@@ -16,6 +16,7 @@ android {
             res.srcDirs =
                     [
                             'src/main/res/layout/fragment_main',
+                            'src/main/res/layout/drawer',
                             'src/main/res/layout',
                             'src/main/res'
                     ]
