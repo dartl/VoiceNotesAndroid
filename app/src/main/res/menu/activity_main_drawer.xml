@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <item
+        android:id="@+id/menu_add"
+        android:icon="@drawable/ic_note_add_black_24dp"
+        android:title="@string/menu_add" />
+    <item
+        android:id="@+id/menu_notes_list"
+        android:icon="@drawable/ic_note_black_24dp"
+        android:title="@string/menu_notes_list"
+        app:actionLayout="@layout/note_counter"/>
+    <item
+        android:id="@+id/menu_import_export"
+        android:icon="@drawable/ic_import_export_black_24dp"
+        android:title="@string/menu_export_import" />
+    <item
+        android:id="@+id/menu_sync"
+        android:icon="@drawable/ic_backup_black_24dp"
+        android:title="@string/menu_sync" />
+    <item
+        android:id="@+id/menu_settings"
+        android:icon="@drawable/ic_settings_black_24dp"
+        android:title="@string/menu_settings" />
+    <item
+        android:id="@+id/menu_help"
+        android:icon="@drawable/ic_help_black_24dp"
+        android:title="@string/menu_help" />
+    <!--
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_camera"
@@ -32,5 +58,5 @@
                 android:title="Send" />
         </menu>
     </item>
-
+    -->
 </menu>

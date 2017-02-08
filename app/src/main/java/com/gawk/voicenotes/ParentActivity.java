@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 /**
  * Created by GAWK on 06.02.2017.
@@ -73,6 +74,10 @@ public class ParentActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+        int count = 10;
+        NavigationView navigationView = (NavigationView)findViewById(R.id.nav_view);
+        TextView view = (TextView) navigationView.getMenu().findItem(R.id.menu_notes_list).getActionView();
+        view.setText(count > 0 ? String.valueOf(count) : null);
         return true;
     }
 
@@ -97,17 +102,15 @@ public class ParentActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.menu_add) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.menu_import_export) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.menu_sync) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.menu_settings) {
 
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.menu_help) {
 
         }
 
