@@ -8,11 +8,14 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.gawk.voicenotes.adapters.ViewPagerAdapter;
-import com.gawk.voicenotes.fragments_main.NotesListFragment;
-import com.gawk.voicenotes.fragments_main.NotificationsListFragment;
+import com.gawk.voicenotes.fragments_notes.NewNoteNotifications;
+import com.gawk.voicenotes.fragments_notes.NewNoteText;
 
-public class MainActivity extends ParentActivity {
+/**
+ * Created by GAWK on 12.02.2017.
+ */
 
+public class NewNote extends ParentActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private ViewPagerAdapter adapter;
@@ -20,12 +23,13 @@ public class MainActivity extends ParentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_first);
+        setContentView(R.layout.new_note);
+        super.setToolbarTitlte("Новая заметка");
 
         TabLayout tab = (TabLayout) findViewById(R.id.tabs);
         tab.setVisibility(View.VISIBLE);
 
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        viewPager = (ViewPager) findViewById(R.id.viewpager_new_note);
         setupViewPager(viewPager);
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
@@ -35,8 +39,8 @@ public class MainActivity extends ParentActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new NotesListFragment(), "Заметки");
-        adapter.addFragment(new NotificationsListFragment(), "Оповещения");
+        adapter.addFragment(new NewNoteText(), "Заметка");
+        adapter.addFragment(new NewNoteNotifications(), "Оповещения");
         viewPager.setAdapter(adapter);
     }
 

@@ -13,4 +13,7 @@
     <string name="menu_export_import">Export/Import</string>
     <string name="menu_sync">Cloud sync</string>
     <string name="menu_help">Help</string>
+
+    <!-- Новая заметка -->
+    <string name="new_note_text">Text</string>
 </resources>

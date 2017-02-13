@@ -16,4 +16,20 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
+    <style name="GawkMaterialTheme.Body" >
+        <item name="android:padding">@dimen/body_padding</item>
+    </style>
+
+    <style name="GawkMaterialTheme.ButtonBig" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:backgroundTint">@color/colorPrimaryDark</item>
+        <item name="android:paddingLeft">@dimen/big_button_icon_padding</item>
+        <item name="android:paddingRight">@dimen/big_button_icon_padding</item>
+        <item name="android:paddingTop">@dimen/big_button_icon_padding_top</item>
+        <item name="android:paddingBottom">@dimen/big_button_icon_padding_top</item>
+        <item name="android:layout_marginLeft">@dimen/big_button_icon_margin</item>
+        <item name="android:layout_marginRight">@dimen/big_button_icon_margin</item>
+        <item name="android:minHeight">@dimen/big_button_icon_height</item>
+    </style>
+
+    <style name="GawkMaterialTheme.MultiTextField" parent="Widget.AppCompat.EditText" />
 </resources>

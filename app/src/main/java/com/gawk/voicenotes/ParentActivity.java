@@ -1,9 +1,7 @@
 package com.gawk.voicenotes;
 
-import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
+import android.content.Intent;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -14,8 +12,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import java.util.TooManyListenersException;
 
 /**
  * Created by GAWK on 06.02.2017.
@@ -24,9 +23,7 @@ import android.widget.TextView;
 public class ParentActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    protected RelativeLayout fullLayout;
-    protected FrameLayout frameLayout;
-
+    private Toolbar toolbar;
     @Override
     public void setContentView(int layoutResID) {
 
@@ -38,9 +35,8 @@ public class ParentActivity extends AppCompatActivity
         TabLayout tab = (TabLayout) fullView.findViewById(R.id.tabs);
         tab.setVisibility(View.GONE);
         //Your drawer content...
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,9 +97,11 @@ public class ParentActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
+        Intent intent;
         if (id == R.id.menu_add) {
             // Handle the camera action
+            intent = new Intent(this, NewNote.class);
+            startActivity(intent);
         } else if (id == R.id.menu_import_export) {
 
         } else if (id == R.id.menu_sync) {
@@ -117,5 +115,9 @@ public class ParentActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void setToolbarTitlte(String title) {
+        toolbar.setTitle(title);
     }
 }

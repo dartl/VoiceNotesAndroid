@@ -8,4 +8,15 @@
     <dimen name="nav_header_height">160dp</dimen>
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="fab_margin">16dp</dimen>
+
+    <!-- Big button icon -->
+    <dimen name="big_button_icon_margin">16dp</dimen>
+    <dimen name="big_button_icon_padding">64dp</dimen>
+    <dimen name="big_button_icon_padding_top">16dp</dimen>
+    <dimen name="big_button_icon_text_size">18dp</dimen>
+    <dimen name="big_button_icon_height">64dp</dimen>
+
+    <!-- Body -->
+    <dimen name="body_padding">16dp</dimen>
+
 </resources>

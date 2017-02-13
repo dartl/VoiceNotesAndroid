@@ -80,6 +80,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         }
     }
 
+    // Подключаемся к БД
     public void connection() {
         try {
             db = sInstance.getWritableDatabase();
@@ -88,12 +89,49 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         }
     }
 
+    // Отключиться от БД
     public void disconnection() {
         try {
             db.close();
             db = null;
         }
         catch (SQLiteException ex){
+        }
+    }
+
+    /*
+        Методы для работы с Note
+     */
+
+    // Получить указатель на все заметки
+    public Cursor getCursorAllNotes() {
+        if (!db.isOpen()) {
+            return null;
+        }
+        return db.rawQuery("SELECT * FROM " +
+                SQLiteDBHelper.NOTES_TABLE_NAME + " ORDER BY " + SQLiteDBHelper.NOTES_TABLE_COLUMN_DATE
+                + " DESC", null);
+    }
+
+    // Сохранить новую заметку или обновить существующую
+    // action = 0 - добавить новую; action = 1 - обновить существующую
+    public boolean saveNote(Note note, int action) {
+        if (!db.isOpen()) {
+            return false;
+        }
+        ContentValues newValues = new ContentValues();
+        newValues.put(SQLiteDBHelper.NOTES_TABLE_COLUMN_TEXT_NOTE, note.getText_note());
+        newValues.put(SQLiteDBHelper.NOTES_TABLE_COLUMN_DATE, note.getDate());
+        switch (action) {
+            case 0:
+                db.insert(SQLiteDBHelper.NOTES_TABLE_NAME, null, newValues);
+                return true;
+            case 1:
+                db.update(SQLiteDBHelper.NOTES_TABLE_NAME, newValues, "id = ?",
+                    new String[] { String.valueOf(note.getId()) });
+                return true;
+            default:
+                return false;
         }
     }
 
