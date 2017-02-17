@@ -19,4 +19,8 @@
     <!-- Body -->
     <dimen name="body_padding">16dp</dimen>
 
+    <!-- Multi text full width -->
+    <dimen name="multi_text_full_padding">20dp</dimen>
+    <dimen name="multi_text_full_text_size">16sp</dimen>
+
 </resources>

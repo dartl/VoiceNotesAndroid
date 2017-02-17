@@ -15,9 +15,8 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="GawkMaterialTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="GawkMaterialTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="GawkMaterialTheme.ButtonActionImage" parent="Widget.AppCompat.Light.ActionButton">
+    </style>
 
     <style name="GawkMaterialTheme.Body" >
         <item name="android:padding">@dimen/body_padding</item>
@@ -34,5 +33,13 @@
         <item name="android:height">@dimen/big_button_icon_height</item>
     </style>
 
-    <style name="GawkMaterialTheme.MultiTextField" parent="Widget.AppCompat.EditText" />
+    <style name="GawkMaterialTheme.MultiTextField">
+        <item name="android:padding">@dimen/multi_text_full_padding</item>
+        <item name="android:textSize">@dimen/multi_text_full_text_size</item>
+    </style>
+
+    <style name="GawkMaterialTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="GawkMaterialTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 </resources>
