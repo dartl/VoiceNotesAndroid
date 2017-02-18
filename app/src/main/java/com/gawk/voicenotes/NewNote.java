@@ -2,11 +2,16 @@ package com.gawk.voicenotes;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.gawk.voicenotes.adapters.SetNotificationFullDialogFragment;
 import com.gawk.voicenotes.adapters.ViewPagerAdapter;
 import com.gawk.voicenotes.fragments_notes.NewNoteNotifications;
 import com.gawk.voicenotes.fragments_notes.NewNoteText;
@@ -19,6 +24,9 @@ public class NewNote extends ParentActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private ViewPagerAdapter adapter;
+
+    /* объявляем все элементы активные */
+    private ImageButton newNoteAddNotification, newNoteAdd, newNoteClear;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +43,18 @@ public class NewNote extends ParentActivity {
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
         createTabIcons();
+
+        /* Определяем все кнопки и события нажатия */
+        /*
+        newNoteAddNotification = (ImageButton) findViewById(R.id.imageButton_newNoteAddNotification);
+        newNoteAdd = (ImageButton) adapter.getItem(0).getView().findViewById(R.id.imageButton_NewNoteAdd);
+        newNoteClear = (ImageButton) adapter.getItem(0).getView().findViewById(R.id.imageButton_NewNoteClear);
+
+        newNoteAddNotification.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                showDialog();
+            }
+        });*/
     }
 
     private void setupViewPager(ViewPager viewPager) {

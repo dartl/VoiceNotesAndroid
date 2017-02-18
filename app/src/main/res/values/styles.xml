@@ -42,4 +42,8 @@
 
     <style name="GawkMaterialTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="GawkMaterialTheme.FullDialogTitle" >
+        <item name="android:padding">@dimen/full_width_app_height</item>
+    </style>
+
 </resources>

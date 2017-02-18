@@ -99,8 +99,10 @@ public class ParentActivity extends AppCompatActivity
         int id = item.getItemId();
         Intent intent;
         if (id == R.id.menu_add) {
-            // Handle the camera action
             intent = new Intent(this, NewNote.class);
+            startActivity(intent);
+        } else if (id == R.id.menu_notes_list) {
+            intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         } else if (id == R.id.menu_import_export) {
 

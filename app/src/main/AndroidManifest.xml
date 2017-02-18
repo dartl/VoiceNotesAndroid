@@ -10,7 +10,7 @@
         android:theme="@style/GawkMaterialTheme">
 
         <activity android:name=".MainActivity"
-            android:launchMode="singleTop">
+            android:launchMode="singleInstance">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,7 +19,8 @@
         </activity>
 
 
-        <activity android:name=".NewNote">
+        <activity android:name=".NewNote"
+            android:launchMode="singleInstance">
         </activity>
     </application>
 
