@@ -43,18 +43,6 @@ public class NewNote extends ParentActivity implements TimePickerReturn {
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
         createTabIcons();
-
-        /* Определяем все кнопки и события нажатия */
-        /*
-        newNoteAddNotification = (ImageButton) findViewById(R.id.imageButton_newNoteAddNotification);
-        newNoteAdd = (ImageButton) adapter.getItem(0).getView().findViewById(R.id.imageButton_NewNoteAdd);
-        newNoteClear = (ImageButton) adapter.getItem(0).getView().findViewById(R.id.imageButton_NewNoteClear);
-
-        newNoteAddNotification.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                showDialog();
-            }
-        });*/
     }
 
     private void setupViewPager(ViewPager viewPager) {

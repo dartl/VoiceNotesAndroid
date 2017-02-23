@@ -24,6 +24,7 @@
     <string name="new_note_sound_on">Sound on</string>
     <string name="new_note_shake_off">Shake off</string>
     <string name="new_note_shake_on">Shake on</string>
+    <string name="new_note_error_date">Select a date in the future</string>
 
 
 </resources>

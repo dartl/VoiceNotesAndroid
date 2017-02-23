@@ -46,4 +46,8 @@
         <item name="android:padding">@dimen/full_width_app_height</item>
     </style>
 
+    <style name="GawkMaterialTheme.ErrorBody" >
+        <item name="android:textColor">@color/colorError</item>
+    </style>
+
 </resources>

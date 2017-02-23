@@ -29,11 +29,13 @@ public class NewNoteNotifications extends Fragment implements TimePickerReturn {
     private Switch switchNotification;
     private RelativeLayout notificationLayout;
     private Button selectTime, selectDate;
-    private TextView textViewNowDate;
+    private TextView textViewNowDate, textViewErrorDate;
     private ToggleButton toggleButton_Sound, toggleButton_Shake;
 
     private Calendar dateNotification;
     private DialogFragment newFragmentDate, newFragmentTime;
+    private boolean checkError,
+            checkNotification = false;
     private final Notification notification = new Notification();
 
     public NewNoteNotifications() {
@@ -55,6 +57,7 @@ public class NewNoteNotifications extends Fragment implements TimePickerReturn {
         selectTime = (Button) view.findViewById(R.id.buttonSelectTime);
         selectDate = (Button) view.findViewById(R.id.buttonSelectDate);
         textViewNowDate = (TextView) view.findViewById(R.id.textViewNowDate);
+        textViewErrorDate = (TextView) view.findViewById(R.id.textViewErrorDate);
         toggleButton_Sound = (ToggleButton) view.findViewById(R.id.toggleButton_Sound);
         toggleButton_Shake = (ToggleButton)  view.findViewById(R.id.toggleButton_Shake);
 
@@ -77,6 +80,7 @@ public class NewNoteNotifications extends Fragment implements TimePickerReturn {
                 for (int i =0; i < notificationLayout.getChildCount(); i++) {
                     notificationLayout.getChildAt(i).setEnabled(isChecked);
                 }
+                checkNotification = isChecked;
             }
         });
 
@@ -94,6 +98,7 @@ public class NewNoteNotifications extends Fragment implements TimePickerReturn {
 
         dateNotification = Calendar.getInstance();
         setNotificationTime();
+        textViewErrorDate.setVisibility(View.INVISIBLE);
         return view;
     }
 
@@ -115,6 +120,15 @@ public class NewNoteNotifications extends Fragment implements TimePickerReturn {
         DateFormat dateFormat = SimpleDateFormat.getDateTimeInstance();
         textViewNowDate.setText(dateFormat.format(dateNotification.getTime()));
         notification.setDate(dateNotification.getTime());
+        if ( (dateNotification.getTimeInMillis() - Calendar.getInstance().getTimeInMillis()) > 180000 ) {
+            checkError = false;
+            textViewErrorDate.setVisibility(View.INVISIBLE);
+        } else {
+            // Выбрана дата из прошлого времени
+            checkError = true;
+            textViewErrorDate.setVisibility(View.VISIBLE);
+        }
+
     }
 
     @Override
