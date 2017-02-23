@@ -37,6 +37,8 @@
             android:id="@+id/imageButton2" />
     </LinearLayout>
 
+
+
     <ScrollView
         android:layout_below="@+id/app_title"
         android:layout_width="match_parent"
@@ -63,25 +65,27 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true" />
 
-            <LinearLayout
+
+
+            <RelativeLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/toggleButton3">
 
-                <CalendarView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/calendarView"
-                    android:layout_weight="1" />
-
                 <TimePicker
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/timePicker"
-                    android:layout_weight="1" />
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/timePicker" />
 
-            </LinearLayout>
+                <DatePicker
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/timePicker"
+                    android:id="@+id/datePicker" />
+            </RelativeLayout>
 
         </RelativeLayout>
     </ScrollView>

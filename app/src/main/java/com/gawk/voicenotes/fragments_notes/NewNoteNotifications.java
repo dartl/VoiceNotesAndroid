@@ -1,24 +1,36 @@
 package com.gawk.voicenotes.fragments_notes;
 
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
+import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.RelativeLayout;
+import android.widget.Switch;
+import android.widget.TextView;
 
 import com.gawk.voicenotes.R;
-import com.gawk.voicenotes.adapters.SetNotificationFullDialogFragment;
+import com.gawk.voicenotes.adapters.TimePickerReturn;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 /**
  * Created by GAWK on 12.02.2017.
  */
 
-public class NewNoteNotifications extends Fragment {
-    private ImageButton newNoteAddNotification;
+public class NewNoteNotifications extends Fragment implements TimePickerReturn {
+    private Switch switchNotification;
+    private RelativeLayout notificationLayout;
+    private Button selectTime, selectDate;
+    private TextView textViewNowDate;
+
+    private Calendar dateNotification;
+    private DialogFragment newFragmentDate, newFragmentTime;
 
     public NewNoteNotifications() {
         // Required empty public constructor
@@ -33,27 +45,73 @@ public class NewNoteNotifications extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.new_note_notifications, null);
-        newNoteAddNotification = (ImageButton) view.findViewById(R.id.imageButton_newNoteAddNotification);
-        newNoteAddNotification.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                showDialog();
 
+        switchNotification = (Switch) view.findViewById(R.id.switchNotification);
+        notificationLayout = (RelativeLayout) view.findViewById(R.id.notificationLayout);
+        selectTime = (Button) view.findViewById(R.id.buttonSelectTime);
+        selectDate = (Button) view.findViewById(R.id.buttonSelectDate);
+        textViewNowDate = (TextView) view.findViewById(R.id.textViewNowDate);
+
+        selectTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showTimePickerDialog(v);
             }
         });
+
+        selectDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDatePickerDialog(v);
+            }
+        });
+
+        switchNotification.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                for (int i =0; i < notificationLayout.getChildCount(); i++) {
+                    notificationLayout.getChildAt(i).setEnabled(isChecked);
+                }
+            }
+        });
+
+        dateNotification = Calendar.getInstance();
+        setNotificationTime();
         return view;
     }
 
-    public void showDialog() {
-        FragmentManager fragmentManager = getFragmentManager();
-        SetNotificationFullDialogFragment newFragment = new SetNotificationFullDialogFragment();
+    public void showTimePickerDialog(View v) {
+        if (newFragmentTime == null) {
+            newFragmentTime = new TimePickerFragment();
+        }
+        newFragmentTime.show(getFragmentManager(), "timePicker");
+    }
 
-        // The device is smaller, so show the fragment fullscreen
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        // For a little polish, specify a transition animation
-        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        // To make it fullscreen, use the 'content' root view as the container
-        // for the fragment, which is always the root view for the activity
-        transaction.add(android.R.id.content, newFragment)
-                .addToBackStack(null).commit();
+    public void showDatePickerDialog(View v) {
+        if (newFragmentDate == null) {
+            newFragmentDate = new DatePickerFragment();
+        }
+        newFragmentDate.show(getFragmentManager(), "datePicker");
+    }
+
+    private void setNotificationTime() {
+
+        DateFormat dateFormat = SimpleDateFormat.getDateTimeInstance();
+        textViewNowDate.setText(dateFormat.format(dateNotification.getTime()));
+    }
+
+    @Override
+    public void getTime(int hourOfDay, int minute) {
+        dateNotification.set(dateNotification.get(Calendar.YEAR),
+                dateNotification.get(Calendar.MONTH),
+                dateNotification.get(Calendar.DAY_OF_MONTH),
+                hourOfDay, minute, 0);
+        setNotificationTime();
+    }
+
+    @Override
+    public void getDate(int year, int month, int dayOfMonth) {
+        dateNotification.set(year, month, dayOfMonth,
+                dateNotification.get(Calendar.HOUR), dateNotification.get(Calendar.MINUTE), 0);
+        setNotificationTime();
     }
 }

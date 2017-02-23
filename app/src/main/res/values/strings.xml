@@ -16,4 +16,14 @@
 
     <!-- Новая заметка -->
     <string name="new_note_text">Text notes</string>
+    <string name="new_note_remind">Remind you?</string>
+    <string name="new_note_we_remind">We remind you</string>
+    <string name="new_note_select_date">Select date</string>
+    <string name="new_note_select_time">Select time</string>
+    <string name="new_note_sound_off">Sound off</string>
+    <string name="new_note_sound_on">Sound on</string>
+    <string name="new_note_shake_off">Shake off</string>
+    <string name="new_note_shake_on">Shake on</string>
+
+
 </resources>

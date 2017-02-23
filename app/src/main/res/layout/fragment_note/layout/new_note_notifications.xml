@@ -3,20 +3,86 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent" android:layout_height="match_parent" style="@style/GawkMaterialTheme.Body">
 
-    <ImageButton
+    <Switch
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_add_black_24dp"
+        android:id="@+id/switchNotification"
+        android:text="@string/new_note_remind"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        style="@style/GawkMaterialTheme.ButtonBig"
-        android:id="@+id/imageButton_newNoteAddNotification" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
-    <ListView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/notificationLayout"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/imageButton_newNoteAddNotification" />
+        android:layout_below="@+id/switchNotification">
+
+        <ToggleButton
+            android:text="@string/new_note_sound_off"
+            android:textOff="@string/new_note_sound_off"
+            android:textOn="@string/new_note_sound_on"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/toggleButton_Sound"
+            android:enabled="false" />
+
+        <ToggleButton
+            android:text="@string/new_note_shake_off"
+            android:textOff="@string/new_note_shake_off"
+            android:textOn="@string/new_note_shake_on"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/toggleButton_Shake"
+            android:enabled="false" />
+
+        <Button
+            android:text="@string/new_note_select_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/buttonSelectDate"
+            android:enabled="false"
+            />
+
+        <Button
+            android:text="@string/new_note_select_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/buttonSelectTime"
+            android:enabled="false" />
+
+        <TextView
+            android:text="@string/new_note_we_remind"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewTitleDate"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:layout_below="@+id/toggleButton_Sound"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:enabled="false" />
+
+        <TextView
+            android:text="TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewNowDate"
+            android:enabled="false"
+            android:layout_below="@+id/textViewTitleDate"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+    </RelativeLayout>
 </RelativeLayout>

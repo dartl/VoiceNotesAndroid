@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.gawk.voicenotes.adapters.SetNotificationFullDialogFragment;
+import com.gawk.voicenotes.adapters.TimePickerReturn;
 import com.gawk.voicenotes.adapters.ViewPagerAdapter;
 import com.gawk.voicenotes.fragments_notes.NewNoteNotifications;
 import com.gawk.voicenotes.fragments_notes.NewNoteText;
@@ -20,7 +20,7 @@ import com.gawk.voicenotes.fragments_notes.NewNoteText;
  * Created by GAWK on 12.02.2017.
  */
 
-public class NewNote extends ParentActivity {
+public class NewNote extends ParentActivity implements TimePickerReturn {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private ViewPagerAdapter adapter;
@@ -74,5 +74,17 @@ public class NewNote extends ParentActivity {
         tabTwo.setText(adapter.getPageTitle(1));
         tabTwo.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_event_note_white_24dp, 0, 0);
         tabLayout.getTabAt(1).setCustomView(tabTwo);
+    }
+
+    @Override
+    public void getTime(int hourOfDay, int minute) {
+        TimePickerReturn parent = (TimePickerReturn) adapter.getItem(1);
+        parent.getTime(hourOfDay,minute);
+    }
+
+    @Override
+    public void getDate(int year, int month, int dayOfMonth) {
+        TimePickerReturn parent = (TimePickerReturn) adapter.getItem(1);
+        parent.getDate(year, month, dayOfMonth);
     }
 }
