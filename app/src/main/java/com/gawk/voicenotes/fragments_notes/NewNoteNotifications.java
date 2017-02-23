@@ -11,9 +11,11 @@ import android.widget.CompoundButton;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.gawk.voicenotes.R;
 import com.gawk.voicenotes.adapters.TimePickerReturn;
+import com.gawk.voicenotes.models.Notification;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -28,9 +30,11 @@ public class NewNoteNotifications extends Fragment implements TimePickerReturn {
     private RelativeLayout notificationLayout;
     private Button selectTime, selectDate;
     private TextView textViewNowDate;
+    private ToggleButton toggleButton_Sound, toggleButton_Shake;
 
     private Calendar dateNotification;
     private DialogFragment newFragmentDate, newFragmentTime;
+    private final Notification notification = new Notification();
 
     public NewNoteNotifications() {
         // Required empty public constructor
@@ -51,6 +55,8 @@ public class NewNoteNotifications extends Fragment implements TimePickerReturn {
         selectTime = (Button) view.findViewById(R.id.buttonSelectTime);
         selectDate = (Button) view.findViewById(R.id.buttonSelectDate);
         textViewNowDate = (TextView) view.findViewById(R.id.textViewNowDate);
+        toggleButton_Sound = (ToggleButton) view.findViewById(R.id.toggleButton_Sound);
+        toggleButton_Shake = (ToggleButton)  view.findViewById(R.id.toggleButton_Shake);
 
         selectTime.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,6 +80,18 @@ public class NewNoteNotifications extends Fragment implements TimePickerReturn {
             }
         });
 
+        toggleButton_Sound.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                notification.setSound(isChecked);
+            }
+        });
+
+        toggleButton_Shake.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                notification.setShake(isChecked);
+            }
+        });
+
         dateNotification = Calendar.getInstance();
         setNotificationTime();
         return view;
@@ -94,9 +112,9 @@ public class NewNoteNotifications extends Fragment implements TimePickerReturn {
     }
 
     private void setNotificationTime() {
-
         DateFormat dateFormat = SimpleDateFormat.getDateTimeInstance();
         textViewNowDate.setText(dateFormat.format(dateNotification.getTime()));
+        notification.setDate(dateNotification.getTime());
     }
 
     @Override

@@ -41,6 +41,8 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
     public static final String NOTIFICATIONS_TABLE_COLUMN_ID = "_id";
     public static final String NOTIFICATIONS_TABLE_COLUMN_ID_NOTE = "ID_NOTE";
     public static final String NOTIFICATIONS_TABLE_COLUMN_ID_DATE = "DATE";
+    public static final String NOTIFICATIONS_TABLE_COLUMN_ID_SOUND = "SOUND";
+    public static final String NOTIFICATIONS_TABLE_COLUMN_ID_VIBRATE = "VIBRATE";
 
     public static synchronized SQLiteDBHelper getInstance(Context context) {
         if (sInstance == null) {
@@ -64,7 +66,8 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         db.execSQL(
                 "create table " + NOTIFICATIONS_TABLE_NAME +
                         "(" + NOTIFICATIONS_TABLE_COLUMN_ID + " integer primary key, " +
-                        NOTIFICATIONS_TABLE_COLUMN_ID_NOTE + " integer, " + NOTIFICATIONS_TABLE_COLUMN_ID_DATE + " text)"
+                        NOTIFICATIONS_TABLE_COLUMN_ID_NOTE + " integer, " + NOTIFICATIONS_TABLE_COLUMN_ID_DATE + " text, "
+                        + NOTIFICATIONS_TABLE_COLUMN_ID_SOUND + " integer, " + NOTIFICATIONS_TABLE_COLUMN_ID_VIBRATE + "integer)"
         );
     }
 
@@ -75,7 +78,8 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
             db.execSQL(
                     "create table " + NOTIFICATIONS_TABLE_NAME +
                             "(" + NOTIFICATIONS_TABLE_COLUMN_ID + " integer primary key, " +
-                            NOTIFICATIONS_TABLE_COLUMN_ID_NOTE + " integer, " + NOTIFICATIONS_TABLE_COLUMN_ID_DATE + " text)"
+                            NOTIFICATIONS_TABLE_COLUMN_ID_NOTE + " integer, " + NOTIFICATIONS_TABLE_COLUMN_ID_DATE + " text, "
+                            + NOTIFICATIONS_TABLE_COLUMN_ID_SOUND + " integer, " + NOTIFICATIONS_TABLE_COLUMN_ID_VIBRATE + "integer)"
             );
         }
     }

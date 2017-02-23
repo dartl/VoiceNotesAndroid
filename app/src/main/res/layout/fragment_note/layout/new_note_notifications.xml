@@ -30,7 +30,8 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:id="@+id/toggleButton_Sound"
-            android:enabled="false" />
+            android:enabled="false"
+            android:checked="true" />
 
         <ToggleButton
             android:text="@string/new_note_shake_off"
@@ -41,7 +42,8 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:id="@+id/toggleButton_Shake"
-            android:enabled="false" />
+            android:enabled="false"
+            android:checked="true"/>
 
         <Button
             android:text="@string/new_note_select_date"
@@ -84,5 +86,13 @@
             android:layout_below="@+id/textViewTitleDate"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
+
+        <TextView
+            android:text="TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/textView3" />
     </RelativeLayout>
 </RelativeLayout>
