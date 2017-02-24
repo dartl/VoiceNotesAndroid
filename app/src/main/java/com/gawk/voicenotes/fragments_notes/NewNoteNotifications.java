@@ -121,11 +121,11 @@ public class NewNoteNotifications extends Fragment implements TimePickerReturn {
         textViewNowDate.setText(dateFormat.format(dateNotification.getTime()));
         notification.setDate(dateNotification.getTime());
         if ( (dateNotification.getTimeInMillis() - Calendar.getInstance().getTimeInMillis()) > 180000 ) {
-            checkError = false;
+            checkError = true;
             textViewErrorDate.setVisibility(View.INVISIBLE);
         } else {
             // Выбрана дата из прошлого времени
-            checkError = true;
+            checkError = false;
             textViewErrorDate.setVisibility(View.VISIBLE);
         }
 
@@ -145,5 +145,12 @@ public class NewNoteNotifications extends Fragment implements TimePickerReturn {
         dateNotification.set(year, month, dayOfMonth,
                 dateNotification.get(Calendar.HOUR), dateNotification.get(Calendar.MINUTE), 0);
         setNotificationTime();
+    }
+
+    public Notification getNotification() {
+        if (checkError && checkNotification) {
+            return notification;
+        }
+        return null;
     }
 }

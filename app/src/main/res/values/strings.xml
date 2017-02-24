@@ -37,6 +37,6 @@
     <string name="yes">Yes</string>
     <string name="cancel">Cancel</string>
     <string name="dialogDeleteTitle">Remove?</string>
-    <string name="dialogDeleteMessage">The selected objects will be removed</string>
+    <string name="dialogDeleteMessage">The objects will be deleted permanently</string>
 
 </resources>

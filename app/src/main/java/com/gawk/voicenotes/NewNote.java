@@ -16,6 +16,7 @@ import com.gawk.voicenotes.adapters.ViewPagerAdapter;
 import com.gawk.voicenotes.fragments_notes.NewNoteNotifications;
 import com.gawk.voicenotes.fragments_notes.NewNoteText;
 import com.gawk.voicenotes.models.Note;
+import com.gawk.voicenotes.models.Notification;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -87,12 +88,20 @@ public class NewNote extends ParentActivity implements TimePickerReturn {
     }
 
     private void startSaveNote() {
+        // сохранение заметки
         NewNoteText newNoteText = (NewNoteText) adapter.getItem(0);
         Note newNote = new Note(-1,newNoteText.getTextNote(), Calendar.getInstance().getTime());
         SQLiteDBHelper db = SQLiteDBHelper.getInstance(this);
-        if (db.saveNote(newNote, 0)) {
-            finish();
+        long note_id = db.saveNote(newNote, 0);
+
+        // сохранение оповещения
+        NewNoteNotifications newNoteNotifications = (NewNoteNotifications) adapter.getItem(1);
+        Notification notification = newNoteNotifications.getNotification();
+        if (notification != null) {
+            notification.setId_note(note_id);
+            db.saveNotification(notification,0);
         }
+        finish();
     }
 
     @Override

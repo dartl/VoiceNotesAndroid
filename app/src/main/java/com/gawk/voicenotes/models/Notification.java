@@ -14,7 +14,7 @@ import java.util.Date;
  */
 
 public class Notification implements Serializable {
-    private int id, id_note;
+    private long id, id_note;
     private Date date;
     private boolean sound, shake;
 
@@ -27,6 +27,7 @@ public class Notification implements Serializable {
     }
 
     public Notification(Cursor element) {
+        element.moveToFirst();
         this.id = element.getInt(element.getColumnIndex(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_ID));
         this.id_note = element.getInt(element.getColumnIndex(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_ID));
         String s = element.getString(element.getColumnIndex(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_DATE));
@@ -69,19 +70,19 @@ public class Notification implements Serializable {
         this.shake = shake;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public int getId_note() {
+    public long getId_note() {
         return id_note;
     }
 
-    public void setId_note(int id_note) {
+    public void setId_note(long id_note) {
         this.id_note = id_note;
     }
 

@@ -69,19 +69,19 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
                 "create table " + NOTIFICATIONS_TABLE_NAME +
                         "(" + NOTIFICATIONS_TABLE_COLUMN_ID + " integer primary key, " +
                         NOTIFICATIONS_TABLE_COLUMN_ID_NOTE + " integer, " + NOTIFICATIONS_TABLE_COLUMN_DATE + " text, "
-                        + NOTIFICATIONS_TABLE_COLUMN_SOUND + " integer, " + NOTIFICATIONS_TABLE_COLUMN_VIBRATE + "integer)"
+                        + NOTIFICATIONS_TABLE_COLUMN_SOUND + " integer, " + NOTIFICATIONS_TABLE_COLUMN_VIBRATE + " integer)"
         );
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
     {
-        if (newVersion != oldVersion) {
+        if (newVersion > oldVersion) {
             db.execSQL(
                     "create table " + NOTIFICATIONS_TABLE_NAME +
                             "(" + NOTIFICATIONS_TABLE_COLUMN_ID + " integer primary key, " +
                             NOTIFICATIONS_TABLE_COLUMN_ID_NOTE + " integer, " + NOTIFICATIONS_TABLE_COLUMN_DATE + " text, "
-                            + NOTIFICATIONS_TABLE_COLUMN_SOUND + " integer, " + NOTIFICATIONS_TABLE_COLUMN_VIBRATE + "integer)"
+                            + NOTIFICATIONS_TABLE_COLUMN_SOUND + " integer, " + NOTIFICATIONS_TABLE_COLUMN_VIBRATE + " integer)"
             );
         }
     }
@@ -110,6 +110,16 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
     /*
         Методы для работы с Notification
      */
+    public Cursor getCursorAllNotification() {
+        if (!db.isOpen()) {
+            return null;
+        }
+        return db.rawQuery("SELECT * FROM " +
+                SQLiteDBHelper.NOTIFICATIONS_TABLE_NAME + " ORDER BY " + SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_DATE
+                + " ASC", null);
+    }
+
+
     // Сохранить новую заметку или обновить существующую
     // action = 0 - добавить новую; action = 1 - обновить существующую
     public long saveNotification(Notification notification, int action) {
@@ -125,7 +135,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
             case 0:
                 return db.insert(SQLiteDBHelper.NOTIFICATIONS_TABLE_NAME, null, newValues);
             case 1:
-                db.update(SQLiteDBHelper.NOTIFICATIONS_TABLE_NAME, newValues, "id = ?",
+                db.update(SQLiteDBHelper.NOTIFICATIONS_TABLE_NAME, newValues, NOTIFICATIONS_TABLE_COLUMN_ID +" = ?",
                         new String[] { String.valueOf(notification.getId()) });
                 return 0;
             default:
@@ -147,11 +157,16 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
                 + " DESC", null);
     }
 
+    public Cursor getNoteById(long id){
+        return db.rawQuery("SELECT * FROM " +
+                SQLiteDBHelper.NOTES_TABLE_NAME + " WHERE "+NOTES_TABLE_COLUMN_ID+" = " + id, null);
+    }
+
     // Сохранить новую заметку или обновить существующую
     // action = 0 - добавить новую; action = 1 - обновить существующую
-    public boolean saveNote(Note note, int action) {
+    public long saveNote(Note note, int action) {
         if (!db.isOpen()) {
-            return false;
+            return -1;
         }
         ContentValues newValues = new ContentValues();
         newValues.put(SQLiteDBHelper.NOTES_TABLE_COLUMN_TEXT_NOTE, note.getText_note());
@@ -160,13 +175,13 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
             case 0:
                 long i = db.insert(SQLiteDBHelper.NOTES_TABLE_NAME, null, newValues);
                 Log.e("GAWK_ERR","addNote - " + String.valueOf(i));
-                return true;
+                return i;
             case 1:
-                db.update(SQLiteDBHelper.NOTES_TABLE_NAME, newValues, "_id = ?",
+                db.update(SQLiteDBHelper.NOTES_TABLE_NAME, newValues, NOTES_TABLE_COLUMN_ID +" = ?",
                     new String[] { String.valueOf(note.getId()) });
-                return true;
+                return note.getId();
             default:
-                return false;
+                return -1;
         }
     }
 

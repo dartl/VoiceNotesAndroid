@@ -88,7 +88,5 @@ public class NoteCursorAdapter extends CursorAdapter {
             date_and_time += dateFormat.format(date);
             dateView.setText(date_and_time);
         }
-
-
     }
 }

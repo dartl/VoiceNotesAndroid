@@ -39,7 +39,6 @@ public class NotesListFragment extends Fragment implements ActionsListNotes {
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
-
         super.onActivityCreated(savedInstanceState);
     }
 
@@ -52,13 +51,10 @@ public class NotesListFragment extends Fragment implements ActionsListNotes {
         dbHelper.connection();
 
         Cursor noteCursor = dbHelper.getCursorAllNotes();
+        noteCursorAdapter = new NoteCursorAdapter(getActivity(), noteCursor, true, this);
 
         listViewAllNotes = (ListView) view.findViewById(R.id.listViewAllNotes);
-
-        noteCursorAdapter = new NoteCursorAdapter(getActivity(), noteCursor, true, this);
-        Log.d("GAWK_ERR","Идет процесс");
         listViewAllNotes.setAdapter(noteCursorAdapter);
-
         return view;
     }
 

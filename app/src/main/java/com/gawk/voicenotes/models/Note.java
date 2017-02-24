@@ -12,7 +12,7 @@ import java.util.Date;
  */
 
 public class Note implements Serializable {
-    private int id;
+    private long id;
     private String text_note;
     private Date date;
 
@@ -29,7 +29,8 @@ public class Note implements Serializable {
     }
 
     public Note(Cursor elem) {
-        this.id = elem.getInt(elem.getColumnIndex(SQLiteDBHelper.NOTES_TABLE_COLUMN_ID));
+        elem.moveToFirst();
+        this.id = elem.getLong(elem.getColumnIndex(SQLiteDBHelper.NOTES_TABLE_COLUMN_ID));
         this.text_note = elem.getString(elem.getColumnIndex(SQLiteDBHelper.NOTES_TABLE_COLUMN_TEXT_NOTE));
         int temp = elem.getInt(elem.getColumnIndex(SQLiteDBHelper.NOTES_TABLE_COLUMN_DATE));
         this.date = new Date(temp);
@@ -43,11 +44,11 @@ public class Note implements Serializable {
         this.date = date;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
