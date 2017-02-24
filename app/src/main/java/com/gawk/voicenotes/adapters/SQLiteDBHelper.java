@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.gawk.voicenotes.models.Note;
+import com.gawk.voicenotes.models.Notification;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,9 +41,9 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
     public static final String NOTIFICATIONS_TABLE_NAME = "NOTIFICATIONS";
     public static final String NOTIFICATIONS_TABLE_COLUMN_ID = "_id";
     public static final String NOTIFICATIONS_TABLE_COLUMN_ID_NOTE = "ID_NOTE";
-    public static final String NOTIFICATIONS_TABLE_COLUMN_ID_DATE = "DATE";
-    public static final String NOTIFICATIONS_TABLE_COLUMN_ID_SOUND = "SOUND";
-    public static final String NOTIFICATIONS_TABLE_COLUMN_ID_VIBRATE = "VIBRATE";
+    public static final String NOTIFICATIONS_TABLE_COLUMN_DATE = "DATE";
+    public static final String NOTIFICATIONS_TABLE_COLUMN_SOUND = "SOUND";
+    public static final String NOTIFICATIONS_TABLE_COLUMN_VIBRATE = "VIBRATE";
 
     public static synchronized SQLiteDBHelper getInstance(Context context) {
         if (sInstance == null) {
@@ -61,13 +62,13 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         db.execSQL(
                 "create table " + NOTES_TABLE_NAME +
                         "(" + NOTES_TABLE_COLUMN_ID + " integer primary key, " +
-                        NOTES_TABLE_COLUMN_TEXT_NOTE + " text, " + NOTES_TABLE_COLUMN_DATE + " text)"
+                        NOTES_TABLE_COLUMN_TEXT_NOTE + " text, " + NOTES_TABLE_COLUMN_DATE + " integer)"
         );
         db.execSQL(
                 "create table " + NOTIFICATIONS_TABLE_NAME +
                         "(" + NOTIFICATIONS_TABLE_COLUMN_ID + " integer primary key, " +
-                        NOTIFICATIONS_TABLE_COLUMN_ID_NOTE + " integer, " + NOTIFICATIONS_TABLE_COLUMN_ID_DATE + " text, "
-                        + NOTIFICATIONS_TABLE_COLUMN_ID_SOUND + " integer, " + NOTIFICATIONS_TABLE_COLUMN_ID_VIBRATE + "integer)"
+                        NOTIFICATIONS_TABLE_COLUMN_ID_NOTE + " integer, " + NOTIFICATIONS_TABLE_COLUMN_DATE + " text, "
+                        + NOTIFICATIONS_TABLE_COLUMN_SOUND + " integer, " + NOTIFICATIONS_TABLE_COLUMN_VIBRATE + "integer)"
         );
     }
 
@@ -78,28 +79,56 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
             db.execSQL(
                     "create table " + NOTIFICATIONS_TABLE_NAME +
                             "(" + NOTIFICATIONS_TABLE_COLUMN_ID + " integer primary key, " +
-                            NOTIFICATIONS_TABLE_COLUMN_ID_NOTE + " integer, " + NOTIFICATIONS_TABLE_COLUMN_ID_DATE + " text, "
-                            + NOTIFICATIONS_TABLE_COLUMN_ID_SOUND + " integer, " + NOTIFICATIONS_TABLE_COLUMN_ID_VIBRATE + "integer)"
+                            NOTIFICATIONS_TABLE_COLUMN_ID_NOTE + " integer, " + NOTIFICATIONS_TABLE_COLUMN_DATE + " text, "
+                            + NOTIFICATIONS_TABLE_COLUMN_SOUND + " integer, " + NOTIFICATIONS_TABLE_COLUMN_VIBRATE + "integer)"
             );
         }
     }
 
     // Подключаемся к БД
     public void connection() {
-        try {
-            db = sInstance.getWritableDatabase();
-        }
-        catch (SQLiteException ex){
+        if (db == null) {
+            try {
+                db = sInstance.getWritableDatabase();
+            } catch (SQLiteException ex) {
+            }
         }
     }
 
     // Отключиться от БД
     public void disconnection() {
-        try {
-            db.close();
-            db = null;
+        if (db != null) {
+            try {
+                db.close();
+                db = null;
+            } catch (SQLiteException ex) {
+            }
         }
-        catch (SQLiteException ex){
+    }
+
+    /*
+        Методы для работы с Notification
+     */
+    // Сохранить новую заметку или обновить существующую
+    // action = 0 - добавить новую; action = 1 - обновить существующую
+    public long saveNotification(Notification notification, int action) {
+        if (!db.isOpen()) {
+            return -1;
+        }
+        ContentValues newValues = new ContentValues();
+        newValues.put(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_ID_NOTE, notification.getId_note());
+        newValues.put(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_DATE, notification.getDate().getTime());
+        newValues.put(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_SOUND, notification.isSound());
+        newValues.put(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_VIBRATE, notification.isShake());
+        switch (action) {
+            case 0:
+                return db.insert(SQLiteDBHelper.NOTIFICATIONS_TABLE_NAME, null, newValues);
+            case 1:
+                db.update(SQLiteDBHelper.NOTIFICATIONS_TABLE_NAME, newValues, "id = ?",
+                        new String[] { String.valueOf(notification.getId()) });
+                return 0;
+            default:
+                return -1;
         }
     }
 
@@ -125,7 +154,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         }
         ContentValues newValues = new ContentValues();
         newValues.put(SQLiteDBHelper.NOTES_TABLE_COLUMN_TEXT_NOTE, note.getText_note());
-        newValues.put(SQLiteDBHelper.NOTES_TABLE_COLUMN_DATE, note.getDate());
+        newValues.put(SQLiteDBHelper.NOTES_TABLE_COLUMN_DATE, note.getDate().getTime());
         switch (action) {
             case 0:
                 db.insert(SQLiteDBHelper.NOTES_TABLE_NAME, null, newValues);

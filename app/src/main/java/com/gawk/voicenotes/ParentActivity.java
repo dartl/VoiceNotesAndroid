@@ -118,8 +118,4 @@ public class ParentActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-    public void setToolbarTitlte(String title) {
-        toolbar.setTitle(title);
-    }
 }

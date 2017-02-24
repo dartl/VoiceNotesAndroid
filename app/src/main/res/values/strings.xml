@@ -1,10 +1,15 @@
 <resources>
-    <string name="app_name">VoiceNotesAndroid</string>
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+
+    <!-- Названия активити -->
+    <string name="app_name">Voice Notes</string>
+
+    <!-- Главное окно -->
+    <string name="new_notes">Notes</string>
+    <string name="new_note_notifications">Notifications</string>
 
     <!-- Меню -->
     <string name="menu_add">Add note</string>
@@ -15,9 +20,11 @@
     <string name="menu_help">Help</string>
 
     <!-- Новая заметка -->
+    <string name="new_note">Note</string>
+    <string name="new_note_notification">Notification</string>
     <string name="new_note_text">Text notes</string>
-    <string name="new_note_remind">Remind you?</string>
-    <string name="new_note_we_remind">We remind you</string>
+    <string name="new_note_remind">Remind?</string>
+    <string name="new_note_we_remind">We remind</string>
     <string name="new_note_select_date">Select date</string>
     <string name="new_note_select_time">Select time</string>
     <string name="new_note_sound_off">Sound off</string>

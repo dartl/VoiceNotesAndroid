@@ -35,8 +35,8 @@ public class MainActivity extends ParentActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new NotesListFragment(), "Заметки");
-        adapter.addFragment(new NotificationsListFragment(), "Оповещения");
+        adapter.addFragment(new NotesListFragment(), getResources().getString(R.string.new_notes));
+        adapter.addFragment(new NotificationsListFragment(), getResources().getString(R.string.new_note_notification));
         viewPager.setAdapter(adapter);
     }
 
@@ -51,4 +51,6 @@ public class MainActivity extends ParentActivity {
         tabTwo.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_event_note_white_24dp, 0, 0);
         tabLayout.getTabAt(1).setCustomView(tabTwo);
     }
+
+
 }

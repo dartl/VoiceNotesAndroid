@@ -10,7 +10,8 @@
         android:text="@string/new_note_remind"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        style="@style/Base.TextAppearance.AppCompat.Display1"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
