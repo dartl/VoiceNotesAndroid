@@ -1,9 +1,11 @@
 package com.gawk.voicenotes.fragments_main;
 
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -75,10 +77,28 @@ public class NotesListFragment extends Fragment implements ActionsListNotes {
         return true;
     }
 
-    @Override
-    public void deleteNote(long id) {
-        dbHelper.noteDelete(id);
-        updateNote();
+    // state: 0 - delete one note, 1 - delete all note
+    public void deleteElement(long id, int state) {
+        switch (state) {
+            case 0:
+                dbHelper.noteDelete(id);
+                updateNote();
+                break;
+            case 1:
+                int i = 0;
+                long id_temp;
+                if (selectNotes.size() > 0) {
+                    while (!selectNotes.isEmpty()) {
+                        id_temp = (Long) selectNotes.get(i);
+                        selectNotes.remove(i);
+                        dbHelper.noteDelete(id_temp);
+                    }
+                    updateNote();
+                }
+                break;
+            default:
+                break;
+        }
     }
 
     @Override
@@ -90,16 +110,25 @@ public class NotesListFragment extends Fragment implements ActionsListNotes {
         }
     }
 
-    public void deleteSelectedNote() {
-        int i = 0;
-        long id;
-        if (selectNotes.size() > 0) {
-            while (!selectNotes.isEmpty()) {
-                id = (Long) selectNotes.get(i);
-                selectNotes.remove(i);
-                dbHelper.noteDelete(id);
+    @Override
+    public void showDialogDelete(final long _id, final int state) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        // 2. Chain together various setter methods to set the dialog characteristics
+        builder.setMessage(R.string.dialogDeleteMessage)
+                .setTitle(R.string.dialogDeleteTitle);
+
+        // Add the buttons
+        builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                deleteElement(_id,state);
             }
-            updateNote();
-        }
+        });
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.cancel();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }

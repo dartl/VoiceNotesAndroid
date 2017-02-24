@@ -60,7 +60,7 @@ public class MainActivity extends ParentActivity {
         switch (i) {
             case 0:
                 NotesListFragment notesListFragment = (NotesListFragment) adapter.getItem(i);
-                notesListFragment.deleteSelectedNote();
+                notesListFragment.showDialogDelete(-1,1);
                 break;
             case 1:
                 break;

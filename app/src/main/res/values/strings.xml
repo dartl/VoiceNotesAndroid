@@ -33,5 +33,10 @@
     <string name="new_note_shake_on">Shake on</string>
     <string name="new_note_error_date">Select a date in the future</string>
 
+    <!-- Диалоговые окна -->
+    <string name="yes">Yes</string>
+    <string name="cancel">Cancel</string>
+    <string name="dialogDeleteTitle">Remove?</string>
+    <string name="dialogDeleteMessage">The selected objects will be removed</string>
 
 </resources>

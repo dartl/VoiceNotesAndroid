@@ -5,6 +5,6 @@ package com.gawk.voicenotes.adapters;
  */
 
 public interface ActionsListNotes {
-    public void deleteNote(long id);
+    public void showDialogDelete(final long id, final int state);
     public void selectNote(long id, boolean checked);
 }

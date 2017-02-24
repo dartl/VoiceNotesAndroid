@@ -51,7 +51,7 @@ public class NoteCursorAdapter extends CursorAdapter {
             @Override
             public void onClick(View v) {
                 long id = getItemId(position);
-                actionsListNotes.deleteNote(id);
+                actionsListNotes.showDialogDelete(id,0);
             }
         });
 
