@@ -6,5 +6,5 @@ package com.gawk.voicenotes.adapters;
 
 public interface ActionsListNotes {
     public void deleteNote(long id);
-    public void selectNote(long id);
+    public void selectNote(long id, boolean checked);
 }

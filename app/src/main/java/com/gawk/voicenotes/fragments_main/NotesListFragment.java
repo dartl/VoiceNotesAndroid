@@ -15,6 +15,9 @@ import com.gawk.voicenotes.adapters.ActionsListNotes;
 import com.gawk.voicenotes.adapters.NoteCursorAdapter;
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 /**
  * Created by GAWK on 02.02.2017.
  */
@@ -23,6 +26,8 @@ public class NotesListFragment extends Fragment implements ActionsListNotes {
     private ListView listViewAllNotes;
     private SQLiteDBHelper dbHelper;
     private NoteCursorAdapter noteCursorAdapter;
+
+    private ArrayList selectNotes = new ArrayList<Long>();
 
     public NotesListFragment() {
         // Required empty public constructor
@@ -72,8 +77,11 @@ public class NotesListFragment extends Fragment implements ActionsListNotes {
     }
 
     @Override
-    public void selectNote(long id) {
-
-        Log.e("GAWK_ERR","selected notes - " + String.valueOf(id));
+    public void selectNote(long id, boolean checked) {
+        if (checked) {
+            selectNotes.add(id);
+        } else {
+            selectNotes.remove(id);
+        }
     }
 }

@@ -6,6 +6,8 @@ import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -43,12 +45,21 @@ public class NoteCursorAdapter extends CursorAdapter {
         // события с элементами
         ImageButton deleteIcon = (ImageButton) view.findViewById(R.id.buttonDeleteNote);
         final int position = cursor.getPosition();
+        CheckBox checkBoxSelectNote = (CheckBox) view.findViewById(R.id.checkBoxSelectNote);
 
         deleteIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 long id = getItemId(position);
                 actionsListNotes.deleteNote(id);
+            }
+        });
+
+        checkBoxSelectNote.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                long id = getItemId(position);
+                actionsListNotes.selectNote(id,isChecked);
             }
         });
 
