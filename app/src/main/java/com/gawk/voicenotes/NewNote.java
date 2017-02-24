@@ -81,7 +81,6 @@ public class NewNote extends ParentActivity implements TimePickerReturn {
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.e("GAWK_ERR", "onActivityResult");
         if (requestCode== getResources().getInteger(R.integer.constant_request_code_recognize) && resultCode==RESULT_OK) {
             newNoteText.setActivityResult(data);
         }

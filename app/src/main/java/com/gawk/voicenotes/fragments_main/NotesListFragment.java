@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.gawk.voicenotes.R;
+import com.gawk.voicenotes.adapters.ActionsListNotes;
 import com.gawk.voicenotes.adapters.NoteCursorAdapter;
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
 
@@ -18,7 +19,7 @@ import com.gawk.voicenotes.adapters.SQLiteDBHelper;
  * Created by GAWK on 02.02.2017.
  */
 
-public class NotesListFragment extends Fragment {
+public class NotesListFragment extends Fragment implements ActionsListNotes {
     private ListView listViewAllNotes;
     private SQLiteDBHelper dbHelper;
     private NoteCursorAdapter noteCursorAdapter;
@@ -45,7 +46,7 @@ public class NotesListFragment extends Fragment {
 
         listViewAllNotes = (ListView) view.findViewById(R.id.listViewAllNotes);
 
-        noteCursorAdapter = new NoteCursorAdapter(getActivity(), noteCursor, true);
+        noteCursorAdapter = new NoteCursorAdapter(getActivity(), noteCursor, true, this);
         Log.d("GAWK_ERR","Идет процесс");
         listViewAllNotes.setAdapter(noteCursorAdapter);
 
@@ -62,5 +63,17 @@ public class NotesListFragment extends Fragment {
         Cursor noteCursor = dbHelper.getCursorAllNotes();
         noteCursorAdapter.changeCursor(noteCursor);
         return true;
+    }
+
+    @Override
+    public void deleteNote(long id) {
+        dbHelper.noteDelete(id);
+        updateNote();
+    }
+
+    @Override
+    public void selectNote(long id) {
+
+        Log.e("GAWK_ERR","selected notes - " + String.valueOf(id));
     }
 }

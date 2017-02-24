@@ -6,6 +6,7 @@ import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.gawk.voicenotes.R;
@@ -21,9 +22,15 @@ import java.util.Date;
  */
 
 public class NoteCursorAdapter extends CursorAdapter {
+    private ActionsListNotes actionsListNotes;
 
     public NoteCursorAdapter(Context context, Cursor c, boolean autoRequery) {
         super(context, c, autoRequery);
+    }
+
+    public NoteCursorAdapter(Context context, Cursor c, boolean autoRequery, ActionsListNotes actionsListNotes) {
+        super(context, c, autoRequery);
+        this.actionsListNotes = actionsListNotes;
     }
 
     @Override
@@ -32,7 +39,20 @@ public class NoteCursorAdapter extends CursorAdapter {
     }
 
     @Override
-    public void bindView(View view, Context context, Cursor cursor) {
+    public void bindView(View view, Context context, final Cursor cursor) {
+        // события с элементами
+        ImageButton deleteIcon = (ImageButton) view.findViewById(R.id.buttonDeleteNote);
+        final int position = cursor.getPosition();
+
+        deleteIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                long id = getItemId(position);
+                actionsListNotes.deleteNote(id);
+            }
+        });
+
+        // вывод даты и текста
         String text = cursor.getString(cursor.getColumnIndex
                 (SQLiteDBHelper.NOTES_TABLE_COLUMN_TEXT_NOTE));
         long datelong = cursor.getLong(cursor.getColumnIndex

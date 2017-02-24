@@ -8,7 +8,7 @@
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/checkBox"
+        android:id="@+id/checkBoxSelectNote"
         android:layout_gravity="center"
         style="@style/GawkMaterialTheme.ListIconSelect"/>
 
@@ -36,7 +36,7 @@
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/button2"
+        android:id="@+id/buttonDeleteNote"
         style="@style/GawkMaterialTheme.ListIconDelete"
         android:layout_gravity="center"
         app:srcCompat="@drawable/ic_delete_forever_black_24dp" />

@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.gawk.voicenotes.models.Note;
 import com.gawk.voicenotes.models.Notification;
@@ -157,15 +158,24 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         newValues.put(SQLiteDBHelper.NOTES_TABLE_COLUMN_DATE, note.getDate().getTime());
         switch (action) {
             case 0:
-                db.insert(SQLiteDBHelper.NOTES_TABLE_NAME, null, newValues);
+                long i = db.insert(SQLiteDBHelper.NOTES_TABLE_NAME, null, newValues);
+                Log.e("GAWK_ERR","addNote - " + String.valueOf(i));
                 return true;
             case 1:
-                db.update(SQLiteDBHelper.NOTES_TABLE_NAME, newValues, "id = ?",
+                db.update(SQLiteDBHelper.NOTES_TABLE_NAME, newValues, "_id = ?",
                     new String[] { String.valueOf(note.getId()) });
                 return true;
             default:
                 return false;
         }
+    }
+
+    public boolean noteDelete(long id) {
+        int deleteRow = db.delete(SQLiteDBHelper.NOTES_TABLE_NAME, "_id = ?" ,new String[] { String.valueOf(id) });
+        if (deleteRow == 1) {
+            return true;
+        }
+        return false;
     }
 
     public boolean importDB(File file, SQLiteDatabase db) {
