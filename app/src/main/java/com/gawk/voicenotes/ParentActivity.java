@@ -9,6 +9,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -24,6 +25,8 @@ public class ParentActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private Toolbar toolbar;
+    protected MenuItem actionRemoveSelected;
+
     @Override
     public void setContentView(int layoutResID) {
 
@@ -70,10 +73,7 @@ public class ParentActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
-        int count = 10;
-        NavigationView navigationView = (NavigationView)findViewById(R.id.nav_view);
-        TextView view = (TextView) navigationView.getMenu().findItem(R.id.menu_notes_list).getActionView();
-        view.setText(count > 0 ? String.valueOf(count) : null);
+        actionRemoveSelected = menu.findItem(R.id.action_remove_selected);
         return true;
     }
 
@@ -85,7 +85,8 @@ public class ParentActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_remove_selected) {
+            actionRemoveSelected();
             return true;
         }
 
@@ -117,5 +118,9 @@ public class ParentActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void actionRemoveSelected() {
+
     }
 }

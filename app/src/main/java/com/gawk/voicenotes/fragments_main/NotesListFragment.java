@@ -1,6 +1,7 @@
 package com.gawk.voicenotes.fragments_main;
 
 import android.database.Cursor;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.gawk.voicenotes.R;
 import com.gawk.voicenotes.adapters.ActionsListNotes;
@@ -67,6 +69,9 @@ public class NotesListFragment extends Fragment implements ActionsListNotes {
     public boolean updateNote() {
         Cursor noteCursor = dbHelper.getCursorAllNotes();
         noteCursorAdapter.changeCursor(noteCursor);
+        NavigationView navigationView = (NavigationView) getActivity().findViewById(R.id.nav_view);
+        TextView view = (TextView) navigationView.getMenu().findItem(R.id.menu_notes_list).getActionView();
+        view.setText(noteCursorAdapter.getCount() > 0 ? String.valueOf(noteCursorAdapter.getCount()) : null);
         return true;
     }
 
@@ -82,6 +87,19 @@ public class NotesListFragment extends Fragment implements ActionsListNotes {
             selectNotes.add(id);
         } else {
             selectNotes.remove(id);
+        }
+    }
+
+    public void deleteSelectedNote() {
+        int i = 0;
+        long id;
+        if (selectNotes.size() > 0) {
+            while (!selectNotes.isEmpty()) {
+                id = (Long) selectNotes.get(i);
+                selectNotes.remove(i);
+                dbHelper.noteDelete(id);
+            }
+            updateNote();
         }
     }
 }

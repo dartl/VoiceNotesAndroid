@@ -3,7 +3,10 @@ package com.gawk.voicenotes;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -52,5 +55,27 @@ public class MainActivity extends ParentActivity {
         tabLayout.getTabAt(1).setCustomView(tabTwo);
     }
 
+    public void actionRemoveSelected() {
+        int i = viewPager.getCurrentItem();
+        switch (i) {
+            case 0:
+                NotesListFragment notesListFragment = (NotesListFragment) adapter.getItem(i);
+                notesListFragment.deleteSelectedNote();
+                break;
+            case 1:
+                break;
+            default:
+                break;
+        }
+        Log.d("GAWK_ERR","переопределилось");
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        super.onCreateOptionsMenu(menu);
+        actionRemoveSelected.setVisible(true);
+        return true;
+    }
 
 }
