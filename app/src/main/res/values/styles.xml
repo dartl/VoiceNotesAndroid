@@ -74,6 +74,14 @@
         <item name="android:paddingBottom">16dp</item>
     </style>
 
+    <style name="GawkMaterialTheme.ListIconMini" >
+        <item name="android:background">#00000000</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">16dp</item>
+    </style>
+
     <style name="GawkMaterialTheme.ListIconSelect" >
         <item name="android:paddingRight">16dp</item>
         <item name="android:paddingTop">16dp</item>

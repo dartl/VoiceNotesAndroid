@@ -2,6 +2,7 @@ package com.gawk.voicenotes;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -38,7 +39,7 @@ public class MainActivity extends ParentActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new NotesListFragment(), getResources().getString(R.string.new_notes));
+        adapter.addFragment(new NotesListFragment(this), getResources().getString(R.string.new_notes));
         adapter.addFragment(new NotificationsListFragment(), getResources().getString(R.string.new_note_notification));
         viewPager.setAdapter(adapter);
     }
@@ -76,6 +77,10 @@ public class MainActivity extends ParentActivity {
         super.onCreateOptionsMenu(menu);
         actionRemoveSelected.setVisible(true);
         return true;
+    }
+
+    public NotificationsListFragment getFragment(int position) {
+        return (NotificationsListFragment) adapter.getItem(position);
     }
 
 }

@@ -1,5 +1,6 @@
 package com.gawk.voicenotes.fragments_main;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.support.design.widget.NavigationView;
@@ -14,6 +15,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.gawk.voicenotes.MainActivity;
+import com.gawk.voicenotes.ParentActivity;
 import com.gawk.voicenotes.R;
 import com.gawk.voicenotes.adapters.ActionsListNotes;
 import com.gawk.voicenotes.adapters.NoteCursorAdapter;
@@ -30,11 +33,17 @@ public class NotesListFragment extends Fragment implements ActionsListNotes {
     private ListView listViewAllNotes;
     private SQLiteDBHelper dbHelper;
     private NoteCursorAdapter noteCursorAdapter;
+    private MainActivity mainActivity;
 
     private ArrayList selectNotes = new ArrayList<Long>();
 
     public NotesListFragment() {
         // Required empty public constructor
+    }
+
+    public NotesListFragment(MainActivity mainActivity) {
+        // Required empty public constructor
+        this.mainActivity = mainActivity;
     }
 
     @Override
@@ -78,6 +87,7 @@ public class NotesListFragment extends Fragment implements ActionsListNotes {
         switch (state) {
             case 0:
                 dbHelper.noteDelete(id);
+                deleteNotifications(id);
                 updateNote();
                 break;
             case 1:
@@ -88,6 +98,7 @@ public class NotesListFragment extends Fragment implements ActionsListNotes {
                         id_temp = (Long) selectNotes.get(i);
                         selectNotes.remove(i);
                         dbHelper.noteDelete(id_temp);
+                        deleteNotifications(id_temp);
                     }
                     updateNote();
                 }
@@ -95,6 +106,11 @@ public class NotesListFragment extends Fragment implements ActionsListNotes {
             default:
                 break;
         }
+    }
+
+    public void deleteNotifications(long id) {
+        NotificationsListFragment fragment = (NotificationsListFragment) mainActivity.getFragment(1);
+        fragment.deleteElement(id,2);
     }
 
     @Override

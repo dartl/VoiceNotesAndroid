@@ -1,11 +1,17 @@
 package com.gawk.voicenotes.adapters;
 
+import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.CharArrayBuffer;
+import android.database.ContentObserver;
 import android.database.Cursor;
+import android.database.DataSetObserver;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.net.Uri;
+import android.os.Bundle;
 import android.util.Log;
 
 import com.gawk.voicenotes.models.Note;
@@ -120,6 +126,36 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
     }
 
 
+    public Cursor getAllNotificationByNote(long id) {
+        if (!db.isOpen()) {
+            return null;
+        }
+        return db.rawQuery("SELECT * FROM " +
+                SQLiteDBHelper.NOTIFICATIONS_TABLE_NAME + " WHERE " + SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_ID_NOTE
+                + " = " + id, null);
+    }
+
+    public boolean deleteAllNotificationByNote(long id) {
+        if (!db.isOpen()) {
+            return false;
+        }
+        Cursor deleteNotifications = db.rawQuery("SELECT * FROM " +
+                SQLiteDBHelper.NOTIFICATIONS_TABLE_NAME + " WHERE " + SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_ID_NOTE
+                + " = " + id, null);
+        deleteNotifications.moveToFirst();
+        while (deleteNotifications.moveToNext()) {
+            if (
+                    !deleteNotification(
+                            deleteNotifications.getLong(
+                                    deleteNotifications.getColumnIndex(NOTIFICATIONS_TABLE_COLUMN_ID)))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+
     // Сохранить новую заметку или обновить существующую
     // action = 0 - добавить новую; action = 1 - обновить существующую
     public long saveNotification(Notification notification, int action) {
@@ -143,6 +179,14 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         }
     }
 
+    public boolean deleteNotification(long id) {
+        int deleteRow = db.delete(SQLiteDBHelper.NOTIFICATIONS_TABLE_NAME, "_id = ?" ,new String[] { String.valueOf(id) });
+        if (deleteRow == 1) {
+            return true;
+        }
+        return false;
+    }
+
     /*
         Методы для работы с Note
      */
@@ -158,6 +202,9 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
     }
 
     public Cursor getNoteById(long id){
+        if (!db.isOpen()) {
+            return null;
+        }
         return db.rawQuery("SELECT * FROM " +
                 SQLiteDBHelper.NOTES_TABLE_NAME + " WHERE "+NOTES_TABLE_COLUMN_ID+" = " + id, null);
     }
@@ -186,8 +233,22 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
     }
 
     public boolean noteDelete(long id) {
-        int deleteRow = db.delete(SQLiteDBHelper.NOTES_TABLE_NAME, "_id = ?" ,new String[] { String.valueOf(id) });
+        int deleteRow = db.delete(SQLiteDBHelper.NOTES_TABLE_NAME, SQLiteDBHelper.NOTES_TABLE_COLUMN_ID + " = ?" ,new String[] { String.valueOf(id) });
         if (deleteRow == 1) {
+            Cursor cursorNotification = db.rawQuery("SELECT * FROM " +
+                    SQLiteDBHelper.NOTIFICATIONS_TABLE_NAME + " WHERE "+NOTIFICATIONS_TABLE_COLUMN_ID_NOTE+" = " + id, null);
+            while (!cursorNotification.isLast()) {
+                cursorNotification.moveToNext();
+                if (
+                            deleteNotification(
+                                    cursorNotification.getLong(
+                                            cursorNotification.getColumnIndex(NOTIFICATIONS_TABLE_COLUMN_ID)
+                                    )
+                            )
+                        ) {
+                    return false;
+                }
+            }
             return true;
         }
         return false;
