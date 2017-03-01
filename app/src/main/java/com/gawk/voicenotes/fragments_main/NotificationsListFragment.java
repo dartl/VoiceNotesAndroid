@@ -1,9 +1,11 @@
 package com.gawk.voicenotes.fragments_main;
 
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.gawk.voicenotes.R;
+import com.gawk.voicenotes.adapters.ActionsListNotes;
 import com.gawk.voicenotes.adapters.NotificationCursorAdapter;
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
 
@@ -21,7 +24,7 @@ import java.util.ArrayList;
  * Created by GAWK on 02.02.2017.
  */
 
-public class NotificationsListFragment extends Fragment {
+public class NotificationsListFragment extends Fragment implements ActionsListNotes {
     private ListView listViewAllNotification;
     private SQLiteDBHelper dbHelper;
     private NotificationCursorAdapter notificationCursorAdapter;
@@ -31,8 +34,6 @@ public class NotificationsListFragment extends Fragment {
     public NotificationsListFragment() {
         // Required empty public constructor
     }
-
-    String data[] = new String[] { "one", "two", "three", "four" };
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -47,7 +48,7 @@ public class NotificationsListFragment extends Fragment {
         dbHelper = SQLiteDBHelper.getInstance(getActivity());
         dbHelper.connection();
         Cursor notificationCursor = dbHelper.getCursorAllNotification();
-        notificationCursorAdapter = new NotificationCursorAdapter(getActivity(), notificationCursor, true);
+        notificationCursorAdapter = new NotificationCursorAdapter(getActivity(), notificationCursor, true, this);
 
         listViewAllNotification = (ListView) view.findViewById(R.id.listViewAllNotifications);
         listViewAllNotification.setAdapter(notificationCursorAdapter);
@@ -91,6 +92,37 @@ public class NotificationsListFragment extends Fragment {
                 break;
             default:
                 break;
+        }
+    }
+
+    @Override
+    public void showDialogDelete(final long _id,final int state) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        // 2. Chain together various setter methods to set the dialog characteristics
+        builder.setMessage(R.string.dialogDeleteMessage)
+                .setTitle(R.string.dialogDeleteTitle);
+
+        // Add the buttons
+        builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                deleteElement(_id,state);
+            }
+        });
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.cancel();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    @Override
+    public void selectNote(long id, boolean checked) {
+        if (checked) {
+            selectNotification.add(id);
+        } else {
+            selectNotification.remove(id);
         }
     }
 }

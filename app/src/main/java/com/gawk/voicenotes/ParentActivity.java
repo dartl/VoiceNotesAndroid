@@ -25,11 +25,10 @@ public class ParentActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private Toolbar toolbar;
-    protected MenuItem actionRemoveSelected;
+    protected MenuItem actionRemoveSelected, actionSave;
 
     @Override
     public void setContentView(int layoutResID) {
-
         DrawerLayout fullView = (DrawerLayout) getLayoutInflater().inflate(R.layout.activity_base, null);
         FrameLayout activityContainer = (FrameLayout) fullView.findViewById(R.id.activity_content);
         getLayoutInflater().inflate(layoutResID, activityContainer, true);
@@ -74,6 +73,7 @@ public class ParentActivity extends AppCompatActivity
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         actionRemoveSelected = menu.findItem(R.id.action_remove_selected);
+        actionSave = menu.findItem(R.id.action_save_note);
         return true;
     }
 

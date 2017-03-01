@@ -64,6 +64,8 @@ public class MainActivity extends ParentActivity {
                 notesListFragment.showDialogDelete(-1,1);
                 break;
             case 1:
+                NotificationsListFragment notificationsListFragment = (NotificationsListFragment) adapter.getItem(i);
+                notificationsListFragment.showDialogDelete(-1,1);
                 break;
             default:
                 break;

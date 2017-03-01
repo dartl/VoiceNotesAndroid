@@ -30,20 +30,10 @@ public class Notification implements Serializable {
         element.moveToFirst();
         this.id = element.getInt(element.getColumnIndex(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_ID));
         this.id_note = element.getInt(element.getColumnIndex(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_ID));
-        String s = element.getString(element.getColumnIndex(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_DATE));
         this.sound = toBoolean(element.getInt(element.getColumnIndex(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_SOUND)));
         this.shake = toBoolean(element.getInt(element.getColumnIndex(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_VIBRATE)));
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm");
-        try
-        {
-            Date date = simpleDateFormat.parse(s);
-            System.out.println("date : "+simpleDateFormat.format(date));
-        }
-        catch (ParseException ex)
-        {
-            System.out.println("Exception "+ex);
-        }
-        this.date = null;
+        long temp = element.getLong(element.getColumnIndex(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_DATE));
+        this.date = new Date(temp);
     }
 
     public Notification(int id, int id_note, Date date, boolean sound, boolean shake) {

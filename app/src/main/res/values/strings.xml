@@ -2,10 +2,9 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_settings">Remove selected</string>
-
     <!-- Названия активити -->
     <string name="app_name">Voice Notes</string>
+    <string name="app_name_note">Note</string>
 
     <!-- Главное окно -->
     <string name="new_notes">Notes</string>
@@ -18,6 +17,8 @@
     <string name="menu_export_import">Export/Import</string>
     <string name="menu_sync">Cloud sync</string>
     <string name="menu_help">Help</string>
+    <string name="action_save">Save</string>
+    <string name="action_settings">Remove selected</string>
 
     <!-- Новая заметка -->
     <string name="new_note">Note</string>
@@ -39,4 +40,7 @@
     <string name="dialogDeleteTitle">Remove?</string>
     <string name="dialogDeleteMessage">The objects will be deleted permanently</string>
 
+    <!-- Заметки просмотр -->
+    <string name="note_view_remind_title">We remind</string>
+    <string name="note_view_remind_no_body">Notification is not set</string>
 </resources>

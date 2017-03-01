@@ -32,7 +32,7 @@ public class Note implements Serializable {
         elem.moveToFirst();
         this.id = elem.getLong(elem.getColumnIndex(SQLiteDBHelper.NOTES_TABLE_COLUMN_ID));
         this.text_note = elem.getString(elem.getColumnIndex(SQLiteDBHelper.NOTES_TABLE_COLUMN_TEXT_NOTE));
-        int temp = elem.getInt(elem.getColumnIndex(SQLiteDBHelper.NOTES_TABLE_COLUMN_DATE));
+        long temp = elem.getLong(elem.getColumnIndex(SQLiteDBHelper.NOTES_TABLE_COLUMN_DATE));
         this.date = new Date(temp);
     }
 

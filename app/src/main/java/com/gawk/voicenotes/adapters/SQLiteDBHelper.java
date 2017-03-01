@@ -30,7 +30,8 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
 /**
- * Created by GAWK on 10.02.2017.
+ * Адаптер для подключения к БД
+ * @author GAWK
  */
 
 public class SQLiteDBHelper extends SQLiteOpenHelper {
@@ -52,6 +53,9 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
     public static final String NOTIFICATIONS_TABLE_COLUMN_SOUND = "SOUND";
     public static final String NOTIFICATIONS_TABLE_COLUMN_VIBRATE = "VIBRATE";
 
+    /**
+     * Метод для получения ссылки на статический класс
+     */
     public static synchronized SQLiteDBHelper getInstance(Context context) {
         if (sInstance == null) {
             sInstance = new SQLiteDBHelper(context.getApplicationContext());
@@ -59,18 +63,26 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         return sInstance;
     }
 
+    /**
+     * Стандартный конструктор для получения экземпляра класса
+     */
     public SQLiteDBHelper(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+    /**
+     * Создание БД, если её ещё нет
+     */
     @Override
     public void onCreate(SQLiteDatabase db)
     {
+        // Создаем таблицу заметок
         db.execSQL(
                 "create table " + NOTES_TABLE_NAME +
                         "(" + NOTES_TABLE_COLUMN_ID + " integer primary key, " +
                         NOTES_TABLE_COLUMN_TEXT_NOTE + " text, " + NOTES_TABLE_COLUMN_DATE + " integer)"
         );
+        // Создаем таблицу оповещений
         db.execSQL(
                 "create table " + NOTIFICATIONS_TABLE_NAME +
                         "(" + NOTIFICATIONS_TABLE_COLUMN_ID + " integer primary key, " +
@@ -79,16 +91,23 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         );
     }
 
+    /**
+     * Обновление БД, если версия другая
+     */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
     {
+        // Если версия 2, то
         if (newVersion > oldVersion) {
+            // Создаем таблицу оповещений
             db.execSQL(
                     "create table " + NOTIFICATIONS_TABLE_NAME +
                             "(" + NOTIFICATIONS_TABLE_COLUMN_ID + " integer primary key, " +
                             NOTIFICATIONS_TABLE_COLUMN_ID_NOTE + " integer, " + NOTIFICATIONS_TABLE_COLUMN_DATE + " text, "
                             + NOTIFICATIONS_TABLE_COLUMN_SOUND + " integer, " + NOTIFICATIONS_TABLE_COLUMN_VIBRATE + " integer)"
             );
+
+            // Обновляем таблицу заметок
         }
     }
 
@@ -116,6 +135,11 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
     /*
         Методы для работы с Notification
      */
+
+    /**
+     * Получаем указатель на список всех оповещений
+     * @return возвращает результат запроса к БД
+     */
     public Cursor getCursorAllNotification() {
         if (!db.isOpen()) {
             return null;
@@ -125,7 +149,11 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
                 + " ASC", null);
     }
 
-
+    /**
+     * Получаем указатель на список всех оповещений, привязанных к заметке
+     * @param id идентификатор заметки
+     * @return возвращает результат запроса к БД
+     */
     public Cursor getAllNotificationByNote(long id) {
         if (!db.isOpen()) {
             return null;
@@ -135,13 +163,20 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
                 + " = " + id, null);
     }
 
+    /**
+     * Удаляет все оповещения, привязанные к заметке
+     * @param id идентификатор заметки
+     * @return результат удаления
+     */
     public boolean deleteAllNotificationByNote(long id) {
         if (!db.isOpen()) {
             return false;
         }
+        // Получаем список всех оповещений для этой заметки
         Cursor deleteNotifications = db.rawQuery("SELECT * FROM " +
                 SQLiteDBHelper.NOTIFICATIONS_TABLE_NAME + " WHERE " + SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_ID_NOTE
                 + " = " + id, null);
+        // Поочередно удаляем все оповещения заметки
         deleteNotifications.moveToFirst();
         while (deleteNotifications.moveToNext()) {
             if (
@@ -154,10 +189,13 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         return true;
     }
 
-
-
-    // Сохранить новую заметку или обновить существующую
-    // action = 0 - добавить новую; action = 1 - обновить существующую
+    /**
+     * Сохранить новую заметку или обновить существующую
+     * <p><b>action = 0</b> - добавить новую; <b>action = 1</b> - обновить существующую</p>
+     * @param notification экземпляр оповещения
+     * @param action действие для метода
+     * @return возвращает результат запроса к БД
+     */
     public long saveNotification(Notification notification, int action) {
         if (!db.isOpen()) {
             return -1;
@@ -179,6 +217,12 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         }
     }
 
+    /**
+     * Сохранить новую заметку или обновить существующую
+     * <p><b>action = 0</b> - добавить новую; <b>action = 1</b> - обновить существующую</p>
+     * @param id идентификатор удаляемого оповещения
+     * @return результат удаления
+     */
     public boolean deleteNotification(long id) {
         int deleteRow = db.delete(SQLiteDBHelper.NOTIFICATIONS_TABLE_NAME, "_id = ?" ,new String[] { String.valueOf(id) });
         if (deleteRow == 1) {
