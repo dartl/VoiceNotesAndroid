@@ -31,6 +31,7 @@ public class ExportImportActivity extends ParentActivity implements View.OnClick
     private TextView textViewFullFile;
     private Button buttonSelectFolder, buttonExport, buttonSelectFile, buttonImport;
     private String typeExport = "json", fileName, fullFileName;
+    private String[] exportTypes;
     private File directoryFile;
     private boolean checkSelectFile = false;
     private OpenFileDialog openFileDialog, openDirectoryDialog;
@@ -43,24 +44,15 @@ public class ExportImportActivity extends ParentActivity implements View.OnClick
         getSupportActionBar().setTitle(getString(R.string.app_name_export_import));
 
         spinnerSelectType = (Spinner) findViewById(R.id.spinnerSelectType);
-        String[] data = getResources().getStringArray(R.array.export_import_type);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, data);
+        exportTypes = getResources().getStringArray(R.array.export_import_type);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, exportTypes);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spinnerSelectType.setAdapter(adapter);
         spinnerSelectType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                switch (position) {
-                    case 0:
-                        typeExport = "json";
-                        break;
-                    case 1:
-                        typeExport = "WORD";
-                        break;
-                    default:
-                        break;
-                }
+                typeExport = exportTypes[position];
                 changeExport();
             }
 
@@ -124,6 +116,12 @@ public class ExportImportActivity extends ParentActivity implements View.OnClick
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                dbHelper.connection();
+                dbHelper.exportDB(fileExport,typeExport,exportTypes);
+                dbHelper.disconnection();
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        getString(R.string.success), Toast.LENGTH_SHORT);
+                toast.show();
         }
     }
 

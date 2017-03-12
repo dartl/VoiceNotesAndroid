@@ -249,8 +249,10 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         if (!db.isOpen()) {
             return null;
         }
-        return db.rawQuery("SELECT * FROM " +
+        Cursor c = db.rawQuery("SELECT * FROM " +
                 SQLiteDBHelper.NOTES_TABLE_NAME + " WHERE "+NOTES_TABLE_COLUMN_ID+" = " + id, null);
+        c.moveToFirst();
+        return c;
     }
 
     // Сохранить новую заметку или обновить существующую
@@ -339,28 +341,37 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         return true;
     }
 
-    public boolean exportDB(File file, SQLiteDatabase db) {
-        JSONObject obj;
-        JSONObject resultJson = new JSONObject();
+    public boolean exportDB(File file, String type, final String[] data) {
+        String result = "";
         Note note;
-        Cursor cursorObj = db.rawQuery("SELECT * FROM " +
-                SQLiteDBHelper.NOTES_TABLE_NAME + " ORDER BY " + SQLiteDBHelper.NOTES_TABLE_COLUMN_ID
-                + " DESC", null);
-        while (cursorObj.moveToNext()) {
-            note = new Note(cursorObj);
-            obj = new JSONObject();
-            try {
-                obj.put(NOTES_TABLE_COLUMN_TEXT_NOTE, note.getText_note());
-                obj.put(NOTES_TABLE_COLUMN_DATE, note.getDate());
-                resultJson.put(String.valueOf(note.getId()),obj);
-            } catch (JSONException e) {
-                e.printStackTrace();
+        Cursor cursor = getCursorAllNotes();
+        JSONArray resultJson = new JSONArray();
+        while (cursor.moveToNext()) {
+            note = new Note(cursor);
+            if (type == data[0]) {
+                JSONObject obj;
+                obj = new JSONObject();
+                try {
+                    obj.put(NOTES_TABLE_COLUMN_TEXT_NOTE, note.getText_note());
+                    obj.put(NOTES_TABLE_COLUMN_DATE, note.getDate());
+                    resultJson.put(obj);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            } else if (type == data[1]) {
+                result += note.getDate();
+                result += ": ";
+                result += note.getText_note();
+                result += "\n";
             }
+        }
+        if (type == data[0]) {
+            result = resultJson.toString();
         }
         if (file.canWrite()) {
             try {
                 PrintWriter printWriter = new PrintWriter(file);
-                printWriter.println(resultJson.toString());
+                printWriter.println(result);
                 printWriter.close();
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
