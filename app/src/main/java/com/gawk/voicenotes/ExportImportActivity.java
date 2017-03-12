@@ -28,11 +28,11 @@ import java.util.UUID;
 public class ExportImportActivity extends ParentActivity implements View.OnClickListener{
     private Spinner spinnerSelectType;
     private EditText editTextFileName;
-    private TextView textViewFullFile;
+    private TextView textViewFullFile, textViewFileSelected;
     private Button buttonSelectFolder, buttonExport, buttonSelectFile, buttonImport;
     private String typeExport = "json", fileName, fullFileName;
     private String[] exportTypes;
-    private File directoryFile;
+    private File directoryFile, importFile;
     private boolean checkSelectFile = false;
     private OpenFileDialog openFileDialog, openDirectoryDialog;
 
@@ -91,22 +91,31 @@ public class ExportImportActivity extends ParentActivity implements View.OnClick
         buttonExport = (Button) findViewById(R.id.buttonExport);
         buttonExport.setEnabled(false);
         buttonExport.setOnClickListener(this);
+
+        buttonSelectFile = (Button) findViewById(R.id.buttonSelectFile);
+        buttonSelectFile.setOnClickListener(this);
+
+        buttonImport = (Button) findViewById(R.id.buttonImport);
+        buttonImport.setOnClickListener(this);
+        buttonImport.setEnabled(false);
+
+        textViewFileSelected = (TextView) findViewById(R.id.textViewFileSelected);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.buttonSelectFolder:
-                openDirectoryDialog = new OpenFileDialog(this).setOnCloseListener(new OpenFileDialog.OnCloseListener(){
+                openDirectoryDialog = new OpenFileDialog(this).setFolderSelectable(true).setOnCloseListener(new OpenFileDialog.OnCloseListener(){
                     public void onCancel(){}
 
                     @Override
                     public void onOk(String selectedFile) {
                         directoryFile = new File(selectedFile);
-                        changeExport();
                         checkSelectFile = true;
+                        changeExport();
                     }
-                }).setFolderSelectable(true);
+                });
                 openDirectoryDialog.show();
                 break;
             case R.id.buttonExport:
@@ -122,6 +131,43 @@ public class ExportImportActivity extends ParentActivity implements View.OnClick
                 Toast toast = Toast.makeText(getApplicationContext(),
                         getString(R.string.success), Toast.LENGTH_SHORT);
                 toast.show();
+                break;
+            case R.id.buttonSelectFile:
+                openFileDialog= new OpenFileDialog(this).setFolderSelectable(true).setOnCloseListener(new OpenFileDialog.OnCloseListener(){
+                    public void onCancel(){}
+
+                    @Override
+                    public void onOk(String selectedFile) {
+                        if (selectedFile.length() > 5) {
+                            String json = selectedFile.substring(selectedFile.length()-5,selectedFile.length());
+                            if (json.equalsIgnoreCase("."+exportTypes[0])) {
+                                importFile = new File(selectedFile);
+                                buttonImport.setEnabled(true);
+                                textViewFileSelected.setText(selectedFile);
+                            } else {
+                                buttonImport.setEnabled(false);
+                                textViewFileSelected.setText(getString(R.string.export_import_select_no));
+                            }
+                        }
+                    }
+                });
+                openFileDialog.show();
+                break;
+            case R.id.buttonImport:
+                dbHelper.connection();
+                if (dbHelper.importDB(importFile)) {
+                    Log.e("GAWK_ERR","Успешный импорт");
+                    Toast toastImport = Toast.makeText(getApplicationContext(),
+                            getString(R.string.success), Toast.LENGTH_SHORT);
+                    toastImport.show();
+                } else {
+                    Log.e("GAWK_ERR","Скорее всего данные повреждены");
+                    Toast toastImport = Toast.makeText(getApplicationContext(),
+                            getString(R.string.export_import_error_import), Toast.LENGTH_SHORT);
+                    toastImport.show();
+                }
+                dbHelper.disconnection();
+                break;
         }
     }
 

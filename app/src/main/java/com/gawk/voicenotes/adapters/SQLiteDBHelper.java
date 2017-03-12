@@ -28,6 +28,10 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Адаптер для подключения к БД
@@ -283,8 +287,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         if (deleteRow == 1) {
             Cursor cursorNotification = db.rawQuery("SELECT * FROM " +
                     SQLiteDBHelper.NOTIFICATIONS_TABLE_NAME + " WHERE "+NOTIFICATIONS_TABLE_COLUMN_ID_NOTE+" = " + id, null);
-            while (!cursorNotification.isLast()) {
-                cursorNotification.moveToNext();
+            while (cursorNotification.moveToNext()) {
                 if (
                             deleteNotification(
                                     cursorNotification.getLong(
@@ -300,7 +303,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         return false;
     }
 
-    public boolean importDB(File file, SQLiteDatabase db) {
+    public boolean importDB(File file) {
         String json = "";
         if (file.canRead()) {
             try {
@@ -312,21 +315,21 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
                 e.printStackTrace();
             }
             try {
-                JSONObject jreader = new JSONObject(json);
+                JSONArray jreader = new JSONArray(json);
                 if (jreader.toString().length() >= 1) {
                     JSONObject objNote;
-                    String textNote;
-                    String date;
-                    JSONArray arrayNames = jreader.names();
-                    JSONArray array = jreader.toJSONArray(arrayNames);
-                    for (int  i = 0; i < array.length(); i++) {
-                        objNote=(JSONObject)array.get(i);
+                    String textNote, date;
+                    DateFormat dateFormat;
+                    dateFormat = SimpleDateFormat.getDateTimeInstance();
+                    for (int  i = 0; i < jreader.length(); i++) {
+                        objNote=(JSONObject)jreader.get(i);
                         textNote = objNote.getString(NOTES_TABLE_COLUMN_TEXT_NOTE);
                         date = objNote.getString(NOTES_TABLE_COLUMN_DATE);
-                        if (textNote != null && date != null) {
+                        Date dt = dateFormat.parse(date);
+                        if (textNote != null) {
                             ContentValues newValues = new ContentValues();
                             newValues.put(SQLiteDBHelper.NOTES_TABLE_COLUMN_TEXT_NOTE, textNote);
-                            newValues.put(SQLiteDBHelper.NOTES_TABLE_COLUMN_DATE, date);
+                            newValues.put(SQLiteDBHelper.NOTES_TABLE_COLUMN_DATE, dt.getTime());
                             db.insert(SQLiteDBHelper.NOTES_TABLE_NAME, null, newValues);
                         } else {
                             return false;
@@ -335,9 +338,10 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
+            } catch (ParseException e) {
+                e.printStackTrace();
             }
         }
-
         return true;
     }
 
@@ -346,6 +350,8 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         Note note;
         Cursor cursor = getCursorAllNotes();
         JSONArray resultJson = new JSONArray();
+        DateFormat dateFormat;
+        dateFormat = SimpleDateFormat.getDateTimeInstance();
         while (cursor.moveToNext()) {
             note = new Note(cursor);
             if (type == data[0]) {
@@ -353,7 +359,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
                 obj = new JSONObject();
                 try {
                     obj.put(NOTES_TABLE_COLUMN_TEXT_NOTE, note.getText_note());
-                    obj.put(NOTES_TABLE_COLUMN_DATE, note.getDate());
+                    obj.put(NOTES_TABLE_COLUMN_DATE, dateFormat.format(note.getDate()));
                     resultJson.put(obj);
                 } catch (JSONException e) {
                     e.printStackTrace();

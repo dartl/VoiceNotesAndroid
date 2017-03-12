@@ -75,7 +75,11 @@ public class NewNoteText extends FragmentParent {
 
     public void setActivityResult(Intent data) {
         ArrayList<String> thingsYouSaid = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-        editText_NewNoteText.setText(editText_NewNoteText.getText()+ " " +thingsYouSaid.get(0));
+        if (editText_NewNoteText.getText().length() == 0) {
+            editText_NewNoteText.setText(thingsYouSaid.get(0));
+        } else {
+            editText_NewNoteText.setText(editText_NewNoteText.getText()+ " " +thingsYouSaid.get(0));
+        }
     }
 
     public String getTextNote() {

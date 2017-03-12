@@ -57,6 +57,7 @@
     <string name="export_import_select_no">No select</string>
     <string name="export_import_folder_not">Folder not selected</string>
     <string name="export_import_folder_error">Selected file, not folder</string>
+    <string name="export_import_error_import">The file may be corrupted</string>
 
     <string-array name="export_import_type">
         <item>json</item>
