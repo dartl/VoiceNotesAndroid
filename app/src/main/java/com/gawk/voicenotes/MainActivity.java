@@ -15,6 +15,7 @@ import com.gawk.voicenotes.adapters.SQLiteDBHelper;
 import com.gawk.voicenotes.adapters.ViewPagerAdapter;
 import com.gawk.voicenotes.fragments_main.NotesListFragment;
 import com.gawk.voicenotes.fragments_main.NotificationsListFragment;
+import com.google.android.gms.ads.AdRequest;
 
 public class MainActivity extends ParentActivity {
     private TabLayout tabLayout;
@@ -36,6 +37,9 @@ public class MainActivity extends ParentActivity {
         tabLayout.setupWithViewPager(viewPager);
         createTabIcons();
         dbHelper = SQLiteDBHelper.getInstance(this);
+
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 
     private void setupViewPager(ViewPager viewPager) {

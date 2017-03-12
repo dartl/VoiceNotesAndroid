@@ -18,6 +18,7 @@ android {
                             'src/main/res/layout/fragment_main',
                             'src/main/res/layout/fragment_note',
                             'src/main/res/layout/drawer',
+                            'src/main/res/layout/adMob',
                             'src/main/res/layout',
                             'src/main/res'
                     ]
@@ -37,6 +38,10 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.android.support:appcompat-v7:24.2.1'
-    compile 'com.android.support:design:24.0.0-alpha1'
+    compile 'com.android.support:design:24.2.1'
+    compile 'com.google.firebase:firebase-ads:10.0.1'
     testCompile 'junit:junit:4.12'
 }
+
+
+apply plugin: 'com.google.gms.google-services'

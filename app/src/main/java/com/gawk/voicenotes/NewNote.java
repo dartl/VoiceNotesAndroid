@@ -62,6 +62,8 @@ public class NewNote extends ParentActivity implements TimePickerReturn {
         });
 
         dbHelper = SQLiteDBHelper.getInstance(this);
+
+        mAdView.setVisibility(View.GONE);
     }
 
     private void setupViewPager(ViewPager viewPager) {

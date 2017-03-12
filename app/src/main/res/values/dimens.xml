@@ -17,6 +17,10 @@
     <dimen name="big_button_icon_text_size">18dp</dimen>
     <dimen name="big_button_icon_height">64dp</dimen>
 
+    <!-- Middle button icon -->
+    <dimen name="middle_button_icon_padding">32dp</dimen>
+    <dimen name="middle_button_icon_padding_top">8dp</dimen>
+
     <!-- Body -->
     <dimen name="body_padding">16dp</dimen>
 

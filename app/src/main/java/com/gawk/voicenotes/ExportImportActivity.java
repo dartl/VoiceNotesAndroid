@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.gawk.voicenotes.adapters.OpenFileDialog;
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
+import com.google.android.gms.ads.AdRequest;
 
 import java.io.File;
 import java.io.IOException;
@@ -100,6 +101,9 @@ public class ExportImportActivity extends ParentActivity implements View.OnClick
         buttonImport.setEnabled(false);
 
         textViewFileSelected = (TextView) findViewById(R.id.textViewFileSelected);
+
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 
     @Override

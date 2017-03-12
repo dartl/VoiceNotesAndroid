@@ -6,7 +6,8 @@
         android:orderInCategory="100"
         android:title="@string/action_settings"
         android:visible="false"
-        app:showAsAction="never" />
+        android:icon="@drawable/ic_delete_forever_white_24dp"
+        app:showAsAction="ifRoom|collapseActionView" />
     <item
         android:id="@+id/action_save_note"
         android:orderInCategory="100"

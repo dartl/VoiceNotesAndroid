@@ -10,4 +10,6 @@
     <color name="colorError">#F44336</color>
     <color name="colorGreen">#4CAF50</color>
     <color name="colorYellow">#FFEB3B</color>
+
+    <color name="colorGrey500">#9E9E9E</color>
 </resources>

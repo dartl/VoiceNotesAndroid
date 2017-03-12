@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.gawk.voicenotes.models.Note;
 import com.gawk.voicenotes.models.Notification;
+import com.google.android.gms.ads.AdRequest;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -50,6 +51,9 @@ public class NoteView extends ParentActivity {
         } else {
             finish();
         }
+
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 
     @Override

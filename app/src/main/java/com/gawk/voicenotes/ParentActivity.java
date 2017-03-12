@@ -20,6 +20,8 @@ import android.widget.TextView;
 
 import com.gawk.voicenotes.adapters.NoteCursorAdapter;
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 /**
  * Created by GAWK on 06.02.2017.
@@ -32,6 +34,7 @@ public class ParentActivity extends AppCompatActivity
     protected MenuItem actionRemoveSelected, actionSave;
     private NavigationView navigationView;
     public SQLiteDBHelper dbHelper;
+    protected AdView mAdView;
 
 
     @Override
@@ -70,6 +73,8 @@ public class ParentActivity extends AppCompatActivity
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        mAdView = (AdView) findViewById(R.id.adView);
     }
 
     @Override

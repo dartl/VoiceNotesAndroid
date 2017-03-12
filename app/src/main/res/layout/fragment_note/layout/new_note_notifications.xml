@@ -95,7 +95,6 @@
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
             android:id="@+id/textViewErrorDate"
-            android:visibility="invisible"
             style="@style/GawkMaterialTheme.ErrorBody"/>
 
     </RelativeLayout>

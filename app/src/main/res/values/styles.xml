@@ -37,6 +37,15 @@
         <item name="android:height">@dimen/big_button_icon_height</item>
     </style>
 
+    <style name="GawkMaterialTheme.ButtonMiddle" parent="Widget.AppCompat.Button">
+        <item name="background">@color/colorPrimaryDark</item>
+        <item name="android:paddingLeft">@dimen/middle_button_icon_padding</item>
+        <item name="android:paddingRight">@dimen/middle_button_icon_padding</item>
+        <item name="android:paddingTop">@dimen/middle_button_icon_padding_top</item>
+        <item name="android:paddingBottom">@dimen/middle_button_icon_padding_top</item>
+        <item name="android:height">@dimen/big_button_icon_height</item>
+    </style>
+
     <style name="GawkMaterialTheme.MultiTextField">
         <item name="android:padding">@dimen/multi_text_full_padding</item>
         <item name="android:textSize">@dimen/multi_text_full_text_size</item>
@@ -121,6 +130,7 @@
     </style>
 
     <style name="GawkMaterialTheme.LabelText" >
+        <item name="android:textColor">@color/colorGrey500</item>
         <item name="android:textSize">12sp</item>
         <item name="android:paddingTop">16dp</item>
         <item name="android:paddingBottom">8dp</item>
