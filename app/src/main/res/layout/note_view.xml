@@ -31,8 +31,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textViewTitleNotification"
-        style="@style/GawkMaterialTheme.Display1"
-        android:layout_above="@+id/textViewBodyNotification"
+        style="@style/GawkMaterialTheme.Subhead"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -41,9 +41,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textViewBodyNotification"
-        style="@style/GawkMaterialTheme.ListDateNote"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        style="@style/GawkMaterialTheme.ListTextNoteView"
+        android:layout_alignBaseline="@+id/textViewTitleNotification"
+        android:layout_alignBottom="@+id/textViewTitleNotification"
+        android:layout_toRightOf="@+id/textViewTitleNotification"
+        android:layout_toEndOf="@+id/textViewTitleNotification" />
 
 </RelativeLayout>

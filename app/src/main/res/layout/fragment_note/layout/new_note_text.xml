@@ -27,7 +27,7 @@
         android:id="@+id/imageButton_NewNoteAdd" />
 
     <ImageButton
-        style="@style/GawkMaterialTheme.ButtonBig"
+        style="@style/GawkMaterialTheme.ButtonBigYellow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/ic_clear_black_24dp"

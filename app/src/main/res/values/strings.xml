@@ -5,10 +5,12 @@
     <!-- Названия активити -->
     <string name="app_name">Voice Notes</string>
     <string name="app_name_note">Note</string>
+    <string name="app_name_export_import">Export/Import</string>
 
     <!-- Главное окно -->
     <string name="new_notes">Notes</string>
     <string name="new_note_notifications">Notifications</string>
+    <string name="main_view_error_select">No items selected</string>
 
     <!-- Меню -->
     <string name="menu_add">Add note</string>
@@ -43,4 +45,21 @@
     <!-- Заметки просмотр -->
     <string name="note_view_remind_title">We remind</string>
     <string name="note_view_remind_no_body">Notification is not set</string>
+
+    <!-- Экспорт и импорт -->
+    <string name="export_import_export">Export</string>
+    <string name="export_import_import">Import</string>
+    <string name="export_import_select_type">Select type</string>
+    <string name="export_import_select_folder">Select folder</string>
+    <string name="export_import_set_name">File name</string>
+    <string name="export_import_select_file">Select file</string>
+    <string name="export_import_select_no">No select</string>
+    <string name="export_import_folder_not">Folder not selected</string>
+    <string name="export_import_folder_error">Selected file, not folder</string>
+
+    <string-array name="export_import_type">
+        <item>json</item>
+        <item>Word</item>
+    </string-array>
+
 </resources>

@@ -20,7 +20,7 @@
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
             android:id="@+id/button_save_note"
-            style="@style/GawkMaterialTheme.ButtonBig"
+            style="@style/GawkMaterialTheme.ButtonBigGreen"
         app:srcCompat="@drawable/ic_content_save" />
 
 </RelativeLayout>

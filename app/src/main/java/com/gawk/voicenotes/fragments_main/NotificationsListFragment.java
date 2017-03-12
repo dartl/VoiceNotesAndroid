@@ -12,7 +12,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.gawk.voicenotes.FragmentParent;
 import com.gawk.voicenotes.R;
 import com.gawk.voicenotes.adapters.ActionsListNotes;
 import com.gawk.voicenotes.adapters.NotificationCursorAdapter;
@@ -24,9 +26,8 @@ import java.util.ArrayList;
  * Created by GAWK on 02.02.2017.
  */
 
-public class NotificationsListFragment extends Fragment implements ActionsListNotes {
+public class NotificationsListFragment extends FragmentParent implements ActionsListNotes {
     private ListView listViewAllNotification;
-    private SQLiteDBHelper dbHelper;
     private NotificationCursorAdapter notificationCursorAdapter;
 
     private ArrayList selectNotification = new ArrayList<Long>();
@@ -47,6 +48,7 @@ public class NotificationsListFragment extends Fragment implements ActionsListNo
 
         dbHelper = SQLiteDBHelper.getInstance(getActivity());
         dbHelper.connection();
+
         Cursor notificationCursor = dbHelper.getCursorAllNotification();
         notificationCursorAdapter = new NotificationCursorAdapter(getActivity(), notificationCursor, true, this);
 
@@ -97,24 +99,31 @@ public class NotificationsListFragment extends Fragment implements ActionsListNo
 
     @Override
     public void showDialogDelete(final long _id,final int state) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        // 2. Chain together various setter methods to set the dialog characteristics
-        builder.setMessage(R.string.dialogDeleteMessage)
-                .setTitle(R.string.dialogDeleteTitle);
+        if (selectNotification.size() > 0 ) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            // 2. Chain together various setter methods to set the dialog characteristics
+            builder.setMessage(R.string.dialogDeleteMessage)
+                    .setTitle(R.string.dialogDeleteTitle);
 
-        // Add the buttons
-        builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                deleteElement(_id,state);
-            }
-        });
-        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                dialog.cancel();
-            }
-        });
-        AlertDialog dialog = builder.create();
-        dialog.show();
+            // Add the buttons
+            builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    deleteElement(_id,state);
+                }
+            });
+            builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    dialog.cancel();
+                }
+            });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        } else {
+            Toast toast = Toast.makeText(getContext(),
+                    getResources().getString(R.string.main_view_error_select), Toast.LENGTH_SHORT);
+            toast.show();
+        }
+
     }
 
     @Override

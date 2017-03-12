@@ -13,6 +13,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import com.gawk.voicenotes.FragmentParent;
 import com.gawk.voicenotes.R;
 import com.gawk.voicenotes.adapters.TimePickerReturn;
 import com.gawk.voicenotes.models.Notification;
@@ -25,7 +26,7 @@ import java.util.Calendar;
  * Created by GAWK on 12.02.2017.
  */
 
-public class NewNoteNotifications extends Fragment implements TimePickerReturn {
+public class NewNoteNotifications extends FragmentParent implements TimePickerReturn {
     private Switch switchNotification;
     private RelativeLayout notificationLayout;
     private Button selectTime, selectDate;

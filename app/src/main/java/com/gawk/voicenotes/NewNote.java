@@ -3,7 +3,9 @@ package com.gawk.voicenotes;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,6 +60,8 @@ public class NewNote extends ParentActivity implements TimePickerReturn {
                 startSaveNote();
             }
         });
+
+        dbHelper = SQLiteDBHelper.getInstance(this);
     }
 
     private void setupViewPager(ViewPager viewPager) {
@@ -91,15 +95,14 @@ public class NewNote extends ParentActivity implements TimePickerReturn {
         // сохранение заметки
         NewNoteText newNoteText = (NewNoteText) adapter.getItem(0);
         Note newNote = new Note(-1,newNoteText.getTextNote(), Calendar.getInstance().getTime());
-        SQLiteDBHelper db = SQLiteDBHelper.getInstance(this);
-        long note_id = db.saveNote(newNote, 0);
+        long note_id = dbHelper.saveNote(newNote, 0);
 
         // сохранение оповещения
         NewNoteNotifications newNoteNotifications = (NewNoteNotifications) adapter.getItem(1);
         Notification notification = newNoteNotifications.getNotification();
         if (notification != null) {
             notification.setId_note(note_id);
-            db.saveNotification(notification,0);
+            dbHelper.saveNotification(notification,0);
         }
         finish();
     }

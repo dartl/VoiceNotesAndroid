@@ -1,9 +1,12 @@
 package com.gawk.voicenotes;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -15,7 +18,8 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import java.util.TooManyListenersException;
+import com.gawk.voicenotes.adapters.NoteCursorAdapter;
+import com.gawk.voicenotes.adapters.SQLiteDBHelper;
 
 /**
  * Created by GAWK on 06.02.2017.
@@ -26,6 +30,16 @@ public class ParentActivity extends AppCompatActivity
 
     private Toolbar toolbar;
     protected MenuItem actionRemoveSelected, actionSave;
+    private NavigationView navigationView;
+    public SQLiteDBHelper dbHelper;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        dbHelper = SQLiteDBHelper.getInstance(this);
+        dbHelper.connection();
+    }
 
     @Override
     public void setContentView(int layoutResID) {
@@ -36,7 +50,7 @@ public class ParentActivity extends AppCompatActivity
 
         TabLayout tab = (TabLayout) fullView.findViewById(R.id.tabs);
         tab.setVisibility(View.GONE);
-        //Your drawer content...
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -54,7 +68,7 @@ public class ParentActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
 
@@ -75,6 +89,28 @@ public class ParentActivity extends AppCompatActivity
         actionRemoveSelected = menu.findItem(R.id.action_remove_selected);
         actionSave = menu.findItem(R.id.action_save_note);
         return true;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        dbHelper.connection();
+        Cursor noteCursor = dbHelper.getCursorAllNotes();
+        NoteCursorAdapter noteCursorAdapter = new NoteCursorAdapter(this, noteCursor, true);
+        TextView view = (TextView) navigationView.getMenu().findItem(R.id.menu_notes_list).getActionView();
+        view.setText(noteCursorAdapter.getCount() > 0 ? String.valueOf(noteCursorAdapter.getCount()) : null);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        dbHelper.disconnection();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        dbHelper.disconnection();
     }
 
     @Override
@@ -106,7 +142,8 @@ public class ParentActivity extends AppCompatActivity
             intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         } else if (id == R.id.menu_import_export) {
-
+            intent = new Intent(this, ExportImportActivity.class);
+            startActivity(intent);
         } else if (id == R.id.menu_sync) {
 
         } else if (id == R.id.menu_settings) {

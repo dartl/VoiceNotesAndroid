@@ -11,12 +11,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.gawk.voicenotes.adapters.SQLiteDBHelper;
 import com.gawk.voicenotes.adapters.ViewPagerAdapter;
 import com.gawk.voicenotes.fragments_main.NotesListFragment;
 import com.gawk.voicenotes.fragments_main.NotificationsListFragment;
 
 public class MainActivity extends ParentActivity {
-
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private ViewPagerAdapter adapter;
@@ -35,6 +35,7 @@ public class MainActivity extends ParentActivity {
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
         createTabIcons();
+        dbHelper = SQLiteDBHelper.getInstance(this);
     }
 
     private void setupViewPager(ViewPager viewPager) {

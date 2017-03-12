@@ -97,4 +97,40 @@
         <item name="android:paddingTop">16dp</item>
     </style>
 
+    <style name="GawkMaterialTheme.Subhead" parent="Base.TextAppearance.AppCompat.Subhead" >
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingTop">16dp</item>
+    </style>
+
+    <style name="GawkMaterialTheme.ListTextNoteView" parent="GawkMaterialTheme.ListTextNote">
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:paddingBottom">0dp</item>
+    </style>
+
+    <style name="GawkMaterialTheme.ButtonBigGreen" parent="GawkMaterialTheme.ButtonBig">
+        <item name="background">@color/colorGreen</item>
+    </style>
+
+    <style name="GawkMaterialTheme.ButtonBigYellow" parent="GawkMaterialTheme.ButtonBig">
+        <item name="background">@color/colorYellow</item>
+    </style>
+
+    <style name="GawkMaterialTheme.DisplayExport" parent="Base.TextAppearance.AppCompat.Display1" >
+        <item name="android:paddingTop">32dp</item>
+    </style>
+
+    <style name="GawkMaterialTheme.LabelText" >
+        <item name="android:textSize">12sp</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">8dp</item>
+    </style>
+
+    <style name="GawkMaterialTheme.Input" >
+        <item name="android:textSize">16sp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
+        <item name="android:paddingLeft">0dp</item>
+    </style>
 </resources>

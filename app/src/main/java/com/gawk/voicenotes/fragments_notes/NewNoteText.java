@@ -13,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.gawk.voicenotes.FragmentParent;
 import com.gawk.voicenotes.R;
 
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ import java.util.Locale;
  * Created by GAWK on 12.02.2017.
  */
 
-public class NewNoteText extends Fragment {
+public class NewNoteText extends FragmentParent {
     private TextView editText_NewNoteText;
     private ImageButton imageButton_NewNoteAdd, imageButton_NewNoteClear;
 
@@ -74,7 +75,7 @@ public class NewNoteText extends Fragment {
 
     public void setActivityResult(Intent data) {
         ArrayList<String> thingsYouSaid = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-        editText_NewNoteText.setText(editText_NewNoteText.getText()+ "" +thingsYouSaid.get(0));
+        editText_NewNoteText.setText(editText_NewNoteText.getText()+ " " +thingsYouSaid.get(0));
     }
 
     public String getTextNote() {
