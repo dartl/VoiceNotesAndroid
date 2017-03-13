@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1083230338151",
+    "firebase_url": "https://voicenotesandroid.firebaseio.com",
+    "project_id": "voicenotesandroid",
+    "storage_bucket": "voicenotesandroid.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1083230338151:android:4e23240a3ad159ed",
+        "android_client_info": {
+          "package_name": "com.gawk.voicenotes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1083230338151-j2s2ko84h4unibifgikbh4011rv1neas.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gawk.voicenotes",
+            "certificate_hash": "ba9e4ed8153f022b9373d630a07696257fc40432"
+          }
+        },
+        {
+          "client_id": "1083230338151-f1v2aqgo24tss0nucd0og5klp0682sdn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7wEewWCO4fk2t4pctkUkWdbWzlKNOp-E"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1083230338151-f1v2aqgo24tss0nucd0og5klp0682sdn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

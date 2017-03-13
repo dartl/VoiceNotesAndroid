@@ -45,6 +45,40 @@ public class ExportImportActivity extends ParentActivity implements View.OnClick
         setContentView(R.layout.export_import);
         initAdMob(true);
 
+        openDirectoryDialog = new OpenFileDialog(this).setFileSelectedBackgroundColor(R.color.colorYellow)
+                .setFileSelectedColor(R.color.colorPrimary)
+                .setFolderSelectable(true).setOnCloseListener(new OpenFileDialog.OnCloseListener(){
+                    public void onCancel(){}
+
+                    @Override
+                    public void onOk(String selectedFile) {
+                        directoryFile = new File(selectedFile);
+                        checkSelectFile = true;
+                        changeExport();
+                    }
+                });
+        openFileDialog = new OpenFileDialog(this).setFolderSelectable(true)
+                .setFileSelectedBackgroundColor(R.color.colorYellow)
+                .setFileSelectedColor(R.color.colorPrimary)
+                .setOnCloseListener(new OpenFileDialog.OnCloseListener(){
+                    public void onCancel(){}
+
+                    @Override
+                    public void onOk(String selectedFile) {
+                        if (selectedFile.length() > 5) {
+                            String json = selectedFile.substring(selectedFile.length()-5,selectedFile.length());
+                            if (json.equalsIgnoreCase("."+exportTypes[0])) {
+                                importFile = new File(selectedFile);
+                                buttonImport.setEnabled(true);
+                                textViewFileSelected.setText(selectedFile);
+                            } else {
+                                buttonImport.setEnabled(false);
+                                textViewFileSelected.setText(getString(R.string.export_import_select_no));
+                            }
+                        }
+                    }
+                });
+
         spinnerSelectType = (Spinner) findViewById(R.id.spinnerSelectType);
         exportTypes = getResources().getStringArray(R.array.export_import_type);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, exportTypes);
@@ -126,16 +160,6 @@ public class ExportImportActivity extends ParentActivity implements View.OnClick
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.buttonSelectFolder:
-                openDirectoryDialog = new OpenFileDialog(this).setFolderSelectable(true).setOnCloseListener(new OpenFileDialog.OnCloseListener(){
-                    public void onCancel(){}
-
-                    @Override
-                    public void onOk(String selectedFile) {
-                        directoryFile = new File(selectedFile);
-                        checkSelectFile = true;
-                        changeExport();
-                    }
-                });
                 openDirectoryDialog.show();
                 break;
             case R.id.buttonExport:
@@ -151,24 +175,6 @@ public class ExportImportActivity extends ParentActivity implements View.OnClick
                 Snackbar.make(getCurrentFocus(), getString(R.string.success), Snackbar.LENGTH_LONG).show();
                 break;
             case R.id.buttonSelectFile:
-                openFileDialog= new OpenFileDialog(this).setFolderSelectable(true).setOnCloseListener(new OpenFileDialog.OnCloseListener(){
-                    public void onCancel(){}
-
-                    @Override
-                    public void onOk(String selectedFile) {
-                        if (selectedFile.length() > 5) {
-                            String json = selectedFile.substring(selectedFile.length()-5,selectedFile.length());
-                            if (json.equalsIgnoreCase("."+exportTypes[0])) {
-                                importFile = new File(selectedFile);
-                                buttonImport.setEnabled(true);
-                                textViewFileSelected.setText(selectedFile);
-                            } else {
-                                buttonImport.setEnabled(false);
-                                textViewFileSelected.setText(getString(R.string.export_import_select_no));
-                            }
-                        }
-                    }
-                });
                 openFileDialog.show();
                 break;
             case R.id.buttonImport:

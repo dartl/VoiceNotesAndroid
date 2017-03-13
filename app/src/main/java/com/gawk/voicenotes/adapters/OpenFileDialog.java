@@ -504,7 +504,7 @@ public class OpenFileDialog extends Dialog {
 
             holder.mPathTextView.setText(holder.mFileItem.name);
 
-            if(mSelectedFile!=null&&mSelectedFile.absolutePath==holder.mFileItem.absolutePath&&!mFolderSelectable){
+            if(mSelectedFile!=null&&mSelectedFile.absolutePath==holder.mFileItem.absolutePath){
                 holder.mView.setBackgroundColor(mFileSelectedBackgroundColor);
                 holder.mPathTextView.setTextColor(mFileSelectedColor);
             }
