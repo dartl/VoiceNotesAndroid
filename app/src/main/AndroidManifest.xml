@@ -20,6 +20,7 @@
         android:theme="@style/GawkMaterialTheme">
 
         <activity android:name=".MainActivity"
+            android:label="@string/app_name"
             android:launchMode="singleInstance">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,17 +31,20 @@
 
 
         <activity android:name=".NewNote"
+            android:label="@string/menu_add"
             android:launchMode="singleInstance"
             android:windowSoftInputMode="stateHidden">
         </activity>
 
         <activity android:name=".NoteView"
+            android:label="@string/app_name_note"
             android:launchMode="singleTop"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:windowSoftInputMode="stateHidden">
         </activity>
 
         <activity android:name=".ExportImportActivity"
+            android:label="@string/app_name_export_import"
             android:launchMode="singleInstance"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:windowSoftInputMode="stateHidden">

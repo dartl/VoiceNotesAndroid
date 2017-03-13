@@ -23,6 +23,7 @@ public class MainActivity extends ParentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first);
+        initAdMob(true);
 
         TabLayout tab = (TabLayout) findViewById(R.id.tabs);
         tab.setVisibility(View.VISIBLE);
@@ -34,8 +35,6 @@ public class MainActivity extends ParentActivity {
         tabLayout.setupWithViewPager(viewPager);
         createTabIcons();
         dbHelper = SQLiteDBHelper.getInstance(this);
-
-        initAdMob(true);
     }
 
     @Override

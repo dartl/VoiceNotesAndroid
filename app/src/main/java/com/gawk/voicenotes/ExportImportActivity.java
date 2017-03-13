@@ -43,7 +43,7 @@ public class ExportImportActivity extends ParentActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.export_import);
-        getSupportActionBar().setTitle(getString(R.string.app_name_export_import));
+        initAdMob(true);
 
         spinnerSelectType = (Spinner) findViewById(R.id.spinnerSelectType);
         exportTypes = getResources().getStringArray(R.array.export_import_type);
@@ -102,8 +102,6 @@ public class ExportImportActivity extends ParentActivity implements View.OnClick
         buttonImport.setEnabled(false);
 
         textViewFileSelected = (TextView) findViewById(R.id.textViewFileSelected);
-
-        initAdMob(true);
     }
 
     @Override

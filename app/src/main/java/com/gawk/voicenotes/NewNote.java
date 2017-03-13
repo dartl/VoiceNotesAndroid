@@ -41,7 +41,6 @@ public class NewNote extends ParentActivity implements TimePickerReturn {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_note);
-        getSupportActionBar().setTitle(getResources().getString(R.string.menu_add));
 
         TabLayout tab = (TabLayout) findViewById(R.id.tabs);
         tab.setVisibility(View.VISIBLE);
@@ -64,6 +63,11 @@ public class NewNote extends ParentActivity implements TimePickerReturn {
         dbHelper = SQLiteDBHelper.getInstance(this);
 
         initAdMob(false);
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 
     private void setupViewPager(ViewPager viewPager) {

@@ -27,7 +27,7 @@ public class NoteView extends ParentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.note_view);
-        getSupportActionBar().setTitle(getResources().getString(R.string.app_name_note));
+        initAdMob(true);
 
         textViewDate = (TextView) findViewById(R.id.textViewDate);
         textViewTitleNotification = (TextView) findViewById(R.id.textViewTitleNotification);
@@ -52,7 +52,7 @@ public class NoteView extends ParentActivity {
             finish();
         }
 
-        initAdMob(true);
+
     }
 
     @Override
