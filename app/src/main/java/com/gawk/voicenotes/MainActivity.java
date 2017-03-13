@@ -2,12 +2,10 @@ package com.gawk.voicenotes;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -15,7 +13,6 @@ import com.gawk.voicenotes.adapters.SQLiteDBHelper;
 import com.gawk.voicenotes.adapters.ViewPagerAdapter;
 import com.gawk.voicenotes.fragments_main.NotesListFragment;
 import com.gawk.voicenotes.fragments_main.NotificationsListFragment;
-import com.google.android.gms.ads.AdRequest;
 
 public class MainActivity extends ParentActivity {
     private TabLayout tabLayout;
@@ -38,8 +35,25 @@ public class MainActivity extends ParentActivity {
         createTabIcons();
         dbHelper = SQLiteDBHelper.getInstance(this);
 
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+        initAdMob(true);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        initAdMob(true);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mAdView.destroy();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mAdView.destroy();
     }
 
     private void setupViewPager(ViewPager viewPager) {

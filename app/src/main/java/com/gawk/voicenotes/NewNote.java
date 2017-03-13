@@ -63,7 +63,7 @@ public class NewNote extends ParentActivity implements TimePickerReturn {
 
         dbHelper = SQLiteDBHelper.getInstance(this);
 
-        mAdView.setVisibility(View.GONE);
+        initAdMob(false);
     }
 
     private void setupViewPager(ViewPager viewPager) {
@@ -95,6 +95,7 @@ public class NewNote extends ParentActivity implements TimePickerReturn {
 
     private void startSaveNote() {
         // сохранение заметки
+        dbHelper.connection();
         NewNoteText newNoteText = (NewNoteText) adapter.getItem(0);
         Note newNote = new Note(-1,newNoteText.getTextNote(), Calendar.getInstance().getTime());
         long note_id = dbHelper.saveNote(newNote, 0);
@@ -106,6 +107,7 @@ public class NewNote extends ParentActivity implements TimePickerReturn {
             notification.setId_note(note_id);
             dbHelper.saveNotification(notification,0);
         }
+        dbHelper.disconnection();
         finish();
     }
 

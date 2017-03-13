@@ -2,8 +2,11 @@ package com.gawk.voicenotes.fragments_main;
 
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -18,6 +21,7 @@ import android.widget.Toast;
 
 import com.gawk.voicenotes.FragmentParent;
 import com.gawk.voicenotes.MainActivity;
+import com.gawk.voicenotes.NewNote;
 import com.gawk.voicenotes.ParentActivity;
 import com.gawk.voicenotes.R;
 import com.gawk.voicenotes.adapters.ActionsListNotes;
@@ -65,6 +69,15 @@ public class NotesListFragment extends FragmentParent implements ActionsListNote
 
         listViewAllNotes = (ListView) view.findViewById(R.id.listViewAllNotes);
         listViewAllNotes.setAdapter(noteCursorAdapter);
+
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), NewNote.class);
+                startActivity(intent);
+            }
+        });
         return view;
     }
 
@@ -146,9 +159,7 @@ public class NotesListFragment extends FragmentParent implements ActionsListNote
             AlertDialog dialog = builder.create();
             dialog.show();
         } else {
-            Toast toast = Toast.makeText(getContext(),
-                    getResources().getString(R.string.main_view_error_select), Toast.LENGTH_SHORT);
-            toast.show();
+            Snackbar.make(getView(), getResources().getString(R.string.main_view_error_select), Snackbar.LENGTH_LONG).show();
         }
     }
 }

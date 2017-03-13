@@ -52,8 +52,25 @@ public class NoteView extends ParentActivity {
             finish();
         }
 
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+        initAdMob(true);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        initAdMob(true);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mAdView.destroy();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mAdView.destroy();
     }
 
     @Override

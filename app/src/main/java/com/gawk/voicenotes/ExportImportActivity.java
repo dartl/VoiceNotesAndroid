@@ -1,6 +1,7 @@
 package com.gawk.voicenotes;
 
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -102,8 +103,25 @@ public class ExportImportActivity extends ParentActivity implements View.OnClick
 
         textViewFileSelected = (TextView) findViewById(R.id.textViewFileSelected);
 
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+        initAdMob(true);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        initAdMob(true);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mAdView.destroy();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mAdView.destroy();
     }
 
     @Override
@@ -132,9 +150,7 @@ public class ExportImportActivity extends ParentActivity implements View.OnClick
                 dbHelper.connection();
                 dbHelper.exportDB(fileExport,typeExport,exportTypes);
                 dbHelper.disconnection();
-                Toast toast = Toast.makeText(getApplicationContext(),
-                        getString(R.string.success), Toast.LENGTH_SHORT);
-                toast.show();
+                Snackbar.make(getCurrentFocus(), getString(R.string.success), Snackbar.LENGTH_LONG).show();
                 break;
             case R.id.buttonSelectFile:
                 openFileDialog= new OpenFileDialog(this).setFolderSelectable(true).setOnCloseListener(new OpenFileDialog.OnCloseListener(){
@@ -160,15 +176,9 @@ public class ExportImportActivity extends ParentActivity implements View.OnClick
             case R.id.buttonImport:
                 dbHelper.connection();
                 if (dbHelper.importDB(importFile)) {
-                    Log.e("GAWK_ERR","Успешный импорт");
-                    Toast toastImport = Toast.makeText(getApplicationContext(),
-                            getString(R.string.success), Toast.LENGTH_SHORT);
-                    toastImport.show();
+                    Snackbar.make(getCurrentFocus(), getString(R.string.success), Snackbar.LENGTH_LONG).show();
                 } else {
-                    Log.e("GAWK_ERR","Скорее всего данные повреждены");
-                    Toast toastImport = Toast.makeText(getApplicationContext(),
-                            getString(R.string.export_import_error_import), Toast.LENGTH_SHORT);
-                    toastImport.show();
+                    Snackbar.make(getCurrentFocus(), getString(R.string.export_import_error_import), Snackbar.LENGTH_LONG).show();
                 }
                 dbHelper.disconnection();
                 break;
@@ -182,9 +192,7 @@ public class ExportImportActivity extends ParentActivity implements View.OnClick
                 fullFileName = directoryFile.getPath()+"/"+fileName+"."+typeExport;
                 textViewFullFile.setText(fullFileName);
             } else {
-                Toast toast = Toast.makeText(getApplicationContext(),
-                        getString(R.string.export_import_folder_error), Toast.LENGTH_SHORT);
-                toast.show();
+                Snackbar.make(getCurrentFocus(), getString(R.string.export_import_folder_error), Snackbar.LENGTH_LONG).show();
                 fullFileName = "";
                 textViewFullFile.setText(getResources().getString(R.string.export_import_folder_not));
             }

@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -119,9 +120,7 @@ public class NotificationsListFragment extends FragmentParent implements Actions
             AlertDialog dialog = builder.create();
             dialog.show();
         } else {
-            Toast toast = Toast.makeText(getContext(),
-                    getResources().getString(R.string.main_view_error_select), Toast.LENGTH_SHORT);
-            toast.show();
+            Snackbar.make(getView(), getResources().getString(R.string.main_view_error_select), Snackbar.LENGTH_LONG).show();
         }
 
     }
