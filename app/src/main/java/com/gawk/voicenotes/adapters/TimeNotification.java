@@ -9,7 +9,10 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 
+import com.gawk.voicenotes.NoteView;
+import com.gawk.voicenotes.R;
 import com.gawk.voicenotes.models.Note;
 
 /**
@@ -18,26 +21,33 @@ import com.gawk.voicenotes.models.Note;
 
 public class TimeNotification extends BroadcastReceiver {
     private static final int NOTIFY_CODE = 101;
-    public static final String NOTIFY_TAG = "VOICE_NOTE1" ;
+    public static final String NOTIFY_TAG = "VOICE_NOTE_GAWK" ;
 
     NotificationManager nm;
     @Override
     public void onReceive(Context context, Intent intent) {
-        /*nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        Log.e("GAWK_ERR","TimeNotification start");
+        nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         //Интент для активити, которую мы хотим запускать при нажатии на уведомление
-        Intent intentTL = new Intent(context, ViewNoteActivity.class);
+        Intent intentTL = new Intent(context, NoteView.class);
         Note note = (Note) intent.getSerializableExtra("note");
-        boolean voice = intent.getBooleanExtra("voice", true);
-        boolean vibration = intent.getBooleanExtra("vibration",true);
+        com.gawk.voicenotes.models.Notification notification = (com.gawk.voicenotes.models.Notification) intent.getSerializableExtra("notification");
+        boolean voice = notification.isSound();
+        boolean vibration = notification.isShake();
+        int idNotification = (int) notification.getId();
+        String text = note.getText_note();
+        if (note.getText_note().length() > 100) {
+            text = text.substring(0,100)+"...";
+        }
         Resources res = context.getResources();
-        intentTL.putExtra("note", note);
+        intentTL.putExtra("id", note.getId());
         NotificationCompat.Builder nb = new NotificationCompat.Builder(context)
                 .setSmallIcon(R.drawable.icon175x175)
                 .setLargeIcon(BitmapFactory.decodeResource(res, R.drawable.icon175x175_big))
                 .setAutoCancel(true) //уведомление закроется по клику на него
                 .setTicker("Уведомление о заметке") //текст, который отобразится вверху статус-бара при создании уведомления
-                .setContentText(note.getText_note()) // Основной текст уведомления
-                .setContentIntent(PendingIntent.getActivity(context, 0, intentTL, PendingIntent.FLAG_CANCEL_CURRENT))
+                .setContentText(text) // Основной текст уведомления
+                .setContentIntent(PendingIntent.getActivity(context, idNotification, intentTL, PendingIntent.FLAG_UPDATE_CURRENT))
                 .setWhen(System.currentTimeMillis()) //отображаемое время уведомления
                 .setContentTitle("Уведомление о заметке") //заголовок уведомления
                 .setDefaults(Notification.DEFAULT_LIGHTS); // звук, вибро и диодный индикатор выставляются по умолчанию
@@ -48,7 +58,7 @@ public class TimeNotification extends BroadcastReceiver {
         } else if (vibration) {
             nb.setDefaults(Notification.DEFAULT_VIBRATE); // звук, вибро и диодный индикатор выставляются по умолчанию
         }
-        nm.notify(NOTIFY_TAG, note.getId(), nb.build());*/
+        nm.notify(NOTIFY_TAG, idNotification, nb.build());
     }
 }
 

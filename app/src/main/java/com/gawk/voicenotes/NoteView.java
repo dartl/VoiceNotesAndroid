@@ -1,5 +1,6 @@
 package com.gawk.voicenotes;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
@@ -34,23 +35,7 @@ public class NoteView extends ParentActivity {
         textViewBodyNotification = (TextView) findViewById(R.id.textViewBodyNotification);
         editTextNoteText = (EditText) findViewById(R.id.editTextNoteText);
 
-        long id = getIntent().getLongExtra("id",-1);
-        if (id != -1) {
-            note = new Note(dbHelper.getNoteById(id));
-            editTextNoteText.setText(note.getText_note());
-
-            DateFormat dateFormat;
-            dateFormat = SimpleDateFormat.getDateTimeInstance();
-            textViewDate.setText(dateFormat.format(note.getDate()));
-
-            Cursor cursorDate = dbHelper.getAllNotificationByNote(id);
-            if (cursorDate.moveToFirst()) {
-                Notification notification = new Notification(cursorDate);
-                textViewBodyNotification.setText(dateFormat.format(notification.getDate()));
-            }
-        } else {
-            finish();
-        }
+        setTextNote();
 
 
     }
@@ -99,5 +84,27 @@ public class NoteView extends ParentActivity {
         }
 
         return ret;
+    }
+
+    private void setTextNote() {
+        dbHelper.connection();
+        long id = getIntent().getLongExtra("id",-1);
+        if (id != -1) {
+            note = new Note(dbHelper.getNoteById(id));
+            editTextNoteText.setText(note.getText_note());
+
+            DateFormat dateFormat;
+            dateFormat = SimpleDateFormat.getDateTimeInstance();
+            textViewDate.setText(dateFormat.format(note.getDate()));
+
+            dbHelper.deleteAllOldNotification();
+            Cursor cursorDate = dbHelper.getAllNotificationByNote(id);
+            if (cursorDate.moveToFirst()) {
+                Notification notification = new Notification(cursorDate);
+                textViewBodyNotification.setText(dateFormat.format(notification.getDate()));
+            }
+        } else {
+            finish();
+        }
     }
 }

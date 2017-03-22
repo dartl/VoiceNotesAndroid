@@ -3,6 +3,7 @@ package com.gawk.voicenotes.fragments_notes;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,8 @@ import java.util.Calendar;
  */
 
 public class NewNoteNotifications extends FragmentParent implements TimePickerReturn {
+    private final int MAX_DIFF_TIME = 60000;
+
     private Switch switchNotification;
     private RelativeLayout notificationLayout;
     private Button selectTime, selectDate;
@@ -121,7 +124,7 @@ public class NewNoteNotifications extends FragmentParent implements TimePickerRe
         DateFormat dateFormat = SimpleDateFormat.getDateTimeInstance();
         textViewNowDate.setText(dateFormat.format(dateNotification.getTime()));
         notification.setDate(dateNotification.getTime());
-        if ( (dateNotification.getTimeInMillis() - Calendar.getInstance().getTimeInMillis()) > 180000 ) {
+        if ( (dateNotification.getTimeInMillis() - Calendar.getInstance().getTimeInMillis()) > MAX_DIFF_TIME ) {
             checkError = true;
             textViewErrorDate.setVisibility(View.INVISIBLE);
         } else {
@@ -129,7 +132,6 @@ public class NewNoteNotifications extends FragmentParent implements TimePickerRe
             checkError = false;
             textViewErrorDate.setVisibility(View.VISIBLE);
         }
-
     }
 
     @Override
@@ -150,8 +152,13 @@ public class NewNoteNotifications extends FragmentParent implements TimePickerRe
 
     public Notification getNotification() {
         if (checkError && checkNotification) {
+            Log.e("GAWK_ERR","NewNoteNotification. getNotification() " + notification.getDate());
             return notification;
         }
         return null;
+    }
+
+    public boolean haveNotification() {
+        return (checkError && checkNotification);
     }
 }

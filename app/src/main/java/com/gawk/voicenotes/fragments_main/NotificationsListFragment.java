@@ -65,6 +65,7 @@ public class NotificationsListFragment extends FragmentParent implements Actions
     }
 
     public boolean updateNotification() {
+        dbHelper.deleteAllOldNotification();
         Cursor notificationCursor = dbHelper.getCursorAllNotification();
         notificationCursorAdapter.changeCursor(notificationCursor);
         return true;

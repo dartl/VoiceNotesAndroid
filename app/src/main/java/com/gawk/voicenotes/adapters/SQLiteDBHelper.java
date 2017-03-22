@@ -154,6 +154,24 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
     }
 
     /**
+     * Удаляет из БД все старые заметки
+     * @return возвращает результат запроса к БД
+     */
+    public boolean deleteAllOldNotification() {
+        if (!db.isOpen()) {
+            return false;
+        }
+        Cursor oldNotificationCursor = db.rawQuery("SELECT * FROM " +
+                SQLiteDBHelper.NOTIFICATIONS_TABLE_NAME + " WHERE " + SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_DATE
+                + " < " + new Date().getTime(), null);
+            while (oldNotificationCursor.moveToNext()) {
+                Log.e("GAWK_ERR", "delete notification old, id = "+oldNotificationCursor.getInt(oldNotificationCursor.getColumnIndex(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_ID)));
+                deleteNotification(oldNotificationCursor.getInt(oldNotificationCursor.getColumnIndex(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_ID)));
+            }
+        return true;
+    }
+
+    /**
      * Получаем указатель на список всех оповещений, привязанных к заметке
      * @param id идентификатор заметки
      * @return возвращает результат запроса к БД

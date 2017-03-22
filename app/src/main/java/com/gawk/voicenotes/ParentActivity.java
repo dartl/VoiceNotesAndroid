@@ -1,17 +1,22 @@
 package com.gawk.voicenotes;
 
+import android.app.AlarmManager;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.ServiceConnection;
+import android.content.res.Resources;
 import android.database.Cursor;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -27,6 +32,9 @@ import android.widget.TextView;
 import com.android.vending.billing.IInAppBillingService;
 import com.gawk.voicenotes.adapters.NoteCursorAdapter;
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
+import com.gawk.voicenotes.adapters.TimeNotification;
+import com.gawk.voicenotes.models.Note;
+import com.gawk.voicenotes.models.Notification;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -35,6 +43,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 
 /**
@@ -267,4 +276,19 @@ public class ParentActivity extends AppCompatActivity
             }
         }
     }
+
+    protected void restartNotify(Note note, Notification notification) {
+        AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(this, TimeNotification.class);
+        intent.putExtra("note",note);
+        intent.putExtra("notification",notification);
+        int requestCodeIntent =  (int) notification.getId();
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, -requestCodeIntent,
+                intent, 0);
+        // На случай, если мы ранее запускали активити, а потом поменяли время,
+        // откажемся от уведомления
+        am.cancel(pendingIntent);
+        am.set(AlarmManager.RTC_WAKEUP,  notification.getDate().getTime() , pendingIntent);
+    }
+
 }

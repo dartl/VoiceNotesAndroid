@@ -5,8 +5,6 @@ import android.database.Cursor;
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
 
 import java.io.Serializable;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**

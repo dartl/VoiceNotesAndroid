@@ -70,7 +70,7 @@ public class NotificationCursorAdapter extends CursorAdapter {
 
         // Подключаемся к БД
         SQLiteDBHelper db = SQLiteDBHelper.getInstance(context);
-
+        db.connection();
         // Находим элементы в представлении
         TextView textViewTextNote = (TextView) view.findViewById(R.id.textViewTextNote);
         TextView textViewDateNotification = (TextView) view.findViewById(R.id.textViewDateNotification);

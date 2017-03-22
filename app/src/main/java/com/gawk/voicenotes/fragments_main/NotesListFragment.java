@@ -98,6 +98,7 @@ public class NotesListFragment extends FragmentParent implements ActionsListNote
 
     // state: 0 - delete one note, 1 - delete all note
     public void deleteElement(long id, int state) {
+        dbHelper.connection();
         switch (state) {
             case 0:
                 dbHelper.noteDelete(id);
@@ -111,7 +112,6 @@ public class NotesListFragment extends FragmentParent implements ActionsListNote
                     while (!selectNotes.isEmpty()) {
                         id_temp = (Long) selectNotes.get(i);
                         selectNotes.remove(i);
-                        dbHelper.connection();
                         dbHelper.noteDelete(id_temp);
                         deleteNotifications(id_temp);
                     }
@@ -121,6 +121,7 @@ public class NotesListFragment extends FragmentParent implements ActionsListNote
             default:
                 break;
         }
+        dbHelper.disconnection();
     }
 
     public void deleteNotifications(long id) {

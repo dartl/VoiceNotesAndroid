@@ -1,11 +1,10 @@
 package com.gawk.voicenotes;
 
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,8 +20,6 @@ import com.gawk.voicenotes.models.Note;
 import com.gawk.voicenotes.models.Notification;
 
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 
 /**
  * Created by GAWK on 12.02.2017.
@@ -56,6 +53,7 @@ public class NewNote extends ParentActivity implements TimePickerReturn {
         newNoteAddNotification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 startSaveNote();
             }
         });
@@ -103,13 +101,16 @@ public class NewNote extends ParentActivity implements TimePickerReturn {
         NewNoteText newNoteText = (NewNoteText) adapter.getItem(0);
         Note newNote = new Note(-1,newNoteText.getTextNote(), Calendar.getInstance().getTime());
         long note_id = dbHelper.saveNote(newNote, 0);
+        newNote.setId(note_id);
 
         // сохранение оповещения
         NewNoteNotifications newNoteNotifications = (NewNoteNotifications) adapter.getItem(1);
-        Notification notification = newNoteNotifications.getNotification();
-        if (notification != null) {
+        if (newNoteNotifications.haveNotification()) {
+            Notification notification = newNoteNotifications.getNotification();
             notification.setId_note(note_id);
-            dbHelper.saveNotification(notification,0);
+            notification.setId(dbHelper.saveNotification(notification,0));
+            Log.e("GAWK_ERR","NewNote. startSaveNote(). notification.getDate() = " + notification.getDate());
+            restartNotify(newNote, notification);
         }
         dbHelper.disconnection();
         finish();
@@ -126,4 +127,6 @@ public class NewNote extends ParentActivity implements TimePickerReturn {
         TimePickerReturn parent = (TimePickerReturn) adapter.getItem(1);
         parent.getDate(year, month, dayOfMonth);
     }
+
+
 }
