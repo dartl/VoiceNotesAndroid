@@ -10,6 +10,8 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +28,7 @@ import com.gawk.voicenotes.ParentActivity;
 import com.gawk.voicenotes.R;
 import com.gawk.voicenotes.adapters.ActionsListNotes;
 import com.gawk.voicenotes.adapters.NoteCursorAdapter;
+import com.gawk.voicenotes.adapters.NoteRecyclerAdapter;
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
 
 import java.lang.reflect.Array;
@@ -37,10 +40,13 @@ import java.util.ArrayList;
 
 public class NotesListFragment extends FragmentParent implements ActionsListNotes {
     private ListView listViewAllNotes;
-    private NoteCursorAdapter noteCursorAdapter;
     private MainActivity mainActivity;
 
     private ArrayList selectNotes = new ArrayList<Long>();
+
+    private RecyclerView mRecyclerView;
+    private NoteRecyclerAdapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
 
     public NotesListFragment() {
         // Required empty public constructor
@@ -65,10 +71,20 @@ public class NotesListFragment extends FragmentParent implements ActionsListNote
         dbHelper.connection();
 
         Cursor noteCursor = dbHelper.getCursorAllNotes();
-        noteCursorAdapter = new NoteCursorAdapter(getActivity(), noteCursor, true, this);
 
+        /* new NoteRecycler */
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        mAdapter = new NoteRecyclerAdapter(getActivity(), noteCursor);
+
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.listViewAllNotes);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
+
+        // old
+        /*
         listViewAllNotes = (ListView) view.findViewById(R.id.listViewAllNotes);
         listViewAllNotes.setAdapter(noteCursorAdapter);
+        */
 
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -89,10 +105,10 @@ public class NotesListFragment extends FragmentParent implements ActionsListNote
 
     public boolean updateNote() {
         Cursor noteCursor = dbHelper.getCursorAllNotes();
-        noteCursorAdapter.changeCursor(noteCursor);
+        mAdapter.changeCursor(noteCursor);
         NavigationView navigationView = (NavigationView) getActivity().findViewById(R.id.nav_view);
         TextView view = (TextView) navigationView.getMenu().findItem(R.id.menu_notes_list).getActionView();
-        view.setText(noteCursorAdapter.getCount() > 0 ? String.valueOf(noteCursorAdapter.getCount()) : null);
+        view.setText(mAdapter.getItemCount() > 0 ? String.valueOf(mAdapter.getItemCount()) : null);
         return true;
     }
 

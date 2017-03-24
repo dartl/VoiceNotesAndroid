@@ -1,45 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    style="@style/GawkMaterialTheme.ListItem">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp">
 
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/checkBoxSelectNote"
-        android:layout_gravity="center"
-        style="@style/GawkMaterialTheme.ListIconSelect"/>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1">
-
-        <TextView
-            android:text="Date"
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view"
+        app:cardCornerRadius="2dp"
+        app:cardElevation="2dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textViewListDate"
-            style="@style/GawkMaterialTheme.ListDateNote" />
+            android:orientation="horizontal"
+            style="@style/GawkMaterialTheme.ListItem">
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/checkBoxSelectNote"
+                android:layout_gravity="center"
+                style="@style/GawkMaterialTheme.ListIconSelect"/>
 
-        <TextView
-            android:text="Text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/textViewListText"
-            android:maxLines="2"
-            style="@style/GawkMaterialTheme.ListTextNote"/>
-    </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/buttonDeleteNote"
-        style="@style/GawkMaterialTheme.ListIconDelete"
-        android:layout_gravity="center"
-        app:srcCompat="@drawable/ic_delete_forever_black_24dp" />
+                <TextView
+                    android:text="Date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textViewListDate"
+                    style="@style/GawkMaterialTheme.ListDateNote" />
+
+                <TextView
+                    android:text="Text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textViewListText"
+                    android:maxLines="2"
+                    style="@style/GawkMaterialTheme.ListTextNote"/>
+            </LinearLayout>
+
+            <ImageButton
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/buttonDeleteNote"
+                style="@style/GawkMaterialTheme.ListIconDelete"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/ic_delete_forever_black_24dp" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
 
 </LinearLayout>

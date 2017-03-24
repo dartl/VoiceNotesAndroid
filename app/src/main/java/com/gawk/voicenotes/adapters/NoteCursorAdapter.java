@@ -27,6 +27,7 @@ import java.util.Date;
  * @author GAWK
  */
 
+
 public class NoteCursorAdapter extends CursorAdapter {
     /**
      * Ссылка на интерфейс, определяющий методы, работающие с фрагментами для адаптеров {@value}
