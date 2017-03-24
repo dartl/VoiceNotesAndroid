@@ -74,7 +74,7 @@ public class NotesListFragment extends FragmentParent implements ActionsListNote
 
         /* new NoteRecycler */
         mLayoutManager = new LinearLayoutManager(getActivity());
-        mAdapter = new NoteRecyclerAdapter(getActivity(), noteCursor);
+        mAdapter = new NoteRecyclerAdapter(getActivity(), noteCursor, this);
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.listViewAllNotes);
         mRecyclerView.setLayoutManager(mLayoutManager);

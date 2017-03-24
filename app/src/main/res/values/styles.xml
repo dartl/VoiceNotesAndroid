@@ -68,7 +68,7 @@
     </style>
 
     <style name="GawkMaterialTheme.ListTextNote" >
-        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingLeft">6dp</item>
         <item name="android:textSize">14sp</item>
         <item name="android:paddingBottom">16dp</item>
     </style>

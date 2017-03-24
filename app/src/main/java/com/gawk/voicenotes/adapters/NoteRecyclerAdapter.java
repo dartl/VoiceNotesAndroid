@@ -1,15 +1,18 @@
 package com.gawk.voicenotes.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.gawk.voicenotes.NoteView;
 import com.gawk.voicenotes.R;
 
 import java.text.DateFormat;
@@ -21,10 +24,13 @@ import java.util.Date;
  * Created by GAWK on 24.03.2017.
  */
 
-public class NoteRecyclerAdapter extends  CursorRecyclerViewAdapter<NoteRecyclerAdapter.ViewHolder> {
+public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerAdapter.ViewHolder> {
 
-    public NoteRecyclerAdapter(Context context, Cursor cursor) {
+    private ActionsListNotes actionsListNotes;
+
+    public NoteRecyclerAdapter(Context context, Cursor cursor, ActionsListNotes actionsListNotes) {
         super(context, cursor);
+        this.actionsListNotes = actionsListNotes;
     }
 
     // Provide a reference to the views for each data item
@@ -35,17 +41,47 @@ public class NoteRecyclerAdapter extends  CursorRecyclerViewAdapter<NoteRecycler
         public ImageButton deleteIcon;
         public CheckBox checkBoxSelectNote;
         public TextView textView, dateView;
+        public View parent;
 
         public ViewHolder(View v) {
             super(v);
+            parent = v;
             deleteIcon = (ImageButton) v.findViewById(R.id.buttonDeleteNote);
             checkBoxSelectNote = (CheckBox) v.findViewById(R.id.checkBoxSelectNote);
             textView = (TextView) v.findViewById(R.id.textViewListText);
             dateView = (TextView) v.findViewById(R.id.textViewListDate);
         }
 
-        public void setData(Cursor c) {
+        public void setData(final Cursor c, final NoteRecyclerAdapter noteRecyclerAdapter) {
+            final int position = c.getPosition();
+
             textView.setText(c.getString(c.getColumnIndex(SQLiteDBHelper.NOTES_TABLE_COLUMN_TEXT_NOTE)));
+            deleteIcon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    long id = noteRecyclerAdapter.getItemId(position);
+                    noteRecyclerAdapter.getActionsListNotes().showDialogDelete(id,0);
+                }
+            });
+
+            checkBoxSelectNote.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    long id = noteRecyclerAdapter.getItemId(position);
+                    noteRecyclerAdapter.getActionsListNotes().selectNote(id,isChecked);
+                }
+            });
+
+            parent.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent;
+                    long id = noteRecyclerAdapter.getItemId(position);
+                    intent = new Intent(v.getContext(), NoteView.class);
+                    intent.putExtra("id",id);
+                    v.getContext().startActivity(intent);
+                }
+            });
 
             long dateLong = c.getLong(c.getColumnIndex
                     (SQLiteDBHelper.NOTES_TABLE_COLUMN_DATE));  // получаем дату в виде числа
@@ -83,7 +119,7 @@ public class NoteRecyclerAdapter extends  CursorRecyclerViewAdapter<NoteRecycler
     public void onBindViewHolder(NoteRecyclerAdapter.ViewHolder viewHolder, Cursor cursor) {
         NoteRecyclerAdapter.ViewHolder holder = viewHolder;
         cursor.moveToPosition(cursor.getPosition());
-        holder.setData(cursor);
+        holder.setData(cursor, this);
     }
 
     @Override
@@ -94,5 +130,13 @@ public class NoteRecyclerAdapter extends  CursorRecyclerViewAdapter<NoteRecycler
     @Override
     public int getItemViewType(int position) {
         return 0;
+    }
+
+    public ActionsListNotes getActionsListNotes() {
+        return actionsListNotes;
+    }
+
+    public void setActionsListNotes(ActionsListNotes actionsListNotes) {
+        this.actionsListNotes = actionsListNotes;
     }
 }
