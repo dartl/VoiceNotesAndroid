@@ -1,7 +1,7 @@
 package com.gawk.voicenotes.adapters;
 
 /**
- * Этот интерфейс необходим для того, чтобы в адаптерах {@link NoteCursorAdapter} и {@link NotificationCursorAdapter}
+ * Этот интерфейс необходим для того, чтобы в адаптерах {@link NoteRecyclerAdapter} и {@link NotificationRecyclerAdapter}
  * чтобы была возможность вызвать методы фрагментов
  * @author GAWK on 24.02.2017.
  */
@@ -19,4 +19,5 @@ public interface ActionsListNotes {
      * @param checked состояние выделения
      */
     public void selectNote(long id, boolean checked);
+    public void selectNotification(long id, boolean checked);
 }

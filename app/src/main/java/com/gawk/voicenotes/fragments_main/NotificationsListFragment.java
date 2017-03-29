@@ -3,22 +3,19 @@ package com.gawk.voicenotes.fragments_main;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.gawk.voicenotes.FragmentParent;
 import com.gawk.voicenotes.R;
 import com.gawk.voicenotes.adapters.ActionsListNotes;
-import com.gawk.voicenotes.adapters.NotificationCursorAdapter;
+import com.gawk.voicenotes.adapters.NotificationRecyclerAdapter;
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
 
 import java.util.ArrayList;
@@ -29,7 +26,9 @@ import java.util.ArrayList;
 
 public class NotificationsListFragment extends FragmentParent implements ActionsListNotes {
     private ListView listViewAllNotification;
-    private NotificationCursorAdapter notificationCursorAdapter;
+    private RecyclerView mRecyclerView;
+    private NotificationRecyclerAdapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
 
     private ArrayList selectNotification = new ArrayList<Long>();
 
@@ -51,10 +50,15 @@ public class NotificationsListFragment extends FragmentParent implements Actions
         dbHelper.connection();
 
         Cursor notificationCursor = dbHelper.getCursorAllNotification();
-        notificationCursorAdapter = new NotificationCursorAdapter(getActivity(), notificationCursor, true, this);
 
-        listViewAllNotification = (ListView) view.findViewById(R.id.listViewAllNotifications);
-        listViewAllNotification.setAdapter(notificationCursorAdapter);
+        /* new NoteRecycler */
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        mAdapter = new NotificationRecyclerAdapter(getActivity(), notificationCursor, this, dbHelper);
+
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.listViewAllNotifications);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
+
         return view;
     }
 
@@ -67,7 +71,7 @@ public class NotificationsListFragment extends FragmentParent implements Actions
     public boolean updateNotification() {
         dbHelper.deleteAllOldNotification();
         Cursor notificationCursor = dbHelper.getCursorAllNotification();
-        notificationCursorAdapter.changeCursor(notificationCursor);
+        mAdapter.changeCursor(notificationCursor);
         return true;
     }
 
@@ -128,6 +132,10 @@ public class NotificationsListFragment extends FragmentParent implements Actions
 
     @Override
     public void selectNote(long id, boolean checked) {
+    }
+
+    @Override
+    public void selectNotification(long id, boolean checked) {
         if (checked) {
             selectNotification.add(id);
         } else {

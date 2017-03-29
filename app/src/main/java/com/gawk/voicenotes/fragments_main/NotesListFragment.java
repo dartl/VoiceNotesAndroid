@@ -1,37 +1,29 @@
 package com.gawk.voicenotes.fragments_main;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.gawk.voicenotes.FragmentParent;
 import com.gawk.voicenotes.MainActivity;
 import com.gawk.voicenotes.NewNote;
-import com.gawk.voicenotes.ParentActivity;
 import com.gawk.voicenotes.R;
 import com.gawk.voicenotes.adapters.ActionsListNotes;
-import com.gawk.voicenotes.adapters.NoteCursorAdapter;
 import com.gawk.voicenotes.adapters.NoteRecyclerAdapter;
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -152,6 +144,11 @@ public class NotesListFragment extends FragmentParent implements ActionsListNote
         } else {
             selectNotes.remove(id);
         }
+    }
+
+    @Override
+    public void selectNotification(long id, boolean checked) {
+
     }
 
     @Override

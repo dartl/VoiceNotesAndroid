@@ -1,22 +1,18 @@
 package com.gawk.voicenotes;
 
 import android.app.AlarmManager;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.ServiceConnection;
-import android.content.res.Resources;
 import android.database.Cursor;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.NotificationCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -30,7 +26,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.android.vending.billing.IInAppBillingService;
-import com.gawk.voicenotes.adapters.NoteCursorAdapter;
+import com.gawk.voicenotes.adapters.NoteRecyclerAdapter;
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
 import com.gawk.voicenotes.adapters.TimeNotification;
 import com.gawk.voicenotes.models.Note;
@@ -41,9 +37,6 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.Date;
 
 
 /**
@@ -63,7 +56,7 @@ public class ParentActivity extends AppCompatActivity
     FirebaseAnalytics mFirebaseAnalytics;
     IInAppBillingService mService;
 
-    String SKU_ONE_DOLLOR = "donation_one_dollor";
+    String SKU_ONE_DOLLOR = "dsgdwgfhfdsgdsbcvxvewrtgvwevzsdfd";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,9 +106,9 @@ public class ParentActivity extends AppCompatActivity
         super.onResume();
         dbHelper.connection();
         Cursor noteCursor = dbHelper.getCursorAllNotes();
-        NoteCursorAdapter noteCursorAdapter = new NoteCursorAdapter(this, noteCursor, true);
+        NoteRecyclerAdapter noteCursorAdapter = new NoteRecyclerAdapter(this, noteCursor);
         TextView view = (TextView) navigationView.getMenu().findItem(R.id.menu_notes_list).getActionView();
-        view.setText(noteCursorAdapter.getCount() > 0 ? String.valueOf(noteCursorAdapter.getCount()) : null);
+        view.setText(noteCursorAdapter.getItemCount() > 0 ? String.valueOf(noteCursorAdapter.getItemCount()) : null);
     }
 
     @Override
@@ -240,7 +233,8 @@ public class ParentActivity extends AppCompatActivity
     }
 
     public void startBuySubscription() throws RemoteException {
-        /*Bundle bundle = mService.getBuyIntent(3, getPackageName(),
+        /*
+        Bundle bundle = mService.getBuyIntent(3, getPackageName(),
                 SKU_ONE_DOLLOR, "subs", "");
 
         PendingIntent pendingIntent = bundle.getParcelable(RESPONSE_BUY_INTENT);

@@ -1,5 +1,6 @@
 package com.gawk.voicenotes.adapters;
 
+import android.app.NotificationManager;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
@@ -41,6 +42,7 @@ import java.util.Date;
 public class SQLiteDBHelper extends SQLiteOpenHelper {
     private static SQLiteDBHelper sInstance;
     private SQLiteDatabase db;
+    private Context context;
 
     public static final int DATABASE_VERSION = 2;
     public static final String DATABASE_NAME = "VOICE_NOTES.DB";
@@ -72,6 +74,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
      */
     public SQLiteDBHelper(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        this.context = context;
     }
 
     /**
@@ -246,6 +249,8 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
      * @return результат удаления
      */
     public boolean deleteNotification(long id) {
+        NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        nm.cancel(TimeNotification.NOTIFY_TAG,(int)id);
         int deleteRow = db.delete(SQLiteDBHelper.NOTIFICATIONS_TABLE_NAME, "_id = ?" ,new String[] { String.valueOf(id) });
         if (deleteRow == 1) {
             return true;

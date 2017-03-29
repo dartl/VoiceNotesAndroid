@@ -70,19 +70,32 @@
     <style name="GawkMaterialTheme.ListTextNote" >
         <item name="android:paddingLeft">6dp</item>
         <item name="android:textSize">14sp</item>
-        <item name="android:paddingBottom">16dp</item>
+        <item name="android:paddingTop">16dp</item>
     </style>
 
     <style name="GawkMaterialTheme.ListDateNote" >
         <item name="android:paddingLeft">6dp</item>
         <item name="android:textSize">14sp</item>
-        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">16dp</item>
+    </style>
+
+    <style name="GawkMaterialTheme.ListTextNoteView" parent="GawkMaterialTheme.ListTextNote">
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:paddingBottom">0dp</item>
     </style>
 
     <style name="GawkMaterialTheme.ListIconDelete" >
         <item name="android:background">#00000000</item>
         <item name="android:paddingRight">16dp</item>
         <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">16dp</item>
+    </style>
+
+    <style name="GawkMaterialTheme.ListIconNotification" >
+        <item name="android:paddingRight">8dp</item>
+        <item name="android:paddingLeft">8dp</item>
         <item name="android:paddingTop">16dp</item>
         <item name="android:paddingBottom">16dp</item>
     </style>
@@ -111,11 +124,7 @@
         <item name="android:paddingTop">16dp</item>
     </style>
 
-    <style name="GawkMaterialTheme.ListTextNoteView" parent="GawkMaterialTheme.ListTextNote">
-        <item name="android:paddingLeft">16dp</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:paddingBottom">0dp</item>
-    </style>
+
 
     <style name="GawkMaterialTheme.ButtonBigGreen" parent="GawkMaterialTheme.ButtonBig">
         <item name="background">@color/colorGreen</item>
