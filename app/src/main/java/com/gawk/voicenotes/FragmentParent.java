@@ -39,4 +39,9 @@ public class FragmentParent extends Fragment {
         super.onStop();
         dbHelper.disconnection();
     }
+
+    // функция поиска
+    public void search(String text) {
+
+    }
 }

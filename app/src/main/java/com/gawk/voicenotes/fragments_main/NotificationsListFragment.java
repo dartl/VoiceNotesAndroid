@@ -7,12 +7,14 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.gawk.voicenotes.FragmentParent;
+import com.gawk.voicenotes.MainActivity;
 import com.gawk.voicenotes.R;
 import com.gawk.voicenotes.adapters.ActionsListNotes;
 import com.gawk.voicenotes.adapters.NotificationRecyclerAdapter;
@@ -25,7 +27,7 @@ import java.util.ArrayList;
  */
 
 public class NotificationsListFragment extends FragmentParent implements ActionsListNotes {
-    private ListView listViewAllNotification;
+    private MainActivity mainActivity;
     private RecyclerView mRecyclerView;
     private NotificationRecyclerAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -34,6 +36,10 @@ public class NotificationsListFragment extends FragmentParent implements Actions
 
     public NotificationsListFragment() {
         // Required empty public constructor
+    }
+
+    public NotificationsListFragment(MainActivity mainActivity) {
+        this.mainActivity = mainActivity;
     }
 
     @Override

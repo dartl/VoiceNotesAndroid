@@ -272,6 +272,18 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
                 + " DESC", null);
     }
 
+    // Получить указатель на все заметки с искомым вхождением
+    public Cursor getCursorAllNotes(String text) {
+        if (!db.isOpen()) {
+            return null;
+        }
+        return db.rawQuery("SELECT * FROM " +
+                SQLiteDBHelper.NOTES_TABLE_NAME + " WHERE lower(" +
+                SQLiteDBHelper.NOTES_TABLE_COLUMN_TEXT_NOTE + ") like lower('%" + text
+                + "%') ORDER BY " + SQLiteDBHelper.NOTES_TABLE_COLUMN_DATE
+                + " DESC", null);
+    }
+
     public Cursor getNoteById(long id){
         if (!db.isOpen()) {
             return null;

@@ -1,7 +1,6 @@
 package com.gawk.voicenotes.adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,11 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.gawk.voicenotes.NoteView;
 import com.gawk.voicenotes.R;
 import com.gawk.voicenotes.models.Note;
 
@@ -78,12 +75,23 @@ public class NotificationRecyclerAdapter extends CursorRecyclerViewAdapter<Notif
             Cursor noteCursor = db.getNoteById(note_id);
             Note note = new Note(noteCursor);
 
+            Calendar cToday = Calendar.getInstance();   // получаем сегодняшний день и время
+            cToday.set(
+                    cToday.get(Calendar.YEAR),
+                    cToday.get(Calendar.MONTH),
+                    cToday.get(Calendar.DAY_OF_MONTH),
+                    23,59);   // меняем дату на начало дня
+
             // Выводим дату и время срабатывания оповещения
             long datelong = c.getLong(c.getColumnIndex
                     (SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_DATE));
             DateFormat dateFormat;
             Date date = new Date(datelong);
-            dateFormat = SimpleDateFormat.getDateTimeInstance();
+            if (date.before(cToday.getTime())) {
+                dateFormat = SimpleDateFormat.getTimeInstance();
+            } else {
+                dateFormat = SimpleDateFormat.getDateTimeInstance();
+            }
             textViewDateNotification.setText(dateFormat.format(date));
 
             // Выводим текст заметки, к которой относится оповещение

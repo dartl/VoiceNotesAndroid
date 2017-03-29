@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +32,6 @@ import java.util.ArrayList;
  */
 
 public class NotesListFragment extends FragmentParent implements ActionsListNotes {
-    private ListView listViewAllNotes;
     private MainActivity mainActivity;
 
     private ArrayList selectNotes = new ArrayList<Long>();
@@ -72,12 +72,6 @@ public class NotesListFragment extends FragmentParent implements ActionsListNote
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
 
-        // old
-        /*
-        listViewAllNotes = (ListView) view.findViewById(R.id.listViewAllNotes);
-        listViewAllNotes.setAdapter(noteCursorAdapter);
-        */
-
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,11 +86,10 @@ public class NotesListFragment extends FragmentParent implements ActionsListNote
     @Override
     public void onResume() {
         super.onResume();
-        updateNote();
+        updateNote(dbHelper.getCursorAllNotes());
     }
 
-    public boolean updateNote() {
-        Cursor noteCursor = dbHelper.getCursorAllNotes();
+    public boolean updateNote(Cursor noteCursor) {
         mAdapter.changeCursor(noteCursor);
         NavigationView navigationView = (NavigationView) getActivity().findViewById(R.id.nav_view);
         TextView view = (TextView) navigationView.getMenu().findItem(R.id.menu_notes_list).getActionView();
@@ -111,7 +104,7 @@ public class NotesListFragment extends FragmentParent implements ActionsListNote
             case 0:
                 dbHelper.noteDelete(id);
                 deleteNotifications(id);
-                updateNote();
+                updateNote(dbHelper.getCursorAllNotes());
                 break;
             case 1:
                 int i = 0;
@@ -123,7 +116,7 @@ public class NotesListFragment extends FragmentParent implements ActionsListNote
                         dbHelper.noteDelete(id_temp);
                         deleteNotifications(id_temp);
                     }
-                    updateNote();
+                    updateNote(dbHelper.getCursorAllNotes());
                 }
                 break;
             default:
@@ -175,5 +168,10 @@ public class NotesListFragment extends FragmentParent implements ActionsListNote
         } else {
             Snackbar.make(getView(), getResources().getString(R.string.main_view_error_select), Snackbar.LENGTH_LONG).show();
         }
+    }
+
+    @Override
+    public void search(String text) {
+        updateNote(dbHelper.getCursorAllNotes(text));
     }
 }

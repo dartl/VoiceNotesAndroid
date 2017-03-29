@@ -49,7 +49,7 @@ public class ParentActivity extends AppCompatActivity
     private static final int BILLING_RESPONSE_RESULT_OK = 0;
     private static final int RC_BUY = 1001;
     private Toolbar toolbar;
-    protected MenuItem actionRemoveSelected, actionSave;
+    protected MenuItem actionRemoveSelected, actionSave, actionSearch;
     private NavigationView navigationView;
     public SQLiteDBHelper dbHelper;
     protected AdView mAdView;
@@ -171,6 +171,7 @@ public class ParentActivity extends AppCompatActivity
         getMenuInflater().inflate(R.menu.main, menu);
         actionRemoveSelected = menu.findItem(R.id.action_remove_selected);
         actionSave = menu.findItem(R.id.action_save_note);
+        actionSearch = menu.findItem(R.id.action_search);
         return true;
     }
 
@@ -285,4 +286,11 @@ public class ParentActivity extends AppCompatActivity
         am.set(AlarmManager.RTC_WAKEUP,  notification.getDate().getTime() , pendingIntent);
     }
 
+    public Toolbar getToolbar() {
+        return toolbar;
+    }
+
+    public void setToolbar(Toolbar toolbar) {
+        this.toolbar = toolbar;
+    }
 }

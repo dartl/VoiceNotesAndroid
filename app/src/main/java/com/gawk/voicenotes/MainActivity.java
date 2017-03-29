@@ -2,10 +2,13 @@ package com.gawk.voicenotes;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -13,11 +16,13 @@ import com.gawk.voicenotes.adapters.SQLiteDBHelper;
 import com.gawk.voicenotes.adapters.ViewPagerAdapter;
 import com.gawk.voicenotes.fragments_main.NotesListFragment;
 import com.gawk.voicenotes.fragments_main.NotificationsListFragment;
+import com.gawk.voicenotes.models.Notification;
 
 public class MainActivity extends ParentActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private ViewPagerAdapter adapter;
+    private SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +35,26 @@ public class MainActivity extends ParentActivity {
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if (position == 1) {
+                    actionSearchVisible(false);
+                } else {
+                    actionSearchVisible(true);
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
@@ -58,7 +83,7 @@ public class MainActivity extends ParentActivity {
     private void setupViewPager(ViewPager viewPager) {
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new NotesListFragment(this), getResources().getString(R.string.new_notes));
-        adapter.addFragment(new NotificationsListFragment(), getResources().getString(R.string.new_note_notification));
+        adapter.addFragment(new NotificationsListFragment(this), getResources().getString(R.string.new_note_notification));
         viewPager.setAdapter(adapter);
     }
 
@@ -88,19 +113,54 @@ public class MainActivity extends ParentActivity {
             default:
                 break;
         }
-        Log.d("GAWK_ERR","переопределилось");
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         super.onCreateOptionsMenu(menu);
         actionRemoveSelected.setVisible(true);
+        actionSearchVisible(true);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_search) {
+            final FragmentParent listFragment = (FragmentParent) adapter.getItem(viewPager.getCurrentItem());
+
+            searchView =
+                    (SearchView) MenuItemCompat.getActionView(actionSearch);
+            searchView.setQueryHint(getResources().getString(R.string.action_search) + "...");
+            searchView.setOnQueryTextListener(
+                    new SearchView.OnQueryTextListener() {
+                        @Override
+                        public boolean onQueryTextSubmit(String query) {
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onQueryTextChange(String newText) {
+                            listFragment.search(newText);
+                            return true;
+                        }
+                    }
+            );
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     public NotificationsListFragment getFragment(int position) {
         return (NotificationsListFragment) adapter.getItem(position);
     }
 
+    public boolean actionSearchVisible(boolean b) {
+        if (actionSearch != null) {
+            actionSearch.setVisible(b);
+        }
+        return true;
+    }
 }
