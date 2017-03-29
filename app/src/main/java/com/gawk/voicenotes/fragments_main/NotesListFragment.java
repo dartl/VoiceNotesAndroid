@@ -122,7 +122,6 @@ public class NotesListFragment extends FragmentParent implements ActionsListNote
             default:
                 break;
         }
-        dbHelper.disconnection();
     }
 
     public void deleteNotifications(long id) {

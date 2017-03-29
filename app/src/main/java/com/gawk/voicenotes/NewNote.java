@@ -2,6 +2,7 @@ package com.gawk.voicenotes;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -113,6 +114,8 @@ public class NewNote extends ParentActivity implements TimePickerReturn {
             restartNotify(newNote, notification);
         }
         dbHelper.disconnection();
+
+
         finish();
     }
 

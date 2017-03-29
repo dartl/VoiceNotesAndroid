@@ -8,6 +8,7 @@ import android.database.CharArrayBuffer;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.database.DataSetObserver;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -15,6 +16,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.gawk.voicenotes.ParentActivity;
 import com.gawk.voicenotes.models.Note;
 import com.gawk.voicenotes.models.Notification;
 
@@ -43,6 +45,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
     private static SQLiteDBHelper sInstance;
     private SQLiteDatabase db;
     private Context context;
+    private ParentActivity activity;
 
     public static final int DATABASE_VERSION = 2;
     public static final String DATABASE_NAME = "VOICE_NOTES.DB";
@@ -249,8 +252,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
      * @return результат удаления
      */
     public boolean deleteNotification(long id) {
-        NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        nm.cancel(TimeNotification.NOTIFY_TAG,(int)id);
+        this.activity.deleteNotify(id);
         int deleteRow = db.delete(SQLiteDBHelper.NOTIFICATIONS_TABLE_NAME, "_id = ?" ,new String[] { String.valueOf(id) });
         if (deleteRow == 1) {
             return true;
@@ -336,6 +338,13 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
             return true;
         }
         return false;
+    }
+
+    public long getCountNotes() {
+        if (!db.isOpen()) {
+            return -1;
+        }
+        return DatabaseUtils.queryNumEntries(db, NOTES_TABLE_NAME);
     }
 
     public boolean importDB(File file) {
@@ -432,4 +441,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         return sb.toString();
     }
 
+    public void setActivity(ParentActivity activity) {
+        this.activity = activity;
+    }
 }

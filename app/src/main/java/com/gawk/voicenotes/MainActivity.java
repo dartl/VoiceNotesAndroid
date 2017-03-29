@@ -1,5 +1,6 @@
 package com.gawk.voicenotes;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.MenuItemCompat;
@@ -66,6 +67,16 @@ public class MainActivity extends ParentActivity {
     public void onResume() {
         super.onResume();
         initAdMob(true);
+        boolean boolInstall = getsPref().getBoolean(INSTALL_PREF,false);
+        if (!boolInstall) {
+            if (dbHelper.getCountNotes() >= 2) {
+                showVote();
+                installIcon();
+                SharedPreferences.Editor ed = getsPref().edit();
+                ed.putBoolean(INSTALL_PREF,true);
+                ed.commit();
+            }
+        }
     }
 
     @Override

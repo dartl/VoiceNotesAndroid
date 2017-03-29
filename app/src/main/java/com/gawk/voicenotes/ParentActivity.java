@@ -4,10 +4,13 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
@@ -16,6 +19,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -48,6 +52,7 @@ public class ParentActivity extends AppCompatActivity
     private static final String RESPONSE_BUY_INTENT = "BUY_INTENT";
     private static final int BILLING_RESPONSE_RESULT_OK = 0;
     private static final int RC_BUY = 1001;
+    final String INSTALL_PREF = "install_app";
     private Toolbar toolbar;
     protected MenuItem actionRemoveSelected, actionSave, actionSearch;
     private NavigationView navigationView;
@@ -55,6 +60,7 @@ public class ParentActivity extends AppCompatActivity
     protected AdView mAdView;
     FirebaseAnalytics mFirebaseAnalytics;
     IInAppBillingService mService;
+    private SharedPreferences sPref;
 
     String SKU_ONE_DOLLOR = "dsgdwgfhfdsgdsbcvxvewrtgvwevzsdfd";
 
@@ -64,8 +70,7 @@ public class ParentActivity extends AppCompatActivity
         dbHelper = SQLiteDBHelper.getInstance(this);
         dbHelper.connection();
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
-
-        Intent intent = new Intent(this, IInAppBillingService.class);
+        sPref = getPreferences(MODE_PRIVATE);
 
 
         Intent serviceIntent =
@@ -286,11 +291,64 @@ public class ParentActivity extends AppCompatActivity
         am.set(AlarmManager.RTC_WAKEUP,  notification.getDate().getTime() , pendingIntent);
     }
 
-    public Toolbar getToolbar() {
-        return toolbar;
+    public void deleteNotify(long id) {
+        AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(this, TimeNotification.class);
+        int requestCodeIntent =  (int) id;
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, -requestCodeIntent,
+                intent, 0);
+        // На случай, если мы ранее запускали активити, а потом поменяли время,
+        // откажемся от уведомления
+        am.cancel(pendingIntent);
     }
 
-    public void setToolbar(Toolbar toolbar) {
-        this.toolbar = toolbar;
+    protected void installIcon() {
+        //where this is a context (e.g. your current activity)
+        final Intent shortcutIntent = new Intent(this, MainActivity.class);
+
+        final Intent intent = new Intent();
+        intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
+        // Sets the custom shortcut's title
+        intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, getString(R.string.app_name));
+        // Set the custom shortcut icon
+        intent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, Intent.ShortcutIconResource.fromContext(this, R.drawable.icon175x175_big));
+        // add the shortcut
+        intent.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
+        sendBroadcast(intent);
+    }
+
+    protected void showVote() {
+        Context context = ParentActivity.this;
+
+        AlertDialog.Builder ad = new AlertDialog.Builder(context);
+        ad.setTitle(getResources().getText(R.string.vote_text_header));  // заголовок
+        ad.setMessage(getResources().getText(R.string.vote_text_body)); // сообщение
+        ad.setPositiveButton(getResources().getText(R.string.vote_text_ok), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int arg1) {
+                Intent i = new Intent(android.content.Intent.ACTION_VIEW);
+                i.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.gawk.voicenotes"));
+                startActivity(i);
+            }
+        });
+        ad.setNegativeButton(getResources().getText(R.string.vote_text_cancel), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int arg1) {
+                dialog.cancel();
+            }
+        });
+        ad.setCancelable(true);
+        ad.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            public void onCancel(DialogInterface dialog) {
+                dialog.cancel();
+            }
+        });
+        ad.show();
+    }
+
+    public SharedPreferences getsPref() {
+        return sPref;
+    }
+
+    public void setsPref(SharedPreferences sPref) {
+        this.sPref = sPref;
     }
 }

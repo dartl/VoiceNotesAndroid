@@ -15,6 +15,7 @@ import android.widget.ListView;
 
 import com.gawk.voicenotes.FragmentParent;
 import com.gawk.voicenotes.MainActivity;
+import com.gawk.voicenotes.ParentActivity;
 import com.gawk.voicenotes.R;
 import com.gawk.voicenotes.adapters.ActionsListNotes;
 import com.gawk.voicenotes.adapters.NotificationRecyclerAdapter;
@@ -75,6 +76,7 @@ public class NotificationsListFragment extends FragmentParent implements Actions
     }
 
     public boolean updateNotification() {
+        dbHelper.setActivity((ParentActivity)getContext());
         dbHelper.deleteAllOldNotification();
         Cursor notificationCursor = dbHelper.getCursorAllNotification();
         mAdapter.changeCursor(notificationCursor);
@@ -95,6 +97,8 @@ public class NotificationsListFragment extends FragmentParent implements Actions
                     while (!selectNotification.isEmpty()) {
                         id_temp = (Long) selectNotification.get(i);
                         selectNotification.remove(i);
+                        dbHelper.connection();
+                        dbHelper.setActivity((ParentActivity) getContext());
                         dbHelper.deleteNotification(id_temp);
                     }
                     updateNotification();
