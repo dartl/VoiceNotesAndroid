@@ -22,7 +22,7 @@ public class Note implements Serializable {
         this.date = null;
     }
 
-    public Note(int _id, String _text_note, Date _date) {
+    public Note(long _id, String _text_note, Date _date) {
         this.id = _id;
         this.text_note = _text_note;
         this.date = _date;

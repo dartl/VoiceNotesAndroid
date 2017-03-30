@@ -34,7 +34,9 @@ import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 
 /**
  * Адаптер для подключения к БД
@@ -108,7 +110,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
     {
         // Если версия 2, то
-        if (newVersion > oldVersion) {
+        if (newVersion == DATABASE_VERSION) {
             // Создаем таблицу оповещений
             db.execSQL(
                     "create table " + NOTIFICATIONS_TABLE_NAME +
@@ -116,6 +118,39 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
                             NOTIFICATIONS_TABLE_COLUMN_ID_NOTE + " integer, " + NOTIFICATIONS_TABLE_COLUMN_DATE + " text, "
                             + NOTIFICATIONS_TABLE_COLUMN_SOUND + " integer, " + NOTIFICATIONS_TABLE_COLUMN_VIBRATE + " integer)"
             );
+            Cursor cursor = db.rawQuery("SELECT * FROM " +
+                    SQLiteDBHelper.NOTES_TABLE_NAME + " ORDER BY " + SQLiteDBHelper.NOTES_TABLE_COLUMN_DATE
+                    + " DESC", null);
+            ArrayList<Note> array = new ArrayList<Note>();
+            Note temp = new Note();
+            while (cursor.moveToNext()) {
+                String data = cursor.getString(cursor.getColumnIndex(NOTES_TABLE_COLUMN_DATE));
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy kk:mm");
+                try {
+                    Date date = dateFormat.parse(data);
+                    temp = new Note(cursor.getLong(cursor.getColumnIndex(NOTES_TABLE_COLUMN_ID)),
+                            cursor.getString(cursor.getColumnIndex(NOTES_TABLE_COLUMN_TEXT_NOTE)),date);
+                    array.add(temp);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+            db.execSQL("DROP TABLE IF EXISTS "+NOTES_TABLE_NAME);
+            db.execSQL(
+                    "create table " + NOTES_TABLE_NAME +
+                            "(" + NOTES_TABLE_COLUMN_ID + " integer primary key, " +
+                            NOTES_TABLE_COLUMN_TEXT_NOTE + " text, " + NOTES_TABLE_COLUMN_DATE + " integer)"
+            );
+
+            Iterator<Note> crunchifyIterator = array.iterator();
+            while (crunchifyIterator.hasNext()) {
+                temp = crunchifyIterator.next();
+                ContentValues newValues = new ContentValues();
+                newValues.put(SQLiteDBHelper.NOTES_TABLE_COLUMN_TEXT_NOTE, temp.getText_note());
+                newValues.put(SQLiteDBHelper.NOTES_TABLE_COLUMN_DATE, temp.getDate().getTime());
+                long i = db.insert(SQLiteDBHelper.NOTES_TABLE_NAME, null, newValues);
+            }
+
 
             // Обновляем таблицу заметок
         }
