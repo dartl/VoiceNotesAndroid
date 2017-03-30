@@ -212,8 +212,9 @@ public class ParentActivity extends AppCompatActivity
         } else if (id == R.id.menu_import_export) {
             intent = new Intent(this, ExportImportActivity.class);
             startActivity(intent);
-        } else if (id == R.id.menu_sync) {
-
+        } else if (id == R.id.menu_subs) {
+            intent = new Intent(this, SubscriptionActivity.class);
+            startActivity(intent);
         } else if (id == R.id.menu_settings) {
             intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);

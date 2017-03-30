@@ -56,6 +56,12 @@
             android:windowSoftInputMode="stateHidden">
         </activity>
 
+        <activity android:name=".SubscriptionActivity"
+            android:label="@string/menu_subs"
+            android:launchMode="singleInstance"
+            android:windowSoftInputMode="stateHidden">
+        </activity>
+
         <receiver android:name=".adapters.TimeNotification" />
     </application>
 
