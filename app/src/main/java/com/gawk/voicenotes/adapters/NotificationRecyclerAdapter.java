@@ -61,6 +61,7 @@ public class NotificationRecyclerAdapter extends CursorRecyclerViewAdapter<Notif
 
         public void setData(final Cursor c, final NotificationRecyclerAdapter notificationRecyclerAdapter, SQLiteDBHelper db) {
             final int position = c.getPosition();
+            checkBoxNotification.setChecked(false);
             checkBoxNotification.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

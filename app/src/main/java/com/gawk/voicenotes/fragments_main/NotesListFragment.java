@@ -125,7 +125,7 @@ public class NotesListFragment extends FragmentParent implements ActionsListNote
     }
 
     public void deleteNotifications(long id) {
-        NotificationsListFragment fragment = (NotificationsListFragment) mainActivity.getFragment(1);
+        NotificationsListFragment fragment = mainActivity.getFragment(1);
         fragment.deleteElement(id,2);
     }
 

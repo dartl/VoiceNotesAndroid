@@ -76,6 +76,8 @@ public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerA
                 }
             });
 
+            checkBoxSelectNote.setChecked(false);
+
             parent.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
