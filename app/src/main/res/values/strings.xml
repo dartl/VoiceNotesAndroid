@@ -66,6 +66,9 @@
     <string name="vote_text_ok">Put 5 stars</string>
     <string name="vote_text_cancel">Cancel</string>
 
+    <!-- Настройки -->
+    <string name="settings_add_icon_add">Add shortcut \"Add note\" on the desktop </string>
+
     <string-array name="export_import_type">
         <item>json</item>
         <item>txt</item>

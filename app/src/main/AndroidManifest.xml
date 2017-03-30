@@ -50,6 +50,12 @@
             android:windowSoftInputMode="stateHidden">
         </activity>
 
+        <activity android:name=".SettingsActivity"
+            android:label="@string/menu_settings"
+            android:launchMode="singleInstance"
+            android:windowSoftInputMode="stateHidden">
+        </activity>
+
         <receiver android:name=".adapters.TimeNotification" />
     </application>
 

@@ -37,6 +37,7 @@ import com.gawk.voicenotes.models.Note;
 import com.gawk.voicenotes.models.Notification;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import org.json.JSONException;
@@ -214,7 +215,8 @@ public class ParentActivity extends AppCompatActivity
         } else if (id == R.id.menu_sync) {
 
         } else if (id == R.id.menu_settings) {
-
+            intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
         } else if (id == R.id.menu_help) {
 
         }
