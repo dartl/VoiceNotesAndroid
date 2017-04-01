@@ -4,6 +4,8 @@
     <string name="navigation_drawer_close">Закрыть навигационную панель</string>
     <string name="success">Успешно</string>
     <string name="donate_developer">Поддержать разработчика</string>
+    <string name="donate_small">Небольшое пожертвование</string>
+    <string name="donate_big">Большое пожертвование</string>
 
     <!-- Названия активити -->
     <string name="app_name">Голосовые заметки</string>
@@ -74,8 +76,6 @@
 
     <!-- Подписки -->
     <string name="subs_inner_text">Все подписки удаляют рекламные объявления из приложения и являются пожертвованиями для разработчика</string>
-
-
 
     <string-array name="export_import_type">
         <item>json</item>

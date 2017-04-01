@@ -1,0 +1,86 @@
+<resources>
+    <string name="navigation_drawer_open">Öffnen Sie die Schublade</string>
+    <string name="navigation_drawer_close">Schliessschloss schließen</string>
+    <string name="success">Erfolg</string>
+    <string name="donate_developer">Spenden Entwickler</string>
+    <string name="donate_small">Eine kleine Spende</string>
+    <string name="donate_big">Große Spende</string>
+
+    <!-- Названия активити -->
+    <string name="app_name">Sprachnotizen</string>
+    <string name="app_name_note">Hinweis</string>
+    <string name="app_name_export_import">Export/Einführen</string>
+
+    <!-- Главное окно -->
+    <string name="new_notes">Notizen</string>
+    <string name="new_note_notifications">Benachrichtigungen</string>
+    <string name="main_view_error_select">Keine Elemente ausgewählt</string>
+
+    <!-- Меню -->
+    <string name="menu_add">Notiz hinzufügen</string>
+    <string name="menu_notes_list">Alle Notizen</string>
+    <string name="menu_settings">Einstellungen</string>
+    <string name="menu_export_import">Export/Einführen</string>
+    <string name="menu_sync">Cloud-Synchronisierung</string>
+    <string name="menu_subs">Abonnements</string>
+    <string name="menu_help">Hilfe</string>
+    <string name="action_save">Sparen</string>
+    <string name="action_settings">Ausgewählt entfernen</string>
+    <string name="action_search">Suche</string>
+
+    <!-- Новая заметка -->
+    <string name="new_note">Hinweis</string>
+    <string name="new_note_notification">Benachrichtigung</string>
+    <string name="new_note_text">Textnotizen</string>
+    <string name="new_note_remind">Erinnern?</string>
+    <string name="new_note_we_remind">Wir erinnern</string>
+    <string name="new_note_select_date">Datum auswählen</string>
+    <string name="new_note_select_time">Zeit auswählen</string>
+    <string name="new_note_sound_off">Ton aus</string>
+    <string name="new_note_sound_on">Ton an</string>
+    <string name="new_note_shake_off">Vibration aus</string>
+    <string name="new_note_shake_on">Vibration auf</string>
+    <string name="new_note_error_date">Wählen Sie ein Datum in der Zukunft aus</string>
+
+    <!-- Диалоговые окна -->
+    <string name="yes">Ja</string>
+    <string name="cancel">Stornieren</string>
+    <string name="dialogDeleteTitle">Entfernen?</string>
+    <string name="dialogDeleteMessage">Die Objekte werden dauerhaft gelöscht</string>
+
+    <!-- Заметки просмотр -->
+    <string name="note_view_remind_title">Wir erinnern</string>
+    <string name="note_view_remind_no_body">enachrichtigung ist nicht gesetzt</string>
+
+    <!-- Экспорт и импорт -->
+    <string name="export_import_export">Export</string>
+    <string name="export_import_import">Einführen</string>
+    <string name="export_import_select_type">Art auswählen</string>
+    <string name="export_import_select_folder">Ordner auswählen</string>
+    <string name="export_import_set_name">Dateiname</string>
+    <string name="export_import_select_file">Datei aussuchen</string>
+    <string name="export_import_select_no">Keine Auswahl</string>
+    <string name="export_import_folder_not">Ordner nicht ausgewählt</string>
+    <string name="export_import_folder_error">Ausgewählte Datei, nicht Ordner</string>
+    <string name="export_import_error_import">Die Datei ist möglicherweise beschädigt</string>
+
+    <!-- Голосовалка -->
+    <string name="vote_text_header">Hast du unsere App gefallen?</string>
+    <string name="vote_text_body">Wenn Sie unsere App mögen, stimmen Sie über die Google Play und geben Feedback, wir werden sehr dankbar sein</string>
+    <string name="vote_text_ok">Setzen Sie 5 Sterne</string>
+    <string name="vote_text_cancel">Stornieren</string>
+
+    <!-- Настройки -->
+    <string name="settings_add_icon_add">Verknüpfung hinzufügen \"Notiz hinzufügen\" auf dem Desktop</string>
+
+    <!-- Подписки -->
+    <string name="subs_inner_text">Alle Abonnements löschen Anzeigen aus der Anwendung und sind eine Spende für den Entwickler</string>
+
+
+    <string-array name="export_import_type">
+        <item>json</item>
+        <item>txt</item>
+    </string-array>
+
+    <string name="banner_ad_unit_id">ca-app-pub-3962065675469859/3569530194</string>
+</resources>

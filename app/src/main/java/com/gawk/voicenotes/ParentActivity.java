@@ -51,10 +51,12 @@ import org.json.JSONObject;
 
 public class ParentActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    private static final String RESPONSE_BUY_INTENT = "BUY_INTENT";
-    private static final int BILLING_RESPONSE_RESULT_OK = 0;
-    private static final int RC_BUY = 1001;
-    final String INSTALL_PREF = "install_app";
+    public static final String RESPONSE_BUY_INTENT = "BUY_INTENT";
+    public static final int BILLING_RESPONSE_RESULT_OK = 0;
+    public static final int RC_BUY = 1001;
+    public String SKU_SMALL_DONATE = "donation_one_dollor";
+    public String SKU_BIG_DONATE = "big_donate";
+    public final String INSTALL_PREF = "install_app";
     private Toolbar toolbar;
     protected MenuItem actionRemoveSelected, actionSave, actionSearch;
     private NavigationView navigationView;
@@ -66,7 +68,7 @@ public class ParentActivity extends AppCompatActivity
     private ActionBarDrawerToggle toggle;
     private Button buttonDonateDeveloper;
 
-    String SKU_ONE_DOLLOR = "dsgdwgfhfdsgdsbcvxvewrtgvwevzsdfd";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,11 +96,6 @@ public class ParentActivity extends AppCompatActivity
         public void onServiceConnected(ComponentName name,
                 IBinder service) {
             mService = IInAppBillingService.Stub.asInterface(service);
-            try {
-                startBuySubscription();
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }
         }
     };
 

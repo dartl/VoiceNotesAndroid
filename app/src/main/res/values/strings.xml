@@ -3,6 +3,8 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="success">Success</string>
     <string name="donate_developer">Donate developer</string>
+    <string name="donate_small">A small donation</string>
+    <string name="donate_big">Great donation</string>
 
     <!-- Названия активити -->
     <string name="app_name">Voice Notes</string>

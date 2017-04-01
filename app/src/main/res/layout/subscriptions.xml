@@ -1,23 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    style="@style/GawkMaterialTheme.Body">
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        style="@style/GawkMaterialTheme.DonationText"
         android:text="@string/subs_inner_text" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/buttonSmallDonate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        style="@style/GawkMaterialTheme.ButtonMiddle"
+        android:text="@string/donate_small" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/buttonBigDonate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        style="@style/GawkMaterialTheme.ButtonMiddle"
+        android:text="@string/donate_big" />
 </LinearLayout>

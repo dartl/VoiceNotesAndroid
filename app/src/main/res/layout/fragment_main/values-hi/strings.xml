@@ -1,2 +1,86 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="navigation_drawer_open">नेविगेशन ड्रॉवर खोलें</string>
+    <string name="navigation_drawer_close">नेविगेशन ड्रॉवर को बंद करें</string>
+    <string name="success">सफलता</string>
+    <string name="donate_developer">डेवलपर दान करें</string>
+    <string name="donate_small">एक छोटा सा दान</string>
+    <string name="donate_big">महान दान</string>
+
+    <!-- Названия активити -->
+    <string name="app_name">वॉइस नोट्स</string>
+    <string name="app_name_note">ध्यान दें</string>
+    <string name="app_name_export_import">निर्यात करें/आयात</string>
+
+    <!-- Главное окно -->
+    <string name="new_notes">टिप्पणियाँ</string>
+    <string name="new_note_notifications">सूचनाएं</string>
+    <string name="main_view_error_select">कोई आइटम चयनित नहीं</string>
+
+    <!-- Меню -->
+    <string name="menu_add">नोट जोड़े</string>
+    <string name="menu_notes_list">सभी नोट्स</string>
+    <string name="menu_settings">सेटिंग्स</string>
+    <string name="menu_export_import">निर्यात करें/आयात</string>
+    <string name="menu_sync">क्लाउड सिंक</string>
+    <string name="menu_subs">सदस्यताएं</string>
+    <string name="menu_help">मदद</string>
+    <string name="action_save">बचाना</string>
+    <string name="action_settings">चुने हुए को हटायें</string>
+    <string name="action_search">खोज</string>
+
+    <!-- Новая заметка -->
+    <string name="new_note">ध्यान दें</string>
+    <string name="new_note_notification">अधिसूचना</string>
+    <string name="new_note_text">पाठ नोट्स</string>
+    <string name="new_note_remind">ध्यान दिलाना?</string>
+    <string name="new_note_we_remind">हम याद दिलाते हैं</string>
+    <string name="new_note_select_date">तारीख़ चुनें</string>
+    <string name="new_note_select_time">समय चुनें</string>
+    <string name="new_note_sound_off">चिल्लाना</string>
+    <string name="new_note_sound_on">पर ध्वनि</string>
+    <string name="new_note_shake_off">कंपन बंद</string>
+    <string name="new_note_shake_on">कंपन पर</string>
+    <string name="new_note_error_date">भविष्य में एक तिथि चुनें</string>
+
+    <!-- Диалоговые окна -->
+    <string name="yes">हाँ</string>
+    <string name="cancel">रद्द करना</string>
+    <string name="dialogDeleteTitle">हटाना?</string>
+    <string name="dialogDeleteMessage">वस्तुओं को स्थायी रूप से हटा दिया जाएगा</string>
+
+    <!-- Заметки просмотр -->
+    <string name="note_view_remind_title">हम याद दिलाते हैं</string>
+    <string name="note_view_remind_no_body">अधिसूचना सेट नहीं है</string>
+
+    <!-- Экспорт и импорт -->
+    <string name="export_import_export">निर्यात करें</string>
+    <string name="export_import_import">आयात</string>
+    <string name="export_import_select_type">प्रकार चुनें</string>
+    <string name="export_import_select_folder">फोल्डर का चयन करें</string>
+    <string name="export_import_set_name">फ़ाइल का नाम</string>
+    <string name="export_import_select_file">फ़ाइल का चयन करें</string>
+    <string name="export_import_select_no">कोई चयन नहीं</string>
+    <string name="export_import_folder_not">फ़ोल्डर चयनित नहीं है</string>
+    <string name="export_import_folder_error">चयनित फ़ाइल, फ़ोल्डर नहीं</string>
+    <string name="export_import_error_import">फाइल दूषित हो सकती है</string>
+
+    <!-- Голосовалка -->
+    <string name="vote_text_header">क्या आपको हमारे ऐप पसंद आया?</string>
+    <string name="vote_text_body">यदि आप हमारे ऐप को पसंद करते हैं, तो Google play वोट दें और प्रतिक्रिया दें, हम बहुत आभारी होंगे</string>
+    <string name="vote_text_ok">5 सितारों को रखें</string>
+    <string name="vote_text_cancel">रद्द करना</string>
+
+    <!-- Настройки -->
+    <string name="settings_add_icon_add">डेस्कटॉप पर शॉर्टकट \"नोट जोड़ें\" जोड़ें</string>
+
+    <!-- Подписки -->
+    <string name="subs_inner_text">सभी सदस्यता ऐप्लिकेशन से विज्ञापन हटा देते हैं और डेवलपर के लिए दान हैं</string>
+
+
+    <string-array name="export_import_type">
+        <item>json</item>
+        <item>txt</item>
+    </string-array>
+
+    <string name="banner_ad_unit_id">ca-app-pub-3962065675469859/3569530194</string>
+</resources>

@@ -152,4 +152,10 @@
         <item name="android:layout_marginBottom">8dp</item>
         <item name="android:paddingLeft">0dp</item>
     </style>
+
+    <style name="GawkMaterialTheme.DonationText" >
+        <item name="android:textSize">16sp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+    </style>
 </resources>

@@ -1,0 +1,86 @@
+<resources>
+    <string name="navigation_drawer_open">Terbuka laci navigasi</string>
+    <string name="navigation_drawer_close">Tutup laci navigasi</string>
+    <string name="success">Keberhasilan</string>
+    <string name="donate_developer">Donasi pengembang</string>
+    <string name="donate_small">Sebuah sumbangan kecil</string>
+    <string name="donate_big">sumbangan besar</string>
+
+    <!-- Названия активити -->
+    <string name="app_name">Catatan suara</string>
+    <string name="app_name_note">Catatan</string>
+    <string name="app_name_export_import">Ekspor/Impor</string>
+
+    <!-- Главное окно -->
+    <string name="new_notes">Catatan</string>
+    <string name="new_note_notifications">Pemberitahuan</string>
+    <string name="main_view_error_select">Tidak ada item yang dipilih</string>
+
+    <!-- Меню -->
+    <string name="menu_add">Menambahkan catatan</string>
+    <string name="menu_notes_list">Semua catatan</string>
+    <string name="menu_settings">Pengaturan</string>
+    <string name="menu_export_import">Ekspor/Impor</string>
+    <string name="menu_sync">Cloud sync</string>
+    <string name="menu_subs">Langganan</string>
+    <string name="menu_help">Membantu</string>
+    <string name="action_save">Menyimpan</string>
+    <string name="action_settings">Hapus yang dipilih</string>
+    <string name="action_search">Pencarian</string>
+
+    <!-- Новая заметка -->
+    <string name="new_note">Catatan</string>
+    <string name="new_note_notification">Pemberitahuan</string>
+    <string name="new_note_text">Catatan teks</string>
+    <string name="new_note_remind">Mengingatkan?</string>
+    <string name="new_note_we_remind">Kami mengingatkan</string>
+    <string name="new_note_select_date">Pilih tanggal</string>
+    <string name="new_note_select_time">Pilih waktu</string>
+    <string name="new_note_sound_off">Memperdengarkan</string>
+    <string name="new_note_sound_on">Suara di</string>
+    <string name="new_note_shake_off">Getaran off</string>
+    <string name="new_note_shake_on">Getaran pada</string>
+    <string name="new_note_error_date">Pilih tanggal di masa depan</string>
+
+    <!-- Диалоговые окна -->
+    <string name="yes">Iya nih</string>
+    <string name="cancel">Membatalkan</string>
+    <string name="dialogDeleteTitle">Menghapus?</string>
+    <string name="dialogDeleteMessage">Benda-benda akan dihapus secara permanen</string>
+
+    <!-- Заметки просмотр -->
+    <string name="note_view_remind_title">Kami mengingatkan</string>
+    <string name="note_view_remind_no_body">Pemberitahuan tidak diatur</string>
+
+    <!-- Экспорт и импорт -->
+    <string name="export_import_export">Ekspor</string>
+    <string name="export_import_import">Impor</string>
+    <string name="export_import_select_type">Pilih jenis</string>
+    <string name="export_import_select_folder">Pilih folder</string>
+    <string name="export_import_set_name">Nama file</string>
+    <string name="export_import_select_file">Pilih file</string>
+    <string name="export_import_select_no">Tidak ada pilih</string>
+    <string name="export_import_folder_not">Folder tidak dipilih</string>
+    <string name="export_import_folder_error">File yang dipilih, tidak folder</string>
+    <string name="export_import_error_import">File mungkin rusak</string>
+
+    <!-- Голосовалка -->
+    <string name="vote_text_header">Apakah Anda menyukai aplikasi kita?</string>
+    <string name="vote_text_body">Jika Anda menyukai aplikasi kita, suara pada Google play dan memberikan umpan balik, kami akan sangat berterima kasih</string>
+    <string name="vote_text_ok">Masukan 5</string>
+    <string name="vote_text_cancel">Membatalkan</string>
+
+    <!-- Настройки -->
+    <string name="settings_add_icon_add">Menambahkan shortcut \"Tambahkan catatan\" pada desktop</string>
+
+    <!-- Подписки -->
+    <string name="subs_inner_text">Semua langganan menghapus iklan dari aplikasi dan sumbangan untuk pengembang</string>
+
+
+    <string-array name="export_import_type">
+        <item>json</item>
+        <item>txt</item>
+    </string-array>
+
+    <string name="banner_ad_unit_id">ca-app-pub-3962065675469859/3569530194</string>
+</resources>

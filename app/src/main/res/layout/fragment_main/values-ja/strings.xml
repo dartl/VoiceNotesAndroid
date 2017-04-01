@@ -1,0 +1,86 @@
+<resources>
+    <string name="navigation_drawer_open">ナビゲーション・ドロワーを開く</string>
+    <string name="navigation_drawer_close">ナビゲーション・ドロワーを閉じる</string>
+    <string name="success">成功</string>
+    <string name="donate_developer">開発者に寄付</string>
+    <string name="donate_small">小さな寄付</string>
+    <string name="donate_big">グレート寄付</string>
+
+    <!-- Названия активити -->
+    <string name="app_name">音声メモ</string>
+    <string name="app_name_note">注意</string>
+    <string name="app_name_export_import">輸出する/インポート</string>
+
+    <!-- Главное окно -->
+    <string name="new_notes">音声メモ</string>
+    <string name="new_note_notifications">通知</string>
+    <string name="main_view_error_select">アイテムが選択されていません</string>
+
+    <!-- Меню -->
+    <string name="menu_add">メモを追加</string>
+    <string name="menu_notes_list">すべての音符</string>
+    <string name="menu_settings">設定</string>
+    <string name="menu_export_import">輸出する/インポート</string>
+    <string name="menu_sync">クラウド同期</string>
+    <string name="menu_subs">定期購読</string>
+    <string name="menu_help">助けて</string>
+    <string name="action_save">セーブ</string>
+    <string name="action_settings">削除選択</string>
+    <string name="action_search">サーチ</string>
+
+    <!-- Новая заметка -->
+    <string name="new_note">注意</string>
+    <string name="new_note_notification">お知らせ</string>
+    <string name="new_note_text">テキストノート</string>
+    <string name="new_note_remind">思い出させる？</string>
+    <string name="new_note_we_remind">我々は思い出させる</string>
+    <string name="new_note_select_date">日付を選択</string>
+    <string name="new_note_select_time">時間を選択</string>
+    <string name="new_note_sound_off">サウンドオフ</string>
+    <string name="new_note_sound_on">サウンドオン</string>
+    <string name="new_note_shake_off">振動オフ</string>
+    <string name="new_note_shake_on">振動オン</string>
+    <string name="new_note_error_date">将来の日付を選択する</string>
+
+    <!-- Диалоговые окна -->
+    <string name="yes">はい</string>
+    <string name="cancel">キャンセル</string>
+    <string name="dialogDeleteTitle">削除しますか？</string>
+    <string name="dialogDeleteMessage">オブジェクトは永久に削除されます</string>
+
+    <!-- Заметки просмотр -->
+    <string name="note_view_remind_title">我々は思い出させる</string>
+    <string name="note_view_remind_no_body">通知が設定されていません</string>
+
+    <!-- Экспорт и импорт -->
+    <string name="export_import_export">輸出する</string>
+    <string name="export_import_import">インポート</string>
+    <string name="export_import_select_type">タイプを選択</string>
+    <string name="export_import_select_folder">フォルダを選択</string>
+    <string name="export_import_set_name">ファイル名</string>
+    <string name="export_import_select_file">ファイルを選ぶ</string>
+    <string name="export_import_select_no">選択なし</string>
+    <string name="export_import_folder_not">フォルダが選択されていない</string>
+    <string name="export_import_folder_error">選択したファイル、フォルダではない</string>
+    <string name="export_import_error_import">ファイルが破損している可能性があります。</string>
+
+    <!-- Голосовалка -->
+    <string name="vote_text_header">私たちのアプリが好きでしたか？</string>
+    <string name="vote_text_body">あなたが私たちのアプリを気に入って、 Google Play に投票してフィードバックをいただければ、非常に感謝しています</string>
+    <string name="vote_text_ok">5つ星を入れる</string>
+    <string name="vote_text_cancel">キャンセル</string>
+
+    <!-- Настройки -->
+    <string name="settings_add_icon_add">デスクトップにショートカット\ "ノートを追加\"を追加</string>
+
+    <!-- Подписки -->
+    <string name="subs_inner_text">すべてのサブスクリプションはアプリケーションから広告を削除し、開発者の寄付です</string>
+
+
+    <string-array name="export_import_type">
+        <item>json</item>
+        <item>txt</item>
+    </string-array>
+
+    <string name="banner_ad_unit_id">ca-app-pub-3962065675469859/3569530194</string>
+</resources>

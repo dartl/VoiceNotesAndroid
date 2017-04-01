@@ -1,0 +1,86 @@
+<resources>
+    <string name="navigation_drawer_open">탐색 창 열기</string>
+    <string name="navigation_drawer_close">탐색 창 닫기</string>
+    <string name="success">성공</string>
+    <string name="donate_developer">개발자 기증</string>
+    <string name="donate_small">그리고 작은 기부</string>
+    <string name="donate_big">대 기부</string>
+
+    <!-- Названия активити -->
+    <string name="app_name">음성 메모</string>
+    <string name="app_name_note">노트</string>
+    <string name="app_name_export_import">수출/수입</string>
+
+    <!-- Главное окно -->
+    <string name="new_notes">노트</string>
+    <string name="new_note_notifications">알림</string>
+    <string name="main_view_error_select">선택한 항목이 없습니다.</string>
+
+    <!-- Меню -->
+    <string name="menu_add">메모를 추가</string>
+    <string name="menu_notes_list">모든 음표</string>
+    <string name="menu_settings">설정</string>
+    <string name="menu_export_import">수출/수입</string>
+    <string name="menu_sync">클라우드 동기화</string>
+    <string name="menu_subs">구독</string>
+    <string name="menu_help">도움</string>
+    <string name="action_save">구하다</string>
+    <string name="action_settings">선택된 것을 지우다</string>
+    <string name="action_search">수색</string>
+
+    <!-- Новая заметка -->
+    <string name="new_note">노트</string>
+    <string name="new_note_notification">공고</string>
+    <string name="new_note_text">텍스트 노트</string>
+    <string name="new_note_remind">생각 나니?</string>
+    <string name="new_note_we_remind">우리는 생각 나게한다</string>
+    <string name="new_note_select_date">날짜 선택</string>
+    <string name="new_note_select_time">시간 선택</string>
+    <string name="new_note_sound_off">음소거</string>
+    <string name="new_note_sound_on">소리 켜기</string>
+    <string name="new_note_shake_off">진동 꺼짐</string>
+    <string name="new_note_shake_on">진동 켜기</string>
+    <string name="new_note_error_date">앞으로 날짜 선택</string>
+
+    <!-- Диалоговые окна -->
+    <string name="yes">예</string>
+    <string name="cancel">취소</string>
+    <string name="dialogDeleteTitle">풀다?</string>
+    <string name="dialogDeleteMessage">개체가 영구적으로 삭제됩니다.</string>
+
+    <!-- Заметки просмотр -->
+    <string name="note_view_remind_title">우리는 생각 나게한다.</string>
+    <string name="note_view_remind_no_body">알림이 설정되지 않았습니다.</string>
+
+    <!-- Экспорт и импорт -->
+    <string name="export_import_export">수출</string>
+    <string name="export_import_import">수입</string>
+    <string name="export_import_select_type">유형 선택</string>
+    <string name="export_import_select_folder">폴더 선택</string>
+    <string name="export_import_set_name">파일 이름</string>
+    <string name="export_import_select_file">파일 선택</string>
+    <string name="export_import_select_no">선택 없음</string>
+    <string name="export_import_folder_not">폴더가 선택되지 않았습니다.</string>
+    <string name="export_import_folder_error">폴더가 아닌 선택한 파일</string>
+    <string name="export_import_error_import">파일이 손상되었을 수 있습니다.</string>
+
+    <!-- Голосовалка -->
+    <string name="vote_text_header">우리 앱이 좋았 니?</string>
+    <string name="vote_text_body">앱을 좋아하고 Google play 에 투표하고 피드백을 주시면 매우 감사하겠습니다.</string>
+    <string name="vote_text_ok">5 별 넣기</string>
+    <string name="vote_text_cancel">취소</string>
+
+    <!-- Настройки -->
+    <string name="settings_add_icon_add">바로 가기 \"메모 추가 \"를 바탕 화면에 추가하십시오.</string>
+
+    <!-- Подписки -->
+    <string name="subs_inner_text">모든 구독은 애플리케이션에서 광고를 삭제하며 개발자를위한 기부입니다.</string>
+
+
+    <string-array name="export_import_type">
+        <item>json</item>
+        <item>txt</item>
+    </string-array>
+
+    <string name="banner_ad_unit_id">ca-app-pub-3962065675469859/3569530194</string>
+</resources>
