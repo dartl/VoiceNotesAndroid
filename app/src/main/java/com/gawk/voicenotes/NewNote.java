@@ -67,6 +67,7 @@ public class NewNote extends ParentActivity implements TimePickerReturn {
     @Override
     public void onBackPressed() {
         finish();
+        super.onBackPressed();
     }
 
     private void setupViewPager(ViewPager viewPager) {

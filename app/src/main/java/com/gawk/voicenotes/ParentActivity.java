@@ -26,6 +26,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -62,6 +63,8 @@ public class ParentActivity extends AppCompatActivity
     FirebaseAnalytics mFirebaseAnalytics;
     IInAppBillingService mService;
     private SharedPreferences sPref;
+    private ActionBarDrawerToggle toggle;
+    private Button buttonDonateDeveloper;
 
     String SKU_ONE_DOLLOR = "dsgdwgfhfdsgdsbcvxvewrtgvwevzsdfd";
 
@@ -72,7 +75,6 @@ public class ParentActivity extends AppCompatActivity
         dbHelper.connection();
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         sPref = getPreferences(MODE_PRIVATE);
-
 
         Intent serviceIntent =
                 new Intent("com.android.vending.billing.InAppBillingService.BIND");
@@ -151,7 +153,7 @@ public class ParentActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+        toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
@@ -159,6 +161,14 @@ public class ParentActivity extends AppCompatActivity
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        buttonDonateDeveloper = (Button) findViewById(R.id.buttonDonateDeveloper);
+        buttonDonateDeveloper.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), SubscriptionActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -236,8 +246,11 @@ public class ParentActivity extends AppCompatActivity
         if (check) {
             AdRequest adRequest = new AdRequest.Builder().build();
             mAdView.loadAd(adRequest);
+            mAdView.bringToFront();
+            mAdView.setZ(100);
         } else {
             mAdView.setVisibility(View.GONE);
+            buttonDonateDeveloper.setVisibility(View.GONE);
         }
     }
 

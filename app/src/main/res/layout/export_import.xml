@@ -97,7 +97,9 @@
             android:layout_height="wrap_content"
             android:id="@+id/textView7"
             style="@style/GawkMaterialTheme.DisplayExport"
-            android:layout_below="@+id/buttonSelectFolder"
+            android:layout_below="@+id/buttonExport"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
@@ -106,20 +108,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/buttonSelectFolder"
+            style="@style/GawkMaterialTheme.ButtonMiddle"
             android:layout_below="@+id/textViewFullFile"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            style="@style/GawkMaterialTheme.ButtonMiddle"/>
+            android:layout_centerHorizontal="true" />
 
         <Button
             android:text="@string/export_import_export"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/buttonExport"
-            android:layout_below="@+id/textViewFullFile"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            style="@style/GawkMaterialTheme.ButtonMiddle"/>
+            style="@style/GawkMaterialTheme.ButtonMiddle"
+            android:layout_below="@+id/buttonSelectFolder"
+            android:layout_alignRight="@+id/textViewFullFile"
+            android:layout_alignEnd="@+id/textViewFullFile" />
 
         <TextView
             android:text="@string/export_import_folder_not"

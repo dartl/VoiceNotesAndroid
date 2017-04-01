@@ -171,6 +171,7 @@ public class NotesListFragment extends FragmentParent implements ActionsListNote
 
     @Override
     public void search(String text) {
+        dbHelper.connection();
         updateNote(dbHelper.getCursorAllNotes(text));
     }
 }

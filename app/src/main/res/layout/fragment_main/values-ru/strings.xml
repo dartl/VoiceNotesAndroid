@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="navigation_drawer_open">Открыть навигационную панель</string>
+    <string name="navigation_drawer_close">Закрыть навигационную панель</string>
+    <string name="success">Успешно</string>
+    <string name="donate_developer">Поддержать разработчика</string>
+
+    <!-- Названия активити -->
+    <string name="app_name">Голосовые заметки</string>
+    <string name="app_name_note">Заметка</string>
+    <string name="app_name_export_import">Экспорт/Импортt</string>
+
+    <!-- Главное окно -->
+    <string name="new_notes">Заметки</string>
+    <string name="new_note_notifications">Напоминания</string>
+    <string name="main_view_error_select">Нет выбранных объектов</string>
+
+    <!-- Меню -->
+    <string name="menu_add">Добавить заметку</string>
+    <string name="menu_notes_list">Все заметки</string>
+    <string name="menu_settings">Настройки</string>
+    <string name="menu_export_import">Экспорт/Импортt</string>
+    <string name="menu_sync">Облако</string>
+    <string name="menu_subs">Подписки</string>
+    <string name="menu_help">Справка</string>
+    <string name="action_save">Сохранить</string>
+    <string name="action_settings">Удалить выбранные</string>
+    <string name="action_search">Поиск</string>
+
+    <!-- Новая заметка -->
+    <string name="new_note">Заметка</string>
+    <string name="new_note_notification">Напоминание</string>
+    <string name="new_note_text">Текст заметки</string>
+    <string name="new_note_remind">Напомнить?</string>
+    <string name="new_note_we_remind">Мы напомним</string>
+    <string name="new_note_select_date">Выберите дату</string>
+    <string name="new_note_select_time">Выберите время</string>
+    <string name="new_note_sound_off">Звук выкл.</string>
+    <string name="new_note_sound_on">Звук вкл.</string>
+    <string name="new_note_shake_off">Вибрация выкл.</string>
+    <string name="new_note_shake_on">Вибрация вкл.</string>
+    <string name="new_note_error_date">Выберите дату и время в будущем</string>
+
+    <!-- Диалоговые окна -->
+    <string name="yes">Да</string>
+    <string name="cancel">Отмена</string>
+    <string name="dialogDeleteTitle">Удалить?</string>
+    <string name="dialogDeleteMessage">Объекты будут выделенны навсегда</string>
+
+    <!-- Заметки просмотр -->
+    <string name="note_view_remind_title">Мы напомним</string>
+    <string name="note_view_remind_no_body">Напоминание не установлено</string>
+
+    <!-- Экспорт и импорт -->
+    <string name="export_import_export">Экспорт</string>
+    <string name="export_import_import">Импорт</string>
+    <string name="export_import_select_type">Выберите тип</string>
+    <string name="export_import_select_folder">Выберите папку</string>
+    <string name="export_import_set_name">Название файла</string>
+    <string name="export_import_select_file">Выберите файл</string>
+    <string name="export_import_select_no">Не выбран</string>
+    <string name="export_import_folder_not">Папка не выбрана</string>
+    <string name="export_import_folder_error">Выберите файл, а не папку</string>
+    <string name="export_import_error_import">Файл может быть поврежден</string>
+
+    <!-- Голосовалка -->
+    <string name="vote_text_header">Вам понравилось приложение?</string>
+    <string name="vote_text_body">Если вам понравилось приложение, то проголосуйте за нас на Google Play и оставьте отзыв</string>
+    <string name="vote_text_ok">Поставить 5 звёзд</string>
+    <string name="vote_text_cancel">Отмена</string>
+
+    <!-- Настройки -->
+    <string name="settings_add_icon_add">Добавить иконку \"Добавить заметку\" на рабочий стол</string>
+
+    <!-- Подписки -->
+    <string name="subs_inner_text">Все подписки удаляют рекламные объявления из приложения и являются пожертвованиями для разработчика</string>
+
+
+
+    <string-array name="export_import_type">
+        <item>json</item>
+        <item>txt</item>
+    </string-array>
+
+    <string name="banner_ad_unit_id">ca-app-pub-3962065675469859/3569530194</string>
+</resources>
