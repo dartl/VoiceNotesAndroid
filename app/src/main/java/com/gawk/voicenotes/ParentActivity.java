@@ -36,6 +36,7 @@ import com.gawk.voicenotes.adapters.SQLiteDBHelper;
 import com.gawk.voicenotes.adapters.TimeNotification;
 import com.gawk.voicenotes.models.Note;
 import com.gawk.voicenotes.models.Notification;
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
@@ -43,6 +44,8 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 
 /**
@@ -67,6 +70,7 @@ public class ParentActivity extends AppCompatActivity
     private SharedPreferences sPref;
     private ActionBarDrawerToggle toggle;
     private Button buttonDonateDeveloper;
+    private boolean checkSubs = false;
 
 
 
@@ -96,6 +100,11 @@ public class ParentActivity extends AppCompatActivity
         public void onServiceConnected(ComponentName name,
                 IBinder service) {
             mService = IInAppBillingService.Stub.asInterface(service);
+            try {
+                checkBuySubs();
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
         }
     };
 
@@ -226,7 +235,8 @@ public class ParentActivity extends AppCompatActivity
             intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
         } else if (id == R.id.menu_help) {
-
+            intent = new Intent(this, HelpActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -240,33 +250,61 @@ public class ParentActivity extends AppCompatActivity
 
     public void initAdMob(boolean check) {
         mAdView = (AdView) findViewById(R.id.adView);
-        if (check) {
+        mAdView.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                buttonDonateDeveloper.setVisibility(View.GONE);
+                // Code to be executed when an ad finishes loading.
+            }
+
+            @Override
+            public void onAdFailedToLoad(int errorCode) {
+                // Code to be executed when an ad request fails.
+            }
+
+            @Override
+            public void onAdOpened() {
+                // Code to be executed when an ad opens an overlay that
+                // covers the screen.
+            }
+
+            @Override
+            public void onAdLeftApplication() {
+                buttonDonateDeveloper.setVisibility(View.VISIBLE);
+                // Code to be executed when the user has left the app.
+            }
+
+            @Override
+            public void onAdClosed() {
+                buttonDonateDeveloper.setVisibility(View.VISIBLE);
+                // Code to be executed when when the user is about to return
+                // to the app after tapping on an ad.
+            }
+        });
+        if (check && !checkSubs) {
             AdRequest adRequest = new AdRequest.Builder().build();
             mAdView.loadAd(adRequest);
             mAdView.bringToFront();
-            mAdView.setZ(100);
         } else {
             mAdView.setVisibility(View.GONE);
             buttonDonateDeveloper.setVisibility(View.GONE);
         }
     }
 
-    public void startBuySubscription() throws RemoteException {
-        /*
-        Bundle bundle = mService.getBuyIntent(3, getPackageName(),
-                SKU_ONE_DOLLOR, "subs", "");
+    public void checkBuySubs() throws RemoteException {
+        Bundle activeSubs = mService.getPurchases(3, getPackageName(),
+                "subs", "");
 
-        PendingIntent pendingIntent = bundle.getParcelable(RESPONSE_BUY_INTENT);
-        if (bundle.getInt("RESPONSE_CODE") == BILLING_RESPONSE_RESULT_OK) {
-            // Start purchase flow (this brings up the Google Play UI).
-            // Result will be delivered through onActivityResult().
-            try {
-                startIntentSenderForResult(pendingIntent.getIntentSender(), RC_BUY, new Intent(),
-                        Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(0));
-            } catch (IntentSender.SendIntentException e) {
-                e.printStackTrace();
+        int response = activeSubs.getInt("RESPONSE_CODE");
+        if (response == 0) {
+            ArrayList<String> ownedSkus =
+                    activeSubs.getStringArrayList("INAPP_PURCHASE_ITEM_LIST");
+            Log.e("GAWK_ERR", "Ответ проверки подписок - " + ownedSkus.size());
+            if (ownedSkus.size() > 0) {
+                checkSubs = true;
+                initAdMob(false);
             }
-        }*/
+        }
     }
 
     @Override

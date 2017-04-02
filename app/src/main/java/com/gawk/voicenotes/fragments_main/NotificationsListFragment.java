@@ -39,7 +39,7 @@ public class NotificationsListFragment extends FragmentParent implements Actions
         // Required empty public constructor
     }
 
-    public NotificationsListFragment(MainActivity mainActivity) {
+    public void setMainActivity(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
     }
 

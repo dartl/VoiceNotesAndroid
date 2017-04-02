@@ -93,8 +93,12 @@ public class MainActivity extends ParentActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new NotesListFragment(this), getResources().getString(R.string.new_notes));
-        adapter.addFragment(new NotificationsListFragment(this), getResources().getString(R.string.new_note_notification));
+        NotesListFragment notesListFragment = new NotesListFragment();
+        notesListFragment.setMainActivity(this);
+        adapter.addFragment(notesListFragment, getResources().getString(R.string.new_notes));
+        NotificationsListFragment notificationsListFragment = new NotificationsListFragment();
+        notificationsListFragment.setMainActivity(this);
+        adapter.addFragment(notificationsListFragment, getResources().getString(R.string.new_note_notification));
         viewPager.setAdapter(adapter);
     }
 

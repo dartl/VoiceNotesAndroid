@@ -44,7 +44,8 @@ public class NotesListFragment extends FragmentParent implements ActionsListNote
         // Required empty public constructor
     }
 
-    public NotesListFragment(MainActivity mainActivity) {
+
+    public void setMainActivity(MainActivity mainActivity) {
         // Required empty public constructor
         this.mainActivity = mainActivity;
     }

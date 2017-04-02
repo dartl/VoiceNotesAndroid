@@ -13,7 +13,7 @@ import android.widget.Button;
  */
 
 public class SubscriptionActivity extends ParentActivity {
-    private Button buttonSmallDonate,buttonBigDonate;
+    private Button buttonSmallDonate, buttonBigDonate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +43,7 @@ public class SubscriptionActivity extends ParentActivity {
                 }
             }
         });
+        initAdMob(false);
     }
 
     public void startBuySubscription(String id_sub) throws RemoteException {
