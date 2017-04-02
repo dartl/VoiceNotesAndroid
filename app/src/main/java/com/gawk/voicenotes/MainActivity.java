@@ -69,9 +69,9 @@ public class MainActivity extends ParentActivity {
         initAdMob(true);
         boolean boolInstall = getsPref().getBoolean(INSTALL_PREF,false);
         if (!boolInstall) {
+            installIcon();
             if (dbHelper.getCountNotes() >= 2) {
                 showVote();
-                installIcon();
                 SharedPreferences.Editor ed = getsPref().edit();
                 ed.putBoolean(INSTALL_PREF,true);
                 ed.commit();
