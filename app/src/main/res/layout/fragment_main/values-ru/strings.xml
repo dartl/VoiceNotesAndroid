@@ -10,7 +10,7 @@
     <!-- Названия активити -->
     <string name="app_name">Голосовые заметки</string>
     <string name="app_name_note">Заметка</string>
-    <string name="app_name_export_import">Экспорт/Импортt</string>
+    <string name="app_name_export_import">Экспорт/Импорт</string>
 
     <!-- Главное окно -->
     <string name="new_notes">Заметки</string>
@@ -21,7 +21,7 @@
     <string name="menu_add">Добавить заметку</string>
     <string name="menu_notes_list">Все заметки</string>
     <string name="menu_settings">Настройки</string>
-    <string name="menu_export_import">Экспорт/Импортt</string>
+    <string name="menu_export_import">Экспорт/Импорт</string>
     <string name="menu_sync">Облако</string>
     <string name="menu_subs">Подписки</string>
     <string name="menu_help">Справка</string>
