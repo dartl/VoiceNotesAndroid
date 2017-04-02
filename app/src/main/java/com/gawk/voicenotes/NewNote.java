@@ -3,8 +3,10 @@ package com.gawk.voicenotes;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
@@ -18,6 +20,7 @@ import com.gawk.voicenotes.fragments_notes.NewNoteText;
 import com.gawk.voicenotes.models.Note;
 import com.gawk.voicenotes.models.Notification;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
@@ -90,7 +93,10 @@ public class NewNote extends ParentActivity implements TimePickerReturn {
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        Log.e("GAWK_ERR", "onActivityResult");
         if (requestCode== getResources().getInteger(R.integer.constant_request_code_recognize) && resultCode==RESULT_OK) {
+            ArrayList<String> thingsYouSaid = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+            Log.e("GAWK_ERR", "onActivityResult - " + thingsYouSaid.get(0));
             newNoteText.setActivityResult(data);
         }
     }

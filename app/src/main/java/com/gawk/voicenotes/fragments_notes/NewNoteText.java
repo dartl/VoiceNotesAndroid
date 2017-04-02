@@ -3,6 +3,7 @@ package com.gawk.voicenotes.fragments_notes;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,13 +55,16 @@ public class NewNoteText extends FragmentParent {
                 editText_NewNoteText.setText("");
             }
         });
+        Log.e("GAWK_ERR", "NewNoteText created");
         startRecognize();
         return view;
     }
 
     private void startRecognize() {
+        Log.e("GAWK_ERR", "NewNoteText startRecognize()");
         Intent i = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         i.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, Locale.getDefault());
+        Log.e("GAWK_ERR", "NewNoteText Locale.getDefault() = " + Locale.getDefault());
         try {
             getActivity().startActivityForResult(i, getResources().getInteger(R.integer.constant_request_code_recognize));
         } catch (Exception e) {
