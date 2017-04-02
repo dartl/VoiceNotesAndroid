@@ -50,7 +50,7 @@
 
     <!-- Заметки просмотр -->
     <string name="note_view_remind_title">We remind</string>
-    <string name="note_view_remind_no_body">Notification is not set</string>
+    <string name="note_view_remind_no_body">Never</string>
 
     <!-- Экспорт и импорт -->
     <string name="export_import_export">Export</string>

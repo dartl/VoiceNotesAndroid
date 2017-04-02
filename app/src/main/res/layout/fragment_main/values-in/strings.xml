@@ -50,7 +50,7 @@
 
     <!-- Заметки просмотр -->
     <string name="note_view_remind_title">Kami mengingatkan</string>
-    <string name="note_view_remind_no_body">Pemberitahuan tidak diatur</string>
+    <string name="note_view_remind_no_body">Tak pernah</string>
 
     <!-- Экспорт и импорт -->
     <string name="export_import_export">Ekspor</string>

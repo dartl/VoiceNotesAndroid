@@ -50,7 +50,7 @@
 
     <!-- Заметки просмотр -->
     <string name="note_view_remind_title">Lembramos</string>
-    <string name="note_view_remind_no_body">A notificação não está definida</string>
+    <string name="note_view_remind_no_body">Nunca</string>
 
     <!-- Экспорт и импорт -->
     <string name="export_import_export">Exportar</string>

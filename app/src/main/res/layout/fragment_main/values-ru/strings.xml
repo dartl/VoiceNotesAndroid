@@ -51,7 +51,7 @@
 
     <!-- Заметки просмотр -->
     <string name="note_view_remind_title">Мы напомним</string>
-    <string name="note_view_remind_no_body">Напоминание не установлено</string>
+    <string name="note_view_remind_no_body">Никогда</string>
 
     <!-- Экспорт и импорт -->
     <string name="export_import_export">Экспорт</string>

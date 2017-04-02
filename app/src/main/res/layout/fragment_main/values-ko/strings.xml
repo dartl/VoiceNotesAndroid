@@ -50,7 +50,7 @@
 
     <!-- Заметки просмотр -->
     <string name="note_view_remind_title">우리는 생각 나게한다.</string>
-    <string name="note_view_remind_no_body">알림이 설정되지 않았습니다.</string>
+    <string name="note_view_remind_no_body">못</string>
 
     <!-- Экспорт и импорт -->
     <string name="export_import_export">수출</string>

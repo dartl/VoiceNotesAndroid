@@ -50,7 +50,7 @@
 
     <!-- Заметки просмотр -->
     <string name="note_view_remind_title">我々は思い出させる</string>
-    <string name="note_view_remind_no_body">通知が設定されていません</string>
+    <string name="note_view_remind_no_body">絶対に</string>
 
     <!-- Экспорт и импорт -->
     <string name="export_import_export">輸出する</string>

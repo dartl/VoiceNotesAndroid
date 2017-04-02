@@ -50,7 +50,7 @@
 
     <!-- Заметки просмотр -->
     <string name="note_view_remind_title">हम याद दिलाते हैं</string>
-    <string name="note_view_remind_no_body">अधिसूचना सेट नहीं है</string>
+    <string name="note_view_remind_no_body">कभी नहीँ</string>
 
     <!-- Экспорт и импорт -->
     <string name="export_import_export">निर्यात करें</string>
