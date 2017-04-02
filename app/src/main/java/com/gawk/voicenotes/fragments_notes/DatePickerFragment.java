@@ -2,14 +2,9 @@ package com.gawk.voicenotes.fragments_notes;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.app.TimePickerDialog;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
 import android.support.v4.app.DialogFragment;
-import android.text.format.DateFormat;
 import android.widget.DatePicker;
-import android.widget.TimePicker;
 
 import com.gawk.voicenotes.adapters.TimePickerReturn;
 
@@ -25,7 +20,6 @@ public class DatePickerFragment extends DialogFragment
     TimePickerReturn parent;
     Calendar current;
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the current time as the default values for the picker

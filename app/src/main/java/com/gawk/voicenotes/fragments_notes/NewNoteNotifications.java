@@ -2,8 +2,6 @@ package com.gawk.voicenotes.fragments_notes;
 
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -152,7 +150,6 @@ public class NewNoteNotifications extends FragmentParent implements TimePickerRe
 
     public Notification getNotification() {
         if (checkError && checkNotification) {
-            Log.e("GAWK_ERR","NewNoteNotification. getNotification() " + notification.getDate());
             return notification;
         }
         return null;

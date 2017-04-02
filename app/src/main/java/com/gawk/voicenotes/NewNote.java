@@ -2,11 +2,9 @@ package com.gawk.voicenotes;
 
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
@@ -111,7 +109,6 @@ public class NewNote extends ParentActivity implements TimePickerReturn {
             Notification notification = newNoteNotifications.getNotification();
             notification.setId_note(note_id);
             notification.setId(dbHelper.saveNotification(notification,0));
-            Log.e("GAWK_ERR","NewNote. startSaveNote(). notification.getDate() = " + notification.getDate());
             restartNotify(newNote, notification);
         }
         dbHelper.disconnection();

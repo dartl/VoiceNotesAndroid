@@ -4,17 +4,12 @@ import android.app.NotificationManager;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
-import android.database.CharArrayBuffer;
-import android.database.ContentObserver;
 import android.database.Cursor;
-import android.database.DataSetObserver;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.net.Uri;
-import android.os.Bundle;
-import android.util.Log;
+
 
 import com.gawk.voicenotes.ParentActivity;
 import com.gawk.voicenotes.models.Note;
@@ -206,7 +201,6 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
                 SQLiteDBHelper.NOTIFICATIONS_TABLE_NAME + " WHERE " + SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_DATE
                 + " < " + new Date().getTime(), null);
             while (oldNotificationCursor.moveToNext()) {
-                Log.e("GAWK_ERR", "delete notification old, id = "+oldNotificationCursor.getInt(oldNotificationCursor.getColumnIndex(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_ID)));
                 deleteNotification(oldNotificationCursor.getInt(oldNotificationCursor.getColumnIndex(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_ID)));
             }
         return true;
@@ -343,7 +337,6 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         switch (action) {
             case 0:
                 long i = db.insert(SQLiteDBHelper.NOTES_TABLE_NAME, null, newValues);
-                Log.e("GAWK_ERR","addNote - " + String.valueOf(i));
                 return i;
             case 1:
                 db.update(SQLiteDBHelper.NOTES_TABLE_NAME, newValues, NOTES_TABLE_COLUMN_ID +" = ?",

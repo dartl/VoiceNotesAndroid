@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
 
 import com.gawk.voicenotes.NoteView;
 import com.gawk.voicenotes.R;
@@ -26,7 +25,6 @@ public class TimeNotification extends BroadcastReceiver {
     NotificationManager nm;
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.e("GAWK_ERR","TimeNotification start");
         nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         //Интент для активити, которую мы хотим запускать при нажатии на уведомление
         Intent intentTL = new Intent(context, NoteView.class);

@@ -1,10 +1,7 @@
 package com.gawk.voicenotes;
 
 import android.os.Bundle;
-import android.os.RemoteException;
-import android.view.View;
 import android.webkit.WebView;
-import android.widget.Button;
 
 /**
  * Created by GAWK on 02.04.2017.

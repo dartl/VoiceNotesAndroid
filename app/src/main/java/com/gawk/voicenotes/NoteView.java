@@ -1,6 +1,5 @@
 package com.gawk.voicenotes;
 
-import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,7 +9,6 @@ import android.widget.TextView;
 
 import com.gawk.voicenotes.models.Note;
 import com.gawk.voicenotes.models.Notification;
-import com.google.android.gms.ads.AdRequest;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

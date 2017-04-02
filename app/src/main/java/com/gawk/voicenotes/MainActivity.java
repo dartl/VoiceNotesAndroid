@@ -6,7 +6,6 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,7 +16,6 @@ import com.gawk.voicenotes.adapters.SQLiteDBHelper;
 import com.gawk.voicenotes.adapters.ViewPagerAdapter;
 import com.gawk.voicenotes.fragments_main.NotesListFragment;
 import com.gawk.voicenotes.fragments_main.NotificationsListFragment;
-import com.gawk.voicenotes.models.Notification;
 
 public class MainActivity extends ParentActivity {
     private TabLayout tabLayout;
@@ -69,8 +67,8 @@ public class MainActivity extends ParentActivity {
         initAdMob(true);
         boolean boolInstall = getsPref().getBoolean(INSTALL_PREF,false);
         if (!boolInstall) {
-            installIcon();
             if (dbHelper.getCountNotes() >= 2) {
+                installIcon();
                 showVote();
                 SharedPreferences.Editor ed = getsPref().edit();
                 ed.putBoolean(INSTALL_PREF,true);

@@ -60,6 +60,7 @@ public class ParentActivity extends AppCompatActivity
     public String SKU_SMALL_DONATE = "donation_one_dollor";
     public String SKU_BIG_DONATE = "big_donate";
     public final String INSTALL_PREF = "install_app";
+    public final String DONATE_PREF = "donate_app";
     private Toolbar toolbar;
     protected MenuItem actionRemoveSelected, actionSave, actionSearch;
     private NavigationView navigationView;
@@ -70,7 +71,6 @@ public class ParentActivity extends AppCompatActivity
     private SharedPreferences sPref;
     private ActionBarDrawerToggle toggle;
     private Button buttonDonateDeveloper;
-    private boolean checkSubs = false;
 
 
 
@@ -249,6 +249,7 @@ public class ParentActivity extends AppCompatActivity
     }
 
     public void initAdMob(boolean check) {
+        int aBoolean = getsPref().getInt(DONATE_PREF,0);
         mAdView = (AdView) findViewById(R.id.adView);
         mAdView.setAdListener(new AdListener() {
             @Override
@@ -281,7 +282,7 @@ public class ParentActivity extends AppCompatActivity
                 // to the app after tapping on an ad.
             }
         });
-        if (check && !checkSubs) {
+        if (check && (aBoolean != 2)) {
             AdRequest adRequest = new AdRequest.Builder().build();
             mAdView.loadAd(adRequest);
             mAdView.bringToFront();
@@ -292,6 +293,7 @@ public class ParentActivity extends AppCompatActivity
     }
 
     public void checkBuySubs() throws RemoteException {
+        SharedPreferences.Editor ed = getsPref().edit();
         Bundle activeSubs = mService.getPurchases(3, getPackageName(),
                 "subs", "");
 
@@ -299,32 +301,26 @@ public class ParentActivity extends AppCompatActivity
         if (response == 0) {
             ArrayList<String> ownedSkus =
                     activeSubs.getStringArrayList("INAPP_PURCHASE_ITEM_LIST");
-            Log.e("GAWK_ERR", "Ответ проверки подписок - " + ownedSkus.size());
             if (ownedSkus.size() > 0) {
-                checkSubs = true;
+                ed.putInt(DONATE_PREF,2);
+                ed.commit();
                 initAdMob(false);
+            } else {
+                ed.putInt(DONATE_PREF,1);
             }
         }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == 1001) {
-            int responseCode = data.getIntExtra("RESPONSE_CODE", 0);
-            String purchaseData = data.getStringExtra("INAPP_PURCHASE_DATA");
-            String dataSignature = data.getStringExtra("INAPP_DATA_SIGNATURE");
+        if (requestCode == 1001 && data !=null) {
 
             if (resultCode == RESULT_OK) {
-                try {
-                    JSONObject jo = new JSONObject(purchaseData);
-                    String sku = jo.getString("productId");
-                    Log.e("GAWK_ERR","You have bought the " + sku);
-                }
-                catch (JSONException e) {
-                    Log.e("GAWK_ERR","Failed to parse purchase data.");
-                    e.printStackTrace();
-                }
+                SharedPreferences.Editor ed = getsPref().edit();
+                ed.putInt(DONATE_PREF,2);
             }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
         }
     }
 
