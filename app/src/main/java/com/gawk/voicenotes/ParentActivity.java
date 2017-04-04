@@ -351,7 +351,7 @@ public class ParentActivity extends AppCompatActivity
 
     protected void installIcon() {
         //where this is a context (e.g. your current activity)
-        final Intent shortcutIntent = new Intent(this, MainActivity.class);
+        /*final Intent shortcutIntent = new Intent(this, MainActivity.class);
 
         final Intent intent = new Intent();
         intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
@@ -361,7 +361,7 @@ public class ParentActivity extends AppCompatActivity
         intent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, Intent.ShortcutIconResource.fromContext(this, R.drawable.icon175x175_big));
         // add the shortcut
         intent.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
-        sendBroadcast(intent);
+        sendBroadcast(intent);*/
     }
 
     protected void showVote() {
