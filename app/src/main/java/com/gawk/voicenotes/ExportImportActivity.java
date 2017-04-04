@@ -40,6 +40,8 @@ public class ExportImportActivity extends ParentActivity implements View.OnClick
         setContentView(R.layout.export_import);
         initAdMob(true);
 
+        OpenFileDialog.verifyStoragePermissions(this);
+
         openDirectoryDialog = new OpenFileDialog(this).setFileSelectedBackgroundColor(R.color.colorYellow)
                 .setFileSelectedColor(R.color.colorPrimary)
                 .setFolderSelectable(true).setOnCloseListener(new OpenFileDialog.OnCloseListener(){

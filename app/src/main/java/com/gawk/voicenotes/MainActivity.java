@@ -72,7 +72,7 @@ public class MainActivity extends ParentActivity {
                 showVote();
                 SharedPreferences.Editor ed = getsPref().edit();
                 ed.putBoolean(INSTALL_PREF,true);
-                ed.commit();
+                ed.apply();
             }
         }
     }
