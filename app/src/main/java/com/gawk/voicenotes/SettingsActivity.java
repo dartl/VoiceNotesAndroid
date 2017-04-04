@@ -2,6 +2,7 @@ package com.gawk.voicenotes;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -27,12 +28,11 @@ public class SettingsActivity extends ParentActivity {
     }
 
     protected void installIconAddNote() {
-        //where this is a context (e.g. your current activity)
-        Log.e("GAWK_ERR","installIconAddNote");
         final Intent shortcutIntent = new Intent(this, NewNote.class);
 
         final Intent intent = new Intent();
         intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
+        shortcutIntent.setAction(Intent.ACTION_CREATE_DOCUMENT);
         // Sets the custom shortcut's title
         intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, getString(R.string.menu_add));
         // Set the custom shortcut icon
@@ -40,5 +40,6 @@ public class SettingsActivity extends ParentActivity {
         // add the shortcut
         intent.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
         sendBroadcast(intent);
+        Snackbar.make(getCurrentFocus(), getString(R.string.success), Snackbar.LENGTH_LONG).show();
     }
 }

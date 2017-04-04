@@ -35,6 +35,9 @@
             android:label="@string/menu_add"
             android:launchMode="singleTop"
             android:windowSoftInputMode="stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.CREATE_DOCUMENT" />
+            </intent-filter>
         </activity>
 
         <activity android:name=".NoteView"
