@@ -76,6 +76,8 @@
     <!-- Подписки -->
     <string name="subs_inner_text">Todas as assinaturas excluem anúncios do aplicativo e são uma doação para o desenvolvedor</string>
 
+    <!-- Подписки -->
+    <string name="notification_title">aviso</string>
 
     <string-array name="export_import_type">
         <item>json</item>

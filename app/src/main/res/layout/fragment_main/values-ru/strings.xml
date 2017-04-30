@@ -77,6 +77,9 @@
     <!-- Подписки -->
     <string name="subs_inner_text">Все подписки удаляют рекламные объявления из приложения и являются пожертвованиями для разработчика</string>
 
+    <!-- Подписки -->
+    <string name="notification_title">Уведомление о заметке</string>
+
     <string-array name="export_import_type">
         <item>json</item>
         <item>txt</item>

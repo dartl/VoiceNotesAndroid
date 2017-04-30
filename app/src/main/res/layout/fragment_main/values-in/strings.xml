@@ -76,6 +76,8 @@
     <!-- Подписки -->
     <string name="subs_inner_text">Semua langganan menghapus iklan dari aplikasi dan sumbangan untuk pengembang</string>
 
+    <!-- Подписки -->
+    <string name="notification_title">pemberitahuan</string>
 
     <string-array name="export_import_type">
         <item>json</item>

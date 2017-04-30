@@ -76,6 +76,8 @@
     <!-- Подписки -->
     <string name="subs_inner_text">सभी सदस्यता ऐप्लिकेशन से विज्ञापन हटा देते हैं और डेवलपर के लिए दान हैं</string>
 
+    <!-- Подписки -->
+    <string name="notification_title">नोटिस</string>
 
     <string-array name="export_import_type">
         <item>json</item>

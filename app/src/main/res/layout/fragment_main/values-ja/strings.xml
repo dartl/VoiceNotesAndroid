@@ -76,6 +76,8 @@
     <!-- Подписки -->
     <string name="subs_inner_text">すべてのサブスクリプションはアプリケーションから広告を削除し、開発者の寄付です</string>
 
+    <!-- Подписки -->
+    <string name="notification_title">お知らせ</string>
 
     <string-array name="export_import_type">
         <item>json</item>

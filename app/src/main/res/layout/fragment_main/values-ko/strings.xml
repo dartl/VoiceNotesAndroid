@@ -76,6 +76,8 @@
     <!-- Подписки -->
     <string name="subs_inner_text">모든 구독은 애플리케이션에서 광고를 삭제하며 개발자를위한 기부입니다.</string>
 
+    <!-- Подписки -->
+    <string name="notification_title">통지</string>
 
     <string-array name="export_import_type">
         <item>json</item>

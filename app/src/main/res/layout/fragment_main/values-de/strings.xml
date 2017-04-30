@@ -76,6 +76,8 @@
     <!-- Подписки -->
     <string name="subs_inner_text">Alle Abonnements löschen Anzeigen aus der Anwendung und sind eine Spende für den Entwickler</string>
 
+    <!-- Подписки -->
+    <string name="notification_title">Bekanntmachung</string>
 
     <string-array name="export_import_type">
         <item>json</item>

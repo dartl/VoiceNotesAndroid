@@ -46,11 +46,11 @@ public class TimeNotification extends BroadcastReceiver {
                 .setSmallIcon(R.drawable.icon175x175)
                 .setLargeIcon(BitmapFactory.decodeResource(res, R.drawable.icon175x175_big))
                 .setAutoCancel(true) //уведомление закроется по клику на него
-                .setTicker("Уведомление о заметке") //текст, который отобразится вверху статус-бара при создании уведомления
+                .setTicker(context.getString(R.string.notification_title)) //текст, который отобразится вверху статус-бара при создании уведомления
                 .setContentText(text) // Основной текст уведомления
                 .setContentIntent(PendingIntent.getActivity(context, idNotification, intentTL, PendingIntent.FLAG_UPDATE_CURRENT))
                 .setWhen(System.currentTimeMillis()) //отображаемое время уведомления
-                .setContentTitle("Уведомление о заметке") //заголовок уведомления
+                .setContentTitle(context.getString(R.string.notification_title)) //заголовок уведомления
                 .setDefaults(Notification.DEFAULT_LIGHTS); // звук, вибро и диодный индикатор выставляются по умолчанию
         if (voice && vibration) {
             nb.setDefaults(Notification.DEFAULT_ALL); // звук, вибро и диодный индикатор выставляются по умолчанию

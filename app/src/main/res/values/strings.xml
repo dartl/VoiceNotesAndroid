@@ -76,6 +76,8 @@
     <!-- Подписки -->
     <string name="subs_inner_text">All subscriptions delete ads from the application and are a donation for the developer</string>
 
+    <!-- Подписки -->
+    <string name="notification_title">Notification of a note</string>
 
     <string-array name="export_import_type">
         <item>json</item>
