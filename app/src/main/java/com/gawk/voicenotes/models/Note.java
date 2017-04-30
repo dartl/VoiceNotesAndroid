@@ -1,6 +1,8 @@
 package com.gawk.voicenotes.models;
 
 import android.database.Cursor;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
 
@@ -11,7 +13,7 @@ import java.util.Date;
  * Created by GAWK on 10.02.2017.
  */
 
-public class Note implements Serializable {
+public class Note implements Serializable, Parcelable {
     private long id;
     private String text_note;
     private Date date;
@@ -35,6 +37,25 @@ public class Note implements Serializable {
         this.date = new Date(temp);
     }
 
+    protected Note(Parcel in) {
+        Note n = (Note) in.readSerializable();
+        this.id = n.getId();
+        this.text_note = n.getText_note();
+        this.date = n.getDate();
+    }
+
+    public static final Creator<Note> CREATOR = new Creator<Note>() {
+        @Override
+        public Note createFromParcel(Parcel in) {
+            return new Note(in);
+        }
+
+        @Override
+        public Note[] newArray(int size) {
+            return new Note[size];
+        }
+    };
+
     public Date getDate() {
         return date;
     }
@@ -57,5 +78,15 @@ public class Note implements Serializable {
 
     public void setText_note(String text_note) {
         this.text_note = text_note;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeSerializable(this);
     }
 }

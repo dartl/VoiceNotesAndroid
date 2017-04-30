@@ -1,16 +1,17 @@
 package com.gawk.voicenotes;
 
+import android.Manifest;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentSender;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
@@ -22,7 +23,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -32,6 +32,7 @@ import android.widget.TextView;
 
 import com.android.vending.billing.IInAppBillingService;
 import com.gawk.voicenotes.adapters.NoteRecyclerAdapter;
+import com.gawk.voicenotes.adapters.ParcelableUtil;
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
 import com.gawk.voicenotes.adapters.TimeNotification;
 import com.gawk.voicenotes.models.Note;
@@ -42,8 +43,6 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -86,8 +85,6 @@ public class ParentActivity extends AppCompatActivity
                 new Intent("com.android.vending.billing.InAppBillingService.BIND");
         serviceIntent.setPackage("com.android.vending");
         boolean bindResult = bindService(serviceIntent, mServiceConn, Context.BIND_AUTO_CREATE);
-        Log.e("GAWK_ERR",String.valueOf(bindResult));
-
     }
 
     ServiceConnection mServiceConn = new ServiceConnection() {
@@ -327,15 +324,25 @@ public class ParentActivity extends AppCompatActivity
     protected void restartNotify(Note note, Notification notification) {
         AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, TimeNotification.class);
-        intent.putExtra("note",note);
-        intent.putExtra("notification",notification);
+        intent.putExtra("note",ParcelableUtil.marshall(note));
+        intent.putExtra("notification",ParcelableUtil.marshall(notification));
         int requestCodeIntent =  (int) notification.getId();
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, -requestCodeIntent,
                 intent, 0);
         // На случай, если мы ранее запускали активити, а потом поменяли время,
         // откажемся от уведомления
         am.cancel(pendingIntent);
-        am.set(AlarmManager.RTC_WAKEUP,  notification.getDate().getTime() , pendingIntent);
+        if(Build.VERSION.SDK_INT < 23){
+            if(Build.VERSION.SDK_INT >= 19){
+                am.setExact(AlarmManager.RTC_WAKEUP,  notification.getDate().getTime() , pendingIntent);
+            }
+            else{
+                am.set(AlarmManager.RTC_WAKEUP,  notification.getDate().getTime()  , pendingIntent);
+            }
+        }
+        else{
+            am.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP,  notification.getDate().getTime()  , pendingIntent);
+        }
     }
 
     public void deleteNotify(long id) {
@@ -351,7 +358,7 @@ public class ParentActivity extends AppCompatActivity
 
     protected void installIcon() {
         //where this is a context (e.g. your current activity)
-        /*final Intent shortcutIntent = new Intent(this, MainActivity.class);
+        final Intent shortcutIntent = new Intent(this, MainActivity.class);
 
         final Intent intent = new Intent();
         intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
@@ -361,7 +368,7 @@ public class ParentActivity extends AppCompatActivity
         intent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, Intent.ShortcutIconResource.fromContext(this, R.drawable.icon175x175_big));
         // add the shortcut
         intent.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
-        sendBroadcast(intent);*/
+        sendBroadcast(intent);
     }
 
     protected void showVote() {
@@ -390,6 +397,7 @@ public class ParentActivity extends AppCompatActivity
         });
         ad.show();
     }
+
 
     public SharedPreferences getsPref() {
         return sPref;

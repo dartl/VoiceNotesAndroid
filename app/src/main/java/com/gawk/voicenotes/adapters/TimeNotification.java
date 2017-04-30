@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 
 import com.gawk.voicenotes.NoteView;
@@ -28,8 +29,10 @@ public class TimeNotification extends BroadcastReceiver {
         nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         //Интент для активити, которую мы хотим запускать при нажатии на уведомление
         Intent intentTL = new Intent(context, NoteView.class);
-        Note note = (Note) intent.getSerializableExtra("note");
-        com.gawk.voicenotes.models.Notification notification = (com.gawk.voicenotes.models.Notification) intent.getSerializableExtra("notification");
+        Note note = ParcelableUtil.unmarshall(intent.getByteArrayExtra("note"), Note.CREATOR);
+        com.gawk.voicenotes.models.Notification notification =
+                ParcelableUtil.unmarshall(intent.getByteArrayExtra("notification"),
+                        com.gawk.voicenotes.models.Notification.CREATOR);
         boolean voice = notification.isSound();
         boolean vibration = notification.isShake();
         int idNotification = (int) notification.getId();

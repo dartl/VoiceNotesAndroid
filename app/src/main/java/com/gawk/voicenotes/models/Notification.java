@@ -1,6 +1,8 @@
 package com.gawk.voicenotes.models;
 
 import android.database.Cursor;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
 
@@ -11,7 +13,7 @@ import java.util.Date;
  * Created by GAWK on 10.02.2017.
  */
 
-public class Notification implements Serializable {
+public class Notification implements Serializable, Parcelable {
     private long id, id_note;
     private Date date;
     private boolean sound, shake;
@@ -41,6 +43,37 @@ public class Notification implements Serializable {
         this.sound = sound;
         this.shake = shake;
     }
+
+    protected Notification(Parcel in) {
+        Notification notification = (Notification) in.readSerializable();
+        id = notification.getId();
+        id_note = notification.getId_note();
+        sound = notification.isSound();
+        shake = notification.isShake();
+        date = notification.getDate();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeSerializable(this);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<Notification> CREATOR = new Creator<Notification>() {
+        @Override
+        public Notification createFromParcel(Parcel in) {
+            return new Notification(in);
+        }
+
+        @Override
+        public Notification[] newArray(int size) {
+            return new Notification[size];
+        }
+    };
 
     public boolean isSound() {
         return sound;
