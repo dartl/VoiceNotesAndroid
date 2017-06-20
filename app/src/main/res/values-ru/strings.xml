@@ -74,6 +74,7 @@
     <string name="settings_recognition_check">Проверять возможность распознавания речи на устройстве</string>
     <!-- Подписки -->
     <string name="subs_inner_text">Все подписки удаляют рекламные объявления из приложения и являются пожертвованиями для разработчика</string>
+
     <string-array name="export_import_type">
         <item>json</item>
         <item>txt</item>

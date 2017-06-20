@@ -1,12 +1,12 @@
 package com.gawk.voicenotes;
 
-import android.Manifest;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -23,6 +23,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -32,7 +33,6 @@ import android.widget.TextView;
 
 import com.android.vending.billing.IInAppBillingService;
 import com.gawk.voicenotes.adapters.NoteRecyclerAdapter;
-import com.gawk.voicenotes.adapters.ParcelableUtil;
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
 import com.gawk.voicenotes.adapters.TimeNotification;
 import com.gawk.voicenotes.models.Note;
@@ -43,7 +43,10 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
@@ -67,11 +70,10 @@ public class ParentActivity extends AppCompatActivity
     protected AdView mAdView;
     FirebaseAnalytics mFirebaseAnalytics;
     IInAppBillingService mService;
+    private ArrayList<JSONObject> allSubscriptionsInfo;
     private SharedPreferences sPref;
     private ActionBarDrawerToggle toggle;
     private Button buttonDonateDeveloper;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,10 +97,12 @@ public class ParentActivity extends AppCompatActivity
 
         @Override
         public void onServiceConnected(ComponentName name,
-                IBinder service) {
+                                       IBinder service) {
+            Log.e("GAWK_ERR","CALL onServiceConnected()");
             mService = IInAppBillingService.Stub.asInterface(service);
             try {
                 checkBuySubs();
+                setAllSubscriptionsInfo(getAllSubscriptions());
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
@@ -108,8 +112,6 @@ public class ParentActivity extends AppCompatActivity
     @Override
     protected void onStart() {
         super.onStart();
-        // Bind to IInAppBillingService
-
     }
 
     @Override
@@ -279,6 +281,7 @@ public class ParentActivity extends AppCompatActivity
                 // to the app after tapping on an ad.
             }
         });
+        check = false;
         if (check && (aBoolean != 2)) {
             AdRequest adRequest = new AdRequest.Builder().build();
             mAdView.loadAd(adRequest);
@@ -308,6 +311,37 @@ public class ParentActivity extends AppCompatActivity
         }
     }
 
+    public ArrayList<JSONObject> getAllSubscriptions() throws RemoteException {
+        ArrayList<String> skuList = new ArrayList<> ();
+        skuList.add(SKU_BIG_DONATE);
+        skuList.add(SKU_SMALL_DONATE);
+        Bundle querySkus = new Bundle();
+        querySkus.putStringArrayList("ITEM_ID_LIST", skuList);
+        if ( mService == null) {
+            return null;
+        }
+        Bundle skuDetails = mService.getSkuDetails(3,
+                getPackageName(), "subs", querySkus);
+        int response = skuDetails.getInt("RESPONSE_CODE");
+        ArrayList<JSONObject> jsonObjects = new ArrayList<>();
+        if (response == 0) {
+            ArrayList<String> responseList
+                    = skuDetails.getStringArrayList("DETAILS_LIST");
+
+            for (String thisResponse : responseList) {
+                JSONObject object;
+                try {
+                    object = new JSONObject(thisResponse);
+                    jsonObjects.add(object);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        Log.e("GAWK_ERR","getAllSubscriptions() called. jsonObjects = " + jsonObjects.toString());
+        return jsonObjects;
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1001 && data !=null) {
@@ -324,8 +358,11 @@ public class ParentActivity extends AppCompatActivity
     protected void restartNotify(Note note, Notification notification) {
         AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, TimeNotification.class);
-        intent.putExtra("note",ParcelableUtil.marshall(note));
-        intent.putExtra("notification",ParcelableUtil.marshall(notification));
+        intent.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
+        Bundle c = new Bundle();
+        c.putParcelable("NOTE",note);
+        c.putParcelable("notification", notification);
+        intent.putExtras(c);
         int requestCodeIntent =  (int) notification.getId();
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, -requestCodeIntent,
                 intent, 0);
@@ -337,11 +374,11 @@ public class ParentActivity extends AppCompatActivity
                 am.setExact(AlarmManager.RTC_WAKEUP,  notification.getDate().getTime() , pendingIntent);
             }
             else{
-                am.set(AlarmManager.RTC_WAKEUP,  notification.getDate().getTime()  , pendingIntent);
+                am.set(AlarmManager.RTC_WAKEUP,  notification.getDate().getTime() , pendingIntent);
             }
         }
         else{
-            am.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP,  notification.getDate().getTime()  , pendingIntent);
+            am.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP,  notification.getDate().getTime() , pendingIntent);
         }
     }
 
@@ -398,12 +435,19 @@ public class ParentActivity extends AppCompatActivity
         ad.show();
     }
 
-
     public SharedPreferences getsPref() {
         return sPref;
     }
 
     public void setsPref(SharedPreferences sPref) {
         this.sPref = sPref;
+    }
+
+    public ArrayList<JSONObject> getAllSubscriptionsInfo() {
+        return allSubscriptionsInfo;
+    }
+
+    public void setAllSubscriptionsInfo(ArrayList<JSONObject> allSubscriptionsInfo) {
+        this.allSubscriptionsInfo = allSubscriptionsInfo;
     }
 }

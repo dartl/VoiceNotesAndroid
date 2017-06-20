@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/textViewTitleNotification"
         style="@style/GawkMaterialTheme.Subhead"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@+id/textViewBodyNotification"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -42,9 +42,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/textViewBodyNotification"
         style="@style/GawkMaterialTheme.ListTextNoteView"
-        android:layout_alignBaseline="@+id/textViewTitleNotification"
-        android:layout_alignBottom="@+id/textViewTitleNotification"
-        android:layout_toRightOf="@+id/textViewTitleNotification"
-        android:layout_toEndOf="@+id/textViewTitleNotification" />
+        android:layout_alignParentBottom="true" />
 
 </RelativeLayout>
