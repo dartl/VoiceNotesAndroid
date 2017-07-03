@@ -132,6 +132,9 @@ public class NewNoteText extends FragmentParent {
     }
 
     public String getTextNote() {
-        return String.valueOf(editText_NewNoteText.getText());
+        if (editText_NewNoteText != null) {
+            return String.valueOf(editText_NewNoteText.getText());
+        }
+        return "";
     }
 }

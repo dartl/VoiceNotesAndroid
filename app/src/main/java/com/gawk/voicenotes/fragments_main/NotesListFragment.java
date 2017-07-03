@@ -164,7 +164,9 @@ public class NotesListFragment extends FragmentParent implements ActionsListNote
             AlertDialog dialog = builder.create();
             dialog.show();
         } else {
-            Snackbar.make(getView(), getResources().getString(R.string.main_view_error_select), Snackbar.LENGTH_LONG).show();
+            if (getActivity().getCurrentFocus() != null) {
+                Snackbar.make(getActivity().getCurrentFocus(), getResources().getString(R.string.main_view_error_select), Snackbar.LENGTH_LONG).show();
+            }
         }
     }
 

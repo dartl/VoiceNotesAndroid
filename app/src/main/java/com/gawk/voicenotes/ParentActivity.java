@@ -33,6 +33,7 @@ import android.widget.TextView;
 
 import com.android.vending.billing.IInAppBillingService;
 import com.gawk.voicenotes.adapters.NoteRecyclerAdapter;
+import com.gawk.voicenotes.adapters.ParcelableUtil;
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
 import com.gawk.voicenotes.adapters.TimeNotification;
 import com.gawk.voicenotes.models.Note;
@@ -259,11 +260,13 @@ public class ParentActivity extends AppCompatActivity
 
             @Override
             public void onAdFailedToLoad(int errorCode) {
+                buttonDonateDeveloper.setVisibility(View.VISIBLE);
                 // Code to be executed when an ad request fails.
             }
 
             @Override
             public void onAdOpened() {
+                buttonDonateDeveloper.setVisibility(View.GONE);
                 // Code to be executed when an ad opens an overlay that
                 // covers the screen.
             }
@@ -281,7 +284,6 @@ public class ParentActivity extends AppCompatActivity
                 // to the app after tapping on an ad.
             }
         });
-        check = false;
         if (check && (aBoolean != 2)) {
             AdRequest adRequest = new AdRequest.Builder().build();
             mAdView.loadAd(adRequest);
@@ -360,8 +362,8 @@ public class ParentActivity extends AppCompatActivity
         Intent intent = new Intent(this, TimeNotification.class);
         intent.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
         Bundle c = new Bundle();
-        c.putParcelable("NOTE",note);
-        c.putParcelable("notification", notification);
+        c.putByteArray("note", ParcelableUtil.marshall(note));
+        c.putByteArray("notification", ParcelableUtil.marshall(notification));
         intent.putExtras(c);
         int requestCodeIntent =  (int) notification.getId();
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, -requestCodeIntent,
