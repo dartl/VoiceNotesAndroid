@@ -58,7 +58,6 @@
 
         <activity android:name=".SettingsActivity"
             android:label="@string/menu_settings"
-            android:launchMode="singleInstance"
             android:windowSoftInputMode="stateHidden">
         </activity>
 
@@ -74,7 +73,7 @@
             android:windowSoftInputMode="stateHidden">
         </activity>
 
-        <receiver android:name=".adapters.TimeNotification" ></receiver>
+        <receiver android:name=".adapters.TimeNotification" />
     </application>
 
 </manifest>

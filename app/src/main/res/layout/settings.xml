@@ -1,11 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent" style="@style/GawkMaterialTheme.Body">
+
+    <TextView
+        android:id="@+id/textView"
+        style="@style/GawkMaterialTheme.SettingsTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/settings_notification_title" />
+
+    <Button
+        android:id="@+id/buttonSelectSound"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/settings_notification_sound" />
+
+    <TextView
+        android:id="@+id/textViewSelectSound"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/GawkMaterialTheme.SettingsSubText"
+        android:text="@string/settings_notification_not_sound" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/GawkMaterialTheme.SettingsTitle"
+        android:text="@string/settings_other_title" />
 
     <Button
         android:id="@+id/buttonAddShortcut"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/settings_add_icon_add" />
+
 </LinearLayout>

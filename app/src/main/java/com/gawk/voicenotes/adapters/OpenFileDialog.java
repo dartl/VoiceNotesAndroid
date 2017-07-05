@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.ListIterator;
 
 
 /**
@@ -79,6 +80,7 @@ public class OpenFileDialog extends Dialog {
     private String mTitle;
     private String mOkButtonText;
     private String mCancelButtonText;
+    private ArrayList<String> mEnableTypes;
 
     private OnCloseListener mOnCloseListener;
 
@@ -132,6 +134,8 @@ public class OpenFileDialog extends Dialog {
             Log.e("GAWK_ERR", "isExternalStorageWritable() = " + isExternalStorageWritable());
         }
         setPath(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath());
+
+        mEnableTypes = new ArrayList<>();
     }
 
     @Override
@@ -582,9 +586,18 @@ public class OpenFileDialog extends Dialog {
             this.absolutePath = absolutePath;
             this.isDirectory = isDirectory;
             this.name = absolutePath.substring(absolutePath.lastIndexOf(File.separator)+1);
+            if (!isDirectory) {
+                int i = absolutePath.lastIndexOf('.');
+                if (i > 0) {
+                    this.extension = absolutePath.substring(i+1);
+                }
+            } else {
+                this.extension = "";
+            }
         }
         String absolutePath;
         String name;
+        String extension;
         boolean isDirectory;
         List<FileItem> listChildren(){
             List<FileItem> list = new ArrayList<>();
@@ -598,11 +611,25 @@ public class OpenFileDialog extends Dialog {
                 }
             });
             for(File file:fileArr){
-                if(!file.getName().startsWith(".")) {
-                    list.add(new FileItem(file.getAbsolutePath(), file.isDirectory()));
+                if(!file.getName().startsWith(".") ) {
+                    FileItem fileItem = new FileItem(file.getAbsolutePath(), file.isDirectory());
+                    if (mEnableTypes.size() == 0 || fileItem.isDirectory || checkExtension(fileItem)){
+                        list.add(fileItem);
+                    }
                 }
             }
             return list;
+        }
+
+        boolean checkExtension(FileItem file) {
+            ListIterator<String> litr = mEnableTypes.listIterator();
+            while (litr.hasNext()) {
+                String element = litr.next();
+                if (element.equalsIgnoreCase(file.extension)) {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 
@@ -667,5 +694,14 @@ public class OpenFileDialog extends Dialog {
                     REQUEST_EXTERNAL_STORAGE
             );
         }
+    }
+
+    public ArrayList<String> getmEnableTypes() {
+        return mEnableTypes;
+    }
+
+    public OpenFileDialog setmEnableTypes(ArrayList<String> mEnableTypes) {
+        this.mEnableTypes = mEnableTypes;
+        return this;
     }
 }

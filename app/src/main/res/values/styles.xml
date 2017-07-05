@@ -124,8 +124,6 @@
         <item name="android:paddingTop">16dp</item>
     </style>
 
-
-
     <style name="GawkMaterialTheme.ButtonBigGreen" parent="GawkMaterialTheme.ButtonBig">
         <item name="background">@color/colorGreen</item>
     </style>
@@ -157,5 +155,17 @@
         <item name="android:textSize">16sp</item>
         <item name="android:paddingTop">8dp</item>
         <item name="android:paddingBottom">8dp</item>
+    </style>
+
+    <style name="GawkMaterialTheme.SettingsTitle" >
+        <item name="android:textSize">24sp</item>
+        <item name="android:layout_marginTop">18dp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="GawkMaterialTheme.SettingsSubText" >
+        <item name="android:textSize">16sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/colorGrey500</item>
     </style>
 </resources>

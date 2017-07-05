@@ -34,6 +34,7 @@ import android.widget.TextView;
 import com.android.vending.billing.IInAppBillingService;
 import com.gawk.voicenotes.adapters.NoteRecyclerAdapter;
 import com.gawk.voicenotes.adapters.ParcelableUtil;
+import com.gawk.voicenotes.adapters.PrefUtil;
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
 import com.gawk.voicenotes.adapters.TimeNotification;
 import com.gawk.voicenotes.models.Note;
@@ -347,10 +348,10 @@ public class ParentActivity extends AppCompatActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1001 && data !=null) {
-
             if (resultCode == RESULT_OK) {
                 SharedPreferences.Editor ed = getsPref().edit();
                 ed.putInt(DONATE_PREF,2);
+                ed.apply();
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
@@ -361,7 +362,12 @@ public class ParentActivity extends AppCompatActivity
         AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, TimeNotification.class);
         intent.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
+
+        PrefUtil prefUtil = new PrefUtil(this);
+        String sound_link = prefUtil.getString(PrefUtil.NOTIFICATION_SOUND,"a");
+        Log.e("GAWK_ERR","ParentActivity sound_link = " + sound_link);
         Bundle c = new Bundle();
+        c.putString("sound_link", sound_link);
         c.putByteArray("note", ParcelableUtil.marshall(note));
         c.putByteArray("notification", ParcelableUtil.marshall(notification));
         intent.putExtras(c);

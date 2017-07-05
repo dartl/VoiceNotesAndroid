@@ -1,12 +1,16 @@
 package com.gawk.voicenotes;
 
 import android.database.Cursor;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.gawk.voicenotes.adapters.PrefUtil;
 import com.gawk.voicenotes.models.Note;
 import com.gawk.voicenotes.models.Notification;
 
@@ -34,8 +38,6 @@ public class NoteView extends ParentActivity {
         editTextNoteText = (EditText) findViewById(R.id.editTextNoteText);
 
         setTextNote();
-
-
     }
 
     @Override
@@ -87,6 +89,13 @@ public class NoteView extends ParentActivity {
     private void setTextNote() {
         dbHelper.connection();
         long id = getIntent().getLongExtra("id",-1);
+        boolean ringtoneB = getIntent().getBooleanExtra("ringtone",false);
+        PrefUtil prefUtil = new PrefUtil(this);
+        String stringRingtone = prefUtil.getString(PrefUtil.NOTIFICATION_SOUND,"");
+        if (ringtoneB) {
+            RingtoneManager ringtoneManager = new RingtoneManager(this);
+            ringtoneManager.getRingtone(ringtoneManager.getRingtonePosition(Uri.parse(stringRingtone))).stop();
+        }
         if (id != -1) {
             note = new Note(dbHelper.getNoteById(id));
             editTextNoteText.setText(note.getText_note());
