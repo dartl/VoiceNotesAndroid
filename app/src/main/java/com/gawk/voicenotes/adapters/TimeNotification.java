@@ -7,6 +7,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.database.Cursor;
 import android.graphics.BitmapFactory;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
@@ -15,8 +16,11 @@ import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Vibrator;
+import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.media.session.MediaSessionCompat;
 import android.util.Log;
 
 import com.gawk.voicenotes.NoteView;
@@ -46,57 +50,37 @@ public class TimeNotification extends BroadcastReceiver {
         boolean voice = notification.isSound();
         boolean vibration = notification.isShake();
         int idNotification = (int) notification.getId();
+        Integer state = null;
         String text = note.getText_note();
         if (note.getText_note().length() > 100) {
             text = text.substring(0,100)+"...";
         }
         Resources res = context.getResources();
         intentTL.putExtra("id", note.getId());
-        int state = Notification.DEFAULT_LIGHTS;
         NotificationCompat.Builder nb = new NotificationCompat.Builder(context)
                 .setSmallIcon(R.drawable.icon175x175)
                 .setLargeIcon(BitmapFactory.decodeResource(res, R.drawable.icon175x175_big))
                 .setAutoCancel(true) //уведомление закроется по клику на него
                 .setTicker(context.getString(R.string.new_note_notification)) //текст, который отобразится вверху статус-бара при создании уведомления
                 .setContentText(text) // Основной текст уведомления
-                .setContentIntent(PendingIntent.getActivity(context, idNotification, intentTL, PendingIntent.FLAG_UPDATE_CURRENT))
                 .setWhen(System.currentTimeMillis()) //отображаемое время уведомления
+                .setContentIntent(PendingIntent.getActivity(context, idNotification, intentTL, PendingIntent.FLAG_UPDATE_CURRENT))
+                .setPriority(NotificationCompat.PRIORITY_MAX)
+                .setCategory(NotificationCompat.CATEGORY_REMINDER)
+                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                 .setContentTitle(context.getString(R.string.new_note_notification)); //заголовок уведомления
-        nb.setDefaults(state); // звук, вибро и диодный индикатор выставляются по умолчанию
         String sound_link = intent.getStringExtra("sound_link");
-        if(!sound_link.equalsIgnoreCase("")) {
-            nb.setSound(null);
-            state |= Notification.DEFAULT_SOUND;
-            Uri defaultRingtoneUri = Uri.parse(sound_link);
-            MediaPlayer mediaPlayer = new MediaPlayer();
-            try {
-                mediaPlayer.setDataSource(context, defaultRingtoneUri);
-                mediaPlayer.setAudioStreamType(AudioManager.STREAM_NOTIFICATION);
-                mediaPlayer.prepare();
-                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-
-                    @Override
-                    public void onCompletion(MediaPlayer mp)
-                    {
-                        mp.release();
-                    }
-                });
-                mediaPlayer.start();
-            } catch (IllegalArgumentException | SecurityException | IllegalStateException | IOException e) {
-                e.printStackTrace();
-            }
-            Log.e("GAWK_ERR","uri.toString() = " + Uri.parse(sound_link).getPath());
-            Log.e("GAWK_ERR","RingtoneManager.getDefaultUri = " + RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
-        }
-        if (voice && sound_link.equalsIgnoreCase("")) {
-            state |= Notification.DEFAULT_SOUND;
-        }
         if (vibration) {
-            state |= Notification.DEFAULT_VIBRATE;
+            nb.setVibrate(new long[]{0, 800, 500, 800});
+        }
+        if(!sound_link.equalsIgnoreCase("")) {
+            Uri defaultRingtoneUri = Uri.parse(sound_link);
+            nb.setSound(defaultRingtoneUri,AudioManager.STREAM_RING);
+        } else if (voice){
+            nb.setDefaults(Notification.DEFAULT_SOUND); // выставляет звук по умолчанию
         }
         nm.notify(NOTIFY_TAG, idNotification, nb.build());
     }
-
 
 }
 

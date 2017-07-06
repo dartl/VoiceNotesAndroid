@@ -82,21 +82,19 @@ public class SettingsActivity extends ParentActivity {
         String url = prefUtil.getString(PrefUtil.NOTIFICATION_SOUND,"");
         Log.e("GAWK_ERR","selectAudio(). url = " + url);
         Intent intent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
-        intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, RingtoneManager.TYPE_RINGTONE);
         intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, true);
-        intent.putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, (Uri) null);
+        intent.putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, url);
         intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_SILENT, false);
         intent.putExtra(RingtoneManager.EXTRA_RINGTONE_DEFAULT_URI, url);
         intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE,
                 getResources().getString(R.string.settings_notification_sound));
         startActivityForResult(intent, CODE_RESULT_SOUND);
-
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.e("GAWK_ERR","onActivityResult. requestCode = " + requestCode + "; data = " + data.toString());
-        Log.e("GAWK_ERR","RingtoneManager.EXTRA_RINGTONE_PICKED_URI = " + data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI));
         if (requestCode == CODE_RESULT_SOUND && data != null) {
+            Log.e("GAWK_ERR","onActivityResult. requestCode = " + requestCode + "; data = " + data.toString());
+            Log.e("GAWK_ERR","RingtoneManager.EXTRA_RINGTONE_PICKED_URI = " + data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI));
             if (resultCode == RESULT_OK) {
                 Log.e("GAWK_ERR","onActivityResult (resultCode == CODE_RESULT_SOUND)");
                 Uri uri = data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
