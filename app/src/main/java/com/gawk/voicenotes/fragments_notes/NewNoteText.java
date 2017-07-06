@@ -7,7 +7,9 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,7 +29,7 @@ import java.util.Locale;
  * Created by GAWK on 12.02.2017.
  */
 
-public class NewNoteText extends FragmentParent {
+public class NewNoteText extends FragmentParent implements RecognitionListener{
     private TextView editText_NewNoteText;
     private ImageButton imageButton_NewNoteAdd, imageButton_NewNoteClear;
 
@@ -67,13 +69,13 @@ public class NewNoteText extends FragmentParent {
     }
 
     private void startRecognize() {
-        Log.e("GAWK_ERR", "NewNoteText startRecognize()");
         Intent i = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         i.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         i.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
-        Log.e("GAWK_ERR", "NewNoteText Locale.getDefault() = " + Locale.getDefault());
+
         try {
-            getActivity().startActivityForResult(i, getResources().getInteger(R.integer.constant_request_code_recognize));
+
+            //getActivity().startActivityForResult(i, getResources().getInteger(R.integer.constant_request_code_recognize));
         } catch (Exception e) {
             Log.e("GAWK_ERR", "startRecognize() UtilPreferences.getBoolean = " + UtilPreferences.getBoolean(UtilPreferences.CHECK_RECOGNITION,getActivity()));
             if (UtilPreferences.getBoolean(UtilPreferences.CHECK_RECOGNITION,getActivity())) {
@@ -121,13 +123,15 @@ public class NewNoteText extends FragmentParent {
                 Toast.LENGTH_LONG).show();
     }
 
-    public void setActivityResult(Intent data) {
-        Log.e("GAWK_ERR", "setActivityResult() called");
-        ArrayList<String> thingsYouSaid = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-        if (editText_NewNoteText.getText().length() == 0) {
-            editText_NewNoteText.setText(thingsYouSaid.get(0));
-        } else {
-            editText_NewNoteText.setText(editText_NewNoteText.getText()+ " " +thingsYouSaid.get(0));
+    public void setActivityResult(Intent data, int resultCode) {
+        boolean normalCode = true;
+        if(normalCode) {
+            ArrayList<String> thingsYouSaid = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+            if (editText_NewNoteText.getText().length() == 0) {
+                editText_NewNoteText.setText(thingsYouSaid.get(0));
+            } else {
+                editText_NewNoteText.setText(editText_NewNoteText.getText() + " " + thingsYouSaid.get(0));
+            }
         }
     }
 
@@ -136,5 +140,66 @@ public class NewNoteText extends FragmentParent {
             return String.valueOf(editText_NewNoteText.getText());
         }
         return "";
+    }
+
+    @Override
+    public void onReadyForSpeech(Bundle params) {
+
+    }
+
+    @Override
+    public void onBeginningOfSpeech() {
+
+    }
+
+    @Override
+    public void onRmsChanged(float rmsdB) {
+
+    }
+
+    @Override
+    public void onBufferReceived(byte[] buffer) {
+
+    }
+
+    @Override
+    public void onEndOfSpeech() {
+
+    }
+
+    @Override
+    public void onError(int error) {
+        switch (error) {
+            case RecognizerIntent.RESULT_AUDIO_ERROR:
+                Snackbar.make(getView(), "RESULT_AUDIO_ERROR", Snackbar.LENGTH_LONG).show();
+                break;
+            case RecognizerIntent.RESULT_CLIENT_ERROR:
+                Snackbar.make(getView(), "RESULT_CLIENT_ERROR", Snackbar.LENGTH_LONG).show();
+                break;
+            case RecognizerIntent.RESULT_NETWORK_ERROR:
+                Snackbar.make(getView(), "RESULT_NETWORK_ERROR", Snackbar.LENGTH_LONG).show();
+                break;
+            case RecognizerIntent.RESULT_NO_MATCH:
+                Snackbar.make(getView(), "RESULT_NO_MATCH", Snackbar.LENGTH_LONG).show();
+                break;
+            case RecognizerIntent.RESULT_SERVER_ERROR:
+                Snackbar.make(getView(), "RESULT_SERVER_ERROR", Snackbar.LENGTH_LONG).show();
+                break;
+        }
+    }
+
+    @Override
+    public void onResults(Bundle results) {
+
+    }
+
+    @Override
+    public void onPartialResults(Bundle partialResults) {
+
+    }
+
+    @Override
+    public void onEvent(int eventType, Bundle params) {
+
     }
 }

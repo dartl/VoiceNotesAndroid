@@ -93,11 +93,14 @@ public class NewNote extends ParentActivity implements TimePickerReturn {
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.e("GAWK_ERR", "onActivityResult");
+        if (data != null) {
+            ArrayList<String> languages = data.getStringArrayListExtra(RecognizerIntent.EXTRA_SUPPORTED_LANGUAGES);
+            for (int i = 0 ; i < languages.size(); i++) {
+                Log.e("GAWK_ERR", "language[" + i + "] = " + languages.get(i));
+            }
+        }
         if (requestCode== getResources().getInteger(R.integer.constant_request_code_recognize) && resultCode==RESULT_OK) {
-            ArrayList<String> thingsYouSaid = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-            Log.e("GAWK_ERR", "onActivityResult - " + thingsYouSaid.get(0));
-            newNoteText.setActivityResult(data);
+            newNoteText.setActivityResult(data, resultCode);
         }
     }
 
