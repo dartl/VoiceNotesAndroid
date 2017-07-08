@@ -72,6 +72,11 @@
     <!-- Настройки -->
     <string name="settings_add_icon_add">「メモを追加」アイコンをデスクトップに追加</string>
     <string name="settings_recognition_check">音声認識を使用できるかどうかデバイスを確認してください</string>
+    <string name="settings_notification_title">リマインダ</string>
+    <string name="settings_notification_clear">リマインダーをリセットする</string>
+    <string name="settings_notification_sound">リマインダー用のサウンドを選択する</string>
+    <string name="settings_notification_not_sound">選択されたサウンドがありません</string>
+    <string name="settings_other_title">その他</string>
     <!-- Подписки -->
     <string name="subs_inner_text">どのサブスクリプションでもアプリから広告が削除され、開発者への寄付が行われます。</string>
     <string-array name="export_import_type">

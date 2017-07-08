@@ -1,25 +1,17 @@
 package com.gawk.voicenotes;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.gawk.voicenotes.adapters.OpenFileDialog;
-import com.gawk.voicenotes.adapters.PrefUtil;
-
-import java.io.File;
-import java.util.ArrayList;
+import com.gawk.voicenotes.preferences.PrefUtil;
 
 /**
  * Created by GAWK on 30.03.2017.

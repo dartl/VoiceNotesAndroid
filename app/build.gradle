@@ -6,7 +6,7 @@ android {
     defaultConfig {
         applicationId "com.gawk.voicenotes"
         minSdkVersion 15
-        targetSdkVersion 24
+        targetSdkVersion 25
         versionCode 21
         versionName "6.63"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -15,6 +15,7 @@ android {
         main {
             res.srcDirs =
                     [
+                            'src/main/res/layout/speech_recognitions',
                             'src/main/res/layout/fragment_main',
                             'src/main/res/layout/fragment_note',
                             'src/main/res/layout/drawer',

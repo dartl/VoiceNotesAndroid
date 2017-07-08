@@ -6,7 +6,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentSender;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -34,7 +33,7 @@ import android.widget.TextView;
 import com.android.vending.billing.IInAppBillingService;
 import com.gawk.voicenotes.adapters.NoteRecyclerAdapter;
 import com.gawk.voicenotes.adapters.ParcelableUtil;
-import com.gawk.voicenotes.adapters.PrefUtil;
+import com.gawk.voicenotes.preferences.PrefUtil;
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
 import com.gawk.voicenotes.adapters.TimeNotification;
 import com.gawk.voicenotes.models.Note;
@@ -42,13 +41,11 @@ import com.gawk.voicenotes.models.Notification;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 

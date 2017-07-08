@@ -1,4 +1,4 @@
-package com.gawk.voicenotes.adapters;
+package com.gawk.voicenotes.preferences;
 
 import android.app.Activity;
 import android.content.Context;

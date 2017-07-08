@@ -1,15 +1,20 @@
 package com.gawk.voicenotes.fragments_notes;
 
 import android.app.AlertDialog;
+import android.app.DialogFragment;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.RemoteException;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
-import android.support.design.widget.Snackbar;
+import android.speech.SpeechRecognizer;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,9 +25,11 @@ import android.widget.Toast;
 
 import com.gawk.voicenotes.FragmentParent;
 import com.gawk.voicenotes.R;
-import com.gawk.voicenotes.preferences.UtilPreferences;
+import com.gawk.voicenotes.windows.SpeechRecognitionDialog;
 
+import java.net.BindException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -32,6 +39,8 @@ import java.util.Locale;
 public class NewNoteText extends FragmentParent implements RecognitionListener{
     private TextView editText_NewNoteText;
     private ImageButton imageButton_NewNoteAdd, imageButton_NewNoteClear;
+    private SpeechRecognizer mRecognizerIntent;
+    private DialogFragment mSpeechRecognitionDialog;
 
     public NewNoteText() {
         // Required empty public constructor
@@ -63,44 +72,45 @@ public class NewNoteText extends FragmentParent implements RecognitionListener{
                 editText_NewNoteText.setText("");
             }
         });
-        Log.e("GAWK_ERR", "NewNoteText created");
-        startRecognize();
+
+        mSpeechRecognitionDialog = new SpeechRecognitionDialog(this);
+        mSpeechRecognitionDialog.show(getActivity().getFragmentManager(),"SpeechRecognitionDialog");
+
+        //startRecognize();
         return view;
     }
 
-    private void startRecognize() {
+    public void startRecognize() {
         Intent i = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         i.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         i.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
 
-        try {
-
-            //getActivity().startActivityForResult(i, getResources().getInteger(R.integer.constant_request_code_recognize));
-        } catch (Exception e) {
-            Log.e("GAWK_ERR", "startRecognize() UtilPreferences.getBoolean = " + UtilPreferences.getBoolean(UtilPreferences.CHECK_RECOGNITION,getActivity()));
-            if (UtilPreferences.getBoolean(UtilPreferences.CHECK_RECOGNITION,getActivity())) {
-                Log.e("GAWK_ERR", "NewNoteText exeption called");
-                AlertDialog.Builder ad = new AlertDialog.Builder(getContext());
-                ad.setTitle(getResources().getText(R.string.new_note_error_speech_recognition_title));  // заголовок
-                ad.setMessage(getResources().getText(R.string.new_note_error_speech_recognition)); // сообщение
-                ad.setPositiveButton(getResources().getText(R.string.new_note_error_speech_recognition_ok), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        startInstallAppRecognize();
-                    }
-                });
-                ad.setNegativeButton(getResources().getText(R.string.new_note_error_speech_recognition_cancel), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        cancelInstallAppRecognize();
-                    }
-                });
-                ad.setCancelable(true);
-                ad.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                    public void onCancel(DialogInterface dialog) {
-                        cancelInstallAppRecognize();
-                    }
-                });
-                ad.show();
-            }
+        if (isIntentAvailable(getContext(),i)) { // Проверяем наличие программы для распознования
+            mRecognizerIntent = SpeechRecognizer.createSpeechRecognizer(getContext());
+            mRecognizerIntent.setRecognitionListener(this);
+            mRecognizerIntent.startListening(i);
+        } else {
+            mSpeechRecognitionDialog.dismiss();
+            AlertDialog.Builder ad = new AlertDialog.Builder(getContext());
+            ad.setTitle(getResources().getText(R.string.new_note_error_speech_recognition_title));  // заголовок
+            ad.setMessage(getResources().getText(R.string.new_note_error_speech_recognition)); // сообщение
+            ad.setPositiveButton(getResources().getText(R.string.new_note_error_speech_recognition_ok), new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    startInstallAppRecognize();
+                }
+            });
+            ad.setNegativeButton(getResources().getText(R.string.new_note_error_speech_recognition_cancel), new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    cancelInstallAppRecognize();
+                }
+            });
+            ad.setCancelable(true);
+            ad.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                public void onCancel(DialogInterface dialog) {
+                    cancelInstallAppRecognize();
+                }
+            });
+            ad.show();
         }
     }
 
@@ -123,18 +133,6 @@ public class NewNoteText extends FragmentParent implements RecognitionListener{
                 Toast.LENGTH_LONG).show();
     }
 
-    public void setActivityResult(Intent data, int resultCode) {
-        boolean normalCode = true;
-        if(normalCode) {
-            ArrayList<String> thingsYouSaid = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-            if (editText_NewNoteText.getText().length() == 0) {
-                editText_NewNoteText.setText(thingsYouSaid.get(0));
-            } else {
-                editText_NewNoteText.setText(editText_NewNoteText.getText() + " " + thingsYouSaid.get(0));
-            }
-        }
-    }
-
     public String getTextNote() {
         if (editText_NewNoteText != null) {
             return String.valueOf(editText_NewNoteText.getText());
@@ -142,64 +140,96 @@ public class NewNoteText extends FragmentParent implements RecognitionListener{
         return "";
     }
 
+    // RecognitionListener
+
     @Override
     public void onReadyForSpeech(Bundle params) {
-
+        Log.e("GAWK_ERR","onReadyForSpeech()");
     }
 
     @Override
     public void onBeginningOfSpeech() {
-
+        Log.e("GAWK_ERR","onBeginningOfSpeech()");
     }
 
     @Override
     public void onRmsChanged(float rmsdB) {
-
+        Log.e("GAWK_ERR","onRmsChanged(float rmsdB) = " + rmsdB);
     }
 
     @Override
     public void onBufferReceived(byte[] buffer) {
-
+        Log.e("GAWK_ERR","onBufferReceived(byte[] buffer)");
     }
 
     @Override
     public void onEndOfSpeech() {
-
+        Log.e("GAWK_ERR","onEndOfSpeech()");
     }
 
     @Override
     public void onError(int error) {
+        Log.e("GAWK_ERR","onError(int error) = " + error);
         switch (error) {
-            case RecognizerIntent.RESULT_AUDIO_ERROR:
-                Snackbar.make(getView(), "RESULT_AUDIO_ERROR", Snackbar.LENGTH_LONG).show();
+            case SpeechRecognizer.ERROR_AUDIO:
+                Log.e("GAWK_ERR","onError(int error) - SpeechRecognizer.ERROR_AUDIO");
                 break;
-            case RecognizerIntent.RESULT_CLIENT_ERROR:
-                Snackbar.make(getView(), "RESULT_CLIENT_ERROR", Snackbar.LENGTH_LONG).show();
+            case SpeechRecognizer.ERROR_CLIENT:
+                Log.e("GAWK_ERR","onError(int error) - SpeechRecognizer.ERROR_CLIENT");
                 break;
-            case RecognizerIntent.RESULT_NETWORK_ERROR:
-                Snackbar.make(getView(), "RESULT_NETWORK_ERROR", Snackbar.LENGTH_LONG).show();
+            case SpeechRecognizer.ERROR_INSUFFICIENT_PERMISSIONS:
+                // Ошибка доступа к разрешениям
+                Log.e("GAWK_ERR","onError(int error) - SpeechRecognizer.ERROR_INSUFFICIENT_PERMISSIONS");
                 break;
-            case RecognizerIntent.RESULT_NO_MATCH:
-                Snackbar.make(getView(), "RESULT_NO_MATCH", Snackbar.LENGTH_LONG).show();
+            case SpeechRecognizer.ERROR_NETWORK:
+                Log.e("GAWK_ERR","onError(int error) - SpeechRecognizer.ERROR_NETWORK");
                 break;
-            case RecognizerIntent.RESULT_SERVER_ERROR:
-                Snackbar.make(getView(), "RESULT_SERVER_ERROR", Snackbar.LENGTH_LONG).show();
+            case SpeechRecognizer.ERROR_NETWORK_TIMEOUT:
+                // Например вышли из активности не дожидаясь распознавания
+                Log.e("GAWK_ERR","onError(int error) - SpeechRecognizer.ERROR_NETWORK_TIMEOUT");
+                break;
+            case SpeechRecognizer.ERROR_NO_MATCH:
+                Log.e("GAWK_ERR","onError(int error) - SpeechRecognizer.ERROR_NO_MATCH");
+                break;
+            case SpeechRecognizer.ERROR_RECOGNIZER_BUSY:
+                Log.e("GAWK_ERR","onError(int error) - SpeechRecognizer.ERROR_RECOGNIZER_BUSY");
+                break;
+            case SpeechRecognizer.ERROR_SERVER:
+                // если нет инет и эта ошибка - не хватает пакета локализации
+                Log.e("GAWK_ERR","onError(int error) - SpeechRecognizer.ERROR_SERVER");
+                break;
+            case SpeechRecognizer.ERROR_SPEECH_TIMEOUT:
+                Log.e("GAWK_ERR","onError(int error) - SpeechRecognizer.ERROR_SPEECH_TIMEOUT");
                 break;
         }
     }
 
     @Override
     public void onResults(Bundle results) {
-
+        Log.e("GAWK_ERR","onResults(Bundle results)");
+        ArrayList<String> thingsYouSaid = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+        if (editText_NewNoteText.getText().length() == 0) {
+            editText_NewNoteText.setText(thingsYouSaid.get(0));
+        } else {
+            editText_NewNoteText.setText(editText_NewNoteText.getText() + " " + thingsYouSaid.get(0));
+        }
     }
 
     @Override
     public void onPartialResults(Bundle partialResults) {
-
+        Log.e("GAWK_ERR","onPartialResults(Bundle partialResults)");
     }
 
     @Override
     public void onEvent(int eventType, Bundle params) {
-
+        Log.e("GAWK_ERR","onEvent(int eventType, Bundle params)");
     }
+
+    public static boolean isIntentAvailable(Context context, Intent intent) {
+        final PackageManager packageManager = context.getPackageManager();
+        List<ResolveInfo> list = packageManager.queryIntentActivities(
+                intent, PackageManager.MATCH_DEFAULT_ONLY);
+        return list.size() > 0;
+    }
+
 }

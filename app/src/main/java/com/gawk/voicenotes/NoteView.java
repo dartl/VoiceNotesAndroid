@@ -1,9 +1,6 @@
 package com.gawk.voicenotes;
 
 import android.database.Cursor;
-import android.media.AudioAttributes;
-import android.media.MediaPlayer;
-import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,7 +9,7 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.gawk.voicenotes.adapters.PrefUtil;
+import com.gawk.voicenotes.preferences.PrefUtil;
 import com.gawk.voicenotes.models.Note;
 import com.gawk.voicenotes.models.Notification;
 
