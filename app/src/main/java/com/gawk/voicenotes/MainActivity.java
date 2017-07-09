@@ -1,8 +1,14 @@
 package com.gawk.voicenotes;
 
+import android.*;
+import android.Manifest;
+import android.app.Activity;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.SearchView;
@@ -22,12 +28,16 @@ public class MainActivity extends ParentActivity {
     private ViewPager viewPager;
     private ViewPagerAdapter adapter;
     private SearchView searchView;
+    private View mView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first);
         initAdMob(true);
+
+        mView = (View) findViewById(R.id.activity_main);
+
 
         TabLayout tab = (TabLayout) findViewById(R.id.tabs);
         tab.setVisibility(View.VISIBLE);
@@ -59,6 +69,7 @@ public class MainActivity extends ParentActivity {
         tabLayout.setupWithViewPager(viewPager);
         createTabIcons();
         dbHelper = SQLiteDBHelper.getInstance(this);
+        verifyAllPermissions(this);
     }
 
     @Override
@@ -175,5 +186,72 @@ public class MainActivity extends ParentActivity {
             actionSearch.setVisible(b);
         }
         return true;
+    }
+
+    // Storage Permissions
+    private static final int REQUEST_PERMISSIONS = 13;
+    private static String[] PERMISSIONS = {
+            android.Manifest.permission.READ_EXTERNAL_STORAGE,
+            android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.RECORD_AUDIO
+    };
+
+    /**
+     * Checks if the app has permission to write to device storage
+     *
+     * If the app does not has permission then the user will be prompted to grant permissions
+     *
+     * @param activity
+     */
+    public static void verifyAllPermissions(Activity activity) {
+        // Check if we have write permission
+        for (int i= 0; i < PERMISSIONS.length;i++) {
+            if (ActivityCompat.checkSelfPermission(activity, PERMISSIONS[i]) != PackageManager.PERMISSION_GRANTED) {
+                // We don't have permission so prompt the user
+                ActivityCompat.requestPermissions(
+                        activity,
+                        PERMISSIONS,
+                        REQUEST_PERMISSIONS
+                );
+                break;
+            }
+        }
+    }
+
+    public static boolean checkPermissions(Activity activity, int i) {
+        if (ActivityCompat.checkSelfPermission(activity, PERMISSIONS[i]) == PackageManager.PERMISSION_GRANTED) {
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean checkAllPermissions(Activity activity) {
+        for (int i= 0; i < PERMISSIONS.length;i++) {
+            if (ActivityCompat.checkSelfPermission(activity, PERMISSIONS[i]) != PackageManager.PERMISSION_GRANTED) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_PERMISSIONS: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Snackbar.make(mView, getString(R.string.success), Snackbar.LENGTH_LONG).show();
+                } else {
+                    Snackbar.make(mView, getString(R.string.main_permissions_error), Snackbar.LENGTH_LONG).show();
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request
+        }
     }
 }

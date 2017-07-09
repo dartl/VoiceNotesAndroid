@@ -117,7 +117,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
                     SQLiteDBHelper.NOTES_TABLE_NAME + " ORDER BY " + SQLiteDBHelper.NOTES_TABLE_COLUMN_DATE
                     + " DESC", null);
             ArrayList<Note> array = new ArrayList<Note>();
-            Note temp = new Note();
+            Note temp;
             while (cursor.moveToNext()) {
                 String data = cursor.getString(cursor.getColumnIndex(NOTES_TABLE_COLUMN_DATE));
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy kk:mm");

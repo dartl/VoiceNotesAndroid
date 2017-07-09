@@ -2,23 +2,35 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:minHeight="@dimen/dialog_recognize_height">
+
+    <TextView
+        android:id="@+id/textViewMainText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:text="@string/new_note_speech_recognition_message"
+        style="@style/GawkMaterialTheme.Display1"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
     <ImageView
         android:id="@+id/imageViewVoiceValue"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="@dimen/dialog_recognize_circle_min_size"
+        android:layout_height="@dimen/dialog_recognize_circle_min_size"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         app:srcCompat="@drawable/speech_recognition_circle_grey" />
 
     <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:id="@+id/imageButtonVoice"
+        android:layout_width="@dimen/dialog_recognize_circle_min_size"
+        android:layout_height="@dimen/dialog_recognize_circle_min_size"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_gravity="center"
-        android:background="@drawable/speech_recognition_circle"
-        app:srcCompat="@drawable/ic_mic_black_48dp" />
+        android:background="@drawable/speech_recognition_circle_grey"
+        app:srcCompat="@drawable/ic_mic_white_48dp" />
+
 </RelativeLayout>

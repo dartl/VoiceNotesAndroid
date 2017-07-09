@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.os.RemoteException;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,7 +42,9 @@ public class NewNoteText extends FragmentParent implements RecognitionListener{
     private TextView editText_NewNoteText;
     private ImageButton imageButton_NewNoteAdd, imageButton_NewNoteClear;
     private SpeechRecognizer mRecognizerIntent;
-    private DialogFragment mSpeechRecognitionDialog;
+    private SpeechRecognitionDialog mSpeechRecognitionDialog;
+    private boolean mCheckPartialResults = false;
+    private CharSequence mPartialResultsStart;
 
     public NewNoteText() {
         // Required empty public constructor
@@ -62,7 +66,7 @@ public class NewNoteText extends FragmentParent implements RecognitionListener{
         imageButton_NewNoteAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startRecognize();
+                showRecognizeDialog();
             }
         });
 
@@ -73,17 +77,20 @@ public class NewNoteText extends FragmentParent implements RecognitionListener{
             }
         });
 
+        showRecognizeDialog();
+        return view;
+    }
+
+    private void showRecognizeDialog() {
         mSpeechRecognitionDialog = new SpeechRecognitionDialog(this);
         mSpeechRecognitionDialog.show(getActivity().getFragmentManager(),"SpeechRecognitionDialog");
-
-        //startRecognize();
-        return view;
     }
 
     public void startRecognize() {
         Intent i = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         i.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         i.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+        i.putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, true);
 
         if (isIntentAvailable(getContext(),i)) { // Проверяем наличие программы для распознования
             mRecognizerIntent = SpeechRecognizer.createSpeechRecognizer(getContext());
@@ -145,6 +152,8 @@ public class NewNoteText extends FragmentParent implements RecognitionListener{
     @Override
     public void onReadyForSpeech(Bundle params) {
         Log.e("GAWK_ERR","onReadyForSpeech()");
+        mSpeechRecognitionDialog.setActive();
+        mCheckPartialResults = false;
     }
 
     @Override
@@ -154,7 +163,8 @@ public class NewNoteText extends FragmentParent implements RecognitionListener{
 
     @Override
     public void onRmsChanged(float rmsdB) {
-        Log.e("GAWK_ERR","onRmsChanged(float rmsdB) = " + rmsdB);
+        mSpeechRecognitionDialog.changeVoiceValue((int) (convertDpToPixel((rmsdB*6), getContext())+
+                getResources().getDimension(R.dimen.dialog_recognize_circle_min_size)));
     }
 
     @Override
@@ -170,6 +180,7 @@ public class NewNoteText extends FragmentParent implements RecognitionListener{
     @Override
     public void onError(int error) {
         Log.e("GAWK_ERR","onError(int error) = " + error);
+        mSpeechRecognitionDialog.setInactive();
         switch (error) {
             case SpeechRecognizer.ERROR_AUDIO:
                 Log.e("GAWK_ERR","onError(int error) - SpeechRecognizer.ERROR_AUDIO");
@@ -208,16 +219,25 @@ public class NewNoteText extends FragmentParent implements RecognitionListener{
     public void onResults(Bundle results) {
         Log.e("GAWK_ERR","onResults(Bundle results)");
         ArrayList<String> thingsYouSaid = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
-        if (editText_NewNoteText.getText().length() == 0) {
-            editText_NewNoteText.setText(thingsYouSaid.get(0));
-        } else {
-            editText_NewNoteText.setText(editText_NewNoteText.getText() + " " + thingsYouSaid.get(0));
+        if (thingsYouSaid != null) {
+            if (mPartialResultsStart.length() == 0) {
+                editText_NewNoteText.setText(thingsYouSaid.get(0));
+            } else {
+                editText_NewNoteText.setText(mPartialResultsStart + " " + thingsYouSaid.get(0));
+            }
+            mSpeechRecognitionDialog.dismiss();
         }
     }
 
     @Override
     public void onPartialResults(Bundle partialResults) {
         Log.e("GAWK_ERR","onPartialResults(Bundle partialResults)");
+        if (!mCheckPartialResults) {
+            mPartialResultsStart = editText_NewNoteText.getText();
+            mCheckPartialResults = true;
+        }
+        ArrayList<String> thingsYouSaid = partialResults.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+        editText_NewNoteText.setText(mPartialResultsStart+thingsYouSaid.get(0));
     }
 
     @Override
@@ -230,6 +250,12 @@ public class NewNoteText extends FragmentParent implements RecognitionListener{
         List<ResolveInfo> list = packageManager.queryIntentActivities(
                 intent, PackageManager.MATCH_DEFAULT_ONLY);
         return list.size() > 0;
+    }
+
+    public static float convertDpToPixel(float dp, Context context){
+        Resources resources = context.getResources();
+        DisplayMetrics metrics = resources.getDisplayMetrics();
+        return dp * ((float)metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
     }
 
 }

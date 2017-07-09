@@ -15,6 +15,8 @@
     <string name="new_notes">Notes</string>
     <string name="new_note_notifications">Reminders</string>
     <string name="main_view_error_select">No objects selected</string>
+
+    <string name="main_permissions_error">You did not provide all the permissions. We do not guarantee the working capacity of the application.</string>
     <!-- Меню -->
     <string name="menu_add">Add note</string>
     <string name="menu_notes_list">All notes</string>
@@ -45,6 +47,9 @@
     <string name="new_note_error_speech_recognition_ok">Install</string>
     <string name="new_note_error_speech_recognition_cancel">Cancel</string>
     <string name="new_note_error_speech_recognition_cancel_message">If you refuse, speech recognition probably won\'t work.</string>
+
+    <string name="new_note_speech_recognition_message">Speak…</string>
+    <string name="new_note_speech_recognition_start">Tap to speak</string>
     <!-- Диалоговые окна -->
     <string name="yes">Yes</string>
     <string name="cancel">Cancel</string>
