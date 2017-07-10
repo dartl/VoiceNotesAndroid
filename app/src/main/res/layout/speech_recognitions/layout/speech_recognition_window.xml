@@ -1,36 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:minHeight="@dimen/dialog_recognize_height">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/textViewMainText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="invisible"
-        android:text="@string/new_note_speech_recognition_message"
         style="@style/GawkMaterialTheme.Display1"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/new_note_speech_recognition_message"
+        android:textAlignment="center"
+        android:visibility="invisible" />
 
-    <ImageView
-        android:id="@+id/imageViewVoiceValue"
-        android:layout_width="@dimen/dialog_recognize_circle_min_size"
-        android:layout_height="@dimen/dialog_recognize_circle_min_size"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        app:srcCompat="@drawable/speech_recognition_circle_grey" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/areaRecognition"
+        android:layout_height="@dimen/dialog_recognize_circle_max_size"
+        android:minHeight="@dimen/dialog_recognize_circle_max_size">
 
-    <ImageButton
-        android:id="@+id/imageButtonVoice"
-        android:layout_width="@dimen/dialog_recognize_circle_min_size"
-        android:layout_height="@dimen/dialog_recognize_circle_min_size"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_gravity="center"
-        android:background="@drawable/speech_recognition_circle_grey"
-        app:srcCompat="@drawable/ic_mic_white_48dp" />
+        <ImageView
+            android:id="@+id/imageViewVoiceValue"
+            android:layout_width="@dimen/dialog_recognize_circle_min_size"
+            android:layout_height="@dimen/dialog_recognize_circle_min_size"
+            android:minHeight="@dimen/dialog_recognize_circle_min_size"
+            app:srcCompat="@drawable/speech_recognition_circle_grey"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"/>
 
-</RelativeLayout>
+        <ImageButton
+            android:id="@+id/imageButtonVoice"
+            android:layout_width="@dimen/dialog_recognize_circle_min_size"
+            android:layout_height="@dimen/dialog_recognize_circle_min_size"
+            android:background="@drawable/speech_recognition_circle_grey"
+            android:minHeight="@dimen/dialog_recognize_circle_min_size"
+            app:srcCompat="@drawable/ic_mic_white_48dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/buttonClose"
+            style="@style/GawkMaterialTheme.ButtonAlergCustom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/new_note_speech_recognition_close" />
+
+        <Button
+            android:id="@+id/buttonFix"
+            style="@style/GawkMaterialTheme.ButtonAlergCustom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:visibility="gone"
+            android:text="@string/new_note_speech_recognition_fix" />
+    </LinearLayout>
+</LinearLayout>

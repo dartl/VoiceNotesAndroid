@@ -50,6 +50,19 @@
 
     <string name="new_note_speech_recognition_message">Speak…</string>
     <string name="new_note_speech_recognition_start">Tap to speak</string>
+    <string name="new_note_speech_recognition_error_audio">Audio recording error. Check the microphone settings.</string>
+    <string name="new_note_speech_recognition_error_client">Other client side errors, restart the device and try again.</string>
+    <string name="new_note_speech_recognition_error_insufficient_permissions">Insufficient permissions.
+        Change the settings of the application, giving the necessary permissions.</string>
+    <string name="new_note_speech_recognition_error_network">Other network related errors. Turn on the Internet and try again.</string>
+    <string name="new_note_speech_recognition_error_network_timeout">Network operation timed out.</string>
+    <string name="new_note_speech_recognition_error_no_match">No recognition result matched. Try to speak more clearly and loudly.</string>
+    <string name="new_note_speech_recognition_error_recognizer_busy">RecognitionService busy.</string>
+    <string name="new_note_speech_recognition_error_server">Server sends error status.</string>
+    <string name="new_note_speech_recognition_error_speech_timeout">No speech input. Try again.</string>
+    <string name="new_note_speech_recognition_close">Close</string>
+    <string name="new_note_speech_recognition_fix">Fix </string>
+
     <!-- Диалоговые окна -->
     <string name="yes">Yes</string>
     <string name="cancel">Cancel</string>

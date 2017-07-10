@@ -188,13 +188,6 @@ public class MainActivity extends ParentActivity {
         return true;
     }
 
-    // Storage Permissions
-    private static final int REQUEST_PERMISSIONS = 13;
-    private static String[] PERMISSIONS = {
-            android.Manifest.permission.READ_EXTERNAL_STORAGE,
-            android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.RECORD_AUDIO
-    };
 
     /**
      * Checks if the app has permission to write to device storage
@@ -218,30 +211,19 @@ public class MainActivity extends ParentActivity {
         }
     }
 
-    public static boolean checkPermissions(Activity activity, int i) {
-        if (ActivityCompat.checkSelfPermission(activity, PERMISSIONS[i]) == PackageManager.PERMISSION_GRANTED) {
-            return true;
-        }
-        return false;
-    }
-
-    public static boolean checkAllPermissions(Activity activity) {
-        for (int i= 0; i < PERMISSIONS.length;i++) {
-            if (ActivityCompat.checkSelfPermission(activity, PERMISSIONS[i]) != PackageManager.PERMISSION_GRANTED) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
         switch (requestCode) {
             case REQUEST_PERMISSIONS: {
+                boolean mCheck = true;
                 // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                for (int i = 0; i < grantResults.length; i++) {
+                    if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
+                        mCheck = false;
+                    }
+                }
+                if (mCheck) {
                     Snackbar.make(mView, getString(R.string.success), Snackbar.LENGTH_LONG).show();
                 } else {
                     Snackbar.make(mView, getString(R.string.main_permissions_error), Snackbar.LENGTH_LONG).show();
@@ -249,7 +231,6 @@ public class MainActivity extends ParentActivity {
                     // functionality that depends on this permission.
                 }
             }
-
             // other 'case' lines to check for other
             // permissions this app might request
         }

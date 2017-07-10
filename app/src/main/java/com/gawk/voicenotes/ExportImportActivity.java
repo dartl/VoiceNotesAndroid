@@ -32,15 +32,16 @@ public class ExportImportActivity extends ParentActivity implements View.OnClick
     private File directoryFile, importFile;
     private boolean checkSelectFile = false;
     private OpenFileDialog openFileDialog, openDirectoryDialog;
+    private View mView;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.export_import);
-        initAdMob(true);
+        mView = findViewById(R.id.export_import);
 
-        //OpenFileDialog.verifyStoragePermissions(this); // теперь проверяем все доступы в main
+        initAdMob(true);
 
         openDirectoryDialog = new OpenFileDialog(this).setFileSelectedBackgroundColor(R.color.colorYellow)
                 .setFileSelectedColor(R.color.colorPrimary)
@@ -88,7 +89,6 @@ public class ExportImportActivity extends ParentActivity implements View.OnClick
                 typeExport = exportTypes[position];
                 changeExport();
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
@@ -138,6 +138,9 @@ public class ExportImportActivity extends ParentActivity implements View.OnClick
     public void onResume() {
         super.onResume();
         initAdMob(true);
+        if (checkPermissions(this,2)) {
+            Snackbar.make(mView, getString(R.string.main_permissions_error), Snackbar.LENGTH_LONG).show();
+        }
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.gawk.voicenotes;
 
+import android.*;
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.ComponentName;
@@ -8,6 +10,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
@@ -16,6 +19,7 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -454,5 +458,29 @@ public class ParentActivity extends AppCompatActivity
 
     public void setAllSubscriptionsInfo(ArrayList<JSONObject> allSubscriptionsInfo) {
         this.allSubscriptionsInfo = allSubscriptionsInfo;
+    }
+
+    // Storage Permissions
+    protected static final int REQUEST_PERMISSIONS = 13;
+    protected static String[] PERMISSIONS = {
+            android.Manifest.permission.READ_EXTERNAL_STORAGE,
+            android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            android.Manifest.permission.RECORD_AUDIO
+    };
+
+    public static boolean checkPermissions(Activity activity, int i) {
+        if (ActivityCompat.checkSelfPermission(activity, PERMISSIONS[i]) == PackageManager.PERMISSION_GRANTED) {
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean checkAllPermissions(Activity activity) {
+        for (int i= 0; i < PERMISSIONS.length;i++) {
+            if (ActivityCompat.checkSelfPermission(activity, PERMISSIONS[i]) != PackageManager.PERMISSION_GRANTED) {
+                return false;
+            }
+        }
+        return true;
     }
 }

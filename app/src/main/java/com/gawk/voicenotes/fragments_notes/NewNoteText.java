@@ -44,7 +44,7 @@ public class NewNoteText extends FragmentParent implements RecognitionListener{
     private SpeechRecognizer mRecognizerIntent;
     private SpeechRecognitionDialog mSpeechRecognitionDialog;
     private boolean mCheckPartialResults = false;
-    private CharSequence mPartialResultsStart;
+    private String mPartialResultsStart;
 
     public NewNoteText() {
         // Required empty public constructor
@@ -84,6 +84,14 @@ public class NewNoteText extends FragmentParent implements RecognitionListener{
     private void showRecognizeDialog() {
         mSpeechRecognitionDialog = new SpeechRecognitionDialog(this);
         mSpeechRecognitionDialog.show(getActivity().getFragmentManager(),"SpeechRecognitionDialog");
+    }
+
+    public void endRecognition()  {
+        if (mRecognizerIntent != null)
+        {
+            mRecognizerIntent.cancel();
+            mRecognizerIntent.destroy();
+        }
     }
 
     public void startRecognize() {
@@ -163,6 +171,7 @@ public class NewNoteText extends FragmentParent implements RecognitionListener{
 
     @Override
     public void onRmsChanged(float rmsdB) {
+        //Log.e("GAWK_ERR","onRmsChanged()");
         mSpeechRecognitionDialog.changeVoiceValue((int) (convertDpToPixel((rmsdB*6), getContext())+
                 getResources().getDimension(R.dimen.dialog_recognize_circle_min_size)));
     }
@@ -181,38 +190,8 @@ public class NewNoteText extends FragmentParent implements RecognitionListener{
     public void onError(int error) {
         Log.e("GAWK_ERR","onError(int error) = " + error);
         mSpeechRecognitionDialog.setInactive();
-        switch (error) {
-            case SpeechRecognizer.ERROR_AUDIO:
-                Log.e("GAWK_ERR","onError(int error) - SpeechRecognizer.ERROR_AUDIO");
-                break;
-            case SpeechRecognizer.ERROR_CLIENT:
-                Log.e("GAWK_ERR","onError(int error) - SpeechRecognizer.ERROR_CLIENT");
-                break;
-            case SpeechRecognizer.ERROR_INSUFFICIENT_PERMISSIONS:
-                // Ошибка доступа к разрешениям
-                Log.e("GAWK_ERR","onError(int error) - SpeechRecognizer.ERROR_INSUFFICIENT_PERMISSIONS");
-                break;
-            case SpeechRecognizer.ERROR_NETWORK:
-                Log.e("GAWK_ERR","onError(int error) - SpeechRecognizer.ERROR_NETWORK");
-                break;
-            case SpeechRecognizer.ERROR_NETWORK_TIMEOUT:
-                // Например вышли из активности не дожидаясь распознавания
-                Log.e("GAWK_ERR","onError(int error) - SpeechRecognizer.ERROR_NETWORK_TIMEOUT");
-                break;
-            case SpeechRecognizer.ERROR_NO_MATCH:
-                Log.e("GAWK_ERR","onError(int error) - SpeechRecognizer.ERROR_NO_MATCH");
-                break;
-            case SpeechRecognizer.ERROR_RECOGNIZER_BUSY:
-                Log.e("GAWK_ERR","onError(int error) - SpeechRecognizer.ERROR_RECOGNIZER_BUSY");
-                break;
-            case SpeechRecognizer.ERROR_SERVER:
-                // если нет инет и эта ошибка - не хватает пакета локализации
-                Log.e("GAWK_ERR","onError(int error) - SpeechRecognizer.ERROR_SERVER");
-                break;
-            case SpeechRecognizer.ERROR_SPEECH_TIMEOUT:
-                Log.e("GAWK_ERR","onError(int error) - SpeechRecognizer.ERROR_SPEECH_TIMEOUT");
-                break;
-        }
+        mSpeechRecognitionDialog.errorMessage(error);
+        endRecognition();
     }
 
     @Override
@@ -223,18 +202,22 @@ public class NewNoteText extends FragmentParent implements RecognitionListener{
             if (mPartialResultsStart.length() == 0) {
                 editText_NewNoteText.setText(thingsYouSaid.get(0));
             } else {
-                editText_NewNoteText.setText(mPartialResultsStart + " " + thingsYouSaid.get(0));
+                editText_NewNoteText.setText(mPartialResultsStart + thingsYouSaid.get(0));
             }
             mSpeechRecognitionDialog.dismiss();
         }
+        endRecognition();
     }
 
     @Override
     public void onPartialResults(Bundle partialResults) {
         Log.e("GAWK_ERR","onPartialResults(Bundle partialResults)");
         if (!mCheckPartialResults) {
-            mPartialResultsStart = editText_NewNoteText.getText();
+            mPartialResultsStart = editText_NewNoteText.getText().toString();
             mCheckPartialResults = true;
+            if (editText_NewNoteText.length() > 0) {
+                mPartialResultsStart += " ";
+            }
         }
         ArrayList<String> thingsYouSaid = partialResults.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
         editText_NewNoteText.setText(mPartialResultsStart+thingsYouSaid.get(0));

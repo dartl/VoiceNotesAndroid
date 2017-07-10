@@ -138,7 +138,8 @@ public class NotificationRecyclerAdapter extends CursorRecyclerViewAdapter<Notif
 
     @Override
     public int getItemCount() {
-        return super.getItemCount();
+        if (this.db.isConnect()) return super.getItemCount();
+        return 0;
     }
 
     @Override

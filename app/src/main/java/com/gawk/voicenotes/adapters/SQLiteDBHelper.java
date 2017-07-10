@@ -472,4 +472,9 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
     public void setActivity(ParentActivity activity) {
         this.activity = activity;
     }
+
+    public boolean isConnect() {
+        if (db == null) return false;
+        return db.isOpen();
+    }
 }
