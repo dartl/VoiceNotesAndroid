@@ -96,6 +96,8 @@
     <string name="settings_notification_sound">알림을위한 사운드 선택</string>
     <string name="settings_notification_not_sound">선택된 사운드 없음</string>
     <string name="settings_other_title">다른</string>
+
+    <string name="settings_add_icon_add_title">아이콘 추가</string>
     <!-- Подписки -->
     <string name="subs_inner_text">모든 구독 상품은 광고를 없애고 개발자를 후원하게 됩니다.</string>
     <string-array name="export_import_type">

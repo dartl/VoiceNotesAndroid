@@ -95,6 +95,8 @@
     <string name="settings_notification_sound">रिमाइंडर के लिए ध्वनि चुनें</string>
     <string name="settings_notification_not_sound">कोई ध्वनि चयनित नहीं</string>
     <string name="settings_other_title">अन्य</string>
+
+    <string name="settings_add_icon_add_title">आइकन जोड़ें</string>
     <!-- Подписки -->
     <string name="subs_inner_text">सभी सदस्यताएँ ऐप से विज्ञापन हटा देती हैं और डेवलपर को दान देना इंगित करती हैं</string>
     <string-array name="export_import_type">

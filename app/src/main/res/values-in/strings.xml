@@ -95,6 +95,8 @@
     <string name="settings_notification_sound">Pilih suara untuk pengingat</string>
     <string name="settings_notification_not_sound">Tidak ada suara yang dipilih</string>
     <string name="settings_other_title">Lain</string>
+
+    <string name="settings_add_icon_add_title">Tambahkan ikon</string>
     <!-- Подписки -->
     <string name="subs_inner_text">Semua langganan akan menghapus iklan dari aplikasi ini dan menjadi sumbangan untuk pengembang</string>
     <string-array name="export_import_type">

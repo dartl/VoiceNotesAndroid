@@ -95,6 +95,8 @@
     <string name="settings_notification_sound">Selecciona un sonido para un recordatorio</string>
     <string name="settings_notification_not_sound">No hay sonido seleccionado</string>
     <string name="settings_other_title">Otro</string>
+
+    <string name="settings_add_icon_add_title">Agregar icono</string>
     <!-- Подписки -->
     <string name="subs_inner_text">La suscripción permite eliminar los anuncios y representa una donación para el desarrollador de la aplicación</string>
     <string-array name="export_import_type">

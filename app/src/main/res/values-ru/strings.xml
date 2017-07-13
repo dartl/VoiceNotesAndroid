@@ -95,6 +95,8 @@
     <string name="settings_notification_sound">Выберите звук для напоминания</string>
     <string name="settings_notification_not_sound">Звук не выбран</string>
     <string name="settings_other_title">Другие</string>
+
+    <string name="settings_add_icon_add_title">Добавить иконку</string>
     <!-- Подписки -->
     <string name="subs_inner_text">Все подписки удаляют рекламные объявления из приложения и являются пожертвованиями для разработчика</string>
 

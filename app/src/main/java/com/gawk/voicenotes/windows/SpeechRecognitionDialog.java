@@ -51,9 +51,7 @@ public class SpeechRecognitionDialog extends DialogFragment {
     private boolean mActive = false;
     private int mErrorCode = -1;
 
-    public SpeechRecognitionDialog(NewNoteText mFragmentParent) {
-        this.mFragmentParent = mFragmentParent;
-    }
+    public SpeechRecognitionDialog() {}
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -268,5 +266,13 @@ public class SpeechRecognitionDialog extends DialogFragment {
             return true;
         }
         return false;
+    }
+
+    public NewNoteText getmFragmentParent() {
+        return mFragmentParent;
+    }
+
+    public void setmFragmentParent(NewNoteText mFragmentParent) {
+        this.mFragmentParent = mFragmentParent;
     }
 }

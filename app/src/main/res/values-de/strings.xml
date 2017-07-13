@@ -94,6 +94,8 @@
     <string name="settings_notification_sound">Wählen Sie einen Ton für eine Erinnerung aus</string>
     <string name="settings_notification_not_sound">Kein Ton ausgewählt</string>
     <string name="settings_other_title">Andere</string>
+
+    <string name="settings_add_icon_add_title">Symbol hinzufügen</string>
     <!-- Подписки -->
     <string name="subs_inner_text">Alle Abonnements entfernen Anzeigen aus der App und verstehen sich als Spenden an die Entwickler</string>
     <string-array name="export_import_type">

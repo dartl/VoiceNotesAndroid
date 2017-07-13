@@ -83,7 +83,7 @@
     <string name="export_import_error_import">Le fichier est peut-être endommagé</string>
     <!-- Голосовалка -->
     <string name="vote_text_header">Vous aimez l’appli ?</string>
-    <string name="vote_text_body">Si vous aimez l\’appli, votez pour elle sur Google Play ou ajoutez un commentaire</string>
+    <string name="vote_text_body">Si vous aimez l’appli, votez pour elle sur Google Play ou ajoutez un commentaire</string>
     <string name="vote_text_ok">Donner cinq étoiles à l’application</string>
     <string name="vote_text_cancel">Annuler</string>
     <!-- Настройки -->
@@ -94,6 +94,8 @@
     <string name="settings_notification_sound">Sélectionnez un son pour un rappel</string>
     <string name="settings_notification_not_sound">Aucun son sélectionné</string>
     <string name="settings_other_title">Autre</string>
+
+    <string name="settings_add_icon_add_title">Ajouter l’icône</string>
     <!-- Подписки -->
     <string name="subs_inner_text">Tous les abonnements suppriment des annonces de l’appli et représentent des dons pour le développeur</string>
     <string-array name="export_import_type">

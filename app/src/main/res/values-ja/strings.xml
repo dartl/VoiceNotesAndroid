@@ -95,6 +95,8 @@
     <string name="settings_notification_sound">リマインダー用のサウンドを選択する</string>
     <string name="settings_notification_not_sound">選択されたサウンドがありません</string>
     <string name="settings_other_title">その他</string>
+
+    <string name="settings_add_icon_add_title">アイコンを追加</string>
     <!-- Подписки -->
     <string name="subs_inner_text">どのサブスクリプションでもアプリから広告が削除され、開発者への寄付が行われます。</string>
     <string-array name="export_import_type">

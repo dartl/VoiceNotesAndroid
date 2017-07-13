@@ -82,7 +82,8 @@ public class NewNoteText extends FragmentParent implements RecognitionListener{
     }
 
     private void showRecognizeDialog() {
-        mSpeechRecognitionDialog = new SpeechRecognitionDialog(this);
+        mSpeechRecognitionDialog = new SpeechRecognitionDialog();
+        mSpeechRecognitionDialog.setmFragmentParent(this);
         mSpeechRecognitionDialog.show(getActivity().getFragmentManager(),"SpeechRecognitionDialog");
     }
 

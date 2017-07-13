@@ -94,6 +94,8 @@
     <string name="settings_notification_sound">Selecione um som para um lembrete</string>
     <string name="settings_notification_not_sound">Nenhum som selecionado</string>
     <string name="settings_other_title">De outros</string>
+
+    <string name="settings_add_icon_add_title">Adicionar ícone</string>
     <!-- Подписки -->
     <string name="subs_inner_text">Todas as assinaturas removem os anúncios da aplicação e representam doações para o desenvolvedor</string>
     <string-array name="export_import_type">
