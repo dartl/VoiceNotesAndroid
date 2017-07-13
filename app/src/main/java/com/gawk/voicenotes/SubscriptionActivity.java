@@ -11,6 +11,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.gawk.voicenotes.subs.GooglePlaySubs;
+import com.gawk.voicenotes.subs.SubsInterface;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -22,10 +25,13 @@ import java.util.ArrayList;
 
 public class SubscriptionActivity extends ParentActivity {
     private Button buttonSmallDonate, buttonBigDonate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.subscriptions);
+
+        mGooglePlaySubs = new GooglePlaySubs(this,mService);
 
         buttonSmallDonate = (Button) findViewById(R.id.buttonSmallDonate);
         buttonBigDonate = (Button) findViewById(R.id.buttonBigDonate);
@@ -33,14 +39,14 @@ public class SubscriptionActivity extends ParentActivity {
         buttonSmallDonate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startBuySubscription(SKU_SMALL_DONATE);
+                mGooglePlaySubs.startBuySubscription(SubsInterface.SKU_SMALL_DONATE);
             }
         });
 
         buttonBigDonate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startBuySubscription(SKU_BIG_DONATE);
+                mGooglePlaySubs.startBuySubscription(SubsInterface.SKU_BIG_DONATE);
             }
         });
 
@@ -53,51 +59,19 @@ public class SubscriptionActivity extends ParentActivity {
         initAdMob(false);
     }
 
-    public void startBuySubscription(String id_sub) {
-        Bundle bundle = null;
-        try {
-            bundle = mService.getBuyIntent(3, getPackageName(),
-                    id_sub, "subs", "");
-            PendingIntent pendingIntent = bundle.getParcelable(RESPONSE_BUY_INTENT);
-            if (bundle.getInt("RESPONSE_CODE") == BILLING_RESPONSE_RESULT_OK) {
-                // Start purchase flow (this brings up the Google Play UI).
-                // Result will be delivered through onActivityResult().
-                try {
-                    startIntentSenderForResult(pendingIntent.getIntentSender(), RC_BUY, new Intent(),
-                            Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(0));
-                } catch (IntentSender.SendIntentException e) {
-                    e.printStackTrace();
-                }
-            }
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-        }
-    }
-
     private void addPrice() {
         try {
-            ArrayList<JSONObject> allSubscriptionsInfo = getAllSubscriptions();
-            Log.e("GAWK_ERR","addPrice() called. allSubscriptionsInfo = " + allSubscriptionsInfo);
+            ArrayList<JSONObject> allSubscriptionsInfo = mGooglePlaySubs.getAllSubscriptions();
             if (allSubscriptionsInfo != null && allSubscriptionsInfo.size() > 0) {
-
                 for (int i = 0; i < allSubscriptionsInfo.size(); i++) {
-                    Log.e("GAWK_ERR", "FOR (i=" + i + "):" +allSubscriptionsInfo.get(i).get("productId").toString());
-                    if (allSubscriptionsInfo.get(i).get("productId").toString().equalsIgnoreCase(SKU_BIG_DONATE)) {
-                        Log.e("GAWK_ERR", "CALL " +SKU_BIG_DONATE);
-                        buttonBigDonate.setText(getResources().getText(R.string.donate_big) + " (" + allSubscriptionsInfo.get(i).get("price").toString() + ")");
-                    } else if (allSubscriptionsInfo.get(i).get("productId").toString().equalsIgnoreCase(SKU_SMALL_DONATE)) {
-                        Log.e("GAWK_ERR", SKU_SMALL_DONATE);
-                        buttonSmallDonate.setText(getResources().getText(R.string.donate_small) + " (" + allSubscriptionsInfo.get(i).get("price").toString() + ")");
+                    if (allSubscriptionsInfo.get(i).get("productId").toString().equalsIgnoreCase(SubsInterface.SKU_BIG_DONATE)) {
+                        buttonBigDonate.setText(getResources().getText(R.string.donate_big) + " (" + mGooglePlaySubs.getPrice(SubsInterface.SKU_BIG_DONATE) + ")");
+                    } else if (allSubscriptionsInfo.get(i).get("productId").toString().equalsIgnoreCase(SubsInterface.SKU_SMALL_DONATE)) {
+                        buttonSmallDonate.setText(getResources().getText(R.string.donate_small) + " (" + mGooglePlaySubs.getPrice(SubsInterface.SKU_SMALL_DONATE) + ")");
                     }
                 }
-                ;
-
             }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (RemoteException e) {
+        } catch (JSONException | RemoteException e) {
             e.printStackTrace();
         }
     }

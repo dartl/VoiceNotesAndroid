@@ -15,6 +15,8 @@
     <string name="new_notes">Notes</string>
     <string name="new_note_notifications">Rappels</string>
     <string name="main_view_error_select">Aucun objet sélectionné</string>
+
+    <string name="main_permissions_error">Vous n’avez pas fourni toutes les autorisations. Nous ne garantissons pas la capacité de travail de l’application.</string>
     <!-- Меню -->
     <string name="menu_add">Ajouter une note</string>
     <string name="menu_notes_list">Toutes les notes</string>
@@ -40,10 +42,26 @@
     <string name="new_note_shake_on">Vibration activée</string>
     <string name="new_note_error_date">Sélectionnez une date et heure dans le futur</string>
     <string name="new_note_error_speech_recognition_title">Erreur de reconnaissance vocale</string>
-    <string name="new_note_error_speech_recognition">Une application Google requise n’est pas installée ou a été désactivée. Souhaitez-vous l\'installer ou l\'activer ?         \nIl vous faudra entièrement redémarrer l’appli/smartphone par la suite.</string>
+    <string name="new_note_error_speech_recognition">Une application Google requise n’est pas installée ou a été désactivée. Souhaitez-vous l\’installer ou l\’activer ?         \nIl vous faudra entièrement redémarrer l’appli/smartphone par la suite.</string>
     <string name="new_note_error_speech_recognition_ok">Installer</string>
     <string name="new_note_error_speech_recognition_cancel">Annuler</string>
     <string name="new_note_error_speech_recognition_cancel_message">Si vous refusez, la reconnaissance vocale ne fonctionnera sans doute pas.</string>
+
+    <string name="new_note_speech_recognition_message">Parler…</string>
+    <string name="new_note_speech_recognition_start">Appuyez pour parler</string>
+    <string name="new_note_speech_recognition_error_audio">Erreur d’enregistrement audio. Vérifiez les paramètres du microphone.</string>
+    <string name="new_note_speech_recognition_error_client">D’autres erreurs côté client, redémarrez l’appareil et réessayez.</string>
+    <string name="new_note_speech_recognition_error_insufficient_permissions">Permissions insuffisantes.
+        Modifiez les paramètres de l’application, en donnant les autorisations nécessaires.</string>
+    <string name="new_note_speech_recognition_error_network">D’autres erreurs liées au réseau. Allumez l’Internet et réessayez.</string>
+    <string name="new_note_speech_recognition_error_network_timeout">Une mauvaise connexion Internet, essayez de le désactiver et essayer de reconnaissance hors ligne.</string>
+    <string name="new_note_speech_recognition_error_no_match">Aucun résultat de reconnaissance n’est égal. Essayez de parler plus clairement et fort.</string>
+    <string name="new_note_speech_recognition_error_recognizer_busy">Recognition Server est maintenant occupé par une autre application. Essayez de fermer les autres applications et essayez à nouveau.</string>
+    <string name="new_note_speech_recognition_error_server">Le serveur envoie un état d’erreur.</string>
+    <string name="new_note_speech_recognition_error_server_fix">Téléchargez le package pour la reconnaissance hors ligne dans les paramètres.</string>
+    <string name="new_note_speech_recognition_error_speech_timeout">Aucune entrée vocale. Réessayer.</string>
+    <string name="new_note_speech_recognition_close">Fermer</string>
+    <string name="new_note_speech_recognition_fix">Réparer</string>
     <!-- Диалоговые окна -->
     <string name="yes">Oui</string>
     <string name="cancel">Annuler</string>
@@ -65,7 +83,7 @@
     <string name="export_import_error_import">Le fichier est peut-être endommagé</string>
     <!-- Голосовалка -->
     <string name="vote_text_header">Vous aimez l’appli ?</string>
-    <string name="vote_text_body">Si vous aimez l\'appli, votez pour elle sur Google Play ou ajoutez un commentaire</string>
+    <string name="vote_text_body">Si vous aimez l\’appli, votez pour elle sur Google Play ou ajoutez un commentaire</string>
     <string name="vote_text_ok">Donner cinq étoiles à l’application</string>
     <string name="vote_text_cancel">Annuler</string>
     <!-- Настройки -->

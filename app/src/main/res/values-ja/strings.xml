@@ -15,6 +15,8 @@
     <string name="new_notes">メモ</string>
     <string name="new_note_notifications">リマインダー</string>
     <string name="main_view_error_select">オブジェクトが選択されていません</string>
+
+    <string name="main_permissions_error">あなたはすべての権限を提供していません。 当社は、アプリケーションの作業能力を保証するものではありません。</string>
     <!-- Меню -->
     <string name="menu_add">メモを追加</string>
     <string name="menu_notes_list">すべてのメモ</string>
@@ -45,6 +47,22 @@
     <string name="new_note_error_speech_recognition_ok">インストール</string>
     <string name="new_note_error_speech_recognition_cancel">キャンセル</string>
     <string name="new_note_error_speech_recognition_cancel_message">拒否した場合は、音声認識はほぼ確実に動作しなくなります。</string>
+
+    <string name="new_note_speech_recognition_message">話す…</string>
+    <string name="new_note_speech_recognition_start">タップして話す</string>
+    <string name="new_note_speech_recognition_error_audio">音声記録エラー。 マイクの設定を確認してください。</string>
+    <string name="new_note_speech_recognition_error_client">他のクライアント側のエラー、デバイスを再起動して再試行してください。</string>
+    <string name="new_note_speech_recognition_error_insufficient_permissions">権限が不十分です。
+        アプリケーションの設定を変更し、必要な権限を与えます。</string>
+    <string name="new_note_speech_recognition_error_network">その他のネットワーク関連のエラー。 インターネットの電源を入れて、もう一度やり直してください。</string>
+    <string name="new_note_speech_recognition_error_network_timeout">悪いインターネット接続、それを無効にして、オフラインの認識を試してみてください。</string>
+    <string name="new_note_speech_recognition_error_no_match">認識結果が一致しません。 もっとはっきりと大声で話してみてください。</string>
+    <string name="new_note_speech_recognition_error_recognizer_busy">認識サーバは現在、別のアプリケーションによって占有されています。他のアプリケーションをシャットダウンしてみて、もう一度試してください。</string>
+    <string name="new_note_speech_recognition_error_server">サーバーはエラー状態を送信します。</string>
+    <string name="new_note_speech_recognition_error_server_fix">設定でオフライン認識用のパッケージをダウンロードします。</string>
+    <string name="new_note_speech_recognition_error_speech_timeout">音声入力がありません。 再試行する。</string>
+    <string name="new_note_speech_recognition_close">閉じる</string>
+    <string name="new_note_speech_recognition_fix">修正</string>
     <!-- Диалоговые окна -->
     <string name="yes">はい</string>
     <string name="cancel">キャンセル</string>

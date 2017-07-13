@@ -11,6 +11,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -94,6 +96,7 @@ public class SpeechRecognitionDialog extends DialogFragment {
                     case SpeechRecognizer.ERROR_RECOGNIZER_BUSY:
                         break;
                     case SpeechRecognizer.ERROR_SERVER:
+                        startOpenSettings();
                         break;
                     case SpeechRecognizer.ERROR_SPEECH_TIMEOUT:
                         break;
@@ -188,6 +191,7 @@ public class SpeechRecognitionDialog extends DialogFragment {
                 Log.e("GAWK_ERR","onError(int error) - SpeechRecognizer.ERROR_INSUFFICIENT_PERMISSIONS");
                 break;
             case SpeechRecognizer.ERROR_NETWORK:
+                mFragmentParent.endRecognition();
                 mErrorMessage = getString(R.string.new_note_speech_recognition_error_network);
                 Log.e("GAWK_ERR","onError(int error) - SpeechRecognizer.ERROR_NETWORK");
                 break;
@@ -201,11 +205,16 @@ public class SpeechRecognitionDialog extends DialogFragment {
                 Log.e("GAWK_ERR","onError(int error) - SpeechRecognizer.ERROR_NO_MATCH");
                 break;
             case SpeechRecognizer.ERROR_RECOGNIZER_BUSY:
+                mFragmentParent.endRecognition();
                 mErrorMessage = getString(R.string.new_note_speech_recognition_error_recognizer_busy);
                 Log.e("GAWK_ERR","onError(int error) - SpeechRecognizer.ERROR_RECOGNIZER_BUSY");
                 break;
             case SpeechRecognizer.ERROR_SERVER:
                 mErrorMessage = getString(R.string.new_note_speech_recognition_error_server);
+                if (!hasConnection(mFragmentParent.getContext())) {
+                    mButtonFix.setVisibility(View.VISIBLE);
+                    mErrorMessage = getString(R.string.new_note_speech_recognition_error_server_fix);
+                }
                 // если нет инет и эта ошибка - не хватает пакета локализации
                 Log.e("GAWK_ERR","onError(int error) - SpeechRecognizer.ERROR_SERVER");
                 break;
@@ -232,5 +241,32 @@ public class SpeechRecognitionDialog extends DialogFragment {
                 136
         );
         onDismiss(mDlg);
+    }
+
+    public void startOpenSettings() {
+        Intent callGPSSettingIntent = new Intent(Intent.ACTION_MAIN);
+        callGPSSettingIntent.setClassName("com.android.settings", "com.android.settings.LanguageSettings");
+        startActivity(callGPSSettingIntent);
+    }
+
+    public static boolean hasConnection(final Context context)
+    {
+        ConnectivityManager cm = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo wifiInfo = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        if (wifiInfo != null && wifiInfo.isConnected())
+        {
+            return true;
+        }
+        wifiInfo = cm.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+        if (wifiInfo != null && wifiInfo.isConnected())
+        {
+            return true;
+        }
+        wifiInfo = cm.getActiveNetworkInfo();
+        if (wifiInfo != null && wifiInfo.isConnected())
+        {
+            return true;
+        }
+        return false;
     }
 }

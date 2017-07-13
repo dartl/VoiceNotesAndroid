@@ -22,6 +22,7 @@ import com.gawk.voicenotes.adapters.SQLiteDBHelper;
 import com.gawk.voicenotes.adapters.ViewPagerAdapter;
 import com.gawk.voicenotes.fragments_main.NotesListFragment;
 import com.gawk.voicenotes.fragments_main.NotificationsListFragment;
+import com.gawk.voicenotes.preferences.PrefUtil;
 
 public class MainActivity extends ParentActivity {
     private TabLayout tabLayout;
@@ -76,14 +77,13 @@ public class MainActivity extends ParentActivity {
     public void onResume() {
         super.onResume();
         initAdMob(true);
-        boolean boolInstall = getsPref().getBoolean(INSTALL_PREF,false);
+        PrefUtil prefUtil = new PrefUtil(this);
+        boolean boolInstall = prefUtil.getBoolean(INSTALL_PREF,false);
         if (!boolInstall) {
             if (dbHelper.getCountNotes() >= 2) {
                 installIcon();
                 showVote();
-                SharedPreferences.Editor ed = getsPref().edit();
-                ed.putBoolean(INSTALL_PREF,true);
-                ed.apply();
+                prefUtil.saveBoolean(INSTALL_PREF,true);
             }
         }
     }

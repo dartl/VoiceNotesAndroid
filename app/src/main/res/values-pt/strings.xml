@@ -15,6 +15,8 @@
     <string name="new_notes">Notas</string>
     <string name="new_note_notifications">Lembretes</string>
     <string name="main_view_error_select">Não há objetos selecionados</string>
+
+    <string name="main_permissions_error">Você não forneceu todas as permissões. Não garantimos a capacidade de trabalho da aplicação.</string>
     <!-- Меню -->
     <string name="menu_add">Adicionar nota</string>
     <string name="menu_notes_list">Todas as notas</string>
@@ -45,6 +47,21 @@
     <string name="new_note_error_speech_recognition_ok">Instalar</string>
     <string name="new_note_error_speech_recognition_cancel">Cancelar</string>
     <string name="new_note_error_speech_recognition_cancel_message">Se recusar, o reconhecimento de discurso provavelmente não vai funcionar.</string>
+
+    <string name="new_note_speech_recognition_message">Falar…</string>
+    <string name="new_note_speech_recognition_start">Toque para falar</string>
+    <string name="new_note_speech_recognition_error_audio">Erro de gravação de áudio. Verifique as configurações do microfone.</string>
+    <string name="new_note_speech_recognition_error_client">Outros erros do lado do cliente, reinicie o dispositivo e tente novamente.</string>
+    <string name="new_note_speech_recognition_error_insufficient_permissions">Permissões insuficientes.\n        Altere as configurações do aplicativo, dando as permissões necessárias.</string>
+    <string name="new_note_speech_recognition_error_network">Outros erros relacionados à rede. Ligue a Internet e tente novamente.</string>
+    <string name="new_note_speech_recognition_error_network_timeout">Má conexão à Internet, tente desativá-lo e tentar Reconhecimento offline.</string>
+    <string name="new_note_speech_recognition_error_no_match">Nenhum resultado de reconhecimento corresponde. Tente falar com mais clareza e voz.</string>
+    <string name="new_note_speech_recognition_error_recognizer_busy">Recognition Server é agora ocupado por outra aplicação. Tente encerrar outras aplicações e tente novamente.</string>
+    <string name="new_note_speech_recognition_error_server">O servidor envia o estado do erro.</string>
+    <string name="new_note_speech_recognition_error_server_fix">Baixe o pacote para o reconhecimento off-line nas configurações.</string>
+    <string name="new_note_speech_recognition_error_speech_timeout">Nenhuma entrada de fala. Tente novamente.</string>
+    <string name="new_note_speech_recognition_close">Fechar</string>
+    <string name="new_note_speech_recognition_fix">Consertar</string>
     <!-- Диалоговые окна -->
     <string name="yes">Sim</string>
     <string name="cancel">Cancelar</string>

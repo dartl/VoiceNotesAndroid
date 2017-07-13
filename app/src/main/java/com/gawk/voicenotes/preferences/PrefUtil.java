@@ -34,4 +34,24 @@ public class PrefUtil {
         ed.putString(key, value);
         return ed.commit();
     }
+
+    public boolean saveInt(String key, int value) {
+        SharedPreferences.Editor ed = sharedPreferences.edit();
+        ed.putInt(key, value);
+        return ed.commit();
+    }
+
+    public int getInt(String key, int def) {
+        return sharedPreferences.getInt(key,def);
+    }
+
+    public boolean saveBoolean(String key, boolean value) {
+        SharedPreferences.Editor ed = sharedPreferences.edit();
+        ed.putBoolean(key, value);
+        return ed.commit();
+    }
+
+    public boolean getBoolean(String key, boolean def) {
+        return sharedPreferences.getBoolean(key,def);
+    }
 }

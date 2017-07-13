@@ -15,6 +15,8 @@
     <string name="new_notes">Catatan</string>
     <string name="new_note_notifications">Pengingat</string>
     <string name="main_view_error_select">Tidak ada objek yang dipilih</string>
+
+    <string name="main_permissions_error">Anda tidak memberikan semua izin. Kami tidak menjamin kapasitas aplikasi.</string>
     <!-- Меню -->
     <string name="menu_add">Tambahkan catatan</string>
     <string name="menu_notes_list">Semua catatan</string>
@@ -45,6 +47,22 @@
     <string name="new_note_error_speech_recognition_ok">Instal</string>
     <string name="new_note_error_speech_recognition_cancel">Batalkan</string>
     <string name="new_note_error_speech_recognition_cancel_message">Jika Anda menolak, pengenalan suara mungkin tidak akan berfungsi.</string>
+
+    <string name="new_note_speech_recognition_message">Berbicara…</string>
+    <string name="new_note_speech_recognition_start">Ketuk untuk berbicara</string>
+    <string name="new_note_speech_recognition_error_audio">Kesalahan perekaman audio. Periksa pengaturan mikrofon.</string>
+    <string name="new_note_speech_recognition_error_client">Kesalahan sisi klien lainnya, restart perangkat dan coba lagi.</string>
+    <string name="new_note_speech_recognition_error_insufficient_permissions">Izin tidak mencukupi.
+        Ubah pengaturan aplikasi, berikan izin yang diperlukan.</string>
+    <string name="new_note_speech_recognition_error_network">Kesalahan terkait jaringan lainnya. Hidupkan Internet dan coba lagi.</string>
+    <string name="new_note_speech_recognition_error_network_timeout">Miskin koneksi internet, cobalah untuk menonaktifkannya dan mencoba Pengakuan offline.</string>
+    <string name="new_note_speech_recognition_error_no_match">Tidak ada hasil pengenalan yang sesuai. Cobalah untuk berbicara lebih jelas dan keras.</string>
+    <string name="new_note_speech_recognition_error_recognizer_busy">Pengakuan Server kini ditempati oleh aplikasi lain. Coba matikan aplikasi lain dan coba lagi.</string>
+    <string name="new_note_speech_recognition_error_server">Server mengirimkan status error.</string>
+    <string name="new_note_speech_recognition_error_server_fix">Download paket untuk pengenalan offline dalam pengaturan.</string>
+    <string name="new_note_speech_recognition_error_speech_timeout">Tidak ada masukan ucapan. Coba lagi.</string>
+    <string name="new_note_speech_recognition_close">Dekat</string>
+    <string name="new_note_speech_recognition_fix">Memperbaiki</string>
     <!-- Диалоговые окна -->
     <string name="yes">Ya</string>
     <string name="cancel">Batalkan</string>

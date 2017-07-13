@@ -15,6 +15,8 @@
     <string name="new_notes">Заметки</string>
     <string name="new_note_notifications">Напоминания</string>
     <string name="main_view_error_select">Нет выбранных объектов</string>
+
+    <string name="main_permissions_error">Вы не указали все разрешения. Мы не гарантируем работоспособность приложения.</string>
     <!-- Меню -->
     <string name="menu_add">Добавить заметку</string>
     <string name="menu_notes_list">Все заметки</string>
@@ -45,11 +47,27 @@
     <string name="new_note_error_speech_recognition_ok">Установить</string>
     <string name="new_note_error_speech_recognition_cancel">Отмена</string>
     <string name="new_note_error_speech_recognition_cancel_message">В случае отказа, распознавание речи скорее всего не будет работать.</string>
+
+    <string name="new_note_speech_recognition_message">Говорите…</string>
+    <string name="new_note_speech_recognition_start">Нажмите, чтобы говорить</string>
+    <string name="new_note_speech_recognition_error_audio">Ошибка записи звука. Проверьте настройки микрофона.</string>
+    <string name="new_note_speech_recognition_error_client">Другие ошибки на стороне клиента, перезапустите устройство и повторите попытку.</string>
+    <string name="new_note_speech_recognition_error_insufficient_permissions">Недостаточно прав.
+        Измените настройки приложения, предоставив необходимые разрешения.</string>
+    <string name="new_note_speech_recognition_error_network">Другие ошибки, связанные с сетью. Включите Интернет и повторите попытку.</string>
+    <string name="new_note_speech_recognition_error_network_timeout">Плохая связь с интернетом, попробуйте отключить его и попробуйте офлайн распознование.</string>
+    <string name="new_note_speech_recognition_error_no_match">Результат распознавания не получен. Постарайтесь говорить более четко и громко.</string>
+    <string name="new_note_speech_recognition_error_recognizer_busy">Сервер распознование сейчас занят другим приложнием. Попробуйте выключить другие приложения и попробуйте снова.</string>
+    <string name="new_note_speech_recognition_error_server">Сервер отправляет статус ошибки.</string>
+    <string name="new_note_speech_recognition_error_server_fix">Загрузите пакет для автономного распознавания в настройках.</string>
+    <string name="new_note_speech_recognition_error_speech_timeout">Вас не слышно. Попробуй еще раз.</string>
+    <string name="new_note_speech_recognition_close">Закрыть</string>
+    <string name="new_note_speech_recognition_fix">Исправить</string>
     <!-- Диалоговые окна -->
     <string name="yes">Да</string>
     <string name="cancel">Отмена</string>
     <string name="dialogDeleteTitle">Удалить?</string>
-    <string name="dialogDeleteMessage">Объекты будут выделенны навсегда</string>
+    <string name="dialogDeleteMessage">Объекты будут удалены навсегда</string>
     <!-- Заметки просмотр -->
     <string name="note_view_remind_title">Мы напомним</string>
     <string name="note_view_remind_no_body">Никогда</string>

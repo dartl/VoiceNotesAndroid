@@ -15,6 +15,8 @@
     <string name="new_notes">नोट्स</string>
     <string name="new_note_notifications">रिमाइंडर</string>
     <string name="main_view_error_select">कोई ऑब्जेक्ट नहीं चुना गया</string>
+
+    <string name="main_permissions_error">आपने सभी अनुमतियां नहीं दीं। हम आवेदन की कार्य क्षमता की गारंटी नहीं देते हैं।</string>
     <!-- Меню -->
     <string name="menu_add">नोट जोड़ें</string>
     <string name="menu_notes_list">सभी नोट्स</string>
@@ -45,6 +47,22 @@
     <string name="new_note_error_speech_recognition_ok">इंस्टॉल करें</string>
     <string name="new_note_error_speech_recognition_cancel">रद्द करें</string>
     <string name="new_note_error_speech_recognition_cancel_message">यदि आप मना करते हैं, तो शायद स्पीच पहचान सुविधा काम न करे।</string>
+
+    <string name="new_note_speech_recognition_message">बोले…</string>
+    <string name="new_note_speech_recognition_start">बात करने के लिए टैप करें</string>
+    <string name="new_note_speech_recognition_error_audio">ऑडियो रिकॉर्डिंग त्रुटि माइक्रोफ़ोन सेटिंग जांचें</string>
+    <string name="new_note_speech_recognition_error_client">अन्य क्लाइंट साइड त्रुटियां, डिवाइस को पुनरारंभ करें और पुन: प्रयास करें।</string>
+    <string name="new_note_speech_recognition_error_insufficient_permissions">अपर्याप्त अनुमति।
+        आवश्यक अनुमतियाँ देकर, एप्लिकेशन की सेटिंग्स को बदलें।</string>
+    <string name="new_note_speech_recognition_error_network">अन्य नेटवर्क संबंधित त्रुटियाँ इंटरनेट चालू करें और पुनः प्रयास करें।</string>
+    <string name="new_note_speech_recognition_error_network_timeout">धीमे इंटरनेट कनेक्शन के उसे निष्क्रिय और ऑफलाइन मान्यता कोशिश करने के लिए प्रयास करें।</string>
+    <string name="new_note_speech_recognition_error_no_match">कोई मान्यता परिणाम मिलान नहीं हुआ। अधिक स्पष्ट और जोर से बोलने की कोशिश करें</string>
+    <string name="new_note_speech_recognition_error_recognizer_busy">पहचान सेवा व्यस्त</string>
+    <string name="new_note_speech_recognition_error_server">सर्वर त्रुटि स्थिति भेजता है</string>
+    <string name="new_note_speech_recognition_error_server_fix">सेटिंग में ऑफ़लाइन मान्यता के लिए पैकेज डाउनलोड करें</string>
+    <string name="new_note_speech_recognition_error_speech_timeout">कोई भाषण इनपुट नहीं पुनः प्रयास करें।</string>
+    <string name="new_note_speech_recognition_close">बंद करे</string>
+    <string name="new_note_speech_recognition_fix">ठीक कर</string>
     <!-- Диалоговые окна -->
     <string name="yes">हाँ</string>
     <string name="cancel">रद्द करें</string>

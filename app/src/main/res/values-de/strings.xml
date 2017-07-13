@@ -15,6 +15,8 @@
     <string name="new_notes">Notizen</string>
     <string name="new_note_notifications">Reminder</string>
     <string name="main_view_error_select">Keine Objekte ausgewählt</string>
+
+    <string name="main_permissions_error">Du hast nicht alle Berechtigungen zur Verfügung gestellt. Wir garantieren nicht die Arbeitsfähigkeit des Antrags.</string>
     <!-- Меню -->
     <string name="menu_add">Notiz hinzufügen</string>
     <string name="menu_notes_list">Alle Notizen</string>
@@ -44,6 +46,22 @@
     <string name="new_note_error_speech_recognition_ok">Installieren</string>
     <string name="new_note_error_speech_recognition_cancel">Abbrechen</string>
     <string name="new_note_error_speech_recognition_cancel_message">Bei Ablehnung wird die Spracherkennung voraussichtlich nicht funktionieren.</string>
+
+    <string name="new_note_speech_recognition_message">Sprechen…</string>
+    <string name="new_note_speech_recognition_start">Tippen Sie auf zu sprechen</string>
+    <string name="new_note_speech_recognition_error_audio">Audioaufnahmefehler. Überprüfen Sie die Mikrofoneinstellungen.</string>
+    <string name="new_note_speech_recognition_error_client">Andere Client-Seitenfehler, starten Sie das Gerät neu und versuchen Sie es erneut.</string>
+    <string name="new_note_speech_recognition_error_insufficient_permissions">Nicht ausreichende Berechtigungen.
+        Ändern Sie die Einstellungen der Anwendung und geben Sie die erforderlichen Berechtigungen an.</string>
+    <string name="new_note_speech_recognition_error_network">Andere Netzwerkbezogene Fehler. Schalte das Internet ein und versuche es noch einmal.</string>
+    <string name="new_note_speech_recognition_error_network_timeout">Schlechte Internetverbindung , versuchen Sie es zu deaktivieren und offline Recognition versuchen.</string>
+    <string name="new_note_speech_recognition_error_no_match">Kein Erkennungsergebnis stimmt ab. Versuche, klarer und laut zu sprechen.</string>
+    <string name="new_note_speech_recognition_error_recognizer_busy">Recognition Server wird nun von einer anderen Anwendung belegt. Versuchen Sie andere Anwendungen herunterzufahren und erneut versuchen.</string>
+    <string name="new_note_speech_recognition_error_server">Server sendet Fehlerstatus.</string>
+    <string name="new_note_speech_recognition_error_server_fix">Laden Sie das Paket zur Offline-Erkennung in den Einstellungen herunter.</string>
+    <string name="new_note_speech_recognition_error_speech_timeout">Keine Spracheingabe. Versuch es noch einmal.</string>
+    <string name="new_note_speech_recognition_close">Schließen</string>
+    <string name="new_note_speech_recognition_fix">Fix</string>
     <!-- Диалоговые окна -->
     <string name="yes">Ja</string>
     <string name="cancel">Abbrechen</string>

@@ -15,6 +15,8 @@
     <string name="new_notes">메모</string>
     <string name="new_note_notifications">알림</string>
     <string name="main_view_error_select">선택한 개체가 없습니다.</string>
+
+    <string name="main_permissions_error">모든 권한을 제공하지 않았습니다. 우리는 응용 프로그램의 작업 용량을 보장하지 않습니다.</string>
     <!-- Меню -->
     <string name="menu_add">메모 추가</string>
     <string name="menu_notes_list">모든 메모</string>
@@ -46,6 +48,22 @@
     <string name="new_note_error_speech_recognition_ok">설치</string>
     <string name="new_note_error_speech_recognition_cancel">취소</string>
     <string name="new_note_error_speech_recognition_cancel_message">거부하면 음성 인식이 작동하지 않습니다.</string>
+
+    <string name="new_note_speech_recognition_message">말하다…</string>
+    <string name="new_note_speech_recognition_start">말하려면 탭하세요.</string>
+    <string name="new_note_speech_recognition_error_audio">오디오 녹음 오류. 마이크 설정을 확인하십시오.</string>
+    <string name="new_note_speech_recognition_error_client">다른 클라이언트 측 오류가 발생하면 장치를 재시작하고 다시 시도하십시오.</string>
+    <string name="new_note_speech_recognition_error_insufficient_permissions">권한이 충분하지 않습니다.
+        필요한 권한을 부여하여 응용 프로그램의 설정을 변경하십시오.</string>
+    <string name="new_note_speech_recognition_error_network">기타 네트워크 관련 오류. 인터넷을 켜고 다시 시도하십시오.</string>
+    <string name="new_note_speech_recognition_error_network_timeout">가난한 인터넷 연결을 해제하고 오프라인 인식을 시도하려고합니다.</string>
+    <string name="new_note_speech_recognition_error_no_match">인식 결과가 일치하지 않습니다. 더 분명하고 큰 소리로 말하십시오.</string>
+    <string name="new_note_speech_recognition_error_recognizer_busy">인식 서버는 이제 다른 응용 프로그램에 의해 점유된다. 다른 응용 프로그램을 종료 시도하고 다시 시도하십시오.</string>
+    <string name="new_note_speech_recognition_error_server">서버가 오류 상태를 보냅니다.</string>
+    <string name="new_note_speech_recognition_error_server_fix">설정에서 오프라인 인식을위한 패키지를 다운로드하십시오.</string>
+    <string name="new_note_speech_recognition_error_speech_timeout">음성 입력이 없습니다. 다시 시도하십시오.</string>
+    <string name="new_note_speech_recognition_close">닫기</string>
+    <string name="new_note_speech_recognition_fix">고치다</string>
     <!-- Диалоговые окна -->
     <string name="yes">예</string>
     <string name="cancel">취소</string>

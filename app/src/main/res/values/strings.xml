@@ -55,10 +55,11 @@
     <string name="new_note_speech_recognition_error_insufficient_permissions">Insufficient permissions.
         Change the settings of the application, giving the necessary permissions.</string>
     <string name="new_note_speech_recognition_error_network">Other network related errors. Turn on the Internet and try again.</string>
-    <string name="new_note_speech_recognition_error_network_timeout">Network operation timed out.</string>
+    <string name="new_note_speech_recognition_error_network_timeout">Poor connection to the Internet, try disabling it and try offline recognition.</string>
     <string name="new_note_speech_recognition_error_no_match">No recognition result matched. Try to speak more clearly and loudly.</string>
-    <string name="new_note_speech_recognition_error_recognizer_busy">RecognitionService busy.</string>
+    <string name="new_note_speech_recognition_error_recognizer_busy">Server recognition is now occupied by another application. Try turning off other applications and try again.</string>
     <string name="new_note_speech_recognition_error_server">Server sends error status.</string>
+    <string name="new_note_speech_recognition_error_server_fix">Download the package for offline recognition in the settings.</string>
     <string name="new_note_speech_recognition_error_speech_timeout">No speech input. Try again.</string>
     <string name="new_note_speech_recognition_close">Close</string>
     <string name="new_note_speech_recognition_fix">Fix </string>
@@ -95,6 +96,8 @@
     <string name="settings_notification_sound">Select a sound for a reminder</string>
     <string name="settings_notification_not_sound">No sound selected</string>
     <string name="settings_other_title">Other</string>
+
+    <string name="settings_add_icon_add_title">Add icon</string>
     <!-- Подписки -->
     <string name="subs_inner_text">All subscriptions remove ads from the app and represent donations to the developer</string>
     <string-array name="export_import_type">

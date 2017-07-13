@@ -42,6 +42,8 @@ import com.gawk.voicenotes.adapters.SQLiteDBHelper;
 import com.gawk.voicenotes.adapters.TimeNotification;
 import com.gawk.voicenotes.models.Note;
 import com.gawk.voicenotes.models.Notification;
+import com.gawk.voicenotes.subs.GooglePlaySubs;
+import com.gawk.voicenotes.subs.SubsInterface;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -59,13 +61,7 @@ import java.util.ArrayList;
 
 public class ParentActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    public static final String RESPONSE_BUY_INTENT = "BUY_INTENT";
-    public static final int BILLING_RESPONSE_RESULT_OK = 0;
-    public static final int RC_BUY = 1001;
-    public String SKU_SMALL_DONATE = "donation_one_dollor";
-    public String SKU_BIG_DONATE = "big_donate";
     public final String INSTALL_PREF = "install_app";
-    public final String DONATE_PREF = "donate_app";
     private Toolbar toolbar;
     protected MenuItem actionRemoveSelected, actionSave, actionSearch;
     private NavigationView navigationView;
@@ -73,23 +69,25 @@ public class ParentActivity extends AppCompatActivity
     protected AdView mAdView;
     FirebaseAnalytics mFirebaseAnalytics;
     IInAppBillingService mService;
-    private ArrayList<JSONObject> allSubscriptionsInfo;
-    private SharedPreferences sPref;
     private ActionBarDrawerToggle toggle;
     private Button buttonDonateDeveloper;
+    protected GooglePlaySubs mGooglePlaySubs;
+    protected ParentActivity mActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         dbHelper = SQLiteDBHelper.getInstance(this);
         dbHelper.connection();
+
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
-        sPref = getPreferences(MODE_PRIVATE);
+        mActivity = this;
 
         Intent serviceIntent =
                 new Intent("com.android.vending.billing.InAppBillingService.BIND");
         serviceIntent.setPackage("com.android.vending");
-        boolean bindResult = bindService(serviceIntent, mServiceConn, Context.BIND_AUTO_CREATE);
+        bindService(serviceIntent, mServiceConn, Context.BIND_AUTO_CREATE);
     }
 
     ServiceConnection mServiceConn = new ServiceConnection() {
@@ -104,8 +102,8 @@ public class ParentActivity extends AppCompatActivity
             Log.e("GAWK_ERR","CALL onServiceConnected()");
             mService = IInAppBillingService.Stub.asInterface(service);
             try {
-                checkBuySubs();
-                setAllSubscriptionsInfo(getAllSubscriptions());
+                mGooglePlaySubs = new GooglePlaySubs(mActivity,mService);
+                mGooglePlaySubs.checkBuySubs();
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
@@ -251,7 +249,12 @@ public class ParentActivity extends AppCompatActivity
     }
 
     public void initAdMob(boolean check) {
-        int aBoolean = getsPref().getInt(DONATE_PREF,0);
+        int aBoolean;
+        if (mGooglePlaySubs != null) {
+            aBoolean = mGooglePlaySubs.subsGetActive();
+        } else {
+            aBoolean = 0;
+        }
         mAdView = (AdView) findViewById(R.id.adView);
         mAdView.setAdListener(new AdListener() {
             @Override
@@ -296,63 +299,13 @@ public class ParentActivity extends AppCompatActivity
         }
     }
 
-    public void checkBuySubs() throws RemoteException {
-        SharedPreferences.Editor ed = getsPref().edit();
-        Bundle activeSubs = mService.getPurchases(3, getPackageName(),
-                "subs", "");
 
-        int response = activeSubs.getInt("RESPONSE_CODE");
-        if (response == 0) {
-            ArrayList<String> ownedSkus =
-                    activeSubs.getStringArrayList("INAPP_PURCHASE_ITEM_LIST");
-            if (ownedSkus.size() > 0) {
-                ed.putInt(DONATE_PREF,2);
-                ed.commit();
-                initAdMob(false);
-            } else {
-                ed.putInt(DONATE_PREF,1);
-            }
-        }
-    }
-
-    public ArrayList<JSONObject> getAllSubscriptions() throws RemoteException {
-        ArrayList<String> skuList = new ArrayList<> ();
-        skuList.add(SKU_BIG_DONATE);
-        skuList.add(SKU_SMALL_DONATE);
-        Bundle querySkus = new Bundle();
-        querySkus.putStringArrayList("ITEM_ID_LIST", skuList);
-        if ( mService == null) {
-            return null;
-        }
-        Bundle skuDetails = mService.getSkuDetails(3,
-                getPackageName(), "subs", querySkus);
-        int response = skuDetails.getInt("RESPONSE_CODE");
-        ArrayList<JSONObject> jsonObjects = new ArrayList<>();
-        if (response == 0) {
-            ArrayList<String> responseList
-                    = skuDetails.getStringArrayList("DETAILS_LIST");
-
-            for (String thisResponse : responseList) {
-                JSONObject object;
-                try {
-                    object = new JSONObject(thisResponse);
-                    jsonObjects.add(object);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        Log.e("GAWK_ERR","getAllSubscriptions() called. jsonObjects = " + jsonObjects.toString());
-        return jsonObjects;
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1001 && data !=null) {
             if (resultCode == RESULT_OK) {
-                SharedPreferences.Editor ed = getsPref().edit();
-                ed.putInt(DONATE_PREF,2);
-                ed.apply();
+                mGooglePlaySubs.subsSetActive();
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
@@ -442,22 +395,6 @@ public class ParentActivity extends AppCompatActivity
             }
         });
         ad.show();
-    }
-
-    public SharedPreferences getsPref() {
-        return sPref;
-    }
-
-    public void setsPref(SharedPreferences sPref) {
-        this.sPref = sPref;
-    }
-
-    public ArrayList<JSONObject> getAllSubscriptionsInfo() {
-        return allSubscriptionsInfo;
-    }
-
-    public void setAllSubscriptionsInfo(ArrayList<JSONObject> allSubscriptionsInfo) {
-        this.allSubscriptionsInfo = allSubscriptionsInfo;
     }
 
     // Storage Permissions

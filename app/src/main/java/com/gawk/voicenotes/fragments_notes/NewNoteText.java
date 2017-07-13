@@ -89,7 +89,6 @@ public class NewNoteText extends FragmentParent implements RecognitionListener{
     public void endRecognition()  {
         if (mRecognizerIntent != null)
         {
-            mRecognizerIntent.cancel();
             mRecognizerIntent.destroy();
         }
     }
@@ -189,9 +188,9 @@ public class NewNoteText extends FragmentParent implements RecognitionListener{
     @Override
     public void onError(int error) {
         Log.e("GAWK_ERR","onError(int error) = " + error);
+        endRecognition();
         mSpeechRecognitionDialog.setInactive();
         mSpeechRecognitionDialog.errorMessage(error);
-        endRecognition();
     }
 
     @Override
@@ -241,4 +240,9 @@ public class NewNoteText extends FragmentParent implements RecognitionListener{
         return dp * ((float)metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
     }
 
+    @Override
+    public void onPause() {
+        mRecognizerIntent.destroy();
+        super.onPause();
+    }
 }
