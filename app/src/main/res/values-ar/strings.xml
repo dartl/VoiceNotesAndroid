@@ -39,7 +39,7 @@
     <string name="new_note_error_speech_recognition">لم يتم تثبيت تطبيق غوغل مطلوب أو تم تعطيله. هل ترغب في تثبيت / تمكين ذلك؟\nسيكون لديك لإعادة تشغيل بالكامل التطبيق / الهاتف الذكي بعد ذلك.</string>
     <string name="new_note_error_speech_recognition_ok">التثبت</string>
     <string name="new_note_error_speech_recognition_cancel">إلغاء</string>
-    <string name="new_note_error_speech_recognition_cancel_message">إذا كنت ترفض، التعرف على الكلام ربما فاز \ 't العمل.</string>
+    <string name="new_note_error_speech_recognition_cancel_message">إذا كنت ترفض، التعرف على الكلام ربما فاز \ \'t العمل.</string>
     <string name="new_note_speech_recognition_message">تحدث…</string>
     <string name="new_note_speech_recognition_start">انقر للتحدث</string>
     <string name="new_note_speech_recognition_error_audio">خطأ في تسجيل الصوت. تحقق من إعدادات الميكروفون.</string>
