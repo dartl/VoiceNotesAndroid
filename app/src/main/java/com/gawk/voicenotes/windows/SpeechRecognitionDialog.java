@@ -116,9 +116,14 @@ public class SpeechRecognitionDialog extends DialogFragment {
                 if (!mActive) {
                     setActive();
                     mFragmentParent.startRecognize();
+                    if (mFragmentParent != null) {
+                        mFragmentParent.startRecognize();
+                    }
                 } else {
                     setInactive();
-                    mFragmentParent.endRecognition();
+                    if (mFragmentParent != null) {
+                        mFragmentParent.endRecognition();
+                    }
                 }
             }
         });
@@ -135,14 +140,18 @@ public class SpeechRecognitionDialog extends DialogFragment {
 
     @Override
     public void onCancel(DialogInterface dialog) {
+        if (mFragmentParent != null) {
+            mFragmentParent.endRecognition();
+        }
         super.onCancel(dialog);
-        mFragmentParent.endRecognition();
     }
 
     @Override
     public void onDismiss(DialogInterface dialog) {
+        if (mFragmentParent != null) {
+            mFragmentParent.endRecognition();
+        }
         super.onDismiss(dialog);
-        mFragmentParent.endRecognition();
     }
 
     public void changeVoiceValue(int valueDestine) {

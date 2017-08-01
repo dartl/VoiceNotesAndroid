@@ -108,6 +108,8 @@ public class SettingsActivity extends ParentActivity {
 
     private void setSoundTitle(String s) {
         Ringtone r = RingtoneManager.getRingtone(this, Uri.parse(s));
-        textViewSelectSound.setText(r.getTitle(this));
+        if (r != null) {
+            textViewSelectSound.setText(r.getTitle(this));
+        }
     }
 }

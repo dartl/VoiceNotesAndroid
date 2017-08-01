@@ -90,6 +90,7 @@ public class NewNoteText extends FragmentParent implements RecognitionListener{
     public void endRecognition()  {
         if (mRecognizerIntent != null)
         {
+            mRecognizerIntent.cancel();
             mRecognizerIntent.destroy();
         }
     }
@@ -243,7 +244,9 @@ public class NewNoteText extends FragmentParent implements RecognitionListener{
 
     @Override
     public void onPause() {
-        mRecognizerIntent.destroy();
+        if (mRecognizerIntent != null) {
+            mRecognizerIntent.destroy();
+        }
         super.onPause();
     }
 }
