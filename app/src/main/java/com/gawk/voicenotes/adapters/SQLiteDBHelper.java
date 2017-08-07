@@ -14,6 +14,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.gawk.voicenotes.ParentActivity;
 import com.gawk.voicenotes.models.Note;
 import com.gawk.voicenotes.models.Notification;
+import com.gawk.voicenotes.models.Statistics;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -44,7 +45,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
     private Context context;
     private ParentActivity activity;
 
-    public static final int DATABASE_VERSION = 2;
+    public static final int DATABASE_VERSION = 3;
     public static final String DATABASE_NAME = "VOICE_NOTES.DB";
 
     public static final String NOTES_TABLE_NAME = "NOTES";
@@ -58,6 +59,11 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
     public static final String NOTIFICATIONS_TABLE_COLUMN_DATE = "DATE";
     public static final String NOTIFICATIONS_TABLE_COLUMN_SOUND = "SOUND";
     public static final String NOTIFICATIONS_TABLE_COLUMN_VIBRATE = "VIBRATE";
+
+    public static final String STATISTICS_TABLE_NAME = "STATISTICS";
+    public static final String STATISTICS_TABLE_COLUMN_ID = "_id";
+    public static final String STATISTICS_TABLE_COLUMN_NAME = "NAME";
+    public static final String STATISTICS_TABLE_COLUMN_VALUE = "VALUE";
 
     /**
      * Метод для получения ссылки на статический класс
@@ -96,6 +102,13 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
                         NOTIFICATIONS_TABLE_COLUMN_ID_NOTE + " integer, " + NOTIFICATIONS_TABLE_COLUMN_DATE + " text, "
                         + NOTIFICATIONS_TABLE_COLUMN_SOUND + " integer, " + NOTIFICATIONS_TABLE_COLUMN_VIBRATE + " integer)"
         );
+        // Создаем таблицу статистики
+        db.execSQL(
+                "create table if not exists " + STATISTICS_TABLE_NAME +
+                        "(" + STATISTICS_TABLE_COLUMN_ID + " integer primary key, " +
+                        STATISTICS_TABLE_COLUMN_NAME + " text, " + STATISTICS_TABLE_COLUMN_VALUE + " integer)"
+        );
+        createStatistics(db);
     }
 
     /**
@@ -105,7 +118,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
     {
         // Если версия 2, то
-        if (newVersion == DATABASE_VERSION) {
+        if (oldVersion != newVersion && newVersion == DATABASE_VERSION) {
             // Создаем таблицу оповещений
             db.execSQL(
                     "create table " + NOTIFICATIONS_TABLE_NAME +
@@ -145,9 +158,15 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
                 newValues.put(SQLiteDBHelper.NOTES_TABLE_COLUMN_DATE, temp.getDate().getTime());
                 long i = db.insert(SQLiteDBHelper.NOTES_TABLE_NAME, null, newValues);
             }
-
-
             // Обновляем таблицу заметок
+
+            // Создаем таблицу статистики
+            db.execSQL(
+                    "create table if not exists " + STATISTICS_TABLE_NAME +
+                            "(" + STATISTICS_TABLE_COLUMN_ID + " integer primary key, " +
+                            STATISTICS_TABLE_COLUMN_NAME + " text, " + STATISTICS_TABLE_COLUMN_VALUE + " integer)"
+            );
+            createStatistics(db);
         }
     }
 
@@ -170,6 +189,108 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
             } catch (SQLiteException ex) {
             }
         }
+    }
+
+    /*
+        Методы для работы со статистикой
+     */
+    public void createStatistics(SQLiteDatabase db) {
+        ContentValues newValues = new ContentValues();
+        newValues.put(SQLiteDBHelper.STATISTICS_TABLE_COLUMN_NAME, Statistics.DB_EXPERIENCE);
+        newValues.put(SQLiteDBHelper.STATISTICS_TABLE_COLUMN_VALUE, 0);
+        db.insert(SQLiteDBHelper.STATISTICS_TABLE_NAME, null, newValues);
+
+        newValues = new ContentValues();
+        newValues.put(SQLiteDBHelper.STATISTICS_TABLE_COLUMN_NAME, Statistics.DB_UP_EXPERIENCE);
+        newValues.put(SQLiteDBHelper.STATISTICS_TABLE_COLUMN_VALUE, 2);
+        db.insert(SQLiteDBHelper.STATISTICS_TABLE_NAME, null, newValues);
+
+        newValues = new ContentValues();
+        newValues.put(SQLiteDBHelper.STATISTICS_TABLE_COLUMN_NAME, Statistics.DB_LEVEL);
+        newValues.put(SQLiteDBHelper.STATISTICS_TABLE_COLUMN_VALUE, 0);
+        db.insert(SQLiteDBHelper.STATISTICS_TABLE_NAME, null, newValues);
+
+        newValues = new ContentValues();
+        newValues.put(SQLiteDBHelper.STATISTICS_TABLE_COLUMN_NAME, Statistics.DB_CREATE_NOTES);
+        newValues.put(SQLiteDBHelper.STATISTICS_TABLE_COLUMN_VALUE, 0);
+        db.insert(SQLiteDBHelper.STATISTICS_TABLE_NAME, null, newValues);
+
+        newValues = new ContentValues();
+        newValues.put(SQLiteDBHelper.STATISTICS_TABLE_COLUMN_NAME, Statistics.DB_CREATE_NOTIFICATIONS);
+        newValues.put(SQLiteDBHelper.STATISTICS_TABLE_COLUMN_VALUE, 0);
+        db.insert(SQLiteDBHelper.STATISTICS_TABLE_NAME, null, newValues);
+
+        newValues = new ContentValues();
+        newValues.put(SQLiteDBHelper.STATISTICS_TABLE_COLUMN_NAME, Statistics.DB_GET_NOTIFICATIONS);
+        newValues.put(SQLiteDBHelper.STATISTICS_TABLE_COLUMN_VALUE, 0);
+        db.insert(SQLiteDBHelper.STATISTICS_TABLE_NAME, null, newValues);
+
+        newValues = new ContentValues();
+        newValues.put(SQLiteDBHelper.STATISTICS_TABLE_COLUMN_NAME, Statistics.DB_REMOVE_NOTES);
+        newValues.put(SQLiteDBHelper.STATISTICS_TABLE_COLUMN_VALUE, 0);
+        db.insert(SQLiteDBHelper.STATISTICS_TABLE_NAME, null, newValues);
+
+        newValues = new ContentValues();
+        newValues.put(SQLiteDBHelper.STATISTICS_TABLE_COLUMN_NAME, Statistics.DB_EXPORTS);
+        newValues.put(SQLiteDBHelper.STATISTICS_TABLE_COLUMN_VALUE, 0);
+        db.insert(SQLiteDBHelper.STATISTICS_TABLE_NAME, null, newValues);
+
+        newValues = new ContentValues();
+        newValues.put(SQLiteDBHelper.STATISTICS_TABLE_COLUMN_NAME, Statistics.DB_IMPORTS);
+        newValues.put(SQLiteDBHelper.STATISTICS_TABLE_COLUMN_VALUE, 0);
+        db.insert(SQLiteDBHelper.STATISTICS_TABLE_NAME, null, newValues);
+    }
+
+    private boolean statisticAddPoint(long point) {
+        if (!db.isOpen()) {
+            return false;
+        }
+        db.rawQuery("UPDATE " + SQLiteDBHelper.STATISTICS_TABLE_NAME + " SET " +
+                SQLiteDBHelper.STATISTICS_TABLE_COLUMN_VALUE + " = " +
+                SQLiteDBHelper.STATISTICS_TABLE_COLUMN_VALUE + " + " + point + " WHERE " +
+                SQLiteDBHelper.STATISTICS_TABLE_COLUMN_NAME + " = " + Statistics.DB_EXPERIENCE, null);
+
+        // получаем общее количество опыта
+        Cursor cursor = db.rawQuery("SELECT * FROM " + SQLiteDBHelper.STATISTICS_TABLE_NAME +
+                " WHERE " + SQLiteDBHelper.STATISTICS_TABLE_COLUMN_NAME + " = " + Statistics.DB_EXPERIENCE, null);
+        cursor.moveToFirst();
+        long experience = cursor.getLong(cursor.getColumnIndex(SQLiteDBHelper.STATISTICS_TABLE_COLUMN_VALUE));
+        cursor.close();
+
+        // получаем количество опыта до нового уровня
+        Cursor cursorUp = db.rawQuery("SELECT * FROM " + SQLiteDBHelper.STATISTICS_TABLE_NAME +
+                " WHERE " + SQLiteDBHelper.STATISTICS_TABLE_COLUMN_NAME + " = " + Statistics.DB_UP_EXPERIENCE, null);
+        cursorUp.moveToFirst();
+        long experienceUp = cursorUp.getLong(cursorUp.getColumnIndex(SQLiteDBHelper.STATISTICS_TABLE_COLUMN_VALUE));
+        cursorUp.close();
+
+        if (experience >= experienceUp) {
+            // увеличиваем необходимое количество опыта до следующего уровня
+            double doubleM = experienceUp * 1.2;
+            doubleM = Math.ceil(doubleM);
+            db.rawQuery("UPDATE " + SQLiteDBHelper.STATISTICS_TABLE_NAME + " SET " +
+                    SQLiteDBHelper.STATISTICS_TABLE_COLUMN_VALUE + " = " +
+                    SQLiteDBHelper.STATISTICS_TABLE_COLUMN_VALUE + " + " + doubleM + " WHERE " +
+                    SQLiteDBHelper.STATISTICS_TABLE_COLUMN_NAME + " = " + Statistics.DB_UP_EXPERIENCE, null);
+            // увеличиваем уровень на +1
+            db.rawQuery("UPDATE " + SQLiteDBHelper.STATISTICS_TABLE_NAME + " SET " +
+                    SQLiteDBHelper.STATISTICS_TABLE_COLUMN_VALUE + " = " +
+                    SQLiteDBHelper.STATISTICS_TABLE_COLUMN_VALUE + " + " + 1 + " WHERE " +
+                    SQLiteDBHelper.STATISTICS_TABLE_COLUMN_NAME + " = " + Statistics.DB_LEVEL, null);
+        }
+        return true;
+    }
+
+    private boolean statisticAddNote() {
+        if (!db.isOpen()) {
+            return false;
+        }
+        db.rawQuery("UPDATE " + SQLiteDBHelper.STATISTICS_TABLE_NAME + " SET " +
+                SQLiteDBHelper.STATISTICS_TABLE_COLUMN_VALUE + " = " +
+                SQLiteDBHelper.STATISTICS_TABLE_COLUMN_VALUE + " + 1 WHERE " +
+                SQLiteDBHelper.STATISTICS_TABLE_COLUMN_NAME + " = " + Statistics.DB_CREATE_NOTES, null);
+        statisticAddPoint(Statistics.POINT_CREATE_NOTES);
+        return true;
     }
 
     /*
@@ -337,6 +458,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         switch (action) {
             case 0:
                 long i = db.insert(SQLiteDBHelper.NOTES_TABLE_NAME, null, newValues);
+                statisticAddNote();
                 return i;
             case 1:
                 db.update(SQLiteDBHelper.NOTES_TABLE_NAME, newValues, NOTES_TABLE_COLUMN_ID +" = ?",
