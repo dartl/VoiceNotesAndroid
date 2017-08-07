@@ -29,6 +29,20 @@
     <string name="action_search">Search</string>
 
     <string name="social_action_title">Tell us about your friends</string>
+    <!-- Статистика -->
+    <string name="statistics_level1">Beginner</string>
+    <string name="statistics_level2">Specialist</string>
+    <string name="statistics_level3">Experienced</string>
+    <string name="statistics_level4">Expert</string>
+    <string name="statistics_level5">Master</string>
+    <string name="statistics_level6">Elite</string>
+    <string name="statistics_create_notes_title">Total notes created:</string>
+    <string name="statistics_create_notifications_title">Total reminders created:</string>
+    <string name="statistics_get_notifications_title">Total received reminders:</string>
+    <string name="statistics_remove_notes_title">Total deleted notes:</string>
+    <string name="statistics_exports_title">Exported times:</string>
+    <string name="statistics_imports_title">Imported times:</string>
+
     <!-- Новая заметка -->
     <string name="new_note">Note</string>
     <string name="new_note_notification">Reminder</string>
