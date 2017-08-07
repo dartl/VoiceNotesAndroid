@@ -51,13 +51,133 @@
 
     </RelativeLayout>
 
-
-
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:headerLayout="@layout/nav_header_main"
-        app:menu="@menu/activity_main_drawer"/>
+        >
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <include layout="@layout/nav_header_main" />
+
+                <android.support.design.widget.NavigationView
+                    android:id="@+id/nav_view_menu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="start"
+                    android:background="@color/colorTransparent"
+                    app:menu="@menu/activity_main_drawer"
+                    />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/nav_drawer_recycler_view"
+                    android:layout_width="280dp"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:nestedScrollingEnabled="false"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    tools:targetApi="lollipop" >
+                </android.support.v7.widget.RecyclerView>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical" android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:weightSum="3">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    style="@style/GawkMaterialTheme.SocialTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/social_action_title" />
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_height="@android:dimen/notification_large_icon_height"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <ImageButton
+                        android:id="@+id/buttonFacebook"
+                        style="@style/GawkMaterialTheme.BackgroundTransparent.SocialButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="false"
+                        android:scaleType="fitCenter"
+                        app:srcCompat="@drawable/facebook" />
+
+                    <ImageButton
+                        android:id="@+id/buttonVk"
+                        style="@style/GawkMaterialTheme.BackgroundTransparent.SocialButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:scaleType="fitCenter"
+                        app:srcCompat="@drawable/vk" />
+
+                    <ImageButton
+                        android:id="@+id/buttonGoogle"
+                        style="@style/GawkMaterialTheme.BackgroundTransparent.SocialButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:scaleType="fitCenter"
+                        app:srcCompat="@drawable/g" />
+
+                </LinearLayout>
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:orientation="horizontal" android:layout_width="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_height="@android:dimen/notification_large_icon_height"
+                    android:layout_weight="1"
+                    android:weightSum="3">
+
+                    <ImageButton
+                        android:id="@+id/buttonTwitter"
+                        style="@style/GawkMaterialTheme.BackgroundTransparent.SocialButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:scaleType="fitCenter"
+                        app:srcCompat="@drawable/twitter" />
+
+                    <ImageButton
+                        android:id="@+id/buttonLinkedln"
+                        android:layout_width="fill_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="fitCenter"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        style="@style/GawkMaterialTheme.BackgroundTransparent.SocialButton"
+                        app:srcCompat="@drawable/linkedln" />
+
+                    <ImageButton
+                        android:id="@+id/buttonOdnoklassnik"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="fitCenter"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        style="@style/GawkMaterialTheme.BackgroundTransparent.SocialButton"
+                        app:srcCompat="@drawable/odnoklassniki" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+    </android.support.design.widget.NavigationView>
 </android.support.v4.widget.DrawerLayout>

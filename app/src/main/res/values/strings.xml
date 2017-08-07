@@ -15,7 +15,6 @@
     <string name="new_notes">Notes</string>
     <string name="new_note_notifications">Reminders</string>
     <string name="main_view_error_select">No objects selected</string>
-
     <string name="main_permissions_error">You did not provide all the permissions. We do not guarantee the working capacity of the application.</string>
     <!-- Меню -->
     <string name="menu_add">Add note</string>
@@ -28,6 +27,8 @@
     <string name="action_save">Save</string>
     <string name="action_settings">Delete selected</string>
     <string name="action_search">Search</string>
+
+    <string name="social_action_title">Tell us about your friends</string>
     <!-- Новая заметка -->
     <string name="new_note">Note</string>
     <string name="new_note_notification">Reminder</string>
@@ -47,7 +48,6 @@
     <string name="new_note_error_speech_recognition_ok">Install</string>
     <string name="new_note_error_speech_recognition_cancel">Cancel</string>
     <string name="new_note_error_speech_recognition_cancel_message">If you refuse, speech recognition probably won\'t work.</string>
-
     <string name="new_note_speech_recognition_message">Speak…</string>
     <string name="new_note_speech_recognition_start">Tap to speak</string>
     <string name="new_note_speech_recognition_error_audio">Audio recording error. Check the microphone settings.</string>
@@ -96,7 +96,6 @@
     <string name="settings_notification_sound">Select a sound for a reminder</string>
     <string name="settings_notification_not_sound">No sound selected</string>
     <string name="settings_other_title">Other</string>
-
     <string name="settings_add_icon_add_title">Add icon</string>
     <!-- Подписки -->
     <string name="subs_inner_text">All subscriptions remove ads from the app and represent donations to the developer</string>

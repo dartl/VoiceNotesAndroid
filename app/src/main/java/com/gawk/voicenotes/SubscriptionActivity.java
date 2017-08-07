@@ -3,12 +3,14 @@ package com.gawk.voicenotes;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.RemoteException;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gawk.voicenotes.subs.GooglePlaySubs;
@@ -16,6 +18,7 @@ import com.gawk.voicenotes.subs.SubsInterface;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -25,6 +28,7 @@ import java.util.ArrayList;
 
 public class SubscriptionActivity extends ParentActivity {
     private Button buttonSmallDonate, buttonBigDonate;
+    private TextView textViewDonate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,13 +39,18 @@ public class SubscriptionActivity extends ParentActivity {
 
         buttonSmallDonate = (Button) findViewById(R.id.buttonSmallDonate);
         buttonBigDonate = (Button) findViewById(R.id.buttonBigDonate);
+        textViewDonate = (TextView) findViewById(R.id.textViewDonate);
 
         buttonSmallDonate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //alternativeDonate(); // alternative Donate
                 mGooglePlaySubs.startBuySubscription(SubsInterface.SKU_SMALL_DONATE);
             }
         });
+
+        //buttonBigDonate.setVisibility(View.GONE); // alternative Donate
+        //textViewDonate.setVisibility(View.GONE); // alternative Donate
 
         buttonBigDonate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,5 +83,11 @@ public class SubscriptionActivity extends ParentActivity {
         } catch (JSONException | RemoteException e) {
             e.printStackTrace();
         }
+    }
+
+    private void alternativeDonate()
+    {
+        Intent intent= new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CJJSWW4DWN5YA"));
+        startActivity(intent);
     }
 }

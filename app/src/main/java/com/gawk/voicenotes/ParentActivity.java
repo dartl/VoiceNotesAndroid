@@ -12,6 +12,7 @@ import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.icu.text.CompactDecimalFormat;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -32,11 +33,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.vending.billing.IInAppBillingService;
 import com.gawk.voicenotes.adapters.NoteRecyclerAdapter;
 import com.gawk.voicenotes.adapters.ParcelableUtil;
+import com.gawk.voicenotes.listeners.SocialShare;
 import com.gawk.voicenotes.preferences.PrefUtil;
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
 import com.gawk.voicenotes.adapters.TimeNotification;
@@ -64,13 +68,15 @@ public class ParentActivity extends AppCompatActivity
     public final String INSTALL_PREF = "install_app";
     private Toolbar toolbar;
     protected MenuItem actionRemoveSelected, actionSave, actionSearch;
-    private NavigationView navigationView;
+    private NavigationView navigationView, navigationViewMenu;
     public SQLiteDBHelper dbHelper;
     protected AdView mAdView;
     FirebaseAnalytics mFirebaseAnalytics;
     IInAppBillingService mService;
     private ActionBarDrawerToggle toggle;
     private Button buttonDonateDeveloper;
+    private ImageButton mButtonFacebook, mButtonVk, mButtonGoogle, mButtonTwitter, mButtonLinkedln,
+            mButtonOdnoklassnik;
     protected GooglePlaySubs mGooglePlaySubs;
     protected ParentActivity mActivity;
 
@@ -121,7 +127,7 @@ public class ParentActivity extends AppCompatActivity
         dbHelper.connection();
         Cursor noteCursor = dbHelper.getCursorAllNotes();
         NoteRecyclerAdapter noteCursorAdapter = new NoteRecyclerAdapter(this, noteCursor);
-        TextView view = (TextView) navigationView.getMenu().findItem(R.id.menu_notes_list).getActionView();
+        TextView view = (TextView) navigationViewMenu.getMenu().findItem(R.id.menu_notes_list).getActionView();
         view.setText(noteCursorAdapter.getItemCount() > 0 ? String.valueOf(noteCursorAdapter.getItemCount()) : null);
     }
 
@@ -165,7 +171,9 @@ public class ParentActivity extends AppCompatActivity
         toggle.syncState();
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+
+        navigationViewMenu = (NavigationView) navigationView.findViewById(R.id.nav_view_menu);
+        navigationViewMenu.setNavigationItemSelectedListener(this);
 
         buttonDonateDeveloper = (Button) findViewById(R.id.buttonDonateDeveloper);
         buttonDonateDeveloper.setOnClickListener(new View.OnClickListener() {
@@ -175,6 +183,22 @@ public class ParentActivity extends AppCompatActivity
                 startActivity(intent);
             }
         });
+
+        SocialShare socialShare =  new SocialShare(this);
+
+        mButtonFacebook = (ImageButton) fullView.findViewById(R.id.buttonFacebook);
+        mButtonVk = (ImageButton) fullView.findViewById(R.id.buttonVk);
+        mButtonGoogle = (ImageButton) fullView.findViewById(R.id.buttonGoogle);
+        mButtonTwitter = (ImageButton) fullView.findViewById(R.id.buttonTwitter);
+        mButtonLinkedln = (ImageButton) fullView.findViewById(R.id.buttonLinkedln);
+        mButtonOdnoklassnik = (ImageButton) fullView.findViewById(R.id.buttonOdnoklassnik);
+
+        mButtonFacebook.setOnClickListener(socialShare);
+        mButtonVk.setOnClickListener(socialShare);
+        mButtonGoogle.setOnClickListener(socialShare);
+        mButtonTwitter.setOnClickListener(socialShare);
+        mButtonLinkedln.setOnClickListener(socialShare);
+        mButtonOdnoklassnik.setOnClickListener(socialShare);
     }
 
     @Override

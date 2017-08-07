@@ -15,7 +15,6 @@ public class HelpActivity extends ParentActivity {
         setContentView(R.layout.help);
 
         webView = (WebView) findViewById(R.id.webView);
-        webView.getSettings().setJavaScriptEnabled(true);
         webView.loadUrl("http://voicenotes.cofp.ru/");
         initAdMob(false);
     }

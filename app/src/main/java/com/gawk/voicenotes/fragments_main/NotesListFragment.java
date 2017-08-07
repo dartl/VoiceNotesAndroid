@@ -90,7 +90,7 @@ public class NotesListFragment extends FragmentParent implements ActionsListNote
 
     public boolean updateNote(Cursor noteCursor) {
         mAdapter.changeCursor(noteCursor);
-        NavigationView navigationView = (NavigationView) getActivity().findViewById(R.id.nav_view);
+        NavigationView navigationView = (NavigationView) getActivity().findViewById(R.id.nav_view_menu);
         TextView view = (TextView) navigationView.getMenu().findItem(R.id.menu_notes_list).getActionView();
         view.setText(mAdapter.getItemCount() > 0 ? String.valueOf(mAdapter.getItemCount()) : null);
         return true;

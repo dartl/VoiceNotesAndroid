@@ -35,4 +35,6 @@
     <dimen name="dialog_recognize_height">280dp</dimen>
     <dimen name="dialog_recognize_circle_min_size">100dp</dimen>
     <dimen name="dialog_recognize_circle_max_size">160dp</dimen>
+
+    <dimen name="height_social_button">64dp</dimen>
 </resources>

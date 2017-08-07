@@ -193,4 +193,18 @@
         <item name="android:layout_marginLeft">@dimen/body_padding</item>
         <item name="android:layout_marginRight">@dimen/body_padding</item>
     </style>
+
+    <style name="GawkMaterialTheme.BackgroundTransparent" >
+        <item name="android:background">@color/colorTransparent</item>
+    </style>
+
+    <style name="GawkMaterialTheme.BackgroundTransparent.SocialButton" >
+        <item name="android:layout_margin">4dp</item>
+    </style>
+
+    <style name="GawkMaterialTheme.SocialTitle" >
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textColor">@color/colorGrey500</item>
+        <item name="android:textSize">18sp</item>
+    </style>
 </resources>
