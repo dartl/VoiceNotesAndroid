@@ -28,6 +28,7 @@
     <string name="action_settings">Delete selected</string>
     <string name="action_search">Search</string>
 
+    <string name="menu_statistics">Statistics</string>
     <string name="social_action_title">Tell us about your friends</string>
     <!-- Статистика -->
     <string name="statistics_level1">Beginner</string>

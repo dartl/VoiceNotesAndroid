@@ -41,6 +41,7 @@ import com.android.vending.billing.IInAppBillingService;
 import com.gawk.voicenotes.adapters.NoteRecyclerAdapter;
 import com.gawk.voicenotes.adapters.ParcelableUtil;
 import com.gawk.voicenotes.listeners.SocialShare;
+import com.gawk.voicenotes.models.Statistics;
 import com.gawk.voicenotes.preferences.PrefUtil;
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
 import com.gawk.voicenotes.adapters.TimeNotification;
@@ -257,6 +258,9 @@ public class ParentActivity extends AppCompatActivity
             startActivity(intent);
         } else if (id == R.id.menu_settings) {
             intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.menu_statistics) {
+            intent = new Intent(this, StatisticsActivity.class);
             startActivity(intent);
         } else if (id == R.id.menu_help) {
             intent = new Intent(this, HelpActivity.class);

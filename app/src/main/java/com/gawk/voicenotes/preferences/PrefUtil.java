@@ -54,4 +54,14 @@ public class PrefUtil {
     public boolean getBoolean(String key, boolean def) {
         return sharedPreferences.getBoolean(key,def);
     }
+
+    public boolean saveLong(String key, long value) {
+        SharedPreferences.Editor ed = sharedPreferences.edit();
+        ed.putLong(key, value);
+        return ed.commit();
+    }
+
+    public long getLong(String key, long def) {
+        return sharedPreferences.getLong(key,def);
+    }
 }

@@ -23,6 +23,10 @@
         android:icon="@drawable/ic_settings_black_24dp"
         android:title="@string/menu_settings" />
     <item
+        android:id="@+id/menu_statistics"
+        android:icon="@drawable/ic_poll_black_24dp"
+        android:title="@string/menu_statistics" />
+    <item
         android:id="@+id/menu_subs"
         android:icon="@drawable/ic_subscriptions_black_24dp"
         android:title="@string/menu_subs" />
