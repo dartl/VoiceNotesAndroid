@@ -341,13 +341,13 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         if (!db.isOpen()) {
             return -1;
         }
-        mStatistics.addPointCreateNotes();
         ContentValues newValues = new ContentValues();
         newValues.put(SQLiteDBHelper.NOTES_TABLE_COLUMN_TEXT_NOTE, note.getText_note());
         newValues.put(SQLiteDBHelper.NOTES_TABLE_COLUMN_DATE, note.getDate().getTime());
         switch (action) {
             case 0:
                 long i = db.insert(SQLiteDBHelper.NOTES_TABLE_NAME, null, newValues);
+                mStatistics.addPointCreateNotes();
                 return i;
             case 1:
                 db.update(SQLiteDBHelper.NOTES_TABLE_NAME, newValues, NOTES_TABLE_COLUMN_ID +" = ?",

@@ -85,6 +85,7 @@
     <string name="settings_other_title">Altro</string>
     <string name="settings_add_icon_add_title">Aggiungi icona</string>
     <string name="subs_inner_text">Tutte le sottoscrizioni rimuovono gli annunci dall\'applicazione e rappresentano donazioni allo sviluppatore</string>
+    <string name="menu_statistics">Statistica</string>
     <string name="social_action_title">Raccontaci i tuoi amici</string>
     <string name="statistics_level1">Principiante</string>
     <string name="statistics_level2">Specialista</string>
