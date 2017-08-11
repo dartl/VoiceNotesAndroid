@@ -15,7 +15,6 @@
     <string name="new_notes">Notizen</string>
     <string name="new_note_notifications">Reminder</string>
     <string name="main_view_error_select">Keine Objekte ausgewählt</string>
-
     <string name="main_permissions_error">Du hast nicht alle Berechtigungen zur Verfügung gestellt. Wir garantieren nicht die Arbeitsfähigkeit des Antrags.</string>
     <!-- Меню -->
     <string name="menu_add">Notiz hinzufügen</string>
@@ -28,6 +27,23 @@
     <string name="action_save">Speichern</string>
     <string name="action_settings">Auswahl löschen</string>
     <string name="action_search">Suche</string>
+    <string name="menu_statistics">Statistiken</string>
+    <string name="social_action_title">Erzähl uns von deinen Freunden</string>
+    <!-- Статистика -->
+    <string name="statistics_level1">Anfänger</string>
+    <string name="statistics_level2">Spezialist</string>
+    <string name="statistics_level3">Erfahren</string>
+    <string name="statistics_level4">Experte</string>
+    <string name="statistics_level5">Meister</string>
+    <string name="statistics_level6">Elite</string>
+    <string name="statistics_create_notes_title">Insgesamt erstellte Notizen:</string>
+    <string name="statistics_create_notifications_title">Insgesamt erstellte Erinnerungen:</string>
+    <string name="statistics_get_notifications_title">Insgesamt erhaltene Erinnerungen:</string>
+    <string name="statistics_remove_notes_title">Insgesamt gelöschte Notizen:</string>
+    <string name="statistics_exports_title">Exportierte mal:</string>
+    <string name="statistics_imports_title">Importierte mal:</string>
+    <string name="statistics_level_title">Ebene</string>
+    <string name="statistics_experience_title">Erfahrung</string>
     <!-- Новая заметка -->
     <string name="new_note">Notiz</string>
     <string name="new_note_notification">Reminder</string>
@@ -46,7 +62,6 @@
     <string name="new_note_error_speech_recognition_ok">Installieren</string>
     <string name="new_note_error_speech_recognition_cancel">Abbrechen</string>
     <string name="new_note_error_speech_recognition_cancel_message">Bei Ablehnung wird die Spracherkennung voraussichtlich nicht funktionieren.</string>
-
     <string name="new_note_speech_recognition_message">Sprechen…</string>
     <string name="new_note_speech_recognition_start">Tippen Sie auf zu sprechen</string>
     <string name="new_note_speech_recognition_error_audio">Audioaufnahmefehler. Überprüfen Sie die Mikrofoneinstellungen.</string>

@@ -28,6 +28,23 @@
     <string name="action_save">저장</string>
     <string name="action_settings">선택항목 삭제</string>
     <string name="action_search">검색</string>
+    <string name="menu_statistics">통계</string>
+    <string name="social_action_title">친구에 대해 알려주세요.</string>
+    <!-- Статистика -->
+    <string name="statistics_level1">초보자</string>
+    <string name="statistics_level2">전문가</string>
+    <string name="statistics_level3">숙련 된</string>
+    <string name="statistics_level4">전문가</string>
+    <string name="statistics_level5">석사</string>
+    <string name="statistics_level6">엘리트</string>
+    <string name="statistics_create_notes_title">생성 된 총 메모 수 :</string>
+    <string name="statistics_create_notifications_title">생성 된 전체 미리 알림 :</string>
+    <string name="statistics_get_notifications_title">수신 된 전체 알림 :</string>
+    <string name="statistics_remove_notes_title">총 삭제 된 메모 :</string>
+    <string name="statistics_exports_title">내 보낸 시간 :</string>
+    <string name="statistics_imports_title">가져온 시간 :</string>
+    <string name="statistics_level_title">수평</string>
+    <string name="statistics_experience_title">경험</string>
     <!-- Новая заметка -->
     <string name="new_note">메모</string>
     <string name="new_note_notification">알림</string>

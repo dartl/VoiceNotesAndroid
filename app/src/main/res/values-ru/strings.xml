@@ -28,6 +28,23 @@
     <string name="action_save">Сохранить</string>
     <string name="action_settings">Удалить выбранные</string>
     <string name="action_search">Поиск</string>
+    <string name="menu_statistics">Статистика</string>
+    <string name="social_action_title">Расскажите о нас друзьям</string>
+    <!-- Статистика -->
+    <string name="statistics_level1">Начинающий</string>
+    <string name="statistics_level2">Специалист</string>
+    <string name="statistics_level3">Опытный</string>
+    <string name="statistics_level4">Эксперт</string>
+    <string name="statistics_level5">Мастер</string>
+    <string name="statistics_level6">Элита</string>
+    <string name="statistics_create_notes_title">Всего создано заметок:</string>
+    <string name="statistics_create_notifications_title">Всего создано напоминаний:</string>
+    <string name="statistics_get_notifications_title">Всего полученных напоминаний:</string>
+    <string name="statistics_remove_notes_title">Всего удаленных заметок:</string>
+    <string name="statistics_exports_title">Экспортировано:</string>
+    <string name="statistics_imports_title">Импортировано:</string>
+    <string name="statistics_level_title">Уровень</string>
+    <string name="statistics_experience_title">Опыт</string>
     <!-- Новая заметка -->
     <string name="new_note">Заметка</string>
     <string name="new_note_notification">Напоминание</string>

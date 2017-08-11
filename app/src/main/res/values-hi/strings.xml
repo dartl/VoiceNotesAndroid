@@ -15,7 +15,6 @@
     <string name="new_notes">नोट्स</string>
     <string name="new_note_notifications">रिमाइंडर</string>
     <string name="main_view_error_select">कोई ऑब्जेक्ट नहीं चुना गया</string>
-
     <string name="main_permissions_error">आपने सभी अनुमतियां नहीं दीं। हम आवेदन की कार्य क्षमता की गारंटी नहीं देते हैं।</string>
     <!-- Меню -->
     <string name="menu_add">नोट जोड़ें</string>
@@ -28,6 +27,23 @@
     <string name="action_save">सहेजें</string>
     <string name="action_settings">चुने गए हटाएँ</string>
     <string name="action_search">खोजें</string>
+    <string name="menu_statistics">आंकड़े</string>
+    <string name="social_action_title">हमें अपने दोस्तों के बारे में बताएं</string>
+    <!-- Статистика -->
+    <string name="statistics_level1">नौसिखिया</string>
+    <string name="statistics_level2">विशेषज्ञ</string>
+    <string name="statistics_level3">अनुभव</string>
+    <string name="statistics_level4">विशेषज्ञ</string>
+    <string name="statistics_level5">स्वामी</string>
+    <string name="statistics_level6">अभिजात वर्ग</string>
+    <string name="statistics_create_notes_title">कुल नोट्स बनाए गए:</string>
+    <string name="statistics_create_notifications_title">कुल अनुस्मारक बनाए गए:</string>
+    <string name="statistics_get_notifications_title">कुल प्राप्त अनुस्मारक:</string>
+    <string name="statistics_remove_notes_title">कुल हटाए गए नोट्स:</string>
+    <string name="statistics_exports_title">निर्यात किए गए समय:</string>
+    <string name="statistics_imports_title">आयातित समय:</string>
+    <string name="statistics_level_title">स्तर</string>
+    <string name="statistics_experience_title">अनुभव</string>
     <!-- Новая заметка -->
     <string name="new_note">नोट</string>
     <string name="new_note_notification">रिमाइंडर</string>

@@ -85,6 +85,21 @@
     <string name="settings_other_title">Altro</string>
     <string name="settings_add_icon_add_title">Aggiungi icona</string>
     <string name="subs_inner_text">Tutte le sottoscrizioni rimuovono gli annunci dall\'applicazione e rappresentano donazioni allo sviluppatore</string>
+    <string name="social_action_title">Raccontaci i tuoi amici</string>
+    <string name="statistics_level1">Principiante</string>
+    <string name="statistics_level2">Specialista</string>
+    <string name="statistics_level3">Esperto</string>
+    <string name="statistics_level4">Esperto</string>
+    <string name="statistics_level5">Maestro</string>
+    <string name="statistics_level6">Elite</string>
+    <string name="statistics_create_notes_title">Totale note create:</string>
+    <string name="statistics_create_notifications_title">Totale promemoria creato:</string>
+    <string name="statistics_get_notifications_title">Totale promemoria ricevuti:</string>
+    <string name="statistics_remove_notes_title">Totale note eliminate:</string>
+    <string name="statistics_exports_title">Orari esportati:</string>
+    <string name="statistics_imports_title">Tempi importati:</string>
+    <string name="statistics_level_title">Livello</string>
+    <string name="statistics_experience_title">Esperienza</string>
 
     <string-array name="export_import_type">
         <item>JSON</item>

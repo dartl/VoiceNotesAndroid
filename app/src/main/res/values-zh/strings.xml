@@ -83,6 +83,22 @@
     <string name="settings_other_title">其他</string>
     <string name="settings_add_icon_add_title">添加图标</string>
     <string name="subs_inner_text">所有订阅从应用程序中删除广告，并向开发人员表示捐款</string>
+    <string name="menu_statistics">統計</string>
+    <string name="social_action_title">告訴我們你的朋友</string>
+    <string name="statistics_level1">初學者</string>
+    <string name="statistics_level2">專家</string>
+    <string name="statistics_level3">有經驗的</string>
+    <string name="statistics_level4">專家</string>
+    <string name="statistics_level5">主</string>
+    <string name="statistics_level6">原種</string>
+    <string name="statistics_create_notes_title">總筆記已創建：</string>
+    <string name="statistics_create_notifications_title">創建的提醒總數：</string>
+    <string name="statistics_get_notifications_title">總收到提醒：</string>
+    <string name="statistics_remove_notes_title">總刪除筆記：</string>
+    <string name="statistics_exports_title">出口時間：</string>
+    <string name="statistics_imports_title">進口時間：</string>
+    <string name="statistics_level_title">水平</string>
+    <string name="statistics_experience_title">經驗</string>
 
     <string-array name="export_import_type">
         <item>JSON</item>

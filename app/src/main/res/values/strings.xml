@@ -7,15 +7,18 @@
     <string name="donate_developer">Support the developer</string>
     <string name="donate_small">Small donation</string>
     <string name="donate_big">Large donation</string>
+
     <!-- Названия активити -->
     <string name="app_name">Voice notes</string>
     <string name="app_name_note">Note</string>
     <string name="app_name_export_import">Export/import</string>
+
     <!-- Главное окно -->
     <string name="new_notes">Notes</string>
     <string name="new_note_notifications">Reminders</string>
     <string name="main_view_error_select">No objects selected</string>
     <string name="main_permissions_error">You did not provide all the permissions. We do not guarantee the working capacity of the application.</string>
+
     <!-- Меню -->
     <string name="menu_add">Add note</string>
     <string name="menu_notes_list">All notes</string>
@@ -86,10 +89,12 @@
     <string name="cancel">Cancel</string>
     <string name="dialogDeleteTitle">Delete?</string>
     <string name="dialogDeleteMessage">These items will be deleted forever</string>
+
     <!-- Заметки просмотр -->
     <string name="note_view_remind_title">Voice Notes will remind you</string>
     <string name="note_view_remind_no_body">Never</string>
     <!-- Экспорт и импорт -->
+
     <string name="export_import_export">Export</string>
     <string name="export_import_import">Import</string>
     <string name="export_import_select_type">Select type</string>
@@ -100,11 +105,13 @@
     <string name="export_import_folder_not">Folder not selected</string>
     <string name="export_import_folder_error">Select a file, not a folder</string>
     <string name="export_import_error_import">The file may be corrupt</string>
+
     <!-- Голосовалка -->
     <string name="vote_text_header">Do you like the app?</string>
     <string name="vote_text_body">If you like the app, vote for it on Google Play or write a review</string>
     <string name="vote_text_ok">Give the app five stars</string>
     <string name="vote_text_cancel">Cancel</string>
+
     <!-- Настройки -->
     <string name="settings_add_icon_add">Add an \"Add note\" icon to the desktop</string>
     <string name="settings_recognition_check">Check your device for the ability to use speech recognition</string>
@@ -114,6 +121,7 @@
     <string name="settings_notification_not_sound">No sound selected</string>
     <string name="settings_other_title">Other</string>
     <string name="settings_add_icon_add_title">Add icon</string>
+
     <!-- Подписки -->
     <string name="subs_inner_text">All subscriptions remove ads from the app and represent donations to the developer</string>
     <string-array name="export_import_type">

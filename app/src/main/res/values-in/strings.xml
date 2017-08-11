@@ -15,7 +15,6 @@
     <string name="new_notes">Catatan</string>
     <string name="new_note_notifications">Pengingat</string>
     <string name="main_view_error_select">Tidak ada objek yang dipilih</string>
-
     <string name="main_permissions_error">Anda tidak memberikan semua izin. Kami tidak menjamin kapasitas aplikasi.</string>
     <!-- Меню -->
     <string name="menu_add">Tambahkan catatan</string>
@@ -28,6 +27,23 @@
     <string name="action_save">Simpan</string>
     <string name="action_settings">Hapus yang dipilih</string>
     <string name="action_search">Cari</string>
+    <string name="menu_statistics">Statistik</string>
+    <string name="social_action_title">Ceritakan tentang teman Anda</string>
+    <!-- Статистика -->
+    <string name="statistics_level1">Pemula</string>
+    <string name="statistics_level2">Spesialis</string>
+    <string name="statistics_level3">Berpengalaman</string>
+    <string name="statistics_level4">Ahli</string>
+    <string name="statistics_level5">Menguasai</string>
+    <string name="statistics_level6">Elite</string>
+    <string name="statistics_create_notes_title">Total catatan dibuat:</string>
+    <string name="statistics_create_notifications_title">Total pengingat dibuat:</string>
+    <string name="statistics_get_notifications_title">Total pengingat yang diterima:</string>
+    <string name="statistics_remove_notes_title">Total catatan yang dihapus:</string>
+    <string name="statistics_exports_title">Waktu yang diekspor:</string>
+    <string name="statistics_imports_title">Waktu impor:</string>
+    <string name="statistics_level_title">Tingkat</string>
+    <string name="statistics_experience_title">Pengalaman</string>
     <!-- Новая заметка -->
     <string name="new_note">Catatan</string>
     <string name="new_note_notification">Pengingat</string>

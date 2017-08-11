@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="navigation_drawer_open">افتح لوحة التنقل</string>
     <string name="navigation_drawer_close">أغلق لوحة التنقل</string>
     <string name="success">نجاح</string>
@@ -83,6 +84,24 @@
     <string name="settings_other_title">آخر</string>
     <string name="settings_add_icon_add_title">إضافة رمز</string>
     <string name="subs_inner_text">جميع الاشتراكات إزالة الإعلانات من التطبيق وتمثل التبرعات للمطور</string>
+
+    <string name="menu_statistics">الإحصاء</string>
+    <string name="social_action_title">أخبرنا عن أصدقائك</string>
+    <string name="statistics_level1">مبتدئ</string>
+    <string name="statistics_level2">متخصص</string>
+    <string name="statistics_level3">يختبر</string>
+    <string name="statistics_level4">خبير</string>
+    <string name="statistics_level5">رئيسي - سيد</string>
+    <string name="statistics_level6">نخبة</string>
+    <string name="statistics_create_notes_title">إجمالي الملاحظات التي تم إنشاؤها:</string>
+    <string name="statistics_create_notifications_title">إجمالي التذكيرات التي تم إنشاؤها:</string>
+    <string name="statistics_get_notifications_title">إجمالي التذكيرات المستلمة:</string>
+    <string name="statistics_remove_notes_title">إجمالي الملاحظات المحذوفة:</string>
+    <string name="statistics_exports_title">مرات التصدير:</string>
+    <string name="statistics_imports_title">الأوقات المستوردة:</string>
+    <string name="statistics_level_title">مستوى</string>
+    <string name="statistics_experience_title">تجربة</string>
+
     <string-array name="export_import_type">
         <item>JSON</item>
         <item>txt</item>

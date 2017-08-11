@@ -28,6 +28,23 @@
     <string name="action_save">保存</string>
     <string name="action_settings">選択項目の削除</string>
     <string name="action_search">検索</string>
+    <string name="menu_statistics">統計</string>
+    <string name="social_action_title">あなたの友達について教えてください</string>
+    <!-- Статистика -->
+    <string name="statistics_level1">初心者</string>
+    <string name="statistics_level2">スペシャリスト</string>
+    <string name="statistics_level3">経験豊富な</string>
+    <string name="statistics_level4">専門家</string>
+    <string name="statistics_level5">マスター</string>
+    <string name="statistics_level6">エリート</string>
+    <string name="statistics_create_notes_title">作成された合計ノート数：</string>
+    <string name="statistics_create_notifications_title">作成されたリマインダの総数：</string>
+    <string name="statistics_get_notifications_title">受信したリマインダの総数：</string>
+    <string name="statistics_remove_notes_title">削除されたメモの合計：</string>
+    <string name="statistics_exports_title">輸出回数：</string>
+    <string name="statistics_imports_title">輸入された時間：</string>
+    <string name="statistics_level_title">レベル</string>
+    <string name="statistics_experience_title">経験</string>
     <!-- Новая заметка -->
     <string name="new_note">メモ</string>
     <string name="new_note_notification">リマインダー</string>
