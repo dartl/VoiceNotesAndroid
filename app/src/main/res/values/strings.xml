@@ -43,6 +43,8 @@
     <string name="statistics_remove_notes_title">Total deleted notes:</string>
     <string name="statistics_exports_title">Exported times:</string>
     <string name="statistics_imports_title">Imported times:</string>
+    <string name="statistics_level_title">Level</string>
+    <string name="statistics_experience_title">Experience</string>
 
     <!-- Новая заметка -->
     <string name="new_note">Note</string>

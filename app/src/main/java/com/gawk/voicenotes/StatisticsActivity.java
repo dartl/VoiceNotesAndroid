@@ -19,7 +19,7 @@ import com.gawk.voicenotes.subs.SubsInterface;
 
 public class StatisticsActivity extends ParentActivity {
     private TextView mTextViewCreateNotes, mTextViewCreateNotifications, mTextViewGetNotifications,
-            mTextViewRemoveNotes, mTextViewExports, mTextViewImports;
+            mTextViewRemoveNotes, mTextViewExports, mTextViewImports, mTextViewLevel, mTextViewExperience;
     private ImageView mImageViewAvatar;
     private TextView mTextViewRank;
 
@@ -34,10 +34,18 @@ public class StatisticsActivity extends ParentActivity {
         mTextViewRemoveNotes = (TextView) findViewById(R.id.textViewRemoveNotes);
         mTextViewExports = (TextView) findViewById(R.id.textViewExports);
         mTextViewImports = (TextView) findViewById(R.id.textViewImports);
+        mTextViewLevel = (TextView) findViewById(R.id.textViewLevel);
+        mTextViewExperience = (TextView) findViewById(R.id.textViewExperience);
 
         mImageViewAvatar = (ImageView) findViewById(R.id.imageViewAvatar);
         mTextViewRank = (TextView) findViewById(R.id.textViewRank);
 
+        refresh();
+
+        initAdMob(true);
+    }
+
+    private void refresh() {
         Statistics statistics = new Statistics(this);
 
         mTextViewCreateNotes.setText(String.valueOf(statistics.getCreateNotes()));
@@ -46,10 +54,11 @@ public class StatisticsActivity extends ParentActivity {
         mTextViewRemoveNotes.setText(String.valueOf(statistics.getRemoveNotes()));
         mTextViewExports.setText(String.valueOf(statistics.getExports()));
         mTextViewImports.setText(String.valueOf(statistics.getImports()));
+        mTextViewLevel.setText(getText(R.string.statistics_level_title) + " " + statistics.getLevel());
+        mTextViewExperience.setText(String.valueOf(statistics.getExperience()) + "/" +
+                String.valueOf(statistics.getBorderExperience() + statistics.getUpExperience()));
 
         checkRank();
-
-        initAdMob(true);
     }
 
     private void checkRank() {

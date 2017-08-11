@@ -9,6 +9,8 @@ import com.gawk.voicenotes.preferences.PrefUtil;
  */
 
 public class Statistics {
+    public static final long START_EXPERIENCE = 2;
+
     public static final String PREF_EXPERIENCE = "PREF_EXPERIENCE";
     public static final String PREF_BORDER_EXPERIENCE = "PREF_BORDER_EXPERIENCE";
     public static final String PREF_UP_EXPERIENCE = "PREF_UP_EXPERIENCE";
@@ -38,7 +40,7 @@ public class Statistics {
         long newExperiences = mPrefUtil.getLong(PREF_EXPERIENCE,0);
         newExperiences += code;
         long borderExperiences = mPrefUtil.getLong(PREF_BORDER_EXPERIENCE,0);
-        long upExperiences = mPrefUtil.getLong(PREF_UP_EXPERIENCE,2);
+        long upExperiences = mPrefUtil.getLong(PREF_UP_EXPERIENCE,START_EXPERIENCE);
         if (newExperiences - borderExperiences >= upExperiences) {
             borderExperiences = upExperiences;
             upExperiences = (long) Math.ceil(upExperiences*1.2);
@@ -95,7 +97,7 @@ public class Statistics {
     }
 
     public long getUpExperience() {
-        return mPrefUtil.getLong(PREF_UP_EXPERIENCE,0);
+        return mPrefUtil.getLong(PREF_UP_EXPERIENCE,START_EXPERIENCE);
     }
 
     public int getLevel() {

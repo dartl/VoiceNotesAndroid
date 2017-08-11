@@ -2,6 +2,7 @@
 <android.support.v4.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/GawkMaterialTheme.Body"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <LinearLayout
@@ -23,113 +24,121 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/statistics_level1" />
+
+            <TextView
+                android:id="@+id/textViewLevel"
+                style="@style/GawkMaterialTheme.StatisticsSubName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/textViewExperience"
+                style="@style/GawkMaterialTheme.StatisticsSubName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
         </LinearLayout>
         <LinearLayout
             android:orientation="horizontal" android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent" style="@style/GawkMaterialTheme.StatisticsListElement">
 
             <TextView
                 android:id="@+id/textView11"
+                style="@style/GawkMaterialTheme.StatisticsListElement.Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:text="@string/statistics_create_notes_title" />
 
             <TextView
                 android:id="@+id/textViewCreateNotes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:text="0" />
         </LinearLayout>
         <LinearLayout
             android:orientation="horizontal" android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent" style="@style/GawkMaterialTheme.StatisticsListElement">
 
             <TextView
                 android:id="@+id/textView12"
+                style="@style/GawkMaterialTheme.StatisticsListElement.Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:text="@string/statistics_create_notifications_title" />
 
             <TextView
                 android:id="@+id/textViewCreateNotifications"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:text="0" />
         </LinearLayout>
         <LinearLayout
             android:orientation="horizontal" android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent" style="@style/GawkMaterialTheme.StatisticsListElement">
 
             <TextView
                 android:id="@+id/textView14"
+                style="@style/GawkMaterialTheme.StatisticsListElement.Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:text="@string/statistics_get_notifications_title" />
 
             <TextView
                 android:id="@+id/textViewGetNotifications"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:text="0" />
         </LinearLayout>
         <LinearLayout
             android:orientation="horizontal" android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent" style="@style/GawkMaterialTheme.StatisticsListElement">
 
             <TextView
                 android:id="@+id/textView16"
+                style="@style/GawkMaterialTheme.StatisticsListElement.Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:text="@string/statistics_remove_notes_title" />
 
             <TextView
                 android:id="@+id/textViewRemoveNotes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:text="0" />
         </LinearLayout>
         <LinearLayout
             android:orientation="horizontal" android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent" style="@style/GawkMaterialTheme.StatisticsListElement">
 
             <TextView
                 android:id="@+id/textView18"
+                style="@style/GawkMaterialTheme.StatisticsListElement.Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:text="@string/statistics_exports_title" />
 
             <TextView
                 android:id="@+id/textViewExports"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:text="0" />
         </LinearLayout>
         <LinearLayout
             android:orientation="horizontal" android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent" style="@style/GawkMaterialTheme.StatisticsListElement">
 
             <TextView
                 android:id="@+id/textView20"
+                style="@style/GawkMaterialTheme.StatisticsListElement.Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:text="@string/statistics_imports_title" />
 
             <TextView
                 android:id="@+id/textViewImports"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:text="0" />
         </LinearLayout>
     </LinearLayout>
