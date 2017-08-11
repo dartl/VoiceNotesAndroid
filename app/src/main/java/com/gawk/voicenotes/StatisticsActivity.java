@@ -45,6 +45,12 @@ public class StatisticsActivity extends ParentActivity {
         initAdMob(true);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        refresh();
+    }
+
     private void refresh() {
         Statistics statistics = new Statistics(this);
 
@@ -63,27 +69,27 @@ public class StatisticsActivity extends ParentActivity {
 
     private void checkRank() {
         Statistics statistics = new Statistics(this);
-        if (statistics.getLevel() > 10) {
+        if (statistics.getLevel() >= 10) {
             Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.level2);
             mImageViewAvatar.setImageBitmap(bm);
             mTextViewRank.setText(getText(R.string.statistics_level2));
         }
-        if (statistics.getLevel() > 30) {
+        if (statistics.getLevel() >= 30) {
             Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.level3);
             mImageViewAvatar.setImageBitmap(bm);
             mTextViewRank.setText(getText(R.string.statistics_level3));
         }
-        if (statistics.getLevel() > 50) {
+        if (statistics.getLevel() >= 50) {
             Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.level4);
             mImageViewAvatar.setImageBitmap(bm);
             mTextViewRank.setText(getText(R.string.statistics_level4));
         }
-        if (statistics.getLevel() > 100) {
+        if (statistics.getLevel() >= 100) {
             Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.level5);
             mImageViewAvatar.setImageBitmap(bm);
             mTextViewRank.setText(getText(R.string.statistics_level5));
         }
-        if (statistics.getLevel() > 500) {
+        if (statistics.getLevel() >= 500) {
             Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.level6);
             mImageViewAvatar.setImageBitmap(bm);
             mTextViewRank.setText(getText(R.string.statistics_level6));

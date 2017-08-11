@@ -44,6 +44,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
     private SQLiteDatabase db;
     private Context context;
     private ParentActivity activity;
+    private Statistics mStatistics;
 
     public static final int DATABASE_VERSION = 2;
     public static final String DATABASE_NAME = "VOICE_NOTES.DB";
@@ -81,6 +82,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
     public SQLiteDBHelper(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
+        mStatistics = new Statistics(context);
     }
 
     /**
@@ -262,6 +264,9 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         if (!db.isOpen()) {
             return -1;
         }
+
+        mStatistics.addPointCreateNotifications();
+
         ContentValues newValues = new ContentValues();
         newValues.put(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_ID_NOTE, notification.getId_note());
         newValues.put(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_DATE, notification.getDate().getTime());
@@ -336,6 +341,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         if (!db.isOpen()) {
             return -1;
         }
+        mStatistics.addPointCreateNotes();
         ContentValues newValues = new ContentValues();
         newValues.put(SQLiteDBHelper.NOTES_TABLE_COLUMN_TEXT_NOTE, note.getText_note());
         newValues.put(SQLiteDBHelper.NOTES_TABLE_COLUMN_DATE, note.getDate().getTime());
@@ -368,6 +374,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
                     return false;
                 }
             }
+            mStatistics.addPointRemoveNotes();
             return true;
         }
         return false;
@@ -408,6 +415,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
                             newValues.put(SQLiteDBHelper.NOTES_TABLE_COLUMN_TEXT_NOTE, textNote);
                             newValues.put(SQLiteDBHelper.NOTES_TABLE_COLUMN_DATE, dt.getTime());
                             db.insert(SQLiteDBHelper.NOTES_TABLE_NAME, null, newValues);
+                            mStatistics.addPointImports();
                         } else {
                             return false;
                         }
@@ -456,6 +464,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
                 PrintWriter printWriter = new PrintWriter(file);
                 printWriter.println(result);
                 printWriter.close();
+                mStatistics.addPointExports();
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }

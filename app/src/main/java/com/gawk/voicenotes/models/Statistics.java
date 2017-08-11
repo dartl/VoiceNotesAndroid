@@ -1,6 +1,7 @@
 package com.gawk.voicenotes.models;
 
 import android.app.Activity;
+import android.content.Context;
 
 import com.gawk.voicenotes.preferences.PrefUtil;
 
@@ -32,7 +33,7 @@ public class Statistics {
 
     private PrefUtil mPrefUtil;
 
-    public Statistics(Activity context) {
+    public Statistics(Context context) {
         mPrefUtil = new PrefUtil(context);
     }
 

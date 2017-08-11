@@ -21,7 +21,7 @@ public class PrefUtil {
         sharedPreferences = _sp;
     }
 
-    public PrefUtil(Activity context) {
+    public PrefUtil(Context context) {
         sharedPreferences = context.getSharedPreferences(PERSISTANT_STORAGE_NAME, Context.MODE_PRIVATE);
     }
 

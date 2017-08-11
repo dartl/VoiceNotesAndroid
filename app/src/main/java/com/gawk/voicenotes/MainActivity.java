@@ -153,28 +153,33 @@ public class MainActivity extends ParentActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_search) {
-            final FragmentParent listFragment = (FragmentParent) adapter.getItem(viewPager.getCurrentItem());
+        try {
+            if (id == R.id.action_search) {
+                final FragmentParent listFragment = (FragmentParent) adapter.getItem(viewPager.getCurrentItem());
 
-            searchView =
-                    (SearchView) MenuItemCompat.getActionView(actionSearch);
-            searchView.setQueryHint(getResources().getString(R.string.action_search) + "...");
-            searchView.setOnQueryTextListener(
-                    new SearchView.OnQueryTextListener() {
-                        @Override
-                        public boolean onQueryTextSubmit(String query) {
-                            return false;
-                        }
+                searchView =
+                        (SearchView) MenuItemCompat.getActionView(actionSearch);
+                searchView.setQueryHint(getResources().getString(R.string.action_search) + "...");
+                searchView.setOnQueryTextListener(
+                        new SearchView.OnQueryTextListener() {
+                            @Override
+                            public boolean onQueryTextSubmit(String query) {
+                                return false;
+                            }
 
-                        @Override
-                        public boolean onQueryTextChange(String newText) {
-                            listFragment.search(newText);
-                            return true;
+                            @Override
+                            public boolean onQueryTextChange(String newText) {
+                                listFragment.search(newText);
+                                return true;
+                            }
                         }
-                    }
-            );
-            return true;
+                );
+                return true;
+            }
+        } catch (NullPointerException e) {
+
         }
+
 
         return super.onOptionsItemSelected(item);
     }

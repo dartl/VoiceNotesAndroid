@@ -26,6 +26,7 @@ import android.util.Log;
 import com.gawk.voicenotes.NoteView;
 import com.gawk.voicenotes.R;
 import com.gawk.voicenotes.models.Note;
+import com.gawk.voicenotes.models.Statistics;
 
 import java.io.IOException;
 
@@ -80,6 +81,8 @@ public class TimeNotification extends BroadcastReceiver {
             nb.setDefaults(Notification.DEFAULT_SOUND); // выставляет звук по умолчанию
         }
         nm.notify(NOTIFY_TAG, idNotification, nb.build());
+        Statistics mStatistics = new Statistics(context);
+        mStatistics.addPointGetNotifications();
     }
 
 }

@@ -70,7 +70,7 @@
 
         <activity android:name=".StatisticsActivity"
             android:label="@string/menu_statistics"
-            android:launchMode="singleTop"
+            android:launchMode="singleInstance"
             android:windowSoftInputMode="stateHidden">
         </activity>
 
