@@ -231,4 +231,17 @@
         <item name="android:paddingBottom">16dp</item>
         <item name="android:textSize">14sp</item>
     </style>
+
+    <style name="GawkMaterialTheme.BottomMenuSelected" >
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:paddingRight">@dimen/body_padding</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+    </style>
+
+    <style name="GawkMaterialTheme.BottomMenuSelectedItem" >
+        <item name="android:scaleType">fitCenter</item>
+        <item name="android:layout_marginLeft">8dp</item>
+        <item name="android:background">@color/colorTransparent</item>
+    </style>
 </resources>

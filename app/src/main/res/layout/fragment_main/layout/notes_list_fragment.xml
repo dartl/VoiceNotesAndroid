@@ -6,15 +6,57 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/listViewAllNotes"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="10dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="8dp"
+        android:layout_marginRight="@dimen/body_padding"
+        android:layout_marginBottom="@dimen/body_padding"
         app:srcCompat="@drawable/ic_note_add_white_24dp"
-        app:fabSize="normal" />
+        app:fabSize="normal"
+        android:layout_above="@+id/relativeLayoutBottomMenu"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayoutBottomMenu"
+        style="@style/GawkMaterialTheme.BottomMenuSelected"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:translationY="64dp"
+        android:orientation="horizontal"
+        android:visibility="visible">
+
+        <ImageButton
+            android:id="@+id/imageButtonShare"
+            style="@style/GawkMaterialTheme.BottomMenuSelectedItem"
+            android:layout_width="@dimen/height_icon_selected_menu"
+            android:layout_height="@dimen/height_icon_selected_menu"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="end"
+            android:layout_toLeftOf="@+id/imageButtonDelete"
+            android:layout_toStartOf="@+id/imageButtonDelete"
+            android:scaleType="fitCenter"
+            app:srcCompat="?attr/actionModeShareDrawable" />
+
+        <ImageButton
+            android:id="@+id/imageButtonDelete"
+            style="@style/GawkMaterialTheme.BottomMenuSelectedItem"
+            android:layout_width="@dimen/height_icon_selected_menu"
+            android:layout_height="@dimen/height_icon_selected_menu"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="end"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/ic_delete_forever_black_24dp" />
+    </RelativeLayout>
 </RelativeLayout>

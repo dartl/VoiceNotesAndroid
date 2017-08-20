@@ -107,6 +107,7 @@ public class SpeechRecognitionDialog extends DialogFragment {
         mDlg = builder.create();
 
         Window window = mDlg.getWindow();
+        assert window != null;
         WindowManager.LayoutParams wlp = window.getAttributes();
         wlp.gravity = Gravity.BOTTOM;
 

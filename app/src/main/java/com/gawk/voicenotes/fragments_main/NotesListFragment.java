@@ -14,6 +14,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.gawk.voicenotes.FragmentParent;
@@ -32,6 +34,7 @@ import java.util.ArrayList;
 
 public class NotesListFragment extends FragmentParent implements ActionsListNotes {
     private MainActivity mainActivity;
+    private RelativeLayout mRelativeLayoutBottomMenu;
 
     private ArrayList selectNotes = new ArrayList<Long>();
 
@@ -63,6 +66,8 @@ public class NotesListFragment extends FragmentParent implements ActionsListNote
         dbHelper.connection();
 
         Cursor noteCursor = dbHelper.getCursorAllNotes();
+
+        mRelativeLayoutBottomMenu = view.findViewById(R.id.relativeLayoutBottomMenu);
 
         /* new NoteRecycler */
         mLayoutManager = new LinearLayoutManager(getActivity());
@@ -124,11 +129,13 @@ public class NotesListFragment extends FragmentParent implements ActionsListNote
             Log.e("GAWK_ERR","selectNotes REMOVE before  = " + selectNotes.toString());
             selectNotes.remove(id);
             Log.e("GAWK_ERR","selectNotes REMOVE after = " + selectNotes.toString());
+            changeBottomMenu();
             return false;
         } else {
             Log.e("GAWK_ERR","selectNotes ADD before  = " + selectNotes.toString());
             selectNotes.add(id);
             Log.e("GAWK_ERR","selectNotes ADD after = " + selectNotes.toString());
+            changeBottomMenu();
             return true;
         }
     }
@@ -173,5 +180,22 @@ public class NotesListFragment extends FragmentParent implements ActionsListNote
     public void search(String text) {
         dbHelper.connection();
         updateNote(dbHelper.getCursorAllNotes(text));
+    }
+
+    private void changeBottomMenu() {
+        if (selectNotes.size() > 0) {
+            mRelativeLayoutBottomMenu.getLayoutParams().height = RelativeLayout.LayoutParams.WRAP_CONTENT;
+            mRelativeLayoutBottomMenu.requestLayout();
+            mRelativeLayoutBottomMenu.animate().translationY(0);
+        } else {
+            mRelativeLayoutBottomMenu.animate().translationY(mRelativeLayoutBottomMenu.getHeight());
+            mRelativeLayoutBottomMenu.animate().withEndAction(new Runnable() {
+                @Override
+                public void run() {
+                    mRelativeLayoutBottomMenu.getLayoutParams().height= 0;
+                    mRelativeLayoutBottomMenu.requestLayout();
+                }
+            });
+        }
     }
 }

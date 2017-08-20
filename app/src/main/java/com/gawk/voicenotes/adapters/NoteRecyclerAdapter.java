@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -41,6 +42,7 @@ public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerA
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView textView, dateView;
+        CardView cardView;
         public View parent;
 
         public ViewHolder(View v) {
@@ -48,6 +50,7 @@ public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerA
             parent = v;
             textView = v.findViewById(R.id.textViewListText);
             dateView = v.findViewById(R.id.textViewListDate);
+            cardView = v.findViewById(R.id.card_view);
         }
 
         public void setData(final Cursor c, final NoteRecyclerAdapter noteRecyclerAdapter) {
@@ -100,11 +103,11 @@ public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerA
 
         private void changeItemSelect(boolean state) {
             if (state) {
-                parent.setBackgroundColor(ContextCompat.getColor(parent.getContext(), R.color.colorPrimary));
+                cardView.setBackgroundColor(ContextCompat.getColor(parent.getContext(), R.color.colorPrimaryDark));
                 textView.setTextColor(ContextCompat.getColor(parent.getContext(), R.color.textColorPrimary));
                 dateView.setTextColor(ContextCompat.getColor(parent.getContext(), R.color.textColorPrimary));
             } else {
-                parent.setBackgroundColor(ContextCompat.getColor(parent.getContext(), R.color.colorTransparent));
+                cardView.setBackgroundColor(ContextCompat.getColor(parent.getContext(), R.color.textColorPrimary));
                 textView.setTextColor(ContextCompat.getColor(parent.getContext(), R.color.colorGrey900));
                 dateView.setTextColor(ContextCompat.getColor(parent.getContext(), R.color.colorGrey700));
             }
