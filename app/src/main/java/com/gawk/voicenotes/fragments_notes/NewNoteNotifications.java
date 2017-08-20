@@ -60,14 +60,14 @@ public class NewNoteNotifications extends FragmentParent implements TimePickerRe
 
         mCustomLogger.write("NewNoteNotifications called onCreateView");
 
-        switchNotification = (Switch) view.findViewById(R.id.switchNotification);
-        notificationLayout = (RelativeLayout) view.findViewById(R.id.notificationLayout);
-        selectTime = (Button) view.findViewById(R.id.buttonSelectTime);
-        selectDate = (Button) view.findViewById(R.id.buttonSelectDate);
-        textViewNowDate = (TextView) view.findViewById(R.id.textViewNowDate);
-        textViewErrorDate = (TextView) view.findViewById(R.id.textViewErrorDate);
-        toggleButton_Sound = (ToggleButton) view.findViewById(R.id.toggleButton_Sound);
-        toggleButton_Shake = (ToggleButton)  view.findViewById(R.id.toggleButton_Shake);
+        switchNotification =  view.findViewById(R.id.switchNotification);
+        notificationLayout =  view.findViewById(R.id.notificationLayout);
+        selectTime = view.findViewById(R.id.buttonSelectTime);
+        selectDate = view.findViewById(R.id.buttonSelectDate);
+        textViewNowDate = view.findViewById(R.id.textViewNowDate);
+        textViewErrorDate = view.findViewById(R.id.textViewErrorDate);
+        toggleButton_Sound = view.findViewById(R.id.toggleButton_Sound);
+        toggleButton_Shake =  view.findViewById(R.id.toggleButton_Shake);
 
         selectTime.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,7 +115,6 @@ public class NewNoteNotifications extends FragmentParent implements TimePickerRe
 
         dateNotification = Calendar.getInstance();
         setNotificationTime();
-        textViewErrorDate.setVisibility(View.INVISIBLE);
         return view;
     }
 

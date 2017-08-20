@@ -3,7 +3,9 @@ package com.gawk.voicenotes.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +26,7 @@ import java.util.Date;
  * Created by GAWK on 24.03.2017.
  */
 
-public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerAdapter.ViewHolder> {
+public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerAdapter.ViewHolder> implements View.OnLongClickListener {
 
     private ActionsListNotes actionsListNotes;
 
@@ -40,39 +42,40 @@ public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerA
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
-        public ImageButton deleteIcon;
-        public CheckBox checkBoxSelectNote;
-        public TextView textView, dateView;
+        CheckBox checkBoxSelectNote;
+        TextView textView, dateView;
         public View parent;
 
         public ViewHolder(View v) {
             super(v);
             parent = v;
-            deleteIcon = (ImageButton) v.findViewById(R.id.buttonDeleteNote);
-            checkBoxSelectNote = (CheckBox) v.findViewById(R.id.checkBoxSelectNote);
-            textView = (TextView) v.findViewById(R.id.textViewListText);
-            dateView = (TextView) v.findViewById(R.id.textViewListDate);
+            checkBoxSelectNote = v.findViewById(R.id.checkBoxSelectNote);
+            textView = v.findViewById(R.id.textViewListText);
+            dateView = v.findViewById(R.id.textViewListDate);
         }
 
         public void setData(final Cursor c, final NoteRecyclerAdapter noteRecyclerAdapter) {
             final int position = c.getPosition();
 
             textView.setText(c.getString(c.getColumnIndex(SQLiteDBHelper.NOTES_TABLE_COLUMN_TEXT_NOTE)));
-            deleteIcon.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    long id = noteRecyclerAdapter.getItemId(position);
-                    noteRecyclerAdapter.getActionsListNotes().showDialogDelete(id,0);
-                }
-            });
 
             checkBoxSelectNote.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     long id = noteRecyclerAdapter.getItemId(position);
                     noteRecyclerAdapter.getActionsListNotes().selectNote(id,isChecked);
+                }
+            });
+
+            parent.setLongClickable(true);
+            parent.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    Log.e("GAWK_ERR","LONG CLICK");
+                    view.setBackgroundColor(ContextCompat.getColor(view.getContext(), R.color.colorPrimary));
+                    return true;
                 }
             });
 
@@ -123,9 +126,16 @@ public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerA
 
     @Override
     public void onBindViewHolder(NoteRecyclerAdapter.ViewHolder viewHolder, Cursor cursor) {
-        NoteRecyclerAdapter.ViewHolder holder = viewHolder;
         cursor.moveToPosition(cursor.getPosition());
-        holder.setData(cursor, this);
+        viewHolder.itemView.setLongClickable(true);
+        viewHolder.itemView.setOnLongClickListener(this);
+        viewHolder.setData(cursor, this);
+    }
+
+    @Override
+    public boolean onLongClick(View view) {
+        view.setBackgroundColor(ContextCompat.getColor(getmContext(), R.color.colorPrimary));
+        return false;
     }
 
     @Override

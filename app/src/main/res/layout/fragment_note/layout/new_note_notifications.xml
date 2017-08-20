@@ -71,8 +71,7 @@
             android:id="@+id/textViewTitleDate"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:layout_below="@+id/toggleButton_Sound"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
+            android:layout_centerHorizontal="true"
             android:enabled="false" />
 
         <TextView
@@ -82,11 +81,11 @@
             android:id="@+id/textViewNowDate"
             android:enabled="false"
             android:layout_below="@+id/textViewTitleDate"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_centerHorizontal="true"/>
 
         <TextView
             android:text="@string/new_note_error_date"
+            android:enabled="false"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"

@@ -201,7 +201,7 @@ public class MainActivity extends ParentActivity {
      *
      * If the app does not has permission then the user will be prompted to grant permissions
      *
-     * @param activity
+     * @param activity активность в которой проверяем
      */
     public static void verifyAllPermissions(Activity activity) {
         // Check if we have write permission
@@ -238,8 +238,6 @@ public class MainActivity extends ParentActivity {
                     // functionality that depends on this permission.
                 }
             }
-            // other 'case' lines to check for other
-            // permissions this app might request
         }
     }
 }

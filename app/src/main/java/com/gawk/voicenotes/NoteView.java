@@ -21,7 +21,7 @@ import java.text.SimpleDateFormat;
  */
 
 public class NoteView extends ParentActivity {
-    private TextView textViewDate, textViewTitleNotification, textViewBodyNotification;
+    private TextView textViewDate, textViewBodyNotification;
     private EditText editTextNoteText;
     private Note note;
 
@@ -32,7 +32,6 @@ public class NoteView extends ParentActivity {
         initAdMob(true);
 
         textViewDate = (TextView) findViewById(R.id.textViewDate);
-        textViewTitleNotification = (TextView) findViewById(R.id.textViewTitleNotification);
         textViewBodyNotification = (TextView) findViewById(R.id.textViewBodyNotification);
         editTextNoteText = (EditText) findViewById(R.id.editTextNoteText);
 

@@ -67,11 +67,11 @@ public class NotesListFragment extends FragmentParent implements ActionsListNote
         mLayoutManager = new LinearLayoutManager(getActivity());
         mAdapter = new NoteRecyclerAdapter(getActivity(), noteCursor, this);
 
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.listViewAllNotes);
+        mRecyclerView = view.findViewById(R.id.listViewAllNotes);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
 
-        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
+        FloatingActionButton fab =  view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -50,7 +50,7 @@
     <string name="new_note_notification">Напоминание</string>
     <string name="new_note_text">Текст заметки</string>
     <string name="new_note_remind">Напомнить?</string>
-    <string name="new_note_we_remind">Мы напомним</string>
+    <string name="new_note_we_remind">Время напоминания</string>
     <string name="new_note_select_date">Выберите дату</string>
     <string name="new_note_select_time">Выберите время</string>
     <string name="new_note_sound_off">Звук выкл.</string>
