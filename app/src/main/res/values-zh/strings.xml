@@ -70,9 +70,9 @@
     <string name="export_import_folder_not">文件夹未选中</string>
     <string name="export_import_folder_error">选择一个文件，而不是一个文件夹</string>
     <string name="export_import_error_import">该文件可能已损坏</string>
-    <string name="vote_text_header">你喜欢这个应用程序吗？</string>
-    <string name="vote_text_body">如果您喜欢该应用，请在Google Play上投票，或者撰写评论</string>
-    <string name="vote_text_ok">给应用程序五颗星</string>
+    <string name="vote_text_header">评价我们的应用</string>
+    <string name="vote_text_body">写给我们你不喜欢什么或你的建议</string>
+    <string name="vote_text_ok">联系我们</string>
     <string name="vote_text_cancel">取消</string>
     <string name="settings_add_icon_add">在桌面上添加“添加音符”图标</string>
     <string name="settings_recognition_check">检查您的设备是否有能力使用语音识别</string>

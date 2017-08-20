@@ -99,9 +99,9 @@
     <string name="export_import_folder_error">Pilih berkas, bukan folder</string>
     <string name="export_import_error_import">Berkas ini mungkin rusak</string>
     <!-- Голосовалка -->
-    <string name="vote_text_header">Anda menyukai aplikasi ini?</string>
-    <string name="vote_text_body">Jika Anda menyukai aplikasi ini, beri nilai untuk aplikasi ini di Google Play atau tulis ulasan</string>
-    <string name="vote_text_ok">Beri aplikasi ini lima bintang</string>
+    <string name="vote_text_header">Beri peringkat pada aplikasi kami</string>
+    <string name="vote_text_body">Tulislah kepada kami apa yang tidak Anda sukai atau saran Anda</string>
+    <string name="vote_text_ok">Hubungi Kami</string>
     <string name="vote_text_cancel">Batalkan</string>
     <!-- Настройки -->
     <string name="settings_add_icon_add">Tambahkan ikon \"Tambahkan catatan\" ke desktop</string>

@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textViewDate"
-        style="@style/GawkMaterialTheme.ListDateNote"/>
+        style="@style/GawkMaterialTheme.CardViewNoteDate"/>
 
     <EditText
         android:layout_width="wrap_content"
@@ -41,7 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textViewBodyNotification"
-        style="@style/GawkMaterialTheme.ListTextNoteView"
+        style="@style/GawkMaterialTheme.CardViewNoteText"
         android:layout_alignParentBottom="true" />
 
 </RelativeLayout>

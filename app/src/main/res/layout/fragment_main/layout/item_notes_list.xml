@@ -3,64 +3,77 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="10dp">
+    android:layout_height="wrap_content">
 
     <android.support.v7.widget.CardView
         android:id="@+id/card_view"
-        app:cardCornerRadius="2dp"
-        app:cardElevation="2dp"
-        android:layout_marginBottom="2dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginLeft="8dp"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            style="@style/GawkMaterialTheme.ListItem">
-
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/checkBoxSelectNote"
-                android:layout_gravity="center"
-                style="@style/GawkMaterialTheme.ListIconSelect"/>
+            style="@style/GawkMaterialTheme.CardViewNoteBody"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
+                style="@style/GawkMaterialTheme.ListItem"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:orientation="horizontal">
 
-                <TextView
-                    android:text="Text"
-                    android:layout_width="match_parent"
+                <CheckBox
+                    android:id="@+id/checkBoxSelectNote"
+                    style="@style/GawkMaterialTheme.ListIconSelect"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textViewListText"
-                    android:maxLines="2"
-                    style="@style/GawkMaterialTheme.ListTextNote"/>
+                    android:layout_gravity="center" />
 
-                <TextView
-                    android:text="Date"
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textViewListDate"
-                    style="@style/GawkMaterialTheme.ListDateNote" />
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textViewListDate"
+                        style="@style/GawkMaterialTheme.CardViewNoteDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Date" />
+
+                    <TextView
+                        android:id="@+id/textViewListText"
+                        style="@style/GawkMaterialTheme.CardViewNoteText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLines="2"
+                        android:text="Text" />
+
+
+                </LinearLayout>
+
+                <ImageButton
+                    android:id="@+id/buttonDeleteNote"
+                    style="@style/GawkMaterialTheme.ListIconDelete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/ic_delete_forever_black_24dp" />
 
             </LinearLayout>
 
-            <ImageButton
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_weight="1"
+                android:background="@drawable/textline" />
 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/buttonDeleteNote"
-                style="@style/GawkMaterialTheme.ListIconDelete"
-                android:layout_gravity="center"
-                app:srcCompat="@drawable/ic_delete_forever_black_24dp" />
         </LinearLayout>
+
     </android.support.v7.widget.CardView>
 
 </LinearLayout>

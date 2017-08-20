@@ -72,9 +72,9 @@
     <string name="export_import_folder_not">Cartella non selezionata</string>
     <string name="export_import_folder_error">Selezionare un file, non una cartella</string>
     <string name="export_import_error_import">Il file potrebbe essere danneggiato</string>
-    <string name="vote_text_header">Ti piace l\'applicazione?</string>
-    <string name="vote_text_body">Se ti piace l\'applicazione, votatela su Google Play o scrivi una recensione</string>
-    <string name="vote_text_ok">Dare all\'applicazione cinque stelle</string>
+    <string name="vote_text_header">Valuta la nostra applicazione</string>
+    <string name="vote_text_body">Scrivici quello che non ti è piaciuto oi tuoi suggerimenti</string>
+    <string name="vote_text_ok">Contattaci</string>
     <string name="vote_text_cancel">Annulla</string>
     <string name="settings_add_icon_add">Aggiungere un\'icona \ "Aggiungi nota \" sul desktop</string>
     <string name="settings_recognition_check">Controllare il dispositivo per la capacità di utilizzare il riconoscimento vocale</string>

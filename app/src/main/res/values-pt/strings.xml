@@ -99,9 +99,9 @@
     <string name="export_import_folder_error">Selecione um ficheiro, não uma pasta</string>
     <string name="export_import_error_import">O ficheiro pode estar corrompido</string>
     <!-- Голосовалка -->
-    <string name="vote_text_header">Gosta da aplicação?</string>
-    <string name="vote_text_body">Se gosta da aplicação, vote no Google Play ou escreva uma crítica</string>
-    <string name="vote_text_ok">Dê cinco estrelas à aplicação</string>
+    <string name="vote_text_header">Avalie o nosso aplicativo</string>
+    <string name="vote_text_body">Escreva-nos o que não gostou ou as suas sugestões</string>
+    <string name="vote_text_ok">Contate-nos</string>
     <string name="vote_text_cancel">Cancelar</string>
     <!-- Настройки -->
     <string name="settings_add_icon_add">Adicione um ícone \"Adicionar nota\" ao ambiente de trabalho</string>

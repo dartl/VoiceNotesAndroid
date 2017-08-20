@@ -67,23 +67,6 @@
         <item name="android:paddingLeft">16dp</item>
     </style>
 
-    <style name="GawkMaterialTheme.ListTextNote" >
-        <item name="android:paddingLeft">6dp</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:paddingTop">16dp</item>
-    </style>
-
-    <style name="GawkMaterialTheme.ListDateNote" >
-        <item name="android:paddingLeft">6dp</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:paddingBottom">16dp</item>
-    </style>
-
-    <style name="GawkMaterialTheme.ListTextNoteView" parent="GawkMaterialTheme.ListTextNote">
-        <item name="android:paddingLeft">16dp</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:paddingBottom">0dp</item>
-    </style>
 
     <style name="GawkMaterialTheme.ListIconDelete" >
         <item name="android:background">#00000000</item>
@@ -157,7 +140,7 @@
         <item name="android:paddingBottom">8dp</item>
     </style>
 
-    <style name="GawkMaterialTheme.ButtonAlergCustom" parent="Base.AlertDialog.AppCompat">
+    <style name="GawkMaterialTheme.ButtonAlertCustom" parent="Base.AlertDialog.AppCompat">
         <item name="android:background">@color/colorTransparent</item>
         <item name="android:textColor">@color/colorAccent</item>
         <item name="android:textAllCaps">true</item>
@@ -229,5 +212,22 @@
         <item name="android:paddingRight">16dp</item>
         <item name="android:paddingTop">0dp</item>
         <item name="android:paddingBottom">0dp</item>
+    </style>
+
+    <style name="GawkMaterialTheme.CardViewNoteBody" >
+    </style>
+
+    <style name="GawkMaterialTheme.CardViewNoteDate" >
+        <item name="android:textColor">@color/colorGrey700</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:paddingLeft">6dp</item>
+        <item name="android:paddingTop">16dp</item>
+    </style>
+
+    <style name="GawkMaterialTheme.CardViewNoteText" >
+        <item name="android:textColor">@color/colorGrey900</item>
+        <item name="android:paddingLeft">6dp</item>
+        <item name="android:paddingBottom">16dp</item>
+        <item name="android:textSize">14sp</item>
     </style>
 </resources>

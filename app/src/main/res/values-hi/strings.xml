@@ -99,9 +99,9 @@
     <string name="export_import_folder_error">फ़ाइल चुनें, ना कि फ़ोल्डर</string>
     <string name="export_import_error_import">शायद यह फ़ाइल करप्ट है</string>
     <!-- Голосовалка -->
-    <string name="vote_text_header">आपको ऐप पसंद आया?</string>
-    <string name="vote_text_body">यदि आपको ऐप पसंद है तो Google Play पर इसके लिए वोट करें या समीक्षा लिखें</string>
-    <string name="vote_text_ok">ऐप को पाँच स्टार दें</string>
+    <string name="vote_text_header">हमारे ऐप को रेट करें</string>
+    <string name="vote_text_body">हमें वह लिखें जो आपको पसंद नहीं था या आपके सुझाव</string>
+    <string name="vote_text_ok">हमसे संपर्क करें</string>
     <string name="vote_text_cancel">रद्द करें</string>
     <!-- Настройки -->
     <string name="settings_add_icon_add">डेस्कटॉप पर \"नोट जोड़ें\" आइकन शामिल करें</string>

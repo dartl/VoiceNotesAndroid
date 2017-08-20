@@ -90,7 +90,7 @@ public class NewNoteText extends FragmentParent implements RecognitionListener{
     public void endRecognition()  {
         if (mRecognizerIntent != null)
         {
-            mRecognizerIntent.cancel();
+            mRecognizerIntent.stopListening();
             mRecognizerIntent.destroy();
         }
     }
@@ -172,9 +172,10 @@ public class NewNoteText extends FragmentParent implements RecognitionListener{
 
     @Override
     public void onRmsChanged(float rmsdB) {
-        //Log.e("GAWK_ERR","onRmsChanged()");
-        mSpeechRecognitionDialog.changeVoiceValue((int) (convertDpToPixel((rmsdB*6), getContext())+
-                getResources().getDimension(R.dimen.dialog_recognize_circle_min_size)));
+        if (mSpeechRecognitionDialog != null) {
+            mSpeechRecognitionDialog.changeVoiceValue((int) (convertDpToPixel((rmsdB*6), getContext())+
+                    getResources().getDimension(R.dimen.dialog_recognize_circle_min_size)));
+        }
     }
 
     @Override

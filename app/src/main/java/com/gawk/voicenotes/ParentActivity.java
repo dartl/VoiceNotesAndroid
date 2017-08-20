@@ -41,6 +41,7 @@ import com.android.vending.billing.IInAppBillingService;
 import com.gawk.voicenotes.adapters.NoteRecyclerAdapter;
 import com.gawk.voicenotes.adapters.ParcelableUtil;
 import com.gawk.voicenotes.listeners.SocialShare;
+import com.gawk.voicenotes.logs.CustomLogger;
 import com.gawk.voicenotes.models.Statistics;
 import com.gawk.voicenotes.preferences.PrefUtil;
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
@@ -341,35 +342,47 @@ public class ParentActivity extends AppCompatActivity
     }
 
     protected void restartNotify(Note note, Notification notification) {
-        AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(this, TimeNotification.class);
-        intent.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
+        CustomLogger mCustomLogger = new CustomLogger();
+        try {
+            AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+            Intent intent = new Intent(this, TimeNotification.class);
+            intent.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
 
-        PrefUtil prefUtil = new PrefUtil(this);
-        String sound_link = prefUtil.getString(PrefUtil.NOTIFICATION_SOUND,"a");
-        Log.e("GAWK_ERR","ParentActivity sound_link = " + sound_link);
-        Bundle c = new Bundle();
-        c.putString("sound_link", sound_link);
-        c.putByteArray("note", ParcelableUtil.marshall(note));
-        c.putByteArray("notification", ParcelableUtil.marshall(notification));
-        intent.putExtras(c);
-        int requestCodeIntent =  (int) notification.getId();
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, -requestCodeIntent,
-                intent, 0);
-        // На случай, если мы ранее запускали активити, а потом поменяли время,
-        // откажемся от уведомления
-        am.cancel(pendingIntent);
-        if(Build.VERSION.SDK_INT < 23){
-            if(Build.VERSION.SDK_INT >= 19){
-                am.setExact(AlarmManager.RTC_WAKEUP,  notification.getDate().getTime() , pendingIntent);
+            PrefUtil prefUtil = new PrefUtil(this);
+            String sound_link = prefUtil.getString(PrefUtil.NOTIFICATION_SOUND,"a");
+            Bundle c = new Bundle();
+            c.putString("sound_link", sound_link);
+            c.putByteArray("note", ParcelableUtil.marshall(note));
+            c.putByteArray("notification", ParcelableUtil.marshall(notification));
+            intent.putExtras(c);
+            int requestCodeIntent =  (int) notification.getId();
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(this, -requestCodeIntent,
+                    intent, 0);
+            // На случай, если мы ранее запускали активити, а потом поменяли время,
+            // откажемся от уведомления
+            am.cancel(pendingIntent);
+            mCustomLogger.write("restartNotify();");
+            mCustomLogger.write("note = " + note);
+            mCustomLogger.write("notification = " + notification);
+            if(Build.VERSION.SDK_INT < 23){
+                if(Build.VERSION.SDK_INT >= 19){
+                    mCustomLogger.write("am.setExact()");
+                    am.setExact(AlarmManager.RTC_WAKEUP,  notification.getDate().getTime() , pendingIntent);
+                }
+                else{
+                    mCustomLogger.write("am.set()");
+                    am.set(AlarmManager.RTC_WAKEUP,  notification.getDate().getTime() , pendingIntent);
+                }
             }
             else{
-                am.set(AlarmManager.RTC_WAKEUP,  notification.getDate().getTime() , pendingIntent);
+                mCustomLogger.write("am.setExactAndAllowWhileIdle()");
+                am.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP,  notification.getDate().getTime() , pendingIntent);
             }
+        } catch (Exception e) {
+            mCustomLogger.write(e);
         }
-        else{
-            am.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP,  notification.getDate().getTime() , pendingIntent);
-        }
+
+
     }
 
     public void deleteNotify(long id) {

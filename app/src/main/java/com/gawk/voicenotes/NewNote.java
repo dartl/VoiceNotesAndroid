@@ -17,6 +17,7 @@ import com.gawk.voicenotes.adapters.TimePickerReturn;
 import com.gawk.voicenotes.adapters.ViewPagerAdapter;
 import com.gawk.voicenotes.fragments_notes.NewNoteNotifications;
 import com.gawk.voicenotes.fragments_notes.NewNoteText;
+import com.gawk.voicenotes.logs.CustomLogger;
 import com.gawk.voicenotes.models.Note;
 import com.gawk.voicenotes.models.Notification;
 
@@ -92,6 +93,8 @@ public class NewNote extends ParentActivity implements TimePickerReturn {
     }
 
     private void startSaveNote() {
+        CustomLogger mCustomLogger = new CustomLogger();
+        mCustomLogger.write("startSaveNote();");
         // сохранение заметки
         dbHelper.connection();
         NewNoteText newNoteText = (NewNoteText) adapter.getItem(0);
@@ -102,6 +105,7 @@ public class NewNote extends ParentActivity implements TimePickerReturn {
         // сохранение оповещения
         NewNoteNotifications newNoteNotifications = (NewNoteNotifications) adapter.getItem(1);
         if (newNoteNotifications.haveNotification()) {
+            mCustomLogger.write("newNoteNotifications.haveNotification();");
             Notification notification = newNoteNotifications.getNotification();
             notification.setId_note(note_id);
             notification.setId(dbHelper.saveNotification(notification,0));

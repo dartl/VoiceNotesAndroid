@@ -12,5 +12,7 @@
     <color name="colorYellow">#FFEB3B</color>
 
     <color name="colorGrey500">#9E9E9E</color>
+    <color name="colorGrey700">#616161</color>
+    <color name="colorGrey900">#212121</color>
     <color name="colorTransparent">#00FFFFFF</color>
 </resources>

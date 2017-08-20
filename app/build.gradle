@@ -20,6 +20,7 @@ android {
                             'src/main/res/layout/fragment_note',
                             'src/main/res/layout/drawer',
                             'src/main/res/layout/adMob',
+                            'src/main/res/layout/windows',
                             'src/main/res/layout',
                             'src/main/res'
                     ]
@@ -27,8 +28,8 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled true
-            shrinkResources true
+            minifyEnabled false
+            //shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }

@@ -89,4 +89,13 @@ public class Note implements Serializable, Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeSerializable(this);
     }
+
+    @Override
+    public String toString() {
+        return "Note{" +
+                "id=" + id +
+                ", text_note='" + text_note + '\'' +
+                ", date=" + date +
+                '}';
+    }
 }

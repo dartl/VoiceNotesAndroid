@@ -107,9 +107,9 @@
     <string name="export_import_error_import">The file may be corrupt</string>
 
     <!-- Голосовалка -->
-    <string name="vote_text_header">Do you like the app?</string>
-    <string name="vote_text_body">If you like the app, vote for it on Google Play or write a review</string>
-    <string name="vote_text_ok">Give the app five stars</string>
+    <string name="vote_text_header">Rate our app</string>
+    <string name="vote_text_body">Write to us what you did not like or your suggestions</string>
+    <string name="vote_text_ok">Write to us</string>
     <string name="vote_text_cancel">Cancel</string>
 
     <!-- Настройки -->

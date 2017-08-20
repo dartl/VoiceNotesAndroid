@@ -23,6 +23,7 @@ import com.gawk.voicenotes.adapters.ViewPagerAdapter;
 import com.gawk.voicenotes.fragments_main.NotesListFragment;
 import com.gawk.voicenotes.fragments_main.NotificationsListFragment;
 import com.gawk.voicenotes.preferences.PrefUtil;
+import com.gawk.voicenotes.windows.VotesDialog;
 
 public class MainActivity extends ParentActivity {
     private TabLayout tabLayout;
@@ -71,6 +72,9 @@ public class MainActivity extends ParentActivity {
         createTabIcons();
         dbHelper = SQLiteDBHelper.getInstance(this);
         verifyAllPermissions(this);
+
+        VotesDialog votesDialog = new VotesDialog();
+        votesDialog.show(getFragmentManager(),"VotesDialog");
     }
 
     @Override

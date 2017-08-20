@@ -100,9 +100,9 @@
     <string name="export_import_folder_error">フォルダーではなくファイルを選択してください</string>
     <string name="export_import_error_import">ファイルが破損している可能性があります</string>
     <!-- Голосовалка -->
-    <string name="vote_text_header">アプリを気に入っていただけましたか？</string>
-    <string name="vote_text_body">アプリを気に入っていただけたら、Google Play で投票いただくか、またはレビューをご投稿ください。</string>
-    <string name="vote_text_ok">アプリを 5 つ星で評価</string>
+    <string name="vote_text_header">アプリを評価する</string>
+    <string name="vote_text_body">あなたが好きでなかったことやあなたの提案</string>
+    <string name="vote_text_ok">お問い合わせ</string>
     <string name="vote_text_cancel">キャンセル</string>
     <!-- Настройки -->
     <string name="settings_add_icon_add">「メモを追加」アイコンをデスクトップに追加</string>

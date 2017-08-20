@@ -100,7 +100,7 @@
     <string name="export_import_folder_error">Seleccione un archivo, no una carpeta</string>
     <string name="export_import_error_import">Puede que el archivo esté dañado</string>
     <!-- Голосовалка -->
-    <string name="vote_text_header">¿Le gusta la aplicación?</string>
+    <string name="vote_text_header">Valore nuestra aplicación</string>
     <string name="vote_text_body">Si le gusta la aplicación, vote por ella en Google Play o escriba una opinión</string>
     <string name="vote_text_ok">Dé cinco estrellas a la aplicación</string>
     <string name="vote_text_cancel">Cancelar</string>

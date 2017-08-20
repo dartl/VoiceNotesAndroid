@@ -118,4 +118,15 @@ public class Notification implements Serializable, Parcelable {
     public static boolean toBoolean (int pVal) {
         return pVal != 0;
     }
+
+    @Override
+    public String toString() {
+        return "Notification{" +
+                "id=" + id +
+                ", id_note=" + id_note +
+                ", date=" + date +
+                ", sound=" + sound +
+                ", shake=" + shake +
+                '}';
+    }
 }

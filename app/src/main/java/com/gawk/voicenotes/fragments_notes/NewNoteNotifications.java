@@ -15,6 +15,7 @@ import android.widget.ToggleButton;
 import com.gawk.voicenotes.FragmentParent;
 import com.gawk.voicenotes.R;
 import com.gawk.voicenotes.adapters.TimePickerReturn;
+import com.gawk.voicenotes.logs.CustomLogger;
 import com.gawk.voicenotes.models.Notification;
 
 import java.text.DateFormat;
@@ -40,6 +41,8 @@ public class NewNoteNotifications extends FragmentParent implements TimePickerRe
             checkNotification = false;
     private final Notification notification = new Notification();
 
+    private final CustomLogger mCustomLogger = new CustomLogger();
+
     public NewNoteNotifications() {
         // Required empty public constructor
     }
@@ -53,6 +56,9 @@ public class NewNoteNotifications extends FragmentParent implements TimePickerRe
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.new_note_notifications, null);
+
+
+        mCustomLogger.write("NewNoteNotifications called onCreateView");
 
         switchNotification = (Switch) view.findViewById(R.id.switchNotification);
         notificationLayout = (RelativeLayout) view.findViewById(R.id.notificationLayout);
@@ -79,10 +85,19 @@ public class NewNoteNotifications extends FragmentParent implements TimePickerRe
 
         switchNotification.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                for (int i =0; i < notificationLayout.getChildCount(); i++) {
-                    notificationLayout.getChildAt(i).setEnabled(isChecked);
+                try {
+                    mCustomLogger.write("switchNotification called");
+
+                    for (int i = 0; i < notificationLayout.getChildCount(); i++) {
+                        notificationLayout.getChildAt(i).setEnabled(isChecked);
+                        mCustomLogger.write("notificationLayout.getChildAt(i).setEnabled(isChecked) = " + i);
+                    }
+                    checkNotification = isChecked;
+                    mCustomLogger.write("switchNotification end");
+                } catch (Exception e) {
+                    mCustomLogger.write(e);
                 }
-                checkNotification = isChecked;
+
             }
         });
 
