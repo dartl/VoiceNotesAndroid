@@ -1,56 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    style="@style/GawkMaterialTheme.Body"
     android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/textView9"
         style="@style/TextAppearance.AppCompat.Title"
+        android:layout_marginRight="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="24dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/vote_text_header" />
 
     <TextView
         android:id="@+id/textViewWriteUs"
-        android:visibility="gone"
-        style="@style/TextAppearance.AppCompat.Body1"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
+        style="@style/TextAppearance.AppCompat.Caption"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/vote_text_body" />
+        android:layout_marginBottom="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/vote_text_body"
+        android:textSize="18sp"
+        android:visibility="gone" />
 
     <RatingBar
         android:id="@+id/ratingBarVotes"
         android:numStars="5"
         android:stepSize="1"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:layout_gravity="end"
+        android:orientation="horizontal"
+        android:padding="8dp">
 
         <Button
             android:id="@+id/buttonCancel"
             style="@style/GawkMaterialTheme.ButtonAlertCustom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:text="@string/vote_text_cancel" />
 
         <Button
             android:id="@+id/buttonWriteUs"
             style="@style/GawkMaterialTheme.ButtonAlertCustom"
-            android:layout_width="wrap_content"
+            android:paddingRight="8dp"
+            android:paddingLeft="8dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:layout_weight="1"
-            android:text="@string/vote_text_ok" />
+            android:layout_gravity=""
+            android:text="@string/vote_text_ok"
+            android:visibility="visible" />
     </LinearLayout>
 
 </LinearLayout>

@@ -50,6 +50,7 @@ import com.gawk.voicenotes.models.Note;
 import com.gawk.voicenotes.models.Notification;
 import com.gawk.voicenotes.subs.GooglePlaySubs;
 import com.gawk.voicenotes.subs.SubsInterface;
+import com.gawk.voicenotes.windows.VotesDialog;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -412,30 +413,8 @@ public class ParentActivity extends AppCompatActivity
     }
 
     protected void showVote() {
-        Context context = ParentActivity.this;
-
-        AlertDialog.Builder ad = new AlertDialog.Builder(context);
-        ad.setTitle(getResources().getText(R.string.vote_text_header));  // заголовок
-        ad.setMessage(getResources().getText(R.string.vote_text_body)); // сообщение
-        ad.setPositiveButton(getResources().getText(R.string.vote_text_ok), new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int arg1) {
-                Intent i = new Intent(android.content.Intent.ACTION_VIEW);
-                i.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.gawk.voicenotes"));
-                startActivity(i);
-            }
-        });
-        ad.setNegativeButton(getResources().getText(R.string.vote_text_cancel), new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int arg1) {
-                dialog.cancel();
-            }
-        });
-        ad.setCancelable(true);
-        ad.setOnCancelListener(new DialogInterface.OnCancelListener() {
-            public void onCancel(DialogInterface dialog) {
-                dialog.cancel();
-            }
-        });
-        ad.show();
+        VotesDialog votesDialog = new VotesDialog();
+        votesDialog.show(getFragmentManager(),"VotesDialog");
     }
 
     // Storage Permissions

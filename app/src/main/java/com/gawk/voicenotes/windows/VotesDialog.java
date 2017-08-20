@@ -5,7 +5,10 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.ShareCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -34,14 +37,32 @@ public class VotesDialog extends DialogFragment {
 
         View view = inflater.inflate(R.layout.votes_dialog, null);
 
-        mRatingBarVotes = (RatingBar) view.findViewById(R.id.ratingBarVotes);
+        mRatingBarVotes = view.findViewById(R.id.ratingBarVotes);
 
-        mButtonWriteUs = (Button) view.findViewById(R.id.buttonWriteUs);
-        mButtonCancel = (Button) view.findViewById(R.id.buttonCancel);
+        mButtonWriteUs = view.findViewById(R.id.buttonWriteUs);
+        mButtonCancel = view.findViewById(R.id.buttonCancel);
 
-        mTextViewWriteUs = (TextView) view.findViewById(R.id.textViewWriteUs);
+        mTextViewWriteUs = view.findViewById(R.id.textViewWriteUs);
 
         builder.setView(view);
+
+        mButtonWriteUs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /*Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto",, null));
+                intent.putExtra(Intent.EXTRA_SUBJECT, );
+                startActivity(Intent.createChooser(intent, ));*/
+
+                ShareCompat.IntentBuilder.from(getActivity())
+                        .setType("message/rfc822")
+                        .addEmailTo("voicenotes@mail.ru")
+                        .setSubject("Feedback about the app")
+                        .setText("")
+                        .setChooserTitle("Send Email")
+                        .startChooser();
+                dismiss();
+            }
+        });
 
         mButtonCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,7 +75,10 @@ public class VotesDialog extends DialogFragment {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
                 if (rating >= 4) {
-
+                    Intent i = new Intent(android.content.Intent.ACTION_VIEW);
+                    i.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.gawk.voicenotes"));
+                    startActivity(i);
+                    dismiss();
                 } else {
                     mRatingBarVotes.setVisibility(View.GONE);
                     mTextViewWriteUs.setVisibility(View.VISIBLE);

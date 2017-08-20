@@ -38,11 +38,11 @@ public class MainActivity extends ParentActivity {
         setContentView(R.layout.activity_first);
         initAdMob(true);
 
-        mView = (View) findViewById(R.id.activity_main);
+        mView = findViewById(R.id.activity_main);
 
 
-        TabLayout tab = (TabLayout) findViewById(R.id.tabs);
-        tab.setVisibility(View.VISIBLE);
+        tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setVisibility(View.VISIBLE);
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
@@ -67,14 +67,10 @@ public class MainActivity extends ParentActivity {
             }
         });
 
-        tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
         createTabIcons();
         dbHelper = SQLiteDBHelper.getInstance(this);
         verifyAllPermissions(this);
-
-        VotesDialog votesDialog = new VotesDialog();
-        votesDialog.show(getFragmentManager(),"VotesDialog");
     }
 
     @Override
