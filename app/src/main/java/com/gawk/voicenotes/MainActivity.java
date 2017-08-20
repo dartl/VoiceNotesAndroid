@@ -123,28 +123,9 @@ public class MainActivity extends ParentActivity {
         tabLayout.getTabAt(1).setCustomView(tabTwo);
     }
 
-    public void actionRemoveSelected() {
-        int i = viewPager.getCurrentItem();
-        switch (i) {
-            case 0:
-                NotesListFragment notesListFragment = (NotesListFragment) adapter.getItem(i);
-                notesListFragment.setMainActivity(this);
-                notesListFragment.showDialogDelete(-1,1);
-                break;
-            case 1:
-                NotificationsListFragment notificationsListFragment = (NotificationsListFragment) adapter.getItem(i);
-                notificationsListFragment.setMainActivity(this);
-                notificationsListFragment.showDialogDelete(-1,1);
-                break;
-            default:
-                break;
-        }
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
-        actionRemoveSelected.setVisible(true);
         actionSearchVisible(true);
         return true;
     }

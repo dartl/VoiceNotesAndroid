@@ -9,13 +9,14 @@
         android:id="@+id/editTextNoteText"
         style="@style/GawkMaterialTheme.MultiTextField"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
+        android:layout_height="match_parent"
         android:ems="10"
         android:gravity="start"
-        android:inputType="textMultiLine" />
+        android:inputType="textMultiLine"
+        android:layout_above="@+id/imageView2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textViewDate" />
 
     <TextView
         android:text="TextView"
@@ -25,7 +26,7 @@
         android:gravity="end"
         android:layout_marginRight="@dimen/body_padding"
         style="@style/GawkMaterialTheme.CardViewNoteDate"
-        android:layout_below="@+id/editTextNoteText"
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 

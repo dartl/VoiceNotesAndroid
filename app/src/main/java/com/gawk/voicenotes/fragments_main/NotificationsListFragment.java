@@ -111,7 +111,6 @@ public class NotificationsListFragment extends FragmentParent implements Actions
         }
     }
 
-    @Override
     public void showDialogDelete(final long _id,final int state) {
         if (selectNotification.size() > 0 ) {
             AlertDialog.Builder builder = new AlertDialog.Builder(getContext());

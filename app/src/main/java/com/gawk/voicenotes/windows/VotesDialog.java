@@ -49,10 +49,6 @@ public class VotesDialog extends DialogFragment {
         mButtonWriteUs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto",, null));
-                intent.putExtra(Intent.EXTRA_SUBJECT, );
-                startActivity(Intent.createChooser(intent, ));*/
-
                 ShareCompat.IntentBuilder.from(getActivity())
                         .setType("message/rfc822")
                         .addEmailTo("voicenotes@mail.ru")

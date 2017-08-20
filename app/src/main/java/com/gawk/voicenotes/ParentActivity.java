@@ -70,7 +70,7 @@ public class ParentActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     public final String INSTALL_PREF = "install_app";
     private Toolbar toolbar;
-    protected MenuItem actionRemoveSelected, actionSave, actionSearch;
+    protected MenuItem actionSave, actionSearch;
     private NavigationView navigationView, navigationViewMenu;
     public SQLiteDBHelper dbHelper;
     protected AdView mAdView;
@@ -218,7 +218,6 @@ public class ParentActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
-        actionRemoveSelected = menu.findItem(R.id.action_remove_selected);
         actionSave = menu.findItem(R.id.action_save_note);
         actionSearch = menu.findItem(R.id.action_search);
         return true;
@@ -230,13 +229,6 @@ public class ParentActivity extends AppCompatActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_remove_selected) {
-            actionRemoveSelected();
-            return true;
-        }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -272,10 +264,6 @@ public class ParentActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    public void actionRemoveSelected() {
-
     }
 
     public void initAdMob(boolean check) {
