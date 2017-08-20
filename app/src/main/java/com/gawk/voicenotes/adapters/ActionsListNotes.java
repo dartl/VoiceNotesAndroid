@@ -16,8 +16,8 @@ public interface ActionsListNotes {
     /**
      * Вызыывает метод, отмечающий выделение заметки
      * @param id идентификатор заметки, которую выделяем
-     * @param checked состояние выделения
      */
-    public void selectNote(long id, boolean checked);
-    public void selectNotification(long id, boolean checked);
+    public boolean selectNote(long id);
+    public boolean checkSelectNote(long id);
+    public void selectNotification(long id);
 }

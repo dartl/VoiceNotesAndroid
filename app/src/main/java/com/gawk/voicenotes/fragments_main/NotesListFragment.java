@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -90,37 +91,24 @@ public class NotesListFragment extends FragmentParent implements ActionsListNote
 
     public boolean updateNote(Cursor noteCursor) {
         mAdapter.changeCursor(noteCursor);
-        NavigationView navigationView = (NavigationView) getActivity().findViewById(R.id.nav_view_menu);
+        NavigationView navigationView =  getActivity().findViewById(R.id.nav_view_menu);
         TextView view = (TextView) navigationView.getMenu().findItem(R.id.menu_notes_list).getActionView();
         view.setText(mAdapter.getItemCount() > 0 ? String.valueOf(mAdapter.getItemCount()) : null);
         return true;
     }
 
-    // state: 0 - delete one note, 1 - delete all note
-    public void deleteElement(long id, int state) {
+    public void deleteSelectNotes() {
         dbHelper.connection();
-        switch (state) {
-            case 0:
-                dbHelper.noteDelete(id);
-                deleteNotifications(id);
-                updateNote(dbHelper.getCursorAllNotes());
-                break;
-            case 1:
-                int i = 0;
-                long id_temp;
-                if (selectNotes.size() > 0) {
-                    while (!selectNotes.isEmpty()) {
-                        id_temp = (Long) selectNotes.get(i);
-                        selectNotes.remove(i);
-                        dbHelper.noteDelete(id_temp);
-                        deleteNotifications(id_temp);
-                    }
-                    updateNote(dbHelper.getCursorAllNotes());
-                }
-                break;
-            default:
-                break;
+        long id_temp;
+        Log.e("GAWK_ERR","deleteSelectNotes = " + selectNotes.toString());
+        while (!selectNotes.isEmpty()) {
+            id_temp = (Long) selectNotes.get(0);
+            selectNotes.remove(0);
+            dbHelper.noteDelete(id_temp);
+            deleteNotifications(id_temp);
         }
+        Log.e("GAWK_ERR","deleteSelectNotes = " + selectNotes.toString());
+        updateNote(dbHelper.getCursorAllNotes());
     }
 
     public void deleteNotifications(long id) {
@@ -131,18 +119,27 @@ public class NotesListFragment extends FragmentParent implements ActionsListNote
     }
 
     @Override
-    public void selectNote(long id, boolean checked) {
-        if (checked) {
-            selectNotes.add(id);
-        } else {
+    public boolean selectNote(long id) {
+        if (selectNotes.contains(id)) {
+            Log.e("GAWK_ERR","selectNotes REMOVE before  = " + selectNotes.toString());
             selectNotes.remove(id);
+            Log.e("GAWK_ERR","selectNotes REMOVE after = " + selectNotes.toString());
+            return false;
+        } else {
+            Log.e("GAWK_ERR","selectNotes ADD before  = " + selectNotes.toString());
+            selectNotes.add(id);
+            Log.e("GAWK_ERR","selectNotes ADD after = " + selectNotes.toString());
+            return true;
         }
     }
 
     @Override
-    public void selectNotification(long id, boolean checked) {
-
+    public boolean checkSelectNote(long id) {
+        return selectNotes.contains(id);
     }
+
+    @Override
+    public void selectNotification(long id) {}
 
     @Override
     public void showDialogDelete(final long _id, final int state) {
@@ -155,7 +152,7 @@ public class NotesListFragment extends FragmentParent implements ActionsListNote
             // Add the buttons
             builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
-                    deleteElement(_id,state);
+                    deleteSelectNotes();
                 }
             });
             builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {

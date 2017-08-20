@@ -39,47 +39,33 @@ public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerA
         super(context, cursor);
     }
 
-    // Provide a reference to the views for each data item
-    // Complex data items may need more than one view per item, and
-    // you provide access to all the views for a data item in a view holder
     static class ViewHolder extends RecyclerView.ViewHolder {
-        // each data item is just a string in this case
-        CheckBox checkBoxSelectNote;
         TextView textView, dateView;
         public View parent;
 
         public ViewHolder(View v) {
             super(v);
             parent = v;
-            checkBoxSelectNote = v.findViewById(R.id.checkBoxSelectNote);
             textView = v.findViewById(R.id.textViewListText);
             dateView = v.findViewById(R.id.textViewListDate);
         }
 
         public void setData(final Cursor c, final NoteRecyclerAdapter noteRecyclerAdapter) {
             final int position = c.getPosition();
+            final long id = noteRecyclerAdapter.getItemId(getLayoutPosition());
 
+            changeItemSelect(noteRecyclerAdapter.getActionsListNotes().checkSelectNote(id));
             textView.setText(c.getString(c.getColumnIndex(SQLiteDBHelper.NOTES_TABLE_COLUMN_TEXT_NOTE)));
-
-            checkBoxSelectNote.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    long id = noteRecyclerAdapter.getItemId(position);
-                    noteRecyclerAdapter.getActionsListNotes().selectNote(id,isChecked);
-                }
-            });
 
             parent.setLongClickable(true);
             parent.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
-                    Log.e("GAWK_ERR","LONG CLICK");
-                    view.setBackgroundColor(ContextCompat.getColor(view.getContext(), R.color.colorPrimary));
+                    Log.e("GAWK_ERR","LONG CLICK - " + id);
+                    changeItemSelect(noteRecyclerAdapter.getActionsListNotes().selectNote(id));
                     return true;
                 }
             });
-
-            checkBoxSelectNote.setChecked(false);
 
             parent.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -111,6 +97,18 @@ public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerA
                 dateView.setText(date_and_time);
             }
         }
+
+        private void changeItemSelect(boolean state) {
+            if (state) {
+                parent.setBackgroundColor(ContextCompat.getColor(parent.getContext(), R.color.colorPrimary));
+                textView.setTextColor(ContextCompat.getColor(parent.getContext(), R.color.textColorPrimary));
+                dateView.setTextColor(ContextCompat.getColor(parent.getContext(), R.color.textColorPrimary));
+            } else {
+                parent.setBackgroundColor(ContextCompat.getColor(parent.getContext(), R.color.colorTransparent));
+                textView.setTextColor(ContextCompat.getColor(parent.getContext(), R.color.colorGrey900));
+                dateView.setTextColor(ContextCompat.getColor(parent.getContext(), R.color.colorGrey700));
+            }
+        }
     }
 
     @Override
@@ -127,8 +125,6 @@ public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerA
     @Override
     public void onBindViewHolder(NoteRecyclerAdapter.ViewHolder viewHolder, Cursor cursor) {
         cursor.moveToPosition(cursor.getPosition());
-        viewHolder.itemView.setLongClickable(true);
-        viewHolder.itemView.setOnLongClickListener(this);
         viewHolder.setData(cursor, this);
     }
 

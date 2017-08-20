@@ -139,15 +139,21 @@ public class NotificationsListFragment extends FragmentParent implements Actions
     }
 
     @Override
-    public void selectNote(long id, boolean checked) {
+    public boolean selectNote(long id) {
+        return false;
     }
 
     @Override
-    public void selectNotification(long id, boolean checked) {
-        if (checked) {
-            selectNotification.add(id);
-        } else {
+    public boolean checkSelectNote(long id) {
+        return false;
+    }
+
+    @Override
+    public void selectNotification(long id) {
+        if (selectNotification.contains(id)) {
             selectNotification.remove(id);
+        } else {
+            selectNotification.add(id);
         }
     }
 }

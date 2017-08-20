@@ -52,11 +52,11 @@ public class NotificationRecyclerAdapter extends CursorRecyclerViewAdapter<Notif
         public ViewHolder(View v) {
             super(v);
             parent = v;
-            checkBoxNotification =  (CheckBox) v.findViewById(R.id.checkBoxNotification);
-            imageViewSound = (ImageView) v.findViewById(R.id.imageViewSound);
-            imageViewShake = (ImageView) v.findViewById(R.id.imageViewShake);
-            textViewTextNote = (TextView) v.findViewById(R.id.textViewTextNote);
-            textViewDateNotification = (TextView) v.findViewById(R.id.textViewDateNotification);
+            checkBoxNotification =  v.findViewById(R.id.checkBoxNotification);
+            imageViewSound = v.findViewById(R.id.imageViewSound);
+            imageViewShake = v.findViewById(R.id.imageViewShake);
+            textViewTextNote = v.findViewById(R.id.textViewTextNote);
+            textViewDateNotification = v.findViewById(R.id.textViewDateNotification);
         }
 
         public void setData(final Cursor c, final NotificationRecyclerAdapter notificationRecyclerAdapter, SQLiteDBHelper db) {
@@ -66,7 +66,7 @@ public class NotificationRecyclerAdapter extends CursorRecyclerViewAdapter<Notif
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     long id = notificationRecyclerAdapter.getItemId(position);
-                    notificationRecyclerAdapter.getActionsListNotes().selectNotification(id,isChecked);
+                    notificationRecyclerAdapter.getActionsListNotes().selectNotification(id);
                 }
             });
 
