@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.gawk.voicenotes.preferences.PrefUtil;
+import com.gawk.voicenotes.windows.SelectIntervalDialog;
 
 /**
  * Created by GAWK on 30.03.2017.
@@ -19,12 +20,18 @@ import com.gawk.voicenotes.preferences.PrefUtil;
 
 public class SettingsActivity extends ParentActivity {
     private int CODE_RESULT_SOUND = 1;
-    private Button addShortcut, buttonSelectSound;
+    private Button addShortcut, buttonSelectSound, mButtonRepetitionView;
     private TextView textViewSelectSound;
+    private PrefUtil mPrefUtil;
+    private TextView mTextViewRepetition;
+    private SettingsActivity mSettingsActivity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings);
+        mSettingsActivity = this;
+        mPrefUtil = new PrefUtil(this);
 
         addShortcut = (Button) findViewById(R.id.buttonAddShortcut);
         addShortcut.setOnClickListener(new View.OnClickListener() {
@@ -43,9 +50,20 @@ public class SettingsActivity extends ParentActivity {
         });
 
         textViewSelectSound = (TextView) findViewById(R.id.textViewSelectSound);
+        mButtonRepetitionView = (Button) findViewById(R.id.buttonRepetitionView);
 
-        PrefUtil prefUtil = new PrefUtil(this);
-        String url = prefUtil.getString(PrefUtil.NOTIFICATION_SOUND,"");
+        mTextViewRepetition = (TextView) findViewById(R.id.textViewRepetition);
+        setIntervalNotification(mPrefUtil.getLong(mPrefUtil.NOTIFICATION_INTERVAL,0));
+
+        mButtonRepetitionView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SelectIntervalDialog selectIntervalDialog = new SelectIntervalDialog(mSettingsActivity);
+                selectIntervalDialog.show(getFragmentManager(),"selectIntervalDialog");
+            }
+        });
+
+        String url = mPrefUtil.getString(PrefUtil.NOTIFICATION_SOUND,"");
         setSoundTitle(url);
     }
 
@@ -65,14 +83,11 @@ public class SettingsActivity extends ParentActivity {
     }
 
     private void saveString(String s) {
-        PrefUtil prefUtil = new PrefUtil(this);
-        prefUtil.saveString(PrefUtil.NOTIFICATION_SOUND,s);
+        mPrefUtil.saveString(PrefUtil.NOTIFICATION_SOUND,s);
     }
 
     public void selectAudio() {
-        PrefUtil prefUtil = new PrefUtil(this);
-        String url = prefUtil.getString(PrefUtil.NOTIFICATION_SOUND,"");
-        Log.e("GAWK_ERR","selectAudio(). url = " + url);
+        String url = mPrefUtil.getString(PrefUtil.NOTIFICATION_SOUND,"");
         Intent intent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
         intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, true);
         intent.putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, url);
@@ -85,21 +100,16 @@ public class SettingsActivity extends ParentActivity {
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CODE_RESULT_SOUND && data != null) {
-            Log.e("GAWK_ERR","onActivityResult. requestCode = " + requestCode + "; data = " + data.toString());
-            Log.e("GAWK_ERR","RingtoneManager.EXTRA_RINGTONE_PICKED_URI = " + data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI));
             if (resultCode == RESULT_OK) {
-                Log.e("GAWK_ERR","onActivityResult (resultCode == CODE_RESULT_SOUND)");
                 Uri uri = data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
                 String url;
                 if (uri != null) {
-                    Log.e("GAWK_ERR","uri.toString() = " + uri.toString());
                     url = uri.toString();
                     setSoundTitle(url);
                 } else {
                     url = RingtoneManager.EXTRA_RINGTONE_DEFAULT_URI;
                 }
                 saveString(url);
-                Log.e("GAWK_ERR",url);
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
@@ -110,6 +120,28 @@ public class SettingsActivity extends ParentActivity {
         Ringtone r = RingtoneManager.getRingtone(this, Uri.parse(s));
         if (r != null) {
             textViewSelectSound.setText(r.getTitle(this));
+        }
+    }
+
+    public void setIntervalNotification(long time) {
+        mPrefUtil.saveLong(PrefUtil.NOTIFICATION_INTERVAL,time);
+        final int timeInterval = (int) time/60000;
+        switch (timeInterval) {
+            case 5:
+                mTextViewRepetition.setText(getText(R.string.settings_notification_repetition_text) + " - " + getText(R.string.settings_notification_repetition_select5));
+                break;
+            case 10:
+                mTextViewRepetition.setText(getText(R.string.settings_notification_repetition_text) + " - " + getText(R.string.settings_notification_repetition_select10));
+                break;
+            case 15:
+                mTextViewRepetition.setText(getText(R.string.settings_notification_repetition_text) + " - " + getText(R.string.settings_notification_repetition_select15));
+                break;
+            case 30:
+                mTextViewRepetition.setText(getText(R.string.settings_notification_repetition_text) + " - " + getText(R.string.settings_notification_repetition_select30));
+                break;
+            case 60:
+                mTextViewRepetition.setText(getText(R.string.settings_notification_repetition_text) + " - " + getText(R.string.settings_notification_repetition_select60));
+                break;
         }
     }
 }

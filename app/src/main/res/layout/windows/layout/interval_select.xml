@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/buttonIntervalSelect5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/settings_notification_repetition_select5" />
+
+    <Button
+        android:id="@+id/buttonIntervalSelect10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/settings_notification_repetition_select10" />
+
+    <Button
+        android:id="@+id/buttonIntervalSelect15"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/settings_notification_repetition_select15" />
+
+    <Button
+        android:id="@+id/buttonIntervalSelect30"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/settings_notification_repetition_select30" />
+
+    <Button
+        android:id="@+id/buttonIntervalSelect60"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/settings_notification_repetition_select60" />
+</LinearLayout>

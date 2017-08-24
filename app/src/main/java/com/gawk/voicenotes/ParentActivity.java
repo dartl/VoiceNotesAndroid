@@ -73,6 +73,13 @@ public class ParentActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        PrefUtil prefUtil = new PrefUtil(this);
+
+        /* Проверяем наличие настройки для интервала напоминания, если нет - добавляем стандартные 5 минут */
+        if (prefUtil.getLong(prefUtil.NOTIFICATION_INTERVAL,-1) == -1) {
+            prefUtil.saveLong(prefUtil.NOTIFICATION_INTERVAL,60000 * 5);
+        }
+
         dbHelper = SQLiteDBHelper.getInstance(this);
         dbHelper.connection();
 

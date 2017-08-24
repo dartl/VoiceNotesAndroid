@@ -12,6 +12,7 @@ import android.preference.PreferenceManager;
 public class PrefUtil {
     // константы названий настроек
     public static final String NOTIFICATION_SOUND = "sound_for_notification";
+    public static final String NOTIFICATION_INTERVAL = "interval_for_notification";
 
     // основной код
     public static final String PERSISTANT_STORAGE_NAME = "GAWK_VOICE_NOTES";

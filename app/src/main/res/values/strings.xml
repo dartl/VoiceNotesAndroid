@@ -121,6 +121,13 @@
     <string name="settings_notification_clear">Reset sound reminder</string>
     <string name="settings_notification_sound">Select a sound for a reminder</string>
     <string name="settings_notification_not_sound">No sound selected</string>
+    <string name="settings_notification_repetition_title">Repetition time</string>
+    <string name="settings_notification_repetition_text">Time to repeat reminder</string>
+    <string name="settings_notification_repetition_select5">5 minutes</string>
+    <string name="settings_notification_repetition_select10">10 minutes</string>
+    <string name="settings_notification_repetition_select15">15 minutes</string>
+    <string name="settings_notification_repetition_select30">30 minutes</string>
+    <string name="settings_notification_repetition_select60">60 minutes</string>
     <string name="settings_other_title">Other</string>
     <string name="settings_add_icon_add_title">Add icon</string>
 

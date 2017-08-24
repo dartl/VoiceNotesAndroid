@@ -13,7 +13,7 @@ import java.util.Calendar;
  */
 
 public class DateAndTimeCombine {
-    private final int MAX_DIFF_TIME = 60000;
+    private final long MAX_DIFF_TIME = 60000;
     private DialogFragment mDatePickerFragment, mTimePickerFragment;
     private Calendar mCalendar;
     private FragmentManager mFragmentManager;
@@ -41,10 +41,8 @@ public class DateAndTimeCombine {
         Calendar calendar = Calendar.getInstance();
         calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
         if (mCalendar.before(calendar)) {
-            Log.e("GAWK_ERR","mNewNoteNotifications.fail");
             mTimePickerReturn.fail();
         } else {
-            Log.e("GAWK_ERR","mTimePickerFragment.show");
             mTimePickerFragment.show(mFragmentManager, "timePicker");
         }
     }
