@@ -16,7 +16,7 @@ import com.gawk.voicenotes.MainActivity;
 import com.gawk.voicenotes.ParentActivity;
 import com.gawk.voicenotes.R;
 import com.gawk.voicenotes.adapters.ActionsListNotes;
-import com.gawk.voicenotes.adapters.NotificationRecyclerAdapter;
+import com.gawk.voicenotes.lists_adapters.NotificationRecyclerAdapter;
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
 
 import java.util.ArrayList;

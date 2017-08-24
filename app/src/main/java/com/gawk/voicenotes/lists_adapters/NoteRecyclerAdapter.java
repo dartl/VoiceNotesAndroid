@@ -1,4 +1,4 @@
-package com.gawk.voicenotes.adapters;
+package com.gawk.voicenotes.lists_adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,13 +10,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.gawk.voicenotes.NoteView;
 import com.gawk.voicenotes.R;
+import com.gawk.voicenotes.adapters.ActionsListNotes;
+import com.gawk.voicenotes.adapters.SQLiteDBHelper;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

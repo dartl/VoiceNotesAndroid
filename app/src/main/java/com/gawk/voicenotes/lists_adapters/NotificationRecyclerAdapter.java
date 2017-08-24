@@ -1,4 +1,4 @@
-package com.gawk.voicenotes.adapters;
+package com.gawk.voicenotes.lists_adapters;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gawk.voicenotes.R;
+import com.gawk.voicenotes.adapters.ActionsListNotes;
+import com.gawk.voicenotes.adapters.SQLiteDBHelper;
 import com.gawk.voicenotes.models.Note;
 
 import java.text.DateFormat;

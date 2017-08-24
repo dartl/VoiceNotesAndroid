@@ -12,7 +12,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.gawk.voicenotes.adapters.OpenFileDialog;
+import com.gawk.voicenotes.windows.OpenFileDialog;
 
 import java.io.File;
 import java.io.IOException;

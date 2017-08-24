@@ -47,15 +47,6 @@
             android:checked="true"/>
 
         <Button
-            android:text="@string/new_note_select_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/buttonSelectDate"
-            android:enabled="false"
-            android:layout_above="@+id/buttonSelectTime"
-            android:layout_centerHorizontal="true"  />
-
-        <Button
             android:text="@string/new_note_select_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -82,16 +73,6 @@
             android:enabled="false"
             android:layout_below="@+id/textViewTitleDate"
             android:layout_centerHorizontal="true"/>
-
-        <TextView
-            android:text="@string/new_note_error_date"
-            android:enabled="false"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/textViewErrorDate"
-            style="@style/GawkMaterialTheme.ErrorBody"/>
 
     </RelativeLayout>
 </RelativeLayout>

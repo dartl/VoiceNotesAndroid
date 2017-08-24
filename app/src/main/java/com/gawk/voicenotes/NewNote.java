@@ -1,19 +1,16 @@
 package com.gawk.voicenotes;
 
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.speech.RecognizerIntent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
-import com.gawk.voicenotes.adapters.TimePickerReturn;
+import com.gawk.voicenotes.listeners.TimePickerReturn;
 import com.gawk.voicenotes.adapters.ViewPagerAdapter;
 import com.gawk.voicenotes.fragments_notes.NewNoteNotifications;
 import com.gawk.voicenotes.fragments_notes.NewNoteText;
@@ -21,7 +18,6 @@ import com.gawk.voicenotes.logs.CustomLogger;
 import com.gawk.voicenotes.models.Note;
 import com.gawk.voicenotes.models.Notification;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
@@ -93,8 +89,6 @@ public class NewNote extends ParentActivity implements TimePickerReturn {
     }
 
     private void startSaveNote() {
-        CustomLogger mCustomLogger = new CustomLogger();
-        mCustomLogger.write("startSaveNote();");
         // сохранение заметки
         dbHelper.connection();
         NewNoteText newNoteText = (NewNoteText) adapter.getItem(0);
@@ -105,29 +99,21 @@ public class NewNote extends ParentActivity implements TimePickerReturn {
         // сохранение оповещения
         NewNoteNotifications newNoteNotifications = (NewNoteNotifications) adapter.getItem(1);
         if (newNoteNotifications.haveNotification()) {
-            mCustomLogger.write("newNoteNotifications.haveNotification();");
             Notification notification = newNoteNotifications.getNotification();
             notification.setId_note(note_id);
             notification.setId(dbHelper.saveNotification(notification,0));
             restartNotify(newNote, notification);
         }
         dbHelper.disconnection();
-
-
         finish();
     }
 
     @Override
-    public void getTime(int hourOfDay, int minute) {
-        TimePickerReturn parent = (TimePickerReturn) adapter.getItem(1);
-        parent.getTime(hourOfDay,minute);
+    public void setTimeAndDate(Calendar calendar) {
     }
 
     @Override
-    public void getDate(int year, int month, int dayOfMonth) {
-        TimePickerReturn parent = (TimePickerReturn) adapter.getItem(1);
-        parent.getDate(year, month, dayOfMonth);
+    public void fail() {
     }
-
 
 }

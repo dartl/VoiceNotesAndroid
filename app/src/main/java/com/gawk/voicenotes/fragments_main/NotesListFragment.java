@@ -10,11 +10,9 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -24,7 +22,7 @@ import com.gawk.voicenotes.MainActivity;
 import com.gawk.voicenotes.NewNote;
 import com.gawk.voicenotes.R;
 import com.gawk.voicenotes.adapters.ActionsListNotes;
-import com.gawk.voicenotes.adapters.NoteRecyclerAdapter;
+import com.gawk.voicenotes.lists_adapters.NoteRecyclerAdapter;
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
 import com.gawk.voicenotes.models.Note;
 
@@ -125,14 +123,12 @@ public class NotesListFragment extends FragmentParent implements ActionsListNote
     public void deleteSelectNotes() {
         dbHelper.connection();
         long id_temp;
-        Log.e("GAWK_ERR","deleteSelectNotes = " + selectNotes.toString());
         while (!selectNotes.isEmpty()) {
             id_temp = (Long) selectNotes.get(0);
             selectNotes.remove(0);
             dbHelper.noteDelete(id_temp);
             deleteNotifications(id_temp);
         }
-        Log.e("GAWK_ERR","deleteSelectNotes = " + selectNotes.toString());
         updateNote(dbHelper.getCursorAllNotes());
         changeBottomMenu();
     }
@@ -156,24 +152,23 @@ public class NotesListFragment extends FragmentParent implements ActionsListNote
             mShareText += dateFormat.format(note.getDate()) + "\n";
             mShareText += note.getText_note()+ "\n\n";
         }
+        mShareText += getText(R.string.main_share_text);
+        mShareText += "\n";
+        mShareText += getText(R.string.app_name) + " - https://play.google.com/store/apps/details?id=com.gawk.voicenotes";
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.putExtra(Intent.EXTRA_TEXT, mShareText);
         intent.setType("text/plain");
-        startActivity(Intent.createChooser(intent, "Share"));
+        startActivity(Intent.createChooser(intent, getText(R.string.main_share)));
     }
 
     @Override
     public boolean selectNote(long id) {
         if (selectNotes.contains(id)) {
-            Log.e("GAWK_ERR","selectNotes REMOVE before  = " + selectNotes.toString());
             selectNotes.remove(id);
-            Log.e("GAWK_ERR","selectNotes REMOVE after = " + selectNotes.toString());
             changeBottomMenu();
             return false;
         } else {
-            Log.e("GAWK_ERR","selectNotes ADD before  = " + selectNotes.toString());
             selectNotes.add(id);
-            Log.e("GAWK_ERR","selectNotes ADD after = " + selectNotes.toString());
             changeBottomMenu();
             return true;
         }

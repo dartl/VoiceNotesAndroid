@@ -1,7 +1,7 @@
 package com.gawk.voicenotes.fragments_notes;
 
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
+import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +14,8 @@ import android.widget.ToggleButton;
 
 import com.gawk.voicenotes.FragmentParent;
 import com.gawk.voicenotes.R;
-import com.gawk.voicenotes.adapters.TimePickerReturn;
+import com.gawk.voicenotes.listeners.TimePickerReturn;
+import com.gawk.voicenotes.date_and_time.DateAndTimeCombine;
 import com.gawk.voicenotes.logs.CustomLogger;
 import com.gawk.voicenotes.models.Notification;
 
@@ -27,25 +28,22 @@ import java.util.Calendar;
  */
 
 public class NewNoteNotifications extends FragmentParent implements TimePickerReturn {
-    private final int MAX_DIFF_TIME = 60000;
 
     private Switch switchNotification;
     private RelativeLayout notificationLayout;
-    private Button selectTime, selectDate;
-    private TextView textViewNowDate, textViewErrorDate;
+    private Button selectTime;
+    private TextView textViewNowDate;
     private ToggleButton toggleButton_Sound, toggleButton_Shake;
 
     private Calendar dateNotification;
-    private DialogFragment newFragmentDate, newFragmentTime;
-    private boolean checkError,
-            checkNotification = false;
-    private final Notification notification = new Notification();
+    private DateAndTimeCombine mDateAndTimeCombine;
+    private boolean checkError, checkNotification = false;
+    private View mView;
 
+    private final Notification notification = new Notification();
     private final CustomLogger mCustomLogger = new CustomLogger();
 
-    public NewNoteNotifications() {
-        // Required empty public constructor
-    }
+    public NewNoteNotifications() {}
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -55,45 +53,32 @@ public class NewNoteNotifications extends FragmentParent implements TimePickerRe
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.new_note_notifications, null);
+        mView = inflater.inflate(R.layout.new_note_notifications, null);
 
-
-        mCustomLogger.write("NewNoteNotifications called onCreateView");
-
-        switchNotification =  view.findViewById(R.id.switchNotification);
-        notificationLayout =  view.findViewById(R.id.notificationLayout);
-        selectTime = view.findViewById(R.id.buttonSelectTime);
-        selectDate = view.findViewById(R.id.buttonSelectDate);
-        textViewNowDate = view.findViewById(R.id.textViewNowDate);
-        textViewErrorDate = view.findViewById(R.id.textViewErrorDate);
-        toggleButton_Sound = view.findViewById(R.id.toggleButton_Sound);
-        toggleButton_Shake =  view.findViewById(R.id.toggleButton_Shake);
+        switchNotification =  mView.findViewById(R.id.switchNotification);
+        notificationLayout =  mView.findViewById(R.id.notificationLayout);
+        selectTime = mView.findViewById(R.id.buttonSelectTime);
+        textViewNowDate = mView.findViewById(R.id.textViewNowDate);
+        toggleButton_Sound = mView.findViewById(R.id.toggleButton_Sound);
+        toggleButton_Shake =  mView.findViewById(R.id.toggleButton_Shake);
 
         selectTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showTimePickerDialog(v);
-            }
-        });
-
-        selectDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDatePickerDialog(v);
+                showTimePickerDialog();
             }
         });
 
         switchNotification.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 try {
-                    mCustomLogger.write("switchNotification called");
-
+                    if (isChecked && !checkError) {
+                        showTimePickerDialog();
+                    }
                     for (int i = 0; i < notificationLayout.getChildCount(); i++) {
                         notificationLayout.getChildAt(i).setEnabled(isChecked);
-                        mCustomLogger.write("notificationLayout.getChildAt(i).setEnabled(isChecked) = " + i);
                     }
                     checkNotification = isChecked;
-                    mCustomLogger.write("switchNotification end");
                 } catch (Exception e) {
                     mCustomLogger.write(e);
                 }
@@ -115,51 +100,34 @@ public class NewNoteNotifications extends FragmentParent implements TimePickerRe
 
         dateNotification = Calendar.getInstance();
         setNotificationTime();
-        return view;
+        return mView;
     }
 
-    public void showTimePickerDialog(View v) {
-        if (newFragmentTime == null) {
-            newFragmentTime = new TimePickerFragment();
+    public void showTimePickerDialog() {
+        if (mDateAndTimeCombine == null) {
+            mDateAndTimeCombine = new DateAndTimeCombine(this);
         }
-        newFragmentTime.show(getFragmentManager(), "timePicker");
-    }
-
-    public void showDatePickerDialog(View v) {
-        if (newFragmentDate == null) {
-            newFragmentDate = new DatePickerFragment();
-        }
-        newFragmentDate.show(getFragmentManager(), "datePicker");
+        mDateAndTimeCombine.show(getFragmentManager());
     }
 
     private void setNotificationTime() {
         DateFormat dateFormat = SimpleDateFormat.getDateTimeInstance();
         textViewNowDate.setText(dateFormat.format(dateNotification.getTime()));
         notification.setDate(dateNotification.getTime());
-        if ( (dateNotification.getTimeInMillis() - Calendar.getInstance().getTimeInMillis()) > MAX_DIFF_TIME ) {
-            checkError = true;
-            textViewErrorDate.setVisibility(View.INVISIBLE);
-        } else {
-            // Выбрана дата из прошлого времени
-            checkError = false;
-            textViewErrorDate.setVisibility(View.VISIBLE);
-        }
     }
 
     @Override
-    public void getTime(int hourOfDay, int minute) {
-        dateNotification.set(dateNotification.get(Calendar.YEAR),
-                dateNotification.get(Calendar.MONTH),
-                dateNotification.get(Calendar.DAY_OF_MONTH),
-                hourOfDay, minute, 0);
+    public void setTimeAndDate(Calendar calendar) {
+        checkError = true;
+        dateNotification = calendar;
         setNotificationTime();
     }
 
     @Override
-    public void getDate(int year, int month, int dayOfMonth) {
-        dateNotification.set(year, month, dayOfMonth,
-                dateNotification.get(Calendar.HOUR), dateNotification.get(Calendar.MINUTE), 0);
-        setNotificationTime();
+    public void fail() {
+        Snackbar.make(mView, getString(R.string.new_note_error_date), Snackbar.LENGTH_LONG).show();
+        checkError = false;
+        switchNotification.setChecked(false);
     }
 
     public Notification getNotification() {

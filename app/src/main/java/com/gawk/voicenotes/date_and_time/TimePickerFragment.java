@@ -1,15 +1,14 @@
-package com.gawk.voicenotes.fragments_notes;
+package com.gawk.voicenotes.date_and_time;
 
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.DialogFragment;
 import android.text.format.DateFormat;
 import android.widget.TimePicker;
-
-import com.gawk.voicenotes.adapters.TimePickerReturn;
 
 import java.util.Calendar;
 
@@ -20,8 +19,12 @@ import java.util.Calendar;
 public class TimePickerFragment extends DialogFragment
         implements TimePickerDialog.OnTimeSetListener {
 
-    TimePickerReturn parent;
+    DateAndTimeCombine mDateAndTimeCombine;
     Calendar current;
+
+    public TimePickerFragment(DateAndTimeCombine mDateAndTimeCombine) {
+        this.mDateAndTimeCombine = mDateAndTimeCombine;
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -35,18 +38,19 @@ public class TimePickerFragment extends DialogFragment
         hour = current.get(Calendar.HOUR_OF_DAY);
         minute = current.get(Calendar.MINUTE);
 
-        parent = (TimePickerReturn) getActivity();
         // Create a new instance of TimePickerDialog and return it
         return new TimePickerDialog(getActivity(), this, hour, minute,
                 DateFormat.is24HourFormat(getActivity()));
     }
 
+    @Override
+    public void onCancel(DialogInterface dialog) {
+        super.onCancel(dialog);
+        mDateAndTimeCombine.fail();
+    }
+
+    @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        // Do something with the time chosen by the user
-        current.set(current.get(Calendar.YEAR),
-                current.get(Calendar.MONTH),
-                current.get(Calendar.DAY_OF_MONTH),
-                hourOfDay, minute, 0);
-        parent.getTime(hourOfDay,minute);
+        mDateAndTimeCombine.endSelectTime(hourOfDay, minute);
     }
 }

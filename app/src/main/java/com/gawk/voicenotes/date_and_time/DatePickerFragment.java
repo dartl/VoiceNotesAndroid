@@ -1,12 +1,12 @@
-package com.gawk.voicenotes.fragments_notes;
+package com.gawk.voicenotes.date_and_time;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.util.Log;
 import android.widget.DatePicker;
-
-import com.gawk.voicenotes.adapters.TimePickerReturn;
 
 import java.util.Calendar;
 
@@ -17,8 +17,12 @@ import java.util.Calendar;
 public class DatePickerFragment extends DialogFragment
         implements DatePickerDialog.OnDateSetListener {
 
-    TimePickerReturn parent;
+    DateAndTimeCombine mDateAndTimeCombine;
     Calendar current;
+
+    public DatePickerFragment(DateAndTimeCombine mDateAndTimeCombine) {
+        this.mDateAndTimeCombine = mDateAndTimeCombine;
+    }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -32,7 +36,6 @@ public class DatePickerFragment extends DialogFragment
         month = current.get(Calendar.MONTH);
         dayOfMonth = current.get(Calendar.DAY_OF_MONTH);
 
-        parent = (TimePickerReturn) getActivity();
         // Create a new instance of TimePickerDialog and return it
         return new DatePickerDialog(getActivity(), this, year, month, dayOfMonth);
     }
@@ -40,7 +43,15 @@ public class DatePickerFragment extends DialogFragment
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         current.set(year, month, dayOfMonth,
                 current.get(Calendar.HOUR), current.get(Calendar.MINUTE), 0);
-        parent.getDate(year, month, dayOfMonth);
+        mDateAndTimeCombine.endSelectData(year, month, dayOfMonth);
     }
+
+    @Override
+    public void onCancel(DialogInterface dialog) {
+        super.onCancel(dialog);
+        mDateAndTimeCombine.fail();
+        Log.e("GAWK_ERR","DatePickerFragment onCancel");
+    }
+
 }
 

@@ -1,19 +1,14 @@
 package com.gawk.voicenotes;
 
-import android.*;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.icu.text.CompactDecimalFormat;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -24,7 +19,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -35,31 +29,23 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.vending.billing.IInAppBillingService;
-import com.gawk.voicenotes.adapters.NoteRecyclerAdapter;
+import com.gawk.voicenotes.lists_adapters.NoteRecyclerAdapter;
 import com.gawk.voicenotes.adapters.ParcelableUtil;
 import com.gawk.voicenotes.listeners.SocialShare;
 import com.gawk.voicenotes.logs.CustomLogger;
-import com.gawk.voicenotes.models.Statistics;
 import com.gawk.voicenotes.preferences.PrefUtil;
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
 import com.gawk.voicenotes.adapters.TimeNotification;
 import com.gawk.voicenotes.models.Note;
 import com.gawk.voicenotes.models.Notification;
 import com.gawk.voicenotes.subs.GooglePlaySubs;
-import com.gawk.voicenotes.subs.SubsInterface;
 import com.gawk.voicenotes.windows.VotesDialog;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.firebase.analytics.FirebaseAnalytics;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 
 /**

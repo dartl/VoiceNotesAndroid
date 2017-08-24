@@ -18,6 +18,8 @@
     <string name="new_note_notifications">Reminders</string>
     <string name="main_view_error_select">No objects selected</string>
     <string name="main_permissions_error">You did not provide all the permissions. We do not guarantee the working capacity of the application.</string>
+    <string name="main_share_text">Notes created using the application:</string>
+    <string name="main_share">Share</string>
 
     <!-- Меню -->
     <string name="menu_add">Add note</string>
@@ -93,8 +95,8 @@
     <!-- Заметки просмотр -->
     <string name="note_view_remind_title">Voice Notes will remind you</string>
     <string name="note_view_remind_no_body">Never</string>
-    <!-- Экспорт и импорт -->
 
+    <!-- Экспорт и импорт -->
     <string name="export_import_export">Export</string>
     <string name="export_import_import">Import</string>
     <string name="export_import_select_type">Select type</string>
