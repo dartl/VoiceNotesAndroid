@@ -53,13 +53,13 @@
 
         <Button
             android:id="@+id/buttonWriteUs"
-            android:paddingRight="8dp"
-            android:paddingLeft="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity=""
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
             android:text="@string/vote_text_ok"
-            android:visibility="visible" />
+            android:visibility="gone" />
     </LinearLayout>
 
 </LinearLayout>

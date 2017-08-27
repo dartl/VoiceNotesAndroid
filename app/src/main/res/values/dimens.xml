@@ -18,4 +18,6 @@
     <dimen name="element_padding">16dp</dimen>
 
     <!-- Главное окно -->
+    <dimen name="actions_icon_size">48dp</dimen>
+    <dimen name="actions_icon_padding">4dp</dimen>
 </resources>
