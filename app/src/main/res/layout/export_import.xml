@@ -11,8 +11,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/GawkMaterialTheme.Body">
+        android:layout_height="wrap_content">
 
         <TextView
             android:text="@string/export_import_export"
@@ -31,14 +30,12 @@
             android:id="@+id/textView5"
             android:layout_below="@+id/textView4"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            style="@style/GawkMaterialTheme.LabelText"/>
+            android:layout_alignParentStart="true"/>
 
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/spinnerSelectType"
-            style="@style/GawkMaterialTheme.Input"
             android:layout_below="@+id/textView5"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
@@ -50,8 +47,7 @@
             android:layout_below="@+id/spinnerSelectType"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:id="@+id/textView6"
-            style="@style/GawkMaterialTheme.LabelText"/>
+            android:id="@+id/textView6" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -64,8 +60,7 @@
             android:layout_alignParentStart="true"
             android:id="@+id/editTextFileName"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            style="@style/GawkMaterialTheme.Input"/>
+            android:layout_alignParentEnd="true" />
 
         <TextView
             android:text="@string/export_import_select_no"
@@ -81,20 +76,17 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/textView7"
             android:layout_centerHorizontal="true"
-            android:id="@+id/buttonSelectFile"
-            style="@style/GawkMaterialTheme.ButtonMiddle"/>
+            android:id="@+id/buttonSelectFile"/>
         <Button
             android:text="@string/export_import_import"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/buttonImport"
             android:layout_below="@+id/textViewFileSelected"
-            android:layout_centerHorizontal="true"
-            style="@style/GawkMaterialTheme.ButtonMiddle"/>
+            android:layout_centerHorizontal="true"/>
 
         <TextView
             android:id="@+id/textView7"
-            style="@style/GawkMaterialTheme.DisplayExport"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -109,7 +101,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/buttonSelectFolder"
-            style="@style/GawkMaterialTheme.ButtonMiddle"
             android:layout_below="@+id/textViewFullFile"
             android:layout_centerHorizontal="true" />
 
@@ -118,7 +109,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/buttonExport"
-            style="@style/GawkMaterialTheme.ButtonMiddle"
             android:layout_below="@+id/buttonSelectFolder"
             android:layout_centerHorizontal="true" />
 

@@ -2,6 +2,7 @@ package com.gawk.voicenotes.fragments_notes;
 
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,11 +30,10 @@ import java.util.Calendar;
 
 public class NewNoteNotifications extends FragmentParent implements TimePickerReturn {
 
-    private Switch switchNotification;
+    private Switch switchNotification, mSwitchSound, mSwitchVibrate, mSwitchRepeat;
     private RelativeLayout notificationLayout;
     private Button selectTime;
     private TextView textViewNowDate;
-    private ToggleButton toggleButton_Sound, toggleButton_Shake;
 
     private Calendar dateNotification;
     private DateAndTimeCombine mDateAndTimeCombine;
@@ -41,7 +41,6 @@ public class NewNoteNotifications extends FragmentParent implements TimePickerRe
     private View mView;
 
     private final Notification notification = new Notification();
-    private final CustomLogger mCustomLogger = new CustomLogger();
 
     public NewNoteNotifications() {}
 
@@ -59,8 +58,9 @@ public class NewNoteNotifications extends FragmentParent implements TimePickerRe
         notificationLayout =  mView.findViewById(R.id.notificationLayout);
         selectTime = mView.findViewById(R.id.buttonSelectTime);
         textViewNowDate = mView.findViewById(R.id.textViewNowDate);
-        toggleButton_Sound = mView.findViewById(R.id.toggleButton_Sound);
-        toggleButton_Shake =  mView.findViewById(R.id.toggleButton_Shake);
+        mSwitchSound = mView.findViewById(R.id.switchSound);
+        mSwitchVibrate = mView.findViewById(R.id.switchVibrate);
+        mSwitchRepeat = mView.findViewById(R.id.switchRepeat);
 
         selectTime.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,30 +71,31 @@ public class NewNoteNotifications extends FragmentParent implements TimePickerRe
 
         switchNotification.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                try {
-                    if (isChecked && !checkError) {
-                        showTimePickerDialog();
-                    }
-                    for (int i = 0; i < notificationLayout.getChildCount(); i++) {
-                        notificationLayout.getChildAt(i).setEnabled(isChecked);
-                    }
-                    checkNotification = isChecked;
-                } catch (Exception e) {
-                    mCustomLogger.write(e);
+                if (isChecked && !checkError) {
+                    showTimePickerDialog();
                 }
-
+                for (int i = 0; i < notificationLayout.getChildCount(); i++) {
+                    notificationLayout.getChildAt(i).setEnabled(isChecked);
+                }
+                checkNotification = isChecked;
             }
         });
 
-        toggleButton_Sound.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        mSwitchSound.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 notification.setSound(isChecked);
             }
         });
 
-        toggleButton_Shake.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        mSwitchVibrate.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 notification.setShake(isChecked);
+            }
+        });
+
+        mSwitchRepeat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                notification.setRepeat(isChecked);
             }
         });
 

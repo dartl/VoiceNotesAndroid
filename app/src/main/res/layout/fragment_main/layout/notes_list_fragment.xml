@@ -18,7 +18,6 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="@dimen/body_padding"
         android:layout_marginBottom="@dimen/body_padding"
-        app:srcCompat="@drawable/ic_note_add_white_24dp"
         app:fabSize="normal"
         android:layout_above="@+id/relativeLayoutBottomMenu"
         android:layout_alignParentRight="true"
@@ -26,7 +25,6 @@
 
     <RelativeLayout
         android:id="@+id/relativeLayoutBottomMenu"
-        style="@style/GawkMaterialTheme.BottomMenuSelected"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_alignParentBottom="true"
@@ -38,26 +36,22 @@
 
         <ImageButton
             android:id="@+id/imageButtonShare"
-            style="@style/GawkMaterialTheme.BottomMenuSelectedItem"
             android:layout_width="@dimen/height_icon_selected_menu"
             android:layout_height="@dimen/height_icon_selected_menu"
             android:layout_alignParentTop="true"
             android:layout_gravity="end"
             android:layout_toLeftOf="@+id/imageButtonDelete"
             android:layout_toStartOf="@+id/imageButtonDelete"
-            android:scaleType="fitCenter"
-            app:srcCompat="@drawable/ic_share_white_48dp" />
+            android:scaleType="fitCenter"/>
 
         <ImageButton
             android:id="@+id/imageButtonDelete"
-            style="@style/GawkMaterialTheme.BottomMenuSelectedItem"
             android:layout_width="@dimen/height_icon_selected_menu"
             android:layout_height="@dimen/height_icon_selected_menu"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:layout_gravity="end"
-            android:scaleType="fitCenter"
-            app:srcCompat="@drawable/ic_delete_forever_white_48dp" />
+            android:scaleType="fitCenter"/>
     </RelativeLayout>
 </RelativeLayout>

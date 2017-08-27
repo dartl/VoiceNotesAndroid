@@ -101,7 +101,7 @@ public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerA
         }
 
         private void changeItemSelect(boolean state) {
-            if (state) {
+            /*if (state) {
                 cardView.setBackgroundColor(ContextCompat.getColor(parent.getContext(), R.color.colorGreen));
                 textView.setTextColor(ContextCompat.getColor(parent.getContext(), R.color.textColorPrimary));
                 dateView.setTextColor(ContextCompat.getColor(parent.getContext(), R.color.textColorPrimary));
@@ -109,7 +109,7 @@ public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerA
                 cardView.setBackgroundColor(ContextCompat.getColor(parent.getContext(), R.color.textColorPrimary));
                 textView.setTextColor(ContextCompat.getColor(parent.getContext(), R.color.colorGrey900));
                 dateView.setTextColor(ContextCompat.getColor(parent.getContext(), R.color.colorGrey700));
-            }
+            }*/
         }
     }
 

@@ -2,9 +2,12 @@ package com.gawk.voicenotes;
 
 
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -63,6 +66,14 @@ public class NewNote extends ParentActivity implements TimePickerReturn {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view_menu);
+        navigationView.getMenu().findItem(R.id.menu_add).setCheckable(true).setChecked(true);
+    }
+
+    @Override
     public void onBackPressed() {
         finish();
         super.onBackPressed();
@@ -84,7 +95,7 @@ public class NewNote extends ParentActivity implements TimePickerReturn {
 
         TextView tabTwo = (TextView) LayoutInflater.from(this).inflate(R.layout.tab_header, null);
         tabTwo.setText(adapter.getPageTitle(1));
-        tabTwo.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_event_note_white_24dp, 0, 0);
+        tabTwo.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_alarm_white_24dp, 0, 0);
         tabLayout.getTabAt(1).setCustomView(tabTwo);
     }
 

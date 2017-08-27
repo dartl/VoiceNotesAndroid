@@ -5,8 +5,10 @@ import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -65,6 +67,14 @@ public class SettingsActivity extends ParentActivity {
 
         String url = mPrefUtil.getString(PrefUtil.NOTIFICATION_SOUND,"");
         setSoundTitle(url);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view_menu);
+        navigationView.getMenu().findItem(R.id.menu_settings).setCheckable(true).setChecked(true);
     }
 
     protected void installIconAddNote() {

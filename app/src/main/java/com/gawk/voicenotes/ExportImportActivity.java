@@ -1,9 +1,11 @@
 package com.gawk.voicenotes;
 
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -43,7 +45,7 @@ public class ExportImportActivity extends ParentActivity implements View.OnClick
 
         initAdMob(true);
 
-        openDirectoryDialog = new OpenFileDialog(this).setFileSelectedBackgroundColor(R.color.colorYellow)
+        openDirectoryDialog = new OpenFileDialog(this)
                 .setFileSelectedColor(R.color.colorPrimary)
                 .setFolderSelectable(true).setOnCloseListener(new OpenFileDialog.OnCloseListener(){
                     public void onCancel(){}
@@ -56,7 +58,6 @@ public class ExportImportActivity extends ParentActivity implements View.OnClick
                     }
                 });
         openFileDialog = new OpenFileDialog(this).setFolderSelectable(true)
-                .setFileSelectedBackgroundColor(R.color.colorYellow)
                 .setFileSelectedColor(R.color.colorPrimary)
                 .setOnCloseListener(new OpenFileDialog.OnCloseListener(){
                     public void onCancel(){}
@@ -141,6 +142,9 @@ public class ExportImportActivity extends ParentActivity implements View.OnClick
         if (checkPermissions(this,2)) {
             Snackbar.make(mView, getString(R.string.main_permissions_error), Snackbar.LENGTH_LONG).show();
         }
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view_menu);
+        navigationView.getMenu().findItem(R.id.menu_import_export).setCheckable(true).setChecked(true);
     }
 
     @Override

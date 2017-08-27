@@ -16,6 +16,7 @@ import android.os.RemoteException;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -66,6 +67,7 @@ public class ParentActivity extends AppCompatActivity
     private Button buttonDonateDeveloper;
     private ImageButton mButtonFacebook, mButtonVk, mButtonGoogle, mButtonTwitter, mButtonLinkedln,
             mButtonOdnoklassnik;
+    private MenuItem mOldMenuItem;
     protected GooglePlaySubs mGooglePlaySubs;
     protected ParentActivity mActivity;
 
@@ -101,7 +103,6 @@ public class ParentActivity extends AppCompatActivity
         @Override
         public void onServiceConnected(ComponentName name,
                                        IBinder service) {
-            Log.e("GAWK_ERR","CALL onServiceConnected()");
             mService = IInAppBillingService.Stub.asInterface(service);
             try {
                 mGooglePlaySubs = new GooglePlaySubs(mActivity,mService);
@@ -150,7 +151,7 @@ public class ParentActivity extends AppCompatActivity
     @Override
     public void setContentView(int layoutResID) {
         DrawerLayout fullView = (DrawerLayout) getLayoutInflater().inflate(R.layout.activity_base, null);
-        FrameLayout activityContainer = (FrameLayout) fullView.findViewById(R.id.activity_content);
+        FrameLayout activityContainer = fullView.findViewById(R.id.activity_content);
         getLayoutInflater().inflate(layoutResID, activityContainer, true);
         super.setContentView(fullView);
 
@@ -310,8 +311,6 @@ public class ParentActivity extends AppCompatActivity
         }
     }
 
-
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1001 && data !=null) {
@@ -324,47 +323,37 @@ public class ParentActivity extends AppCompatActivity
     }
 
     protected void restartNotify(Note note, Notification notification) {
-        CustomLogger mCustomLogger = new CustomLogger();
-        try {
-            AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-            Intent intent = new Intent(this, TimeNotification.class);
-            intent.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
+        AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(this, TimeNotification.class);
+        intent.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
 
-            PrefUtil prefUtil = new PrefUtil(this);
-            String sound_link = prefUtil.getString(PrefUtil.NOTIFICATION_SOUND,"a");
-            Bundle c = new Bundle();
-            c.putString("sound_link", sound_link);
-            c.putByteArray("note", ParcelableUtil.marshall(note));
-            c.putByteArray("notification", ParcelableUtil.marshall(notification));
-            intent.putExtras(c);
-            int requestCodeIntent =  (int) notification.getId();
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(this, -requestCodeIntent,
-                    intent, 0);
-            // На случай, если мы ранее запускали активити, а потом поменяли время,
-            // откажемся от уведомления
-            am.cancel(pendingIntent);
-            mCustomLogger.write("restartNotify();");
-            mCustomLogger.write("note = " + note);
-            mCustomLogger.write("notification = " + notification);
-            if(Build.VERSION.SDK_INT < 23){
-                if(Build.VERSION.SDK_INT >= 19){
-                    mCustomLogger.write("am.setExact()");
-                    am.setExact(AlarmManager.RTC_WAKEUP,  notification.getDate().getTime() , pendingIntent);
-                }
-                else{
-                    mCustomLogger.write("am.set()");
-                    am.set(AlarmManager.RTC_WAKEUP,  notification.getDate().getTime() , pendingIntent);
-                }
+        PrefUtil prefUtil = new PrefUtil(this);
+        String sound_link = prefUtil.getString(PrefUtil.NOTIFICATION_SOUND,"a");
+        Bundle c = new Bundle();
+        c.putString("sound_link", sound_link);
+        c.putByteArray("note", ParcelableUtil.marshall(note));
+        c.putByteArray("notification", ParcelableUtil.marshall(notification));
+        intent.putExtras(c);
+        int requestCodeIntent =  (int) notification.getId();
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, -requestCodeIntent,
+                intent, 0);
+        // На случай, если мы ранее запускали активити, а потом поменяли время,
+        // откажемся от уведомления
+        am.cancel(pendingIntent);
+        if(Build.VERSION.SDK_INT < 23){
+            if(Build.VERSION.SDK_INT >= 19){
+                Log.e("GAWK_ERR","Build.VERSION.SDK_INT >= 19");
+                am.setExact(AlarmManager.RTC_WAKEUP,  notification.getDate().getTime() , pendingIntent);
             }
             else{
-                mCustomLogger.write("am.setExactAndAllowWhileIdle()");
-                am.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP,  notification.getDate().getTime() , pendingIntent);
+                Log.e("GAWK_ERR","NO Build.VERSION.SDK_INT >= 19");
+                am.set(AlarmManager.RTC_WAKEUP,  notification.getDate().getTime() , pendingIntent);
             }
-        } catch (Exception e) {
-            mCustomLogger.write(e);
         }
-
-
+        else{
+            Log.e("GAWK_ERR","NO Build.VERSION.SDK_INT < 23");
+            am.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP,  notification.getDate().getTime() , pendingIntent);
+        }
     }
 
     public void deleteNotify(long id) {

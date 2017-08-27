@@ -8,6 +8,8 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="tabIndicatorColor">@color/colorWhite</item>
+        <item name="tabIndicatorHeight">2dp</item>
     </style>
 
     <style name="GawkMaterialTheme.NoActionBar">
@@ -15,233 +17,21 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="GawkMaterialTheme.ButtonActionImage" parent="Widget.AppCompat.Light.ActionButton">
+    <!-- Главное окно -->
+    <style name="GawkMaterialTheme.TabLayoutStyle" parent="Widget.Design.TabLayout">
+        <item name="tabIndicatorColor">@color/colorWhite</item>
+        <item name="tabIndicatorHeight">2dp</item>
+        <item name="tabPaddingStart">8dp</item>
+        <item name="tabPaddingEnd">8dp</item>
+        <item name="tabBackground">?attr/selectableItemBackground</item>
+        <item name="tabTextAppearance">@style/TabTextAppearance</item>
+        <item name="tabSelectedTextColor">@android:color/white</item>
     </style>
 
-    <style name="GawkMaterialTheme.Body" >
-        <item name="android:padding">@dimen/body_padding</item>
-    </style>
-
-    <style name="GawkMaterialTheme.BodyPaddingBottom" >
-        <item name="android:paddingBottom">@dimen/big_button_icon_padding_top</item>
-    </style>
-
-    <style name="GawkMaterialTheme.ButtonBig" parent="Widget.AppCompat.ImageButton">
-        <item name="background">@color/colorPrimaryDark</item>
-        <item name="android:paddingLeft">@dimen/big_button_icon_padding</item>
-        <item name="android:paddingRight">@dimen/big_button_icon_padding</item>
-        <item name="android:paddingTop">@dimen/big_button_icon_padding_top</item>
-        <item name="android:paddingBottom">@dimen/big_button_icon_padding_top</item>
-        <item name="android:layout_marginLeft">@dimen/big_button_icon_margin</item>
-        <item name="android:layout_marginRight">@dimen/big_button_icon_margin</item>
-        <item name="android:height">@dimen/big_button_icon_height</item>
-    </style>
-
-    <style name="GawkMaterialTheme.ButtonMiddle" parent="Widget.AppCompat.Button">
-        <item name="background">@color/colorPrimaryDark</item>
-        <item name="android:paddingLeft">@dimen/middle_button_icon_padding</item>
-        <item name="android:paddingRight">@dimen/middle_button_icon_padding</item>
-        <item name="android:paddingTop">@dimen/middle_button_icon_padding_top</item>
-        <item name="android:paddingBottom">@dimen/middle_button_icon_padding_top</item>
-        <item name="android:height">@dimen/big_button_icon_height</item>
-    </style>
-
-    <style name="GawkMaterialTheme.MultiTextField">
-        <item name="android:padding">@dimen/multi_text_full_padding</item>
-        <item name="android:textSize">@dimen/multi_text_full_text_size</item>
-    </style>
-
-    <style name="GawkMaterialTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="GawkMaterialTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
-    <style name="GawkMaterialTheme.FullDialogTitle" >
-        <item name="android:padding">@dimen/full_width_app_height</item>
-    </style>
-
-    <style name="GawkMaterialTheme.ErrorBody" >
-        <item name="android:textColor">@color/colorError</item>
-    </style>
-
-    <style name="GawkMaterialTheme.ListItem" >
-        <item name="android:paddingLeft">16dp</item>
-    </style>
-
-
-    <style name="GawkMaterialTheme.ListIconDelete" >
-        <item name="android:background">#00000000</item>
-        <item name="android:paddingRight">16dp</item>
-        <item name="android:paddingLeft">16dp</item>
-        <item name="android:paddingTop">16dp</item>
-        <item name="android:paddingBottom">16dp</item>
-    </style>
-
-    <style name="GawkMaterialTheme.ListIconNotification" >
-        <item name="android:paddingRight">8dp</item>
-        <item name="android:paddingLeft">8dp</item>
-        <item name="android:paddingTop">16dp</item>
-        <item name="android:paddingBottom">16dp</item>
-    </style>
-
-    <style name="GawkMaterialTheme.ListIconMini" >
-        <item name="android:background">#00000000</item>
-        <item name="android:paddingRight">16dp</item>
-        <item name="android:paddingLeft">16dp</item>
-        <item name="android:paddingTop">16dp</item>
-        <item name="android:paddingBottom">16dp</item>
-    </style>
-
-    <style name="GawkMaterialTheme.ListIconSelect" >
-        <item name="android:paddingRight">6dp</item>
-        <item name="android:paddingTop">16dp</item>
-        <item name="android:paddingBottom">16dp</item>
-    </style>
-
-    <style name="GawkMaterialTheme.Display1" parent="Base.TextAppearance.AppCompat.Display1" >
-        <item name="android:paddingLeft">16dp</item>
-        <item name="android:paddingTop">16dp</item>
-    </style>
-
-    <style name="GawkMaterialTheme.Subhead" parent="Base.TextAppearance.AppCompat.Subhead" >
-        <item name="android:paddingLeft">16dp</item>
-        <item name="android:paddingTop">16dp</item>
-    </style>
-
-    <style name="GawkMaterialTheme.ButtonBigGreen" parent="GawkMaterialTheme.ButtonBig">
-        <item name="background">@color/colorGreen</item>
-    </style>
-
-    <style name="GawkMaterialTheme.ButtonBigYellow" parent="GawkMaterialTheme.ButtonBig">
-        <item name="background">@color/colorYellow</item>
-    </style>
-
-    <style name="GawkMaterialTheme.DisplayExport" parent="Base.TextAppearance.AppCompat.Display1" >
-        <item name="android:paddingTop">32dp</item>
-    </style>
-
-    <style name="GawkMaterialTheme.LabelText" >
-        <item name="android:textColor">@color/colorGrey500</item>
-        <item name="android:textSize">12sp</item>
-        <item name="android:paddingTop">16dp</item>
-        <item name="android:paddingBottom">8dp</item>
-    </style>
-
-    <style name="GawkMaterialTheme.Input" >
-        <item name="android:textSize">16sp</item>
-        <item name="android:paddingTop">8dp</item>
-        <item name="android:paddingBottom">8dp</item>
-        <item name="android:layout_marginBottom">8dp</item>
-        <item name="android:paddingLeft">0dp</item>
-    </style>
-
-    <style name="GawkMaterialTheme.DonationText" >
-        <item name="android:textSize">16sp</item>
-        <item name="android:paddingTop">8dp</item>
-        <item name="android:paddingBottom">8dp</item>
-    </style>
-
-    <style name="GawkMaterialTheme.ButtonAlertCustom" parent="Base.AlertDialog.AppCompat">
-        <item name="android:background">@color/colorTransparent</item>
-        <item name="android:textColor">@color/colorAccent</item>
-        <item name="android:textAllCaps">true</item>
-    </style>
-
-    <style name="GawkMaterialTheme.RecognitionTextError" parent="Base.TextAppearance.AppCompat.Body2">
-    </style>
-
-    <style name="GawkMaterialTheme.SettingsTitle" >
-        <item name="android:paddingLeft">@dimen/body_padding</item>
-        <item name="android:paddingRight">@dimen/body_padding</item>
+    <style name="TabTextAppearance" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">14sp</item>
-        <item name="android:layout_marginTop">18dp</item>
-        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="textAllCaps">true</item>
     </style>
 
-    <style name="GawkMaterialTheme.SettingsSubText" >
-        <item name="android:paddingLeft">@dimen/body_padding</item>
-        <item name="android:paddingRight">@dimen/body_padding</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/colorGrey500</item>
-    </style>
-
-    <style name="GawkMaterialTheme.SettingsButton" >
-        <item name="android:paddingLeft">@dimen/body_padding</item>
-        <item name="android:paddingRight">@dimen/body_padding</item>
-        <item name="android:textSize">18sp</item>
-        <item name="android:background">@color/colorTransparent</item>
-        <item name="android:gravity">center_vertical</item>
-    </style>
-
-    <style name="GawkMaterialTheme.SettingsPadding" >
-        <item name="android:layout_marginLeft">@dimen/body_padding</item>
-        <item name="android:layout_marginRight">@dimen/body_padding</item>
-    </style>
-
-    <style name="GawkMaterialTheme.BackgroundTransparent" >
-        <item name="android:background">@color/colorTransparent</item>
-    </style>
-
-    <style name="GawkMaterialTheme.BackgroundTransparent.SocialButton" >
-        <item name="android:layout_margin">4dp</item>
-    </style>
-
-    <style name="GawkMaterialTheme.SocialTitle" >
-        <item name="android:layout_gravity">center</item>
-        <item name="android:textColor">@color/colorGrey500</item>
-        <item name="android:textSize">18sp</item>
-    </style>
-
-    <style name="GawkMaterialTheme.StatisticsName" >
-        <item name="android:gravity">center</item>
-        <item name="android:textColor">@color/colorAccent</item>
-        <item name="android:textSize">18sp</item>
-    </style>
-
-    <style name="GawkMaterialTheme.StatisticsSubName" >
-        <item name="android:gravity">center</item>
-        <item name="android:textColor">@color/colorGrey500</item>
-    </style>
-
-    <style name="GawkMaterialTheme.StatisticsListElement" >
-        <item name="android:textSize">16sp</item>
-        <item name="android:paddingTop">16dp</item>
-        <item name="android:paddingBottom">16dp</item>
-    </style>
-
-    <style name="GawkMaterialTheme.StatisticsListElement.Title" >
-        <item name="android:paddingRight">16dp</item>
-        <item name="android:paddingTop">0dp</item>
-        <item name="android:paddingBottom">0dp</item>
-    </style>
-
-    <style name="GawkMaterialTheme.CardViewNoteBody" >
-    </style>
-
-    <style name="GawkMaterialTheme.CardViewNoteDate" >
-        <item name="android:textColor">@color/colorGrey700</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:paddingLeft">6dp</item>
-        <item name="android:paddingTop">16dp</item>
-    </style>
-
-    <style name="GawkMaterialTheme.CardViewNoteText" >
-        <item name="android:textColor">@color/colorGrey900</item>
-        <item name="android:paddingLeft">6dp</item>
-        <item name="android:paddingRight">8dp</item>
-        <item name="android:paddingBottom">16dp</item>
-        <item name="android:textSize">18sp</item>
-    </style>
-
-    <style name="GawkMaterialTheme.BottomMenuSelected" >
-        <item name="android:background">@color/colorPrimary</item>
-        <item name="android:paddingRight">@dimen/body_padding</item>
-        <item name="android:paddingTop">8dp</item>
-        <item name="android:paddingBottom">8dp</item>
-    </style>
-
-    <style name="GawkMaterialTheme.BottomMenuSelectedItem" >
-        <item name="android:scaleType">fitCenter</item>
-        <item name="android:layout_marginLeft">8dp</item>
-        <item name="android:background">@color/colorTransparent</item>
-    </style>
 </resources>

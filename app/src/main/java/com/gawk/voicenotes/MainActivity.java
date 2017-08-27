@@ -6,9 +6,11 @@ import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.SearchView;
@@ -16,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
@@ -24,6 +27,8 @@ import com.gawk.voicenotes.fragments_main.NotesListFragment;
 import com.gawk.voicenotes.fragments_main.NotificationsListFragment;
 import com.gawk.voicenotes.preferences.PrefUtil;
 import com.gawk.voicenotes.windows.VotesDialog;
+
+import org.w3c.dom.Text;
 
 public class MainActivity extends ParentActivity {
     private TabLayout tabLayout;
@@ -39,8 +44,6 @@ public class MainActivity extends ParentActivity {
         initAdMob(true);
 
         mView = findViewById(R.id.activity_main);
-
-
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setVisibility(View.VISIBLE);
 
@@ -86,6 +89,11 @@ public class MainActivity extends ParentActivity {
                 prefUtil.saveBoolean(INSTALL_PREF,true);
             }
         }
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view_menu);
+        navigationView.getMenu().findItem(R.id.menu_notes_list).setCheckable(true).setChecked(true);
+        TextView textView = navigationView.getMenu().findItem(R.id.menu_notes_list).getActionView().findViewById(R.id.counterNotes);
+        textView.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary));
     }
 
     @Override
@@ -112,14 +120,18 @@ public class MainActivity extends ParentActivity {
     }
 
     private void createTabIcons() {
-        TextView tabOne = (TextView) LayoutInflater.from(this).inflate(R.layout.tab_header, null);
-        tabOne.setText(adapter.getPageTitle(0));
-        tabOne.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_note_white_24dp, 0, 0);
+        View tabOne = LayoutInflater.from(this).inflate(R.layout.tab_header, null);
+        TextView tabOneName = tabOne.findViewById(R.id.textViewTabTitle);
+        tabOneName.setText(adapter.getPageTitle(0));
+        ImageView tabOneIcon = tabOne.findViewById(R.id.imageViewTabIcon);
+        tabOneIcon.setImageResource(R.drawable.ic_note_white_24dp);
         tabLayout.getTabAt(0).setCustomView(tabOne);
 
-        TextView tabTwo = (TextView) LayoutInflater.from(this).inflate(R.layout.tab_header, null);
-        tabTwo.setText(adapter.getPageTitle(1));
-        tabTwo.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_event_note_white_24dp, 0, 0);
+        View tabTwo = LayoutInflater.from(this).inflate(R.layout.tab_header, null);
+        TextView tabTwoName = tabTwo.findViewById(R.id.textViewTabTitle);
+        tabTwoName.setText(adapter.getPageTitle(1));
+        ImageView tabTwoIcon = tabTwo.findViewById(R.id.imageViewTabIcon);
+        tabTwoIcon.setImageResource(R.drawable.ic_alarm_white_24dp);
         tabLayout.getTabAt(1).setCustomView(tabTwo);
     }
 

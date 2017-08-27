@@ -3,69 +3,32 @@
 
     <item
         android:id="@+id/menu_add"
-        android:icon="@drawable/ic_note_add_black_24dp"
+        android:icon="@drawable/ic_note_add_grey_24dp"
         android:title="@string/menu_add" />
     <item
         android:id="@+id/menu_notes_list"
-        android:icon="@drawable/ic_note_black_24dp"
         android:title="@string/menu_notes_list"
+        android:icon="@drawable/ic_note_grey_24dp"
         app:actionLayout="@layout/note_counter"/>
     <item
         android:id="@+id/menu_import_export"
-        android:icon="@drawable/ic_import_export_black_24dp"
+        android:icon="@drawable/ic_swap_vert_grey_24dp"
         android:title="@string/menu_export_import" />
-    <!-- <item
-        android:id="@+id/menu_sync"
-        android:icon="@drawable/ic_backup_black_24dp"
-        android:title="@string/menu_sync" /> -->
     <item
         android:id="@+id/menu_settings"
-        android:icon="@drawable/ic_settings_black_24dp"
+        android:icon="@drawable/ic_settings_grey_24dp"
         android:title="@string/menu_settings" />
     <item
         android:id="@+id/menu_statistics"
-        android:icon="@drawable/ic_poll_black_24dp"
+        android:icon="@drawable/ic_equalizer_grey_24dp"
         android:title="@string/menu_statistics" />
     <item
         android:id="@+id/menu_subs"
-        android:icon="@drawable/ic_subscriptions_black_24dp"
+        android:icon="@drawable/ic_monetization_on_grey_24dp"
         android:title="@string/menu_subs" />
     <item
         android:id="@+id/menu_help"
-        android:icon="@drawable/ic_help_black_24dp"
+        android:icon="@drawable/ic_help_grey_24dp"
         android:title="@string/menu_help" />
 
-    <!--
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
-        <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
-    </group>
-
-    <item android:title="Communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
-        </menu>
-    </item>
-    -->
 </menu>

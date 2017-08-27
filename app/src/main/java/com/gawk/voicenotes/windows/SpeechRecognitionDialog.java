@@ -231,11 +231,11 @@ public class SpeechRecognitionDialog extends DialogFragment {
                 Log.e("GAWK_ERR","onError(int error) - SpeechRecognizer.ERROR_SPEECH_TIMEOUT");
                 break;
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             mTextViewMainText.setTextAppearance(R.style.GawkMaterialTheme_RecognitionTextError);
         } else {
             mTextViewMainText.setTextAppearance(getActivity(),R.style.GawkMaterialTheme_RecognitionTextError);
-        }
+        }*/
         mTextViewMainText.setText(mErrorMessage);
         changeVisibleSpeak(View.VISIBLE);
         mAreaRecognition.setVisibility(View.GONE);

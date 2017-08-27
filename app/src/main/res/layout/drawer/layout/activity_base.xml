@@ -28,6 +28,7 @@
                 android:id="@+id/tabs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                style="@style/GawkMaterialTheme.TabLayoutStyle"
                 app:tabMode="fixed"
                 app:tabGravity="fill"/>
         </android.support.design.widget.AppBarLayout>
@@ -74,8 +75,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="start"
-                    android:background="@color/colorTransparent"
                     app:menu="@menu/activity_main_drawer"
+                    app:itemIconTint="@drawable/drawer_menu_item_color"
+                    app:itemBackground="@drawable/drawer_menu_item_background"
                     />
 
                 <android.support.v7.widget.RecyclerView
@@ -95,7 +97,6 @@
 
                 <TextView
                     android:id="@+id/textView2"
-                    style="@style/GawkMaterialTheme.SocialTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -111,7 +112,6 @@
 
                     <ImageButton
                         android:id="@+id/buttonFacebook"
-                        style="@style/GawkMaterialTheme.BackgroundTransparent.SocialButton"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -121,7 +121,6 @@
 
                     <ImageButton
                         android:id="@+id/buttonVk"
-                        style="@style/GawkMaterialTheme.BackgroundTransparent.SocialButton"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -130,7 +129,6 @@
 
                     <ImageButton
                         android:id="@+id/buttonGoogle"
-                        style="@style/GawkMaterialTheme.BackgroundTransparent.SocialButton"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -147,7 +145,6 @@
 
                     <ImageButton
                         android:id="@+id/buttonTwitter"
-                        style="@style/GawkMaterialTheme.BackgroundTransparent.SocialButton"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -161,7 +158,6 @@
                         android:scaleType="fitCenter"
                         android:layout_weight="1"
                         android:layout_gravity="center"
-                        style="@style/GawkMaterialTheme.BackgroundTransparent.SocialButton"
                         app:srcCompat="@drawable/linkedln" />
 
                     <ImageButton
@@ -171,7 +167,6 @@
                         android:scaleType="fitCenter"
                         android:layout_weight="1"
                         android:layout_gravity="center"
-                        style="@style/GawkMaterialTheme.BackgroundTransparent.SocialButton"
                         app:srcCompat="@drawable/odnoklassniki" />
 
                 </LinearLayout>

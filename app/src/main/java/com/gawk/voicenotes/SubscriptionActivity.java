@@ -7,7 +7,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.RemoteException;
+import android.support.design.widget.NavigationView;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -66,6 +68,14 @@ public class SubscriptionActivity extends ParentActivity {
             }
         }, 200);
         initAdMob(false);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view_menu);
+        navigationView.getMenu().findItem(R.id.menu_subs).setCheckable(true).setChecked(true);
     }
 
     private void addPrice() {

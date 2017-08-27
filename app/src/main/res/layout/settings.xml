@@ -5,7 +5,6 @@
 
     <TextView
         android:id="@+id/textView"
-        style="@style/GawkMaterialTheme.SettingsTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/settings_notification_title" />
@@ -18,14 +17,12 @@
 
         <Button
             android:id="@+id/buttonSelectSound"
-            style="@style/GawkMaterialTheme.SettingsButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/settings_notification_sound" />
 
         <TextView
             android:id="@+id/textViewSelectSound"
-            style="@style/GawkMaterialTheme.SettingsSubText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/settings_notification_not_sound" />
@@ -33,7 +30,6 @@
 
     <View
         android:id="@+id/view"
-        style="@style/GawkMaterialTheme.SettingsPadding"
         android:layout_width="fill_parent"
         android:layout_height="1dp"
         android:background="#E0E0E0" />
@@ -51,7 +47,6 @@
 
             <Button
                 android:id="@+id/buttonRepetitionView"
-                style="@style/GawkMaterialTheme.SettingsButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -60,7 +55,6 @@
 
         <TextView
             android:id="@+id/textViewRepetition"
-            style="@style/GawkMaterialTheme.SettingsSubText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/settings_notification_repetition_text" />
@@ -68,14 +62,12 @@
 
     <View
         android:id="@+id/view2"
-        style="@style/GawkMaterialTheme.SettingsPadding"
         android:layout_width="fill_parent"
         android:layout_height="1dp"
         android:background="#E0E0E0" />
 
     <TextView
         android:id="@+id/textView3"
-        style="@style/GawkMaterialTheme.SettingsTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/settings_other_title" />
@@ -88,7 +80,6 @@
 
         <Button
             android:id="@+id/buttonAddShortcut"
-            style="@style/GawkMaterialTheme.SettingsButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/settings_add_icon_add_title" />
@@ -97,13 +88,11 @@
             android:id="@+id/textView8"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/GawkMaterialTheme.SettingsSubText"
             android:text="@string/settings_add_icon_add" />
 
     </LinearLayout>
 
     <View
-        style="@style/GawkMaterialTheme.SettingsPadding"
         android:background="#E0E0E0"
         android:layout_height="1dp"
         android:layout_width="fill_parent"/>

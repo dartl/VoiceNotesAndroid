@@ -15,12 +15,4 @@
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
-
-    <style name="GawkMaterialTheme.ButtonBigGreen" parent="GawkMaterialTheme.ButtonBig">
-        <item name="android:backgroundTint">@color/colorGreen</item>
-    </style>
-
-    <style name="GawkMaterialTheme.ButtonBigYellow" parent="GawkMaterialTheme.ButtonBig">
-        <item name="background">@color/colorYellow</item>
-    </style>
 </resources>

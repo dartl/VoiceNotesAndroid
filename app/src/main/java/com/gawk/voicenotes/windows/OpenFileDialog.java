@@ -66,9 +66,9 @@ public class OpenFileDialog extends Dialog {
     private FileListRecyclerViewAdapter mFileListAdapter = null;
 
     //Resource IDs
-    private int mFolderIcon= R.drawable.ic_folder_black_48dp;
-    private int mFileIcon=R.drawable.ic_insert_drive_file_black_48dp;
-    private int mFolderUpIcon=R.drawable.ic_keyboard_backspace_black_48dp;
+    private int mFolderIcon= R.drawable.ic_folder_black_36dp;
+    private int mFileIcon=R.drawable.ic_insert_drive_file_black_36dp;
+    private int mFolderUpIcon=R.drawable.ic_keyboard_backspace_black_36dp;
     private int mFileSelectedBackgroundColor;
     private int mFileSelectedColor;
 

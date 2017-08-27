@@ -4,6 +4,7 @@ import android.database.Cursor;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;

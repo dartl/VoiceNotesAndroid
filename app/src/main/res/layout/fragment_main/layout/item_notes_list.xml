@@ -13,14 +13,12 @@
         app:cardCornerRadius="0dp">
 
         <LinearLayout
-            style="@style/GawkMaterialTheme.CardViewNoteBody"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
 
             <LinearLayout
-                style="@style/GawkMaterialTheme.ListItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -33,14 +31,12 @@
 
                     <TextView
                         android:id="@+id/textViewListDate"
-                        style="@style/GawkMaterialTheme.CardViewNoteDate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Date" />
 
                     <TextView
                         android:id="@+id/textViewListText"
-                        style="@style/GawkMaterialTheme.CardViewNoteText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:maxLines="2"

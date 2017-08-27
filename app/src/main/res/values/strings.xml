@@ -59,10 +59,9 @@
     <string name="new_note_we_remind">Reminder time</string>
     <string name="new_note_select_date">Select a date</string>
     <string name="new_note_select_time">Select a time</string>
-    <string name="new_note_sound_off">Sound off</string>
-    <string name="new_note_sound_on">Sound on</string>
-    <string name="new_note_shake_off">Vibrate off</string>
-    <string name="new_note_shake_on">Vibrate on</string>
+    <string name="new_note_sound_on">Sound</string>
+    <string name="new_note_repeat_on">Repeat</string>
+    <string name="new_note_shake_on">Vibrate</string>
     <string name="new_note_error_date">Select a date and time in the future</string>
     <string name="new_note_error_speech_recognition_title">Speech recognition error</string>
     <string name="new_note_error_speech_recognition">A required Google application is not installed or has been disabled. Would you like to install/enable it?

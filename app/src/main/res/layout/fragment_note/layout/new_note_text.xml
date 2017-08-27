@@ -11,26 +11,21 @@
         android:gravity="start"
         android:hint="@string/new_note_text"
         android:id="@+id/editText_NewNoteText"
-        style="@style/GawkMaterialTheme.MultiTextField"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <ImageButton
-        style="@style/GawkMaterialTheme.ButtonBig"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_mic_black_24dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:id="@+id/imageButton_NewNoteAdd" />
 
     <ImageButton
-        style="@style/GawkMaterialTheme.ButtonBigYellow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_clear_black_24dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"

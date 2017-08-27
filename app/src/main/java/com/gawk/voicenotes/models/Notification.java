@@ -3,6 +3,7 @@ package com.gawk.voicenotes.models;
 import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
 
@@ -16,7 +17,7 @@ import java.util.Date;
 public class Notification implements Serializable, Parcelable {
     private long id, id_note;
     private Date date;
-    private boolean sound, shake;
+    private boolean sound, shake, mRepeat;
 
     public Notification() {
         this.id = -1;
@@ -24,24 +25,34 @@ public class Notification implements Serializable, Parcelable {
         this.date = null;
         this.sound = true;
         this.shake = true;
+        this.mRepeat = false;
     }
 
     public Notification(Cursor element) {
-        element.moveToFirst();
         this.id = element.getInt(element.getColumnIndex(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_ID));
         this.id_note = element.getInt(element.getColumnIndex(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_ID));
         this.sound = toBoolean(element.getInt(element.getColumnIndex(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_SOUND)));
         this.shake = toBoolean(element.getInt(element.getColumnIndex(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_VIBRATE)));
-        long temp = element.getLong(element.getColumnIndex(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_DATE));
-        this.date = new Date(temp);
+        this.mRepeat = toBoolean(element.getInt(element.getColumnIndex(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_REPEAT)));
+        this.date = new Date(element.getLong(element.getColumnIndex(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_DATE)));
     }
 
-    public Notification(int id, int id_note, Date date, boolean sound, boolean shake) {
+    public Notification(long id, long id_note, Date date, boolean sound, boolean shake, boolean repeat) {
         this.id = id;
         this.id_note = id_note;
         this.date = date;
         this.sound = sound;
         this.shake = shake;
+        this.mRepeat = repeat;
+    }
+
+    public Notification(long id, long id_note, Date date, int sound, int shake, int repeat) {
+        this.id = id;
+        this.id_note = id_note;
+        this.date = date;
+        this.sound = toBoolean(sound);
+        this.shake = toBoolean(shake);
+        this.mRepeat = toBoolean(repeat);
     }
 
     protected Notification(Parcel in) {
@@ -51,6 +62,7 @@ public class Notification implements Serializable, Parcelable {
         sound = notification.isSound();
         shake = notification.isShake();
         date = notification.getDate();
+        mRepeat = notification.isRepeat();
     }
 
     @Override
@@ -119,6 +131,14 @@ public class Notification implements Serializable, Parcelable {
         return pVal != 0;
     }
 
+    public boolean isRepeat() {
+        return mRepeat;
+    }
+
+    public void setRepeat(boolean mRepeat) {
+        this.mRepeat = mRepeat;
+    }
+
     @Override
     public String toString() {
         return "Notification{" +
@@ -127,6 +147,7 @@ public class Notification implements Serializable, Parcelable {
                 ", date=" + date +
                 ", sound=" + sound +
                 ", shake=" + shake +
+                ", mRepeat=" + mRepeat +
                 '}';
     }
 }

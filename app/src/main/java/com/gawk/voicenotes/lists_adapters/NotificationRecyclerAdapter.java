@@ -3,6 +3,7 @@ package com.gawk.voicenotes.lists_adapters;
 import android.content.Context;
 import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import com.gawk.voicenotes.R;
 import com.gawk.voicenotes.adapters.ActionsListNotes;
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
 import com.gawk.voicenotes.models.Note;
+import com.gawk.voicenotes.models.Notification;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -63,6 +65,7 @@ public class NotificationRecyclerAdapter extends CursorRecyclerViewAdapter<Notif
 
         public void setData(final Cursor c, final NotificationRecyclerAdapter notificationRecyclerAdapter, SQLiteDBHelper db) {
             final int position = c.getPosition();
+            Notification notification = new Notification(c);
             checkBoxNotification.setChecked(false);
             checkBoxNotification.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
@@ -73,8 +76,7 @@ public class NotificationRecyclerAdapter extends CursorRecyclerViewAdapter<Notif
             });
 
             // Находим заметку для текущего оповещения
-            long note_id = c.getLong(c.getColumnIndex
-                    (SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_ID_NOTE));
+            long note_id = notification.getId_note();
             Cursor noteCursor = db.getNoteById(note_id);
             Note note = new Note(noteCursor);
 
@@ -86,10 +88,8 @@ public class NotificationRecyclerAdapter extends CursorRecyclerViewAdapter<Notif
                     23,59);   // меняем дату на начало дня
 
             // Выводим дату и время срабатывания оповещения
-            long datelong = c.getLong(c.getColumnIndex
-                    (SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_DATE));
+            Date date = notification.getDate();
             DateFormat dateFormat;
-            Date date = new Date(datelong);
             if (date.before(cToday.getTime())) {
                 dateFormat = SimpleDateFormat.getTimeInstance();
             } else {
@@ -98,24 +98,20 @@ public class NotificationRecyclerAdapter extends CursorRecyclerViewAdapter<Notif
             textViewDateNotification.setText(dateFormat.format(date));
 
             // Выводим текст заметки, к которой относится оповещение
-            textViewTextNote.setText(note.getText_note());
+            textViewTextNote.setText(note.getText_note() + ". Shake = " + notification.isRepeat());
 
             // Задаем иконку для состояния звука оповещения
-            int sound = c.getInt(c.getColumnIndex
-                    (SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_SOUND));
-            if (sound == 0) {
-                imageViewSound.setVisibility(View.GONE);
-            } else {
+            if (notification.isSound()) {
                 imageViewSound.setVisibility(View.VISIBLE);
+            } else {
+                imageViewSound.setVisibility(View.GONE);
             }
 
             // Задаем иконку для состояния вибрации оповещения
-            int shake = c.getInt(c.getColumnIndex
-                    (SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_VIBRATE));
-            if (shake == 0) {
-                imageViewShake.setVisibility(View.GONE);
-            } else {
+            if (notification.isShake()) {
                 imageViewShake.setVisibility(View.VISIBLE);
+            } else {
+                imageViewShake.setVisibility(View.GONE);
             }
         }
     }

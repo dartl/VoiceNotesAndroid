@@ -4,6 +4,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.NavigationView;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -49,6 +51,9 @@ public class StatisticsActivity extends ParentActivity {
     public void onResume() {
         super.onResume();
         refresh();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view_menu);
+        navigationView.getMenu().findItem(R.id.menu_statistics).setCheckable(true).setChecked(true);
     }
 
     private void refresh() {

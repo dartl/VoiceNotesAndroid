@@ -1,6 +1,8 @@
 package com.gawk.voicenotes;
 
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
+import android.view.Menu;
 import android.webkit.WebView;
 
 /**
@@ -17,5 +19,12 @@ public class HelpActivity extends ParentActivity {
         webView = (WebView) findViewById(R.id.webView);
         webView.loadUrl("http://voicenotes.cofp.ru/");
         initAdMob(false);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view_menu);
+        navigationView.getMenu().findItem(R.id.menu_help).setCheckable(true).setChecked(true);
     }
 }

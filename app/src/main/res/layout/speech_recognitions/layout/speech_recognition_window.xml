@@ -2,14 +2,12 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    style="@style/GawkMaterialTheme.Body"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/textViewMainText"
-        style="@style/GawkMaterialTheme.Display1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/new_note_speech_recognition_message"
@@ -37,7 +35,7 @@
             android:layout_height="@dimen/dialog_recognize_circle_min_size"
             android:background="@drawable/speech_recognition_circle_grey"
             android:minHeight="@dimen/dialog_recognize_circle_min_size"
-            app:srcCompat="@drawable/ic_mic_white_48dp"
+
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true" />
 
@@ -46,12 +44,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="2"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/buttonClose"
-            style="@style/GawkMaterialTheme.ButtonAlertCustom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -59,7 +56,6 @@
 
         <Button
             android:id="@+id/buttonFix"
-            style="@style/GawkMaterialTheme.ButtonAlertCustom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"

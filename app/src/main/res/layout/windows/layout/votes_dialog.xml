@@ -47,14 +47,12 @@
 
         <Button
             android:id="@+id/buttonCancel"
-            style="@style/GawkMaterialTheme.ButtonAlertCustom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/vote_text_cancel" />
 
         <Button
             android:id="@+id/buttonWriteUs"
-            style="@style/GawkMaterialTheme.ButtonAlertCustom"
             android:paddingRight="8dp"
             android:paddingLeft="8dp"
             android:layout_width="match_parent"

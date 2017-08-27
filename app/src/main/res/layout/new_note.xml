@@ -19,8 +19,6 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
-            android:id="@+id/button_save_note"
-            style="@style/GawkMaterialTheme.ButtonBigGreen"
-        app:srcCompat="@drawable/ic_content_save" />
+            android:id="@+id/button_save_note" />
 
 </RelativeLayout>
