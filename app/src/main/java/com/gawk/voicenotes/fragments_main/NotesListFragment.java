@@ -216,11 +216,14 @@ public class NotesListFragment extends FragmentParent implements ActionsListNote
     }
 
     private void changeBottomMenu() {
+        mAdapter.setSelectNotes(selectNotes);
         if (selectNotes.size() > 0) {
+            mAdapter.setStateSelected(true);
             mRelativeLayoutBottomMenu.getLayoutParams().height = RelativeLayout.LayoutParams.WRAP_CONTENT;
             mRelativeLayoutBottomMenu.requestLayout();
             mRelativeLayoutBottomMenu.animate().translationY(0);
         } else {
+            mAdapter.setStateSelected(false);
             mRelativeLayoutBottomMenu.animate().translationY(mRelativeLayoutBottomMenu.getHeight());
             mRelativeLayoutBottomMenu.animate().withEndAction(new Runnable() {
                 @Override
@@ -230,5 +233,6 @@ public class NotesListFragment extends FragmentParent implements ActionsListNote
                 }
             });
         }
+        mAdapter.notifyDataSetChanged();
     }
 }

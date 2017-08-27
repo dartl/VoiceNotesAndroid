@@ -123,7 +123,7 @@ public class NotificationRecyclerAdapter extends CursorRecyclerViewAdapter<Notif
 
     @Override
     public NotificationRecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(getmContext()).inflate(R.layout.item_notification_list, parent, false);
+        View v = LayoutInflater.from(getContext()).inflate(R.layout.item_notification_list, parent, false);
         return new NotificationRecyclerAdapter.ViewHolder(v);
     }
 

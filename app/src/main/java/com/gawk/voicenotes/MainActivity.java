@@ -115,7 +115,7 @@ public class MainActivity extends ParentActivity {
         adapter.addFragment(notesListFragment, getResources().getString(R.string.new_notes));
         NotificationsListFragment notificationsListFragment = new NotificationsListFragment();
         notificationsListFragment.setMainActivity(this);
-        adapter.addFragment(notificationsListFragment, getResources().getString(R.string.new_note_notification));
+        adapter.addFragment(notificationsListFragment, getResources().getString(R.string.new_note_notifications));
         viewPager.setAdapter(adapter);
     }
 

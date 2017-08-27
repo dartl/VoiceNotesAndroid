@@ -16,9 +16,9 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/body_padding"
-        android:layout_marginBottom="@dimen/body_padding"
+        android:layout_margin="@dimen/fab_margin"
         app:fabSize="normal"
+        android:src="@drawable/ic_note_add_white_36dp"
         android:layout_above="@+id/relativeLayoutBottomMenu"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
@@ -36,8 +36,8 @@
 
         <ImageButton
             android:id="@+id/imageButtonShare"
-            android:layout_width="@dimen/height_icon_selected_menu"
-            android:layout_height="@dimen/height_icon_selected_menu"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
             android:layout_alignParentTop="true"
             android:layout_gravity="end"
             android:layout_toLeftOf="@+id/imageButtonDelete"
@@ -46,8 +46,8 @@
 
         <ImageButton
             android:id="@+id/imageButtonDelete"
-            android:layout_width="@dimen/height_icon_selected_menu"
-            android:layout_height="@dimen/height_icon_selected_menu"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"

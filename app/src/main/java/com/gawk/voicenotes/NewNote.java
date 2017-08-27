@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
@@ -88,14 +89,18 @@ public class NewNote extends ParentActivity implements TimePickerReturn {
     }
 
     private void createTabIcons() {
-        TextView tabOne = (TextView) LayoutInflater.from(this).inflate(R.layout.tab_header, null);
-        tabOne.setText(adapter.getPageTitle(0));
-        tabOne.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_note_white_24dp, 0, 0);
+        View tabOne = LayoutInflater.from(this).inflate(R.layout.tab_header, null);
+        TextView tabOneName = tabOne.findViewById(R.id.textViewTabTitle);
+        tabOneName.setText(adapter.getPageTitle(0));
+        ImageView tabOneIcon = tabOne.findViewById(R.id.imageViewTabIcon);
+        tabOneIcon.setImageResource(R.drawable.ic_note_white_24dp);
         tabLayout.getTabAt(0).setCustomView(tabOne);
 
-        TextView tabTwo = (TextView) LayoutInflater.from(this).inflate(R.layout.tab_header, null);
-        tabTwo.setText(adapter.getPageTitle(1));
-        tabTwo.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_alarm_white_24dp, 0, 0);
+        View tabTwo = LayoutInflater.from(this).inflate(R.layout.tab_header, null);
+        TextView tabTwoName = tabTwo.findViewById(R.id.textViewTabTitle);
+        tabTwoName.setText(adapter.getPageTitle(1));
+        ImageView tabTwoIcon = tabTwo.findViewById(R.id.imageViewTabIcon);
+        tabTwoIcon.setImageResource(R.drawable.ic_alarm_white_24dp);
         tabLayout.getTabAt(1).setCustomView(tabTwo);
     }
 

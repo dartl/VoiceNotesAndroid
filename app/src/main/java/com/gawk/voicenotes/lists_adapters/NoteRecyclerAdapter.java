@@ -3,6 +3,7 @@ package com.gawk.voicenotes.lists_adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.PorterDuff;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.gawk.voicenotes.NoteView;
@@ -19,6 +21,7 @@ import com.gawk.voicenotes.adapters.SQLiteDBHelper;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -29,6 +32,8 @@ import java.util.Date;
 public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerAdapter.ViewHolder> implements View.OnLongClickListener {
 
     private ActionsListNotes actionsListNotes;
+    private Boolean mStateSelected = false;
+    private ArrayList mSelectNotes = new ArrayList<Long>();
 
     public NoteRecyclerAdapter(Context context, Cursor cursor, ActionsListNotes actionsListNotes) {
         super(context, cursor);
@@ -41,12 +46,13 @@ public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerA
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView textView, dateView;
+        ImageButton mImageButtonIconNote, mImageButtonMoreMenu;
         CardView cardView;
-        public View parent;
-
+        View parent;
         public ViewHolder(View v) {
             super(v);
             parent = v;
+            mImageButtonIconNote = v.findViewById(R.id.imageButtonIconNote);
             textView = v.findViewById(R.id.textViewListText);
             dateView = v.findViewById(R.id.textViewListDate);
             cardView = v.findViewById(R.id.card_view);
@@ -59,11 +65,33 @@ public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerA
             changeItemSelect(noteRecyclerAdapter.getActionsListNotes().checkSelectNote(id));
             textView.setText(c.getString(c.getColumnIndex(SQLiteDBHelper.NOTES_TABLE_COLUMN_TEXT_NOTE)));
 
+            mImageButtonIconNote.setImageResource(R.drawable.ic_insert_drive_file_black_24dp);
+            mImageButtonIconNote.setColorFilter(ContextCompat.getColor(noteRecyclerAdapter.getContext(), R.color.colorPrimary500));
+
+            if (noteRecyclerAdapter.isStateSelected()) {
+                if (noteRecyclerAdapter.getSelectNotes().contains(id)) {
+                    mImageButtonIconNote.setImageResource(R.drawable.ic_done_white_24dp);
+                    mImageButtonIconNote.setColorFilter(ContextCompat.getColor(noteRecyclerAdapter.getContext(), R.color.colorWhite), PorterDuff.Mode.MULTIPLY);
+                    mImageButtonIconNote.setBackgroundResource(R.drawable.list_item_circle_primary);
+                } else {
+                    mImageButtonIconNote.setImageResource(R.drawable.ic_insert_drive_file_black_24dp);
+                    mImageButtonIconNote.setBackgroundResource(R.drawable.list_item_circle);
+                }
+                mImageButtonIconNote.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        parent.performLongClick();
+                    }
+                });
+            } else {
+                mImageButtonIconNote.setBackgroundResource(0);
+                mImageButtonIconNote.setOnClickListener(null);
+            }
+
             parent.setLongClickable(true);
             parent.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
-                    Log.e("GAWK_ERR","LONG CLICK - " + id);
                     changeItemSelect(noteRecyclerAdapter.getActionsListNotes().selectNote(id));
                     return true;
                 }
@@ -79,6 +107,7 @@ public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerA
                     v.getContext().startActivity(intent);
                 }
             });
+
 
             long dateLong = c.getLong(c.getColumnIndex
                     (SQLiteDBHelper.NOTES_TABLE_COLUMN_DATE));  // получаем дату в виде числа
@@ -101,15 +130,11 @@ public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerA
         }
 
         private void changeItemSelect(boolean state) {
-            /*if (state) {
-                cardView.setBackgroundColor(ContextCompat.getColor(parent.getContext(), R.color.colorGreen));
-                textView.setTextColor(ContextCompat.getColor(parent.getContext(), R.color.textColorPrimary));
-                dateView.setTextColor(ContextCompat.getColor(parent.getContext(), R.color.textColorPrimary));
+            if (state) {
+                cardView.setBackgroundColor(ContextCompat.getColor(parent.getContext(), R.color.colorSelectListItem));
             } else {
-                cardView.setBackgroundColor(ContextCompat.getColor(parent.getContext(), R.color.textColorPrimary));
-                textView.setTextColor(ContextCompat.getColor(parent.getContext(), R.color.colorGrey900));
-                dateView.setTextColor(ContextCompat.getColor(parent.getContext(), R.color.colorGrey700));
-            }*/
+                cardView.setBackgroundColor(ContextCompat.getColor(parent.getContext(), R.color.colorWhite));
+            }
         }
     }
 
@@ -120,7 +145,7 @@ public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerA
 
     @Override
     public NoteRecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(getmContext()).inflate(R.layout.item_notes_list, parent, false);
+        View v = LayoutInflater.from(getContext()).inflate(R.layout.item_notes_list, parent, false);
         return new NoteRecyclerAdapter.ViewHolder(v);
     }
 
@@ -132,7 +157,7 @@ public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerA
 
     @Override
     public boolean onLongClick(View view) {
-        view.setBackgroundColor(ContextCompat.getColor(getmContext(), R.color.colorPrimary));
+        view.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
         return false;
     }
 
@@ -152,5 +177,21 @@ public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerA
 
     public void setActionsListNotes(ActionsListNotes actionsListNotes) {
         this.actionsListNotes = actionsListNotes;
+    }
+
+    public Boolean isStateSelected() {
+        return mStateSelected;
+    }
+
+    public void setStateSelected(Boolean mStateSelected) {
+        this.mStateSelected = mStateSelected;
+    }
+
+    public ArrayList getSelectNotes() {
+        return mSelectNotes;
+    }
+
+    public void setSelectNotes(ArrayList selectNotes) {
+        this.mSelectNotes = selectNotes;
     }
 }

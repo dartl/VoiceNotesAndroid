@@ -128,11 +128,11 @@ public abstract class CursorRecyclerViewAdapter<VH extends RecyclerView.ViewHold
         }
     }
 
-    public Context getmContext() {
+    public Context getContext() {
         return mContext;
     }
 
-    public void setmContext(Context mContext) {
+    public void setContext(Context mContext) {
         this.mContext = mContext;
     }
 }

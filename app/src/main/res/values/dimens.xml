@@ -9,34 +9,13 @@
     <dimen name="nav_header_height">100dp</dimen>
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="fab_margin">16dp</dimen>
-
-    <!-- Big button icon -->
-    <dimen name="big_button_icon_margin">16dp</dimen>
-    <dimen name="big_button_icon_padding">64dp</dimen>
-    <dimen name="big_button_icon_padding_top">16dp</dimen>
-    <dimen name="big_button_icon_text_size">18dp</dimen>
-    <dimen name="big_button_icon_height">64dp</dimen>
-
-    <!-- Middle button icon -->
-    <dimen name="middle_button_icon_padding">32dp</dimen>
-    <dimen name="middle_button_icon_padding_top">8dp</dimen>
-
-    <!-- Body -->
-    <dimen name="body_padding">16dp</dimen>
-
-    <!-- Multi text full width -->
-    <dimen name="multi_text_full_padding">20dp</dimen>
-    <dimen name="multi_text_full_text_size">16sp</dimen>
-
-    <!-- Full width dialog -->
-    <dimen name="full_width_app_height">56dp</dimen>
-
     <!-- Dimens for  -->
     <dimen name="dialog_recognize_height">280dp</dimen>
     <dimen name="dialog_recognize_circle_min_size">100dp</dimen>
     <dimen name="dialog_recognize_circle_max_size">160dp</dimen>
 
-    <dimen name="height_social_button">64dp</dimen>
+    <!-- Общие отступы -->
+    <dimen name="element_padding">16dp</dimen>
 
-    <dimen name="height_icon_selected_menu">48dp</dimen>
+    <!-- Главное окно -->
 </resources>

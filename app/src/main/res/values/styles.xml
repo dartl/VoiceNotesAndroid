@@ -24,14 +24,44 @@
         <item name="tabPaddingStart">8dp</item>
         <item name="tabPaddingEnd">8dp</item>
         <item name="tabBackground">?attr/selectableItemBackground</item>
-        <item name="tabTextAppearance">@style/TabTextAppearance</item>
+        <item name="tabTextAppearance">@style/GawkMaterialTheme.TabTextAppearance</item>
         <item name="tabSelectedTextColor">@android:color/white</item>
     </style>
 
-    <style name="TabTextAppearance" parent="TextAppearance.Design.Tab">
+    <style name="GawkMaterialTheme.TabTextAppearance">
         <item name="android:textSize">14sp</item>
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/colorWhite</item>
-        <item name="textAllCaps">true</item>
     </style>
 
+    <style name="GawkMaterialTheme.IconNoBackground">
+        <item name="android:background">@color/colorTransparent</item>
+    </style>
+
+    <style name="GawkMaterialTheme.ListNoteElement">
+        <item name="android:paddingLeft">@dimen/element_padding</item>
+        <item name="android:paddingRight">@dimen/element_padding</item>
+        <item name="android:minHeight">80dp</item>
+    </style>
+
+    <style name="GawkMaterialTheme.ListNoteElementTextAndDate">
+        <item name="android:paddingLeft">@dimen/element_padding</item>
+    </style>
+
+    <style name="GawkMaterialTheme.ListNoteElementIconNote" parent="GawkMaterialTheme.IconNoBackground">
+        <item name="android:padding">8dp</item>
+    </style>
+
+    <style name="GawkMaterialTheme.ListNoteElementDate">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#878787</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+    </style>
+
+    <style name="GawkMaterialTheme.ListNoteElementText">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#5F5F5F</item>
+        <item name="android:paddingBottom">6dp</item>
+    </style>
 </resources>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#4DB6AC</color>
+    <color name="colorPrimary500">#009688</color>
     <color name="colorPrimaryDark">#19A89B</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="windowBackground">#FFFFFF</color>
@@ -9,4 +10,5 @@
     <color name="colorGrey200">#EEEEEE</color>
     <color name="colorGrey800">#424242</color>
     <color name="colorTransparent">#00FFFFFF</color>
+    <color name="colorSelectListItem">#EDFAEF</color>
 </resources>
