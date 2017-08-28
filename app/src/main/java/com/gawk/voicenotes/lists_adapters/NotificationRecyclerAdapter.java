@@ -122,6 +122,11 @@ public class NotificationRecyclerAdapter extends CursorRecyclerViewAdapter<Notif
             // Находим заметку для текущего оповещения
             long note_id = notification.getId_note();
             Cursor noteCursor = db.getNoteById(note_id);
+            noteCursor.moveToFirst();
+            if (noteCursor.getCount() == 0) {
+                db.deleteAllNotificationByNote(note_id);
+                return;
+            }
             Note note = new Note(noteCursor);
 
             Calendar cToday = Calendar.getInstance();   // получаем сегодняшний день и время

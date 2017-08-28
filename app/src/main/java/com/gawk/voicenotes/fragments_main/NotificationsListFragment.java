@@ -59,6 +59,7 @@ public class NotificationsListFragment extends FragmentParent {
         dbHelper.connection();
 
         mListAdapters = new ListAdapters(view,this);
+        mListAdapters.changeVisibleItemMenu(R.id.action_share_element,false);
 
         Cursor notificationCursor = dbHelper.getCursorAllNotification();
 

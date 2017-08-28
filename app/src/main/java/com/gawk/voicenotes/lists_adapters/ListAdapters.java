@@ -24,6 +24,7 @@ import java.util.ArrayList;
 
 public class ListAdapters implements ActionsListNotes {
     private ArrayList mSelectItems = new ArrayList<>();
+    private long mId_item;
     private ImageButton mImageButtonDelete, mImageButtonShare;
     private TextView mTextViewNoteSelectCount;
     private RelativeLayout mRelativeLayoutBottomMenu;
@@ -57,6 +58,23 @@ public class ListAdapters implements ActionsListNotes {
                 changeBottomMenu();
             }
         });
+
+        mBottomMenu = new BottomSheet.Builder(mFragmentParent.getActivity()).title(mFragmentParent.getResources()
+                .getText(R.string.main_action_element))
+                .sheet(R.menu.menu_list_actions)
+                .listener(new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case R.id.action_remove_element:
+                                showDialogDelete(mId_item);
+                                break;
+                            case R.id.action_share_element:
+                                mFragmentParent.shareItemList(mId_item,mSelectItems);
+                                break;
+                        }
+                    }
+                }).build();
     }
 
     public void showDialogDelete(final long _id) {
@@ -106,19 +124,12 @@ public class ListAdapters implements ActionsListNotes {
 
     @Override
     public void showBottomMenu(final long id) {
-        mBottomMenu = new BottomSheet.Builder(mFragmentParent.getActivity()).title(mFragmentParent.getResources()
-                .getText(R.string.main_action_element))
-                .sheet(R.menu.menu_list_actions)
-                .listener(new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                switch (which) {
-                    case R.id.action_remove_element:
-                        showDialogDelete(id);
-                        break;
-                }
-            }
-        }).show();
+        mId_item = id;
+        mBottomMenu.show();
+    }
+
+    public void changeVisibleItemMenu(int id, boolean visible) {
+        mBottomMenu.getMenu().findItem(id).setVisible(visible);
     }
 
     private void changeBottomMenu() {
