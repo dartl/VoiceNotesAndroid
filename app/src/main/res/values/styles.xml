@@ -84,7 +84,60 @@
         <item name="android:layout_marginLeft">8dp</item>
     </style>
 
-    <!-- Draver -->
+    <!-- Окно статистики -->
+    <style name="GawkMaterialTheme.Statistics">
+        <item name="android:paddingTop">@dimen/activity_horizontal_margin</item>
+        <item name="android:paddingBottom">@dimen/activity_horizontal_margin</item>
+    </style>
+
+    <style name="GawkMaterialTheme.StatisticsAvatar">
+        <item name="android:layout_height">@dimen/statistics_avatar_size</item>
+        <item name="android:layout_width">@dimen/statistics_avatar_size</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+    </style>
+
+    <style name="GawkMaterialTheme.StatisticsHead">
+        <item name="android:drawableBottom">@drawable/statistics_head_bottom_border</item>
+    </style>
+
+    <style name="GawkMaterialTheme.StatisticsHeadText1">
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorPrimary500</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
+    <style name="GawkMaterialTheme.StatisticsHeadText2">
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/colorGrey500</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
+    <style name="GawkMaterialTheme.StatisticsHeadText3">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/colorGrey500</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
+    <style name="GawkMaterialTheme.StatisticsItem">
+        <item name="android:padding">@dimen/activity_horizontal_margin</item>
+    </style>
+
+    <style name="GawkMaterialTheme.StatisticsItemTitle">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/colorGrey600</item>
+    </style>
+
+    <style name="GawkMaterialTheme.StatisticsItemCounter">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/colorPrimary500</item>
+        <item name="android:gravity">end</item>
+    </style>
+
+
+    <!-- Drawer -->
     <style name="GawkMaterialTheme.DrawerHeadText1">
         <item name="android:textAllCaps">true</item>
         <item name="android:textSize">18sp</item>

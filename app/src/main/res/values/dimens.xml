@@ -21,4 +21,7 @@
     <!-- Главное окно -->
     <dimen name="actions_icon_size">48dp</dimen>
     <dimen name="actions_icon_padding">4dp</dimen>
+
+    <!-- Окно статистики -->
+    <dimen name="statistics_avatar_size">200dp</dimen>
 </resources>

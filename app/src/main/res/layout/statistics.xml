@@ -2,132 +2,200 @@
 <android.support.v4.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/GawkMaterialTheme.Statistics"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <LinearLayout
         android:orientation="vertical" android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
-            android:orientation="vertical" android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            style="@style/GawkMaterialTheme.StatisticsHead"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/activity_horizontal_margin"
+            android:elevation="2dp"
+            android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/imageViewAvatar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/GawkMaterialTheme.StatisticsAvatar"
                 app:srcCompat="@drawable/level1" />
 
             <TextView
                 android:id="@+id/textViewRank"
+                style="@style/GawkMaterialTheme.StatisticsHeadText1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/statistics_level1" />
 
             <TextView
                 android:id="@+id/textViewLevel"
+                style="@style/GawkMaterialTheme.StatisticsHeadText2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TextView" />
 
             <TextView
                 android:id="@+id/textViewExperience"
+                style="@style/GawkMaterialTheme.StatisticsHeadText3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TextView" />
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            app:srcCompat="@drawable/statistics_head_bottom_border" />
+
         <LinearLayout
+            style="@style/GawkMaterialTheme.StatisticsItem"
             android:orientation="horizontal" android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/textView11"
+                style="@style/GawkMaterialTheme.StatisticsItemTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/statistics_create_notes_title" />
 
             <TextView
                 android:id="@+id/textViewCreateNotes"
-                android:layout_width="wrap_content"
+                style="@style/GawkMaterialTheme.StatisticsItemCounter"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="0" />
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            app:srcCompat="@drawable/textline" />
+
         <LinearLayout
+            style="@style/GawkMaterialTheme.StatisticsItem"
             android:orientation="horizontal" android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/textView12"
+                style="@style/GawkMaterialTheme.StatisticsItemTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/statistics_create_notifications_title" />
 
             <TextView
                 android:id="@+id/textViewCreateNotifications"
-                android:layout_width="wrap_content"
+                style="@style/GawkMaterialTheme.StatisticsItemCounter"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="0" />
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            app:srcCompat="@drawable/textline" />
+
         <LinearLayout
+            style="@style/GawkMaterialTheme.StatisticsItem"
             android:orientation="horizontal" android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/textView14"
+                style="@style/GawkMaterialTheme.StatisticsItemTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/statistics_get_notifications_title" />
 
             <TextView
                 android:id="@+id/textViewGetNotifications"
-                android:layout_width="wrap_content"
+                style="@style/GawkMaterialTheme.StatisticsItemCounter"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="0" />
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            app:srcCompat="@drawable/textline" />
+
         <LinearLayout
+            style="@style/GawkMaterialTheme.StatisticsItem"
             android:orientation="horizontal" android:layout_width="match_parent"
             android:layout_height="match_parent" >
 
             <TextView
                 android:id="@+id/textView16"
+                style="@style/GawkMaterialTheme.StatisticsItemTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/statistics_remove_notes_title" />
 
             <TextView
                 android:id="@+id/textViewRemoveNotes"
-                android:layout_width="wrap_content"
+                style="@style/GawkMaterialTheme.StatisticsItemCounter"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="0" />
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            app:srcCompat="@drawable/textline" />
+
         <LinearLayout
+            style="@style/GawkMaterialTheme.StatisticsItem"
             android:orientation="horizontal" android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/textView18"
+                style="@style/GawkMaterialTheme.StatisticsItemTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/statistics_exports_title" />
 
             <TextView
                 android:id="@+id/textViewExports"
-                android:layout_width="wrap_content"
+                style="@style/GawkMaterialTheme.StatisticsItemCounter"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="0" />
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imageView8"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            app:srcCompat="@drawable/textline" />
+
         <LinearLayout
+            style="@style/GawkMaterialTheme.StatisticsItem"
             android:orientation="horizontal" android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/textView20"
+                style="@style/GawkMaterialTheme.StatisticsItemTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/statistics_imports_title" />
 
             <TextView
                 android:id="@+id/textViewImports"
-                android:layout_width="wrap_content"
+                style="@style/GawkMaterialTheme.StatisticsItemCounter"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="0" />
         </LinearLayout>

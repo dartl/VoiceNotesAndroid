@@ -23,6 +23,7 @@
     <string name="main_share">Share</string>
     <string name="main_selected_element">items</string>
     <string name="main_action_element">Actions</string>
+    <string name="main_action_remove">Delete</string>
 
     <!-- Меню -->
     <string name="menu_add">Add note</string>
