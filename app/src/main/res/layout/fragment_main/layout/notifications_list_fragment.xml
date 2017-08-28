@@ -30,6 +30,19 @@
             android:text="@string/main_selected_element" />
 
         <ImageButton
+            android:id="@+id/imageButtonShare"
+            style="@style/GawkMaterialTheme.ListNoteActionsIcons"
+            android:layout_height="@dimen/actions_icon_size"
+            android:layout_width="@dimen/actions_icon_size"
+            android:padding="@dimen/actions_icon_padding"
+            android:src="@drawable/ic_share_grey_24dp"
+            android:tint="@color/colorGrey600"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/imageButtonDelete"
+            android:layout_toStartOf="@+id/imageButtonDelete"
+            android:scaleType="fitCenter"/>
+
+        <ImageButton
             android:id="@+id/imageButtonDelete"
             style="@style/GawkMaterialTheme.ListNoteActionsIcons"
             android:layout_height="@dimen/actions_icon_size"

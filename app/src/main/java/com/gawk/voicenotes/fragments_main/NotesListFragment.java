@@ -24,6 +24,7 @@ import com.gawk.voicenotes.MainActivity;
 import com.gawk.voicenotes.NewNote;
 import com.gawk.voicenotes.R;
 import com.gawk.voicenotes.adapters.ActionsListNotes;
+import com.gawk.voicenotes.lists_adapters.ListAdapters;
 import com.gawk.voicenotes.lists_adapters.NoteRecyclerAdapter;
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
 import com.gawk.voicenotes.models.Note;
@@ -36,18 +37,10 @@ import java.util.ArrayList;
  * Created by GAWK on 02.02.2017.
  */
 
-public class NotesListFragment extends FragmentParent implements ActionsListNotes {
+public class NotesListFragment extends FragmentParent{
     private MainActivity mainActivity;
-    private ImageButton mImageButtonShare, mImageButtonDelete;
-    private TextView mTextViewNoteSelectCount;
-    private BottomSheet mBottomMenu;
-    private RelativeLayout mRelativeLayoutBottomMenu;
-
-    private ArrayList selectNotes = new ArrayList<Long>();
-
-    private RecyclerView mRecyclerView;
+    private ListAdapters mListAdapters;
     private NoteRecyclerAdapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
 
     public NotesListFragment() {
         // Required empty public constructor
@@ -73,29 +66,13 @@ public class NotesListFragment extends FragmentParent implements ActionsListNote
 
         Cursor noteCursor = dbHelper.getCursorAllNotes();
 
-        mRelativeLayoutBottomMenu = view.findViewById(R.id.relativeLayoutBottomMenu);
-        mTextViewNoteSelectCount = view.findViewById(R.id.textViewNoteSelectCount);
-        mImageButtonShare = view.findViewById(R.id.imageButtonShare);
-        mImageButtonDelete = view.findViewById(R.id.imageButtonDelete);
-        mImageButtonDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showDialogDelete(-1);
-            }
-        });
-
-        mImageButtonShare.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                shareSelectNotes(-1);
-            }
-        });
+        mListAdapters = new ListAdapters(view,this);
 
         /* new NoteRecycler */
-        mLayoutManager = new LinearLayoutManager(getActivity());
-        mAdapter = new NoteRecyclerAdapter(getActivity(), noteCursor, this);
+        mAdapter = new NoteRecyclerAdapter(getActivity(), noteCursor, mListAdapters);
 
-        mRecyclerView = view.findViewById(R.id.listViewAllNotes);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        RecyclerView mRecyclerView = view.findViewById(R.id.listViewAllNotes);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
 
@@ -113,51 +90,47 @@ public class NotesListFragment extends FragmentParent implements ActionsListNote
     @Override
     public void onResume() {
         super.onResume();
-        updateNote(dbHelper.getCursorAllNotes());
+        updateList();
     }
 
-    public boolean updateNote(Cursor noteCursor) {
-        mAdapter.changeCursor(noteCursor);
+    @Override
+    public void updateList() {
+        super.updateList();
+        mAdapter.changeCursor(dbHelper.getCursorAllNotes());
         NavigationView navigationView =  getActivity().findViewById(R.id.nav_view_menu);
         TextView view = (TextView) navigationView.getMenu().findItem(R.id.menu_notes_list).getActionView();
         view.setText(mAdapter.getItemCount() > 0 ? String.valueOf(mAdapter.getItemCount()) : null);
-        return true;
     }
 
-    public void deleteSelectNotes(long id) {
+    @Override
+    public void deleteItemList(long id, boolean stateRemoveAllNotification, ArrayList selectItems) {
+        super.deleteItemList(id,stateRemoveAllNotification,selectItems);
         dbHelper.connection();
         long id_temp;
         if (id == -1) {
-            while (!selectNotes.isEmpty()) {
-                id_temp = (Long) selectNotes.get(0);
-                selectNotes.remove(0);
+            while (!selectItems.isEmpty()) {
+                id_temp = (Long) selectItems.get(0);
+                selectItems.remove(0);
                 dbHelper.noteDelete(id_temp);
-                deleteNotifications(id_temp);
             }
         } else {
             dbHelper.noteDelete(id);
-            deleteNotifications(id);
         }
-        updateNote(dbHelper.getCursorAllNotes());
-        changeBottomMenu();
+        updateList();
+        mainActivity.getFragment(1).updateList();
         mainActivity.refreshNavHeader();
     }
 
-    public void deleteNotifications(long id) {
-        if (mainActivity != null) {
-            NotificationsListFragment fragment = mainActivity.getFragment(1);
-            fragment.deleteElement(id,true);
-        }
-    }
-
-    public void shareSelectNotes(long id) {
+    @Override
+    public void shareItemList(long id, ArrayList selectItems) {
+        super.shareItemList(id,selectItems);
         String mShareText = "";
         Cursor cursor;
         Note note;
         DateFormat dateFormat = SimpleDateFormat.getDateTimeInstance();
         if (id == -1) {
-            for (int i = 0; i < selectNotes.size();i++) {
-                cursor = dbHelper.getNoteById((long)selectNotes.get(i));
+            for (int i = 0; i < selectItems.size();i++) {
+                cursor = dbHelper.getNoteById((long)selectItems.get(i));
                 cursor.moveToFirst();
                 note = new Note(cursor);
                 mShareText += dateFormat.format(note.getDate()) + "\n";
@@ -180,92 +153,13 @@ public class NotesListFragment extends FragmentParent implements ActionsListNote
     }
 
     @Override
-    public boolean selectElement(long id) {
-        if (selectNotes.contains(id)) {
-            selectNotes.remove(id);
-            changeBottomMenu();
-            return false;
-        } else {
-            selectNotes.add(id);
-            changeBottomMenu();
-            return true;
-        }
-    }
-
-    @Override
-    public boolean checkSelectElement(long id) {
-        return selectNotes.contains(id);
-    }
-
-    @Override
-    public void showBottomMenu(final long id) {
-        mBottomMenu = new BottomSheet.Builder(getActivity()).title(getText(R.string.main_action_element)).sheet(R.menu.menu_list_actions).listener(new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                switch (which) {
-                    case R.id.action_share_element:
-                        shareSelectNotes(id);
-                        break;
-                    case R.id.action_remove_element:
-                        showDialogDelete(id);
-                        break;
-                }
-            }
-        }).show();
-    }
-
-    public void showDialogDelete(final long ids) {
-        if (selectNotes.size() > 0 || ids != -1) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            // 2. Chain together various setter methods to set the dialog characteristics
-            builder.setMessage(R.string.dialogDeleteMessage)
-                    .setTitle(R.string.dialogDeleteTitle);
-
-            // Add the buttons
-            builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    deleteSelectNotes(ids);
-                }
-            });
-            builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    dialog.cancel();
-                }
-            });
-            AlertDialog dialog = builder.create();
-            dialog.show();
-        } else {
-            if (getActivity().getCurrentFocus() != null) {
-                Snackbar.make(getActivity().getCurrentFocus(), getResources().getString(R.string.main_view_error_select), Snackbar.LENGTH_LONG).show();
-            }
-        }
+    public void refreshSelectedList() {
+        onResume();
     }
 
     @Override
     public void search(String text) {
         dbHelper.connection();
-        updateNote(dbHelper.getCursorAllNotes(text));
-    }
-
-    private void changeBottomMenu() {
-        mAdapter.setSelectNotes(selectNotes);
-        if (selectNotes.size() > 0) {
-            mAdapter.setStateSelected(true);
-            mRelativeLayoutBottomMenu.getLayoutParams().height = 160;//RelativeLayout.LayoutParams.WRAP_CONTENT;
-            mRelativeLayoutBottomMenu.requestLayout();
-            mRelativeLayoutBottomMenu.animate().translationY(0);
-        } else {
-            mAdapter.setStateSelected(false);
-            mRelativeLayoutBottomMenu.animate().translationY(mRelativeLayoutBottomMenu.getHeight());
-            mRelativeLayoutBottomMenu.animate().withEndAction(new Runnable() {
-                @Override
-                public void run() {
-                    mRelativeLayoutBottomMenu.getLayoutParams().height= 0;
-                    mRelativeLayoutBottomMenu.requestLayout();
-                }
-            });
-        }
-        mAdapter.notifyDataSetChanged();
-        mTextViewNoteSelectCount.setText(selectNotes.size() + " " + getText(R.string.main_selected_element));
+        mAdapter.changeCursor(dbHelper.getCursorAllNotes());
     }
 }

@@ -233,6 +233,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         if (!isConnect()) {
             connection();
         }
+        Log.e("GAWK_ERR","getCursorAllNotification()");
         return db.rawQuery("SELECT * FROM " +
                 SQLiteDBHelper.NOTIFICATIONS_TABLE_NAME + " ORDER BY " + SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_DATE
                 + " ASC", null);

@@ -21,6 +21,8 @@ public abstract class CursorRecyclerViewAdapter<VH extends RecyclerView.ViewHold
 
     private DataSetObserver mDataSetObserver;
 
+    private boolean mStateSelected = false;;
+
     public CursorRecyclerViewAdapter(Context context, Cursor cursor) {
         mContext = context;
         mCursor = cursor;
@@ -134,5 +136,13 @@ public abstract class CursorRecyclerViewAdapter<VH extends RecyclerView.ViewHold
 
     public void setContext(Context mContext) {
         this.mContext = mContext;
+    }
+
+    public boolean isStateSelected() {
+        return mStateSelected;
+    }
+
+    public void setStateSelected(boolean mStateSelected) {
+        this.mStateSelected = mStateSelected;
     }
 }

@@ -33,7 +33,6 @@ public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerA
 
     private ActionsListNotes actionsListNotes;
     private Boolean mStateSelected = false;
-    private ArrayList mSelectNotes = new ArrayList<Long>();
 
     public NoteRecyclerAdapter(Context context, Cursor cursor, ActionsListNotes actionsListNotes) {
         super(context, cursor);
@@ -64,30 +63,32 @@ public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerA
             final long id = noteRecyclerAdapter.getItemId(getLayoutPosition());
 
             changeItemSelect(noteRecyclerAdapter.getActionsListNotes().checkSelectElement(id));
+
             textView.setText(c.getString(c.getColumnIndex(SQLiteDBHelper.NOTES_TABLE_COLUMN_TEXT_NOTE)));
+            mImageButtonIconNote.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (noteRecyclerAdapter.getActionsListNotes().isStateSelected()) {
+                        parent.performLongClick();
+                    }
+                }
+            });
 
             mImageButtonIconNote.setImageResource(R.drawable.ic_insert_drive_file_black_24dp);
             mImageButtonIconNote.setColorFilter(ContextCompat.getColor(noteRecyclerAdapter.getContext(), R.color.colorPrimary500));
 
-            if (noteRecyclerAdapter.isStateSelected()) {
-                if (noteRecyclerAdapter.getSelectNotes().contains(id)) {
+            if (noteRecyclerAdapter.getActionsListNotes().isStateSelected()) {
+                if (noteRecyclerAdapter.getActionsListNotes().checkSelectElement(id)) {
                     mImageButtonIconNote.setImageResource(R.drawable.ic_done_white_24dp);
-                    mImageButtonIconNote.setColorFilter(ContextCompat.getColor(noteRecyclerAdapter.getContext(), R.color.colorWhite), PorterDuff.Mode.MULTIPLY);
+                    mImageButtonIconNote.setColorFilter(ContextCompat.getColor(noteRecyclerAdapter.getContext(), R.color.colorWhite));
                     mImageButtonIconNote.setBackgroundResource(R.drawable.list_item_circle_primary);
                 } else {
                     mImageButtonIconNote.setImageResource(R.drawable.ic_insert_drive_file_black_24dp);
                     mImageButtonIconNote.setBackgroundResource(R.drawable.list_item_circle);
                 }
-                mImageButtonIconNote.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        parent.performLongClick();
-                    }
-                });
                 mImageButtonMoreMenu.setVisibility(View.INVISIBLE);
             } else {
                 mImageButtonIconNote.setBackgroundResource(0);
-                mImageButtonIconNote.setOnClickListener(null);
                 mImageButtonMoreMenu.setVisibility(View.VISIBLE);
             }
 
@@ -189,19 +190,4 @@ public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerA
         this.actionsListNotes = actionsListNotes;
     }
 
-    public Boolean isStateSelected() {
-        return mStateSelected;
-    }
-
-    public void setStateSelected(Boolean mStateSelected) {
-        this.mStateSelected = mStateSelected;
-    }
-
-    public ArrayList getSelectNotes() {
-        return mSelectNotes;
-    }
-
-    public void setSelectNotes(ArrayList selectNotes) {
-        this.mSelectNotes = selectNotes;
-    }
 }

@@ -36,8 +36,6 @@ public class NotificationRecyclerAdapter extends CursorRecyclerViewAdapter<Notif
 
     private ActionsListNotes actionsListNotes;
     private SQLiteDBHelper db;
-    private Boolean mStateSelected = false;
-    private ArrayList mSelectNotes = new ArrayList<Long>();
 
     public NotificationRecyclerAdapter(Context context, Cursor cursor, ActionsListNotes actionsListNotes, SQLiteDBHelper db) {
         super(context, cursor);
@@ -80,25 +78,28 @@ public class NotificationRecyclerAdapter extends CursorRecyclerViewAdapter<Notif
             mImageButtonNotificationIcon.setImageResource(R.drawable.ic_alarm_white_24dp);
             mImageButtonNotificationIcon.setColorFilter(ContextCompat.getColor(notificationRecyclerAdapter.getContext(), R.color.colorPrimary500));
 
-            if (notificationRecyclerAdapter.isStateSelected()) {
+            mImageButtonNotificationIcon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(notificationRecyclerAdapter.getActionsListNotes().isStateSelected()) {
+                        parent.performLongClick();
+                    }
+                }
+            });
+
+            if (notificationRecyclerAdapter.getActionsListNotes().isStateSelected()) {
                 if (stateSelected) {
                     mImageButtonNotificationIcon.setImageResource(R.drawable.ic_done_white_24dp);
-                    mImageButtonNotificationIcon.setColorFilter(ContextCompat.getColor(mImageButtonNotificationIcon.getContext(), R.color.colorWhite), PorterDuff.Mode.MULTIPLY);
+                    mImageButtonNotificationIcon.setColorFilter(ContextCompat.getColor(mImageButtonNotificationIcon.getContext(), R.color.colorWhite));
                     mImageButtonNotificationIcon.setBackgroundResource(R.drawable.list_item_circle_primary);
                 } else {
                     mImageButtonNotificationIcon.setImageResource(R.drawable.ic_alarm_white_24dp);
                     mImageButtonNotificationIcon.setBackgroundResource(R.drawable.list_item_circle);
                 }
-                mImageButtonNotificationIcon.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        parent.performLongClick();
-                    }
-                });
+
                 mImageButtonMoreMenu.setVisibility(View.INVISIBLE);
             } else {
                 mImageButtonNotificationIcon.setBackgroundResource(0);
-                mImageButtonNotificationIcon.setOnClickListener(null);
                 mImageButtonMoreMenu.setVisibility(View.VISIBLE);
             }
 
@@ -202,21 +203,5 @@ public class NotificationRecyclerAdapter extends CursorRecyclerViewAdapter<Notif
 
     public void setActionsListNotes(ActionsListNotes actionsListNotes) {
         this.actionsListNotes = actionsListNotes;
-    }
-
-    public Boolean isStateSelected() {
-        return mStateSelected;
-    }
-
-    public void setStateSelected(Boolean mStateSelected) {
-        this.mStateSelected = mStateSelected;
-    }
-
-    public ArrayList getSelectNotes() {
-        return mSelectNotes;
-    }
-
-    public void setSelectNotes(ArrayList mSelectNotes) {
-        this.mSelectNotes = mSelectNotes;
     }
 }

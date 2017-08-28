@@ -17,4 +17,5 @@ public interface ActionsListNotes {
     boolean selectElement(long id);
     boolean checkSelectElement(long id);
     void showBottomMenu(final long id);
+    boolean isStateSelected();
 }

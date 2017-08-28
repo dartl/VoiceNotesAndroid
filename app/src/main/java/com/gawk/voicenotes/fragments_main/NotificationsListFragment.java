@@ -20,7 +20,7 @@ import com.gawk.voicenotes.FragmentParent;
 import com.gawk.voicenotes.MainActivity;
 import com.gawk.voicenotes.ParentActivity;
 import com.gawk.voicenotes.R;
-import com.gawk.voicenotes.adapters.ActionsListNotes;
+import com.gawk.voicenotes.lists_adapters.ListAdapters;
 import com.gawk.voicenotes.lists_adapters.NotificationRecyclerAdapter;
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
 
@@ -30,17 +30,12 @@ import java.util.ArrayList;
  * Created by GAWK on 02.02.2017.
  */
 
-public class NotificationsListFragment extends FragmentParent implements ActionsListNotes {
+public class NotificationsListFragment extends FragmentParent {
     private MainActivity mainActivity;
     private RecyclerView mRecyclerView;
     private NotificationRecyclerAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private BottomSheet mBottomMenu;
-    private RelativeLayout mRelativeLayoutBottomMenu;
-    private ImageButton mImageButtonDelete;
-    private TextView mTextViewNoteSelectCount;
-
-    private ArrayList selectNotification = new ArrayList<Long>();
+    private ListAdapters mListAdapters;
 
     public NotificationsListFragment() {
         // Required empty public constructor
@@ -63,22 +58,14 @@ public class NotificationsListFragment extends FragmentParent implements Actions
         dbHelper = SQLiteDBHelper.getInstance(getActivity());
         dbHelper.connection();
 
+        mListAdapters = new ListAdapters(view,this);
+
         Cursor notificationCursor = dbHelper.getCursorAllNotification();
 
-        mRelativeLayoutBottomMenu = view.findViewById(R.id.relativeLayoutBottomMenu);
-        mTextViewNoteSelectCount = view.findViewById(R.id.textViewNoteSelectCount);
-        mImageButtonDelete = view.findViewById(R.id.imageButtonDelete);
-        mImageButtonDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showDialogDelete(-1);
-            }
-        });
-
         /* new NoteRecycler */
-        mLayoutManager = new LinearLayoutManager(getActivity());
-        mAdapter = new NotificationRecyclerAdapter(getActivity(), notificationCursor, this, dbHelper);
+        mAdapter = new NotificationRecyclerAdapter(getActivity(), notificationCursor, mListAdapters, dbHelper);
 
+        mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView = view.findViewById(R.id.listViewAllNotifications);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
@@ -89,28 +76,30 @@ public class NotificationsListFragment extends FragmentParent implements Actions
     @Override
     public void onResume() {
         super.onResume();
-        updateNotification();
+        updateList();
     }
 
-    public boolean updateNotification() {
-        dbHelper.setActivity((ParentActivity)getContext());
-        dbHelper.deleteAllOldNotification();
-        Cursor notificationCursor = dbHelper.getCursorAllNotification();
-        mAdapter.changeCursor(notificationCursor);
-        return true;
+    @Override
+    public void updateList() {
+        super.updateList();
+        Cursor cursor = dbHelper.getCursorAllNotification();
+        Log.e("GAWK_ERR","updateList() Notification. cursor.getCount() = " + cursor.getCount());
+        mAdapter.changeCursor(cursor);
     }
 
-    public void deleteElement(long id, boolean stateRemoveAll) {
+    @Override
+    public void deleteItemList(long id, boolean stateRemoveAll, ArrayList selectItems) {
+        super.deleteItemList(id, stateRemoveAll, selectItems);
         if (stateRemoveAll) {
             dbHelper.deleteAllNotificationByNote(id);
         } else {
             if (id == -1) {
                 int i = 0;
                 long id_temp;
-                if (selectNotification.size() > 0) {
-                    while (!selectNotification.isEmpty()) {
-                        id_temp = (Long) selectNotification.get(i);
-                        selectNotification.remove(i);
+                if (selectItems.size() > 0) {
+                    while (!selectItems.isEmpty()) {
+                        id_temp = (Long) selectItems.get(i);
+                        selectItems.remove(i);
                         dbHelper.connection();
                         dbHelper.setActivity((ParentActivity) getContext());
                         dbHelper.deleteNotification(id_temp);
@@ -120,87 +109,10 @@ public class NotificationsListFragment extends FragmentParent implements Actions
                 dbHelper.deleteNotification(id);
             }
         }
-        updateNotification();
-        changeBottomMenu();
-    }
-
-    public void showDialogDelete(final long _id) {
-        if (selectNotification.size() > 0|| _id != -1 ) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-            // 2. Chain together various setter methods to set the dialog characteristics
-            builder.setMessage(R.string.dialogDeleteMessage)
-                    .setTitle(R.string.dialogDeleteTitle);
-
-            // Add the buttons
-            builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    deleteElement(_id,false);
-                }
-            });
-            builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    dialog.cancel();
-                }
-            });
-            AlertDialog dialog = builder.create();
-            dialog.show();
-        } else {
-            Snackbar.make(getView(), getResources().getString(R.string.main_view_error_select), Snackbar.LENGTH_LONG).show();
-        }
-
     }
 
     @Override
-    public boolean selectElement(long id) {
-        if (selectNotification.contains(id)) {
-            selectNotification.remove(id);
-            changeBottomMenu();
-            return false;
-        } else {
-            selectNotification.add(id);
-            changeBottomMenu();
-            return true;
-        }
-    }
-
-    @Override
-    public boolean checkSelectElement(long id) {
-        return selectNotification.contains(id);
-    }
-
-    @Override
-    public void showBottomMenu(final long id) {
-        mBottomMenu = new BottomSheet.Builder(getActivity()).title(getText(R.string.main_action_element)).sheet(R.menu.menu_list_actions).listener(new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                switch (which) {
-                    case R.id.action_remove_element:
-                        showDialogDelete(id);
-                        break;
-                }
-            }
-        }).show();
-    }
-
-    private void changeBottomMenu() {
-        mAdapter.setSelectNotes(selectNotification);
-        if (selectNotification.size() > 0) {
-            mAdapter.setStateSelected(true);
-            mRelativeLayoutBottomMenu.getLayoutParams().height = 160;
-            mRelativeLayoutBottomMenu.requestLayout();
-            mRelativeLayoutBottomMenu.animate().translationY(0);
-        } else {
-            mAdapter.setStateSelected(false);
-            mRelativeLayoutBottomMenu.animate().translationY(mRelativeLayoutBottomMenu.getHeight());
-            mRelativeLayoutBottomMenu.animate().withEndAction(new Runnable() {
-                @Override
-                public void run() {
-                    mRelativeLayoutBottomMenu.getLayoutParams().height= 0;
-                    mRelativeLayoutBottomMenu.requestLayout();
-                }
-            });
-        }
-        mAdapter.notifyDataSetChanged();
-        mTextViewNoteSelectCount.setText(selectNotification.size() + " " + getText(R.string.main_selected_element));
+    public void refreshSelectedList() {
+        onResume();
     }
 }

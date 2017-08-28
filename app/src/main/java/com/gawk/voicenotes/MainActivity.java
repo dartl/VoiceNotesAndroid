@@ -73,6 +73,7 @@ public class MainActivity extends ParentActivity {
         tabLayout.setupWithViewPager(viewPager);
         createTabIcons();
         dbHelper = SQLiteDBHelper.getInstance(this);
+        dbHelper.setActivity(this);
         verifyAllPermissions(this);
     }
 
