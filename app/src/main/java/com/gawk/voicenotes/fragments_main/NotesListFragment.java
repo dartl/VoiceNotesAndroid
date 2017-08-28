@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.cocosw.bottomsheet.BottomSheet;
 import com.gawk.voicenotes.FragmentParent;
 import com.gawk.voicenotes.MainActivity;
 import com.gawk.voicenotes.NewNote;
@@ -36,8 +38,10 @@ import java.util.ArrayList;
 
 public class NotesListFragment extends FragmentParent implements ActionsListNotes {
     private MainActivity mainActivity;
-    private RelativeLayout mRelativeLayoutBottomMenu;
     private ImageButton mImageButtonShare, mImageButtonDelete;
+    private TextView mTextViewNoteSelectCount;
+    private BottomSheet mBottomMenu;
+    private RelativeLayout mRelativeLayoutBottomMenu;
 
     private ArrayList selectNotes = new ArrayList<Long>();
 
@@ -48,7 +52,6 @@ public class NotesListFragment extends FragmentParent implements ActionsListNote
     public NotesListFragment() {
         // Required empty public constructor
     }
-
 
     public void setMainActivity(MainActivity mainActivity) {
         // Required empty public constructor
@@ -71,19 +74,20 @@ public class NotesListFragment extends FragmentParent implements ActionsListNote
         Cursor noteCursor = dbHelper.getCursorAllNotes();
 
         mRelativeLayoutBottomMenu = view.findViewById(R.id.relativeLayoutBottomMenu);
+        mTextViewNoteSelectCount = view.findViewById(R.id.textViewNoteSelectCount);
         mImageButtonShare = view.findViewById(R.id.imageButtonShare);
         mImageButtonDelete = view.findViewById(R.id.imageButtonDelete);
         mImageButtonDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showDialogDelete();
+                showDialogDelete(-1);
             }
         });
 
         mImageButtonShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                shareSelectNotes();
+                shareSelectNotes(-1);
             }
         });
 
@@ -120,33 +124,47 @@ public class NotesListFragment extends FragmentParent implements ActionsListNote
         return true;
     }
 
-    public void deleteSelectNotes() {
+    public void deleteSelectNotes(long id) {
         dbHelper.connection();
         long id_temp;
-        while (!selectNotes.isEmpty()) {
-            id_temp = (Long) selectNotes.get(0);
-            selectNotes.remove(0);
-            dbHelper.noteDelete(id_temp);
-            deleteNotifications(id_temp);
+        if (id == -1) {
+            while (!selectNotes.isEmpty()) {
+                id_temp = (Long) selectNotes.get(0);
+                selectNotes.remove(0);
+                dbHelper.noteDelete(id_temp);
+                deleteNotifications(id_temp);
+            }
+        } else {
+            dbHelper.noteDelete(id);
+            deleteNotifications(id);
         }
         updateNote(dbHelper.getCursorAllNotes());
         changeBottomMenu();
+        mainActivity.refreshNavHeader();
     }
 
     public void deleteNotifications(long id) {
         if (mainActivity != null) {
             NotificationsListFragment fragment = mainActivity.getFragment(1);
-            fragment.deleteElement(id,2);
+            fragment.deleteElement(id,true);
         }
     }
 
-    public void shareSelectNotes() {
+    public void shareSelectNotes(long id) {
         String mShareText = "";
         Cursor cursor;
         Note note;
         DateFormat dateFormat = SimpleDateFormat.getDateTimeInstance();
-        for (int i = 0; i < selectNotes.size();i++) {
-            cursor = dbHelper.getNoteById((long)selectNotes.get(i));
+        if (id == -1) {
+            for (int i = 0; i < selectNotes.size();i++) {
+                cursor = dbHelper.getNoteById((long)selectNotes.get(i));
+                cursor.moveToFirst();
+                note = new Note(cursor);
+                mShareText += dateFormat.format(note.getDate()) + "\n";
+                mShareText += note.getText_note()+ "\n\n";
+            }
+        } else {
+            cursor = dbHelper.getNoteById(id);
             cursor.moveToFirst();
             note = new Note(cursor);
             mShareText += dateFormat.format(note.getDate()) + "\n";
@@ -162,7 +180,7 @@ public class NotesListFragment extends FragmentParent implements ActionsListNote
     }
 
     @Override
-    public boolean selectNote(long id) {
+    public boolean selectElement(long id) {
         if (selectNotes.contains(id)) {
             selectNotes.remove(id);
             changeBottomMenu();
@@ -175,15 +193,29 @@ public class NotesListFragment extends FragmentParent implements ActionsListNote
     }
 
     @Override
-    public boolean checkSelectNote(long id) {
+    public boolean checkSelectElement(long id) {
         return selectNotes.contains(id);
     }
 
     @Override
-    public void selectNotification(long id) {}
+    public void showBottomMenu(final long id) {
+        mBottomMenu = new BottomSheet.Builder(getActivity()).title(getText(R.string.main_action_element)).sheet(R.menu.menu_list_actions).listener(new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case R.id.action_share_element:
+                        shareSelectNotes(id);
+                        break;
+                    case R.id.action_remove_element:
+                        showDialogDelete(id);
+                        break;
+                }
+            }
+        }).show();
+    }
 
-    public void showDialogDelete() {
-        if (selectNotes.size() > 0) {
+    public void showDialogDelete(final long ids) {
+        if (selectNotes.size() > 0 || ids != -1) {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             // 2. Chain together various setter methods to set the dialog characteristics
             builder.setMessage(R.string.dialogDeleteMessage)
@@ -192,7 +224,7 @@ public class NotesListFragment extends FragmentParent implements ActionsListNote
             // Add the buttons
             builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
-                    deleteSelectNotes();
+                    deleteSelectNotes(ids);
                 }
             });
             builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -219,7 +251,7 @@ public class NotesListFragment extends FragmentParent implements ActionsListNote
         mAdapter.setSelectNotes(selectNotes);
         if (selectNotes.size() > 0) {
             mAdapter.setStateSelected(true);
-            mRelativeLayoutBottomMenu.getLayoutParams().height = RelativeLayout.LayoutParams.WRAP_CONTENT;
+            mRelativeLayoutBottomMenu.getLayoutParams().height = 160;//RelativeLayout.LayoutParams.WRAP_CONTENT;
             mRelativeLayoutBottomMenu.requestLayout();
             mRelativeLayoutBottomMenu.animate().translationY(0);
         } else {
@@ -234,5 +266,6 @@ public class NotesListFragment extends FragmentParent implements ActionsListNote
             });
         }
         mAdapter.notifyDataSetChanged();
+        mTextViewNoteSelectCount.setText(selectNotes.size() + " " + getText(R.string.main_selected_element));
     }
 }

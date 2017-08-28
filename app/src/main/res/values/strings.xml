@@ -18,8 +18,11 @@
     <string name="new_note_notifications">Reminders</string>
     <string name="main_view_error_select">No objects selected</string>
     <string name="main_permissions_error">You did not provide all the permissions. We do not guarantee the working capacity of the application.</string>
+
     <string name="main_share_text">Notes created using the application:</string>
     <string name="main_share">Share</string>
+    <string name="main_selected_element">items</string>
+    <string name="main_action_element">Actions</string>
 
     <!-- Меню -->
     <string name="menu_add">Add note</string>
@@ -30,7 +33,7 @@
     <string name="menu_subs">Subscriptions</string>
     <string name="menu_help">Help</string>
     <string name="action_save">Save</string>
-    <string name="action_settings">Delete selected</string>
+    <string name="action_remove">Delete selected</string>
     <string name="action_search">Search</string>
 
     <string name="menu_statistics">Statistics</string>

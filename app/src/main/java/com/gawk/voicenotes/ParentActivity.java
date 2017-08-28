@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -29,6 +31,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.vending.billing.IInAppBillingService;
@@ -36,6 +39,7 @@ import com.gawk.voicenotes.lists_adapters.NoteRecyclerAdapter;
 import com.gawk.voicenotes.adapters.ParcelableUtil;
 import com.gawk.voicenotes.listeners.SocialShare;
 import com.gawk.voicenotes.logs.CustomLogger;
+import com.gawk.voicenotes.models.Statistics;
 import com.gawk.voicenotes.preferences.PrefUtil;
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
 import com.gawk.voicenotes.adapters.TimeNotification;
@@ -67,7 +71,8 @@ public class ParentActivity extends AppCompatActivity
     private Button buttonDonateDeveloper;
     private ImageButton mButtonFacebook, mButtonVk, mButtonGoogle, mButtonTwitter, mButtonLinkedln,
             mButtonOdnoklassnik;
-    private MenuItem mOldMenuItem;
+    private ImageView mImageViewLevelIcon;
+    private TextView mTextViewLevelRank, mTextViewLevelLevel, mTextViewLevelExperience;
     protected GooglePlaySubs mGooglePlaySubs;
     protected ParentActivity mActivity;
 
@@ -126,6 +131,7 @@ public class ParentActivity extends AppCompatActivity
         NoteRecyclerAdapter noteCursorAdapter = new NoteRecyclerAdapter(this, noteCursor);
         TextView view = (TextView) navigationViewMenu.getMenu().findItem(R.id.menu_notes_list).getActionView();
         view.setText(noteCursorAdapter.getItemCount() > 0 ? String.valueOf(noteCursorAdapter.getItemCount()) : null);
+        refreshNavHeader();
     }
 
     @Override
@@ -155,7 +161,7 @@ public class ParentActivity extends AppCompatActivity
         getLayoutInflater().inflate(layoutResID, activityContainer, true);
         super.setContentView(fullView);
 
-        TabLayout tab = (TabLayout) fullView.findViewById(R.id.tabs);
+        TabLayout tab = fullView.findViewById(R.id.tabs);
         tab.setVisibility(View.GONE);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -169,9 +175,8 @@ public class ParentActivity extends AppCompatActivity
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
 
-        navigationViewMenu = (NavigationView) navigationView.findViewById(R.id.nav_view_menu);
+        navigationViewMenu = navigationView.findViewById(R.id.nav_view_menu);
         navigationViewMenu.setNavigationItemSelectedListener(this);
-
         buttonDonateDeveloper = (Button) findViewById(R.id.buttonDonateDeveloper);
         buttonDonateDeveloper.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -183,12 +188,12 @@ public class ParentActivity extends AppCompatActivity
 
         SocialShare socialShare =  new SocialShare(this);
 
-        mButtonFacebook = (ImageButton) fullView.findViewById(R.id.buttonFacebook);
-        mButtonVk = (ImageButton) fullView.findViewById(R.id.buttonVk);
-        mButtonGoogle = (ImageButton) fullView.findViewById(R.id.buttonGoogle);
-        mButtonTwitter = (ImageButton) fullView.findViewById(R.id.buttonTwitter);
-        mButtonLinkedln = (ImageButton) fullView.findViewById(R.id.buttonLinkedln);
-        mButtonOdnoklassnik = (ImageButton) fullView.findViewById(R.id.buttonOdnoklassnik);
+        mButtonFacebook = fullView.findViewById(R.id.buttonFacebook);
+        mButtonVk = fullView.findViewById(R.id.buttonVk);
+        mButtonGoogle = fullView.findViewById(R.id.buttonGoogle);
+        mButtonTwitter = fullView.findViewById(R.id.buttonTwitter);
+        mButtonLinkedln = fullView.findViewById(R.id.buttonLinkedln);
+        mButtonOdnoklassnik = fullView.findViewById(R.id.buttonOdnoklassnik);
 
         mButtonFacebook.setOnClickListener(socialShare);
         mButtonVk.setOnClickListener(socialShare);
@@ -196,6 +201,44 @@ public class ParentActivity extends AppCompatActivity
         mButtonTwitter.setOnClickListener(socialShare);
         mButtonLinkedln.setOnClickListener(socialShare);
         mButtonOdnoklassnik.setOnClickListener(socialShare);
+
+        mImageViewLevelIcon = navigationView.findViewById(R.id.imageViewLevelIcon);
+        mTextViewLevelRank = navigationView.findViewById(R.id.textViewLevelRank);
+        mTextViewLevelLevel = navigationView.findViewById(R.id.textViewLevelLevel);
+        mTextViewLevelExperience = navigationView.findViewById(R.id.textViewLevelExperience);
+        refreshNavHeader();
+    }
+
+    public void refreshNavHeader() {
+        Statistics statistics = new Statistics(this);
+        if (statistics.getLevel() >= 10) {
+            Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.level2_white);
+            mImageViewLevelIcon.setImageBitmap(bm);
+            mTextViewLevelRank.setText(getText(R.string.statistics_level2));
+        }
+        if (statistics.getLevel() >= 30) {
+            Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.level3_white);
+            mImageViewLevelIcon.setImageBitmap(bm);
+            mTextViewLevelRank.setText(getText(R.string.statistics_level3));
+        }
+        if (statistics.getLevel() >= 50) {
+            Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.level4_white);
+            mImageViewLevelIcon.setImageBitmap(bm);
+            mTextViewLevelRank.setText(getText(R.string.statistics_level4));
+        }
+        if (statistics.getLevel() >= 100) {
+            Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.level5_white);
+            mImageViewLevelIcon.setImageBitmap(bm);
+            mTextViewLevelRank.setText(getText(R.string.statistics_level5));
+        }
+        if (statistics.getLevel() >= 500) {
+            Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.level6_white);
+            mImageViewLevelIcon.setImageBitmap(bm);
+            mTextViewLevelRank.setText(getText(R.string.statistics_level6));
+        }
+        mTextViewLevelLevel.setText(getText(R.string.statistics_level_title) + " " + statistics.getLevel());
+        mTextViewLevelExperience.setText(String.valueOf(statistics.getExperience()) + "/" +
+                String.valueOf(statistics.getBorderExperience() + statistics.getUpExperience()));
     }
 
     @Override

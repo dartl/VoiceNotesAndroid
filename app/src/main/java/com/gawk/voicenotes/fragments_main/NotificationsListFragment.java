@@ -7,10 +7,15 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
+import com.cocosw.bottomsheet.BottomSheet;
 import com.gawk.voicenotes.FragmentParent;
 import com.gawk.voicenotes.MainActivity;
 import com.gawk.voicenotes.ParentActivity;
@@ -30,6 +35,10 @@ public class NotificationsListFragment extends FragmentParent implements Actions
     private RecyclerView mRecyclerView;
     private NotificationRecyclerAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    private BottomSheet mBottomMenu;
+    private RelativeLayout mRelativeLayoutBottomMenu;
+    private ImageButton mImageButtonDelete;
+    private TextView mTextViewNoteSelectCount;
 
     private ArrayList selectNotification = new ArrayList<Long>();
 
@@ -56,11 +65,21 @@ public class NotificationsListFragment extends FragmentParent implements Actions
 
         Cursor notificationCursor = dbHelper.getCursorAllNotification();
 
+        mRelativeLayoutBottomMenu = view.findViewById(R.id.relativeLayoutBottomMenu);
+        mTextViewNoteSelectCount = view.findViewById(R.id.textViewNoteSelectCount);
+        mImageButtonDelete = view.findViewById(R.id.imageButtonDelete);
+        mImageButtonDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDialogDelete(-1);
+            }
+        });
+
         /* new NoteRecycler */
         mLayoutManager = new LinearLayoutManager(getActivity());
         mAdapter = new NotificationRecyclerAdapter(getActivity(), notificationCursor, this, dbHelper);
 
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.listViewAllNotifications);
+        mRecyclerView = view.findViewById(R.id.listViewAllNotifications);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
 
@@ -81,14 +100,11 @@ public class NotificationsListFragment extends FragmentParent implements Actions
         return true;
     }
 
-    // state: 0 - delete one notification, 1 - delete all notification, 2 - delete all notification by note
-    public void deleteElement(long id, int state) {
-        switch (state) {
-            case 0:
-                dbHelper.deleteNotification(id);
-                updateNotification();
-                break;
-            case 1:
+    public void deleteElement(long id, boolean stateRemoveAll) {
+        if (stateRemoveAll) {
+            dbHelper.deleteAllNotificationByNote(id);
+        } else {
+            if (id == -1) {
                 int i = 0;
                 long id_temp;
                 if (selectNotification.size() > 0) {
@@ -99,20 +115,17 @@ public class NotificationsListFragment extends FragmentParent implements Actions
                         dbHelper.setActivity((ParentActivity) getContext());
                         dbHelper.deleteNotification(id_temp);
                     }
-                    updateNotification();
                 }
-                break;
-            case 2:
-                dbHelper.deleteAllNotificationByNote(id);
-                updateNotification();
-                break;
-            default:
-                break;
+            } else {
+                dbHelper.deleteNotification(id);
+            }
         }
+        updateNotification();
+        changeBottomMenu();
     }
 
-    public void showDialogDelete(final long _id,final int state) {
-        if (selectNotification.size() > 0 ) {
+    public void showDialogDelete(final long _id) {
+        if (selectNotification.size() > 0|| _id != -1 ) {
             AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
             // 2. Chain together various setter methods to set the dialog characteristics
             builder.setMessage(R.string.dialogDeleteMessage)
@@ -121,7 +134,7 @@ public class NotificationsListFragment extends FragmentParent implements Actions
             // Add the buttons
             builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
-                    deleteElement(_id,state);
+                    deleteElement(_id,false);
                 }
             });
             builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -138,21 +151,56 @@ public class NotificationsListFragment extends FragmentParent implements Actions
     }
 
     @Override
-    public boolean selectNote(long id) {
-        return false;
-    }
-
-    @Override
-    public boolean checkSelectNote(long id) {
-        return false;
-    }
-
-    @Override
-    public void selectNotification(long id) {
+    public boolean selectElement(long id) {
         if (selectNotification.contains(id)) {
             selectNotification.remove(id);
+            changeBottomMenu();
+            return false;
         } else {
             selectNotification.add(id);
+            changeBottomMenu();
+            return true;
         }
+    }
+
+    @Override
+    public boolean checkSelectElement(long id) {
+        return selectNotification.contains(id);
+    }
+
+    @Override
+    public void showBottomMenu(final long id) {
+        mBottomMenu = new BottomSheet.Builder(getActivity()).title(getText(R.string.main_action_element)).sheet(R.menu.menu_list_actions).listener(new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case R.id.action_remove_element:
+                        showDialogDelete(id);
+                        break;
+                }
+            }
+        }).show();
+    }
+
+    private void changeBottomMenu() {
+        mAdapter.setSelectNotes(selectNotification);
+        if (selectNotification.size() > 0) {
+            mAdapter.setStateSelected(true);
+            mRelativeLayoutBottomMenu.getLayoutParams().height = 160;
+            mRelativeLayoutBottomMenu.requestLayout();
+            mRelativeLayoutBottomMenu.animate().translationY(0);
+        } else {
+            mAdapter.setStateSelected(false);
+            mRelativeLayoutBottomMenu.animate().translationY(mRelativeLayoutBottomMenu.getHeight());
+            mRelativeLayoutBottomMenu.animate().withEndAction(new Runnable() {
+                @Override
+                public void run() {
+                    mRelativeLayoutBottomMenu.getLayoutParams().height= 0;
+                    mRelativeLayoutBottomMenu.requestLayout();
+                }
+            });
+        }
+        mAdapter.notifyDataSetChanged();
+        mTextViewNoteSelectCount.setText(selectNotification.size() + " " + getText(R.string.main_selected_element));
     }
 }

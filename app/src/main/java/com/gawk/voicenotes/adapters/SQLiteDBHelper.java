@@ -357,8 +357,8 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
 
     // Получить указатель на все заметки с искомым вхождением
     public Cursor getCursorAllNotes(String text) {
-        if (!db.isOpen()) {
-            return null;
+        if (!isConnect()) {
+            connection();
         }
         return db.rawQuery("SELECT * FROM " +
                 SQLiteDBHelper.NOTES_TABLE_NAME + " WHERE lower(" +
@@ -368,8 +368,8 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
     }
 
     public Cursor getNoteById(long id){
-        if (!db.isOpen()) {
-            return null;
+        if (!isConnect()) {
+            connection();
         }
         Cursor c = db.rawQuery("SELECT * FROM " +
                 SQLiteDBHelper.NOTES_TABLE_NAME + " WHERE "+NOTES_TABLE_COLUMN_ID+" = " + id, null);

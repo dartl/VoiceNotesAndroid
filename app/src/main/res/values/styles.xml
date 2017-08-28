@@ -74,4 +74,41 @@
         <item name="android:layout_marginLeft">8dp</item>
     </style>
 
+    <style name="GawkMaterialTheme.ListNoteActionsTitle">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/colorGrey600</item>
+        <item name="android:layout_marginLeft">8dp</item>
+    </style>
+
+    <style name="GawkMaterialTheme.ListNotificationIconsState" parent="GawkMaterialTheme.IconNoBackground">
+        <item name="android:layout_marginLeft">8dp</item>
+    </style>
+
+    <!-- Draver -->
+    <style name="GawkMaterialTheme.DrawerHeadText1">
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="GawkMaterialTheme.DrawerHeadText2">
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="GawkMaterialTheme.DrawerHeadText3">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="GawkMaterialTheme.DrawerSocial">
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:background">@color/colorGrey50</item>
+    </style>
+
+    <style name="GawkMaterialTheme.DrawerSocialTitle">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/colorGrey500</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
 </resources>

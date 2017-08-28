@@ -58,7 +58,6 @@ public class StatisticsActivity extends ParentActivity {
 
     private void refresh() {
         Statistics statistics = new Statistics(this);
-
         mTextViewCreateNotes.setText(String.valueOf(statistics.getCreateNotes()));
         mTextViewCreateNotifications.setText(String.valueOf(statistics.getCreateNotifications()));
         mTextViewGetNotifications.setText(String.valueOf(statistics.getGetNotifications()));

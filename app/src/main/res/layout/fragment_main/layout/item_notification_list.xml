@@ -1,63 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="10dp">
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <android.support.v7.widget.CardView
         android:id="@+id/card_view"
-        app:cardCornerRadius="2dp"
-        app:cardElevation="2dp"
-        android:layout_marginBottom="2dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginLeft="8dp"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:orientation="horizontal" android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <CheckBox
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="0dp">
+
+        <LinearLayout
+            style="@style/GawkMaterialTheme.ListNoteElement"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/imageButtonNotificationIcon"
+                style="@style/GawkMaterialTheme.ListNoteElementIconNote"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:id="@+id/checkBoxNotification"/>
+                android:layout_gravity="center_vertical"
+                android:scaleType="fitCenter"
+                android:tint="@color/colorPrimary500"
+                app:srcCompat="@drawable/ic_alarm_white_24dp" />
 
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
+                style="@style/GawkMaterialTheme.ListNoteElementTextAndDate"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
                 <TextView
-                    android:text="TextView"
+                    android:id="@+id/textViewDateNotification"
+                    style="@style/GawkMaterialTheme.ListNoteElementText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textViewDateNotification"/>
+                    android:text="TextView" />
 
                 <TextView
-                    android:text="TextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:id="@+id/textViewTextNote"
-                    android:maxLines="1"/>
-
+                    style="@style/GawkMaterialTheme.ListNoteElementDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:text="TextView" />
 
 
             </LinearLayout>
 
             <ImageView
                 android:id="@+id/imageViewSound"
+                style="@style/GawkMaterialTheme.ListNotificationIconsState"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:tint="@color/colorPrimary500"
+                android:src="@drawable/ic_volume_up_grey_24dp"
                 android:layout_gravity="center" />
 
             <ImageView
                 android:id="@+id/imageViewShake"
+                style="@style/GawkMaterialTheme.ListNotificationIconsState"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:tint="@color/colorPrimary500"
+                android:src="@drawable/ic_vibration_grey_24dp"
                 android:layout_gravity="center" />
+
+            <ImageButton
+                android:id="@+id/imageButtonMoreMenu"
+                style="@style/GawkMaterialTheme.IconNoBackground"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                app:srcCompat="@drawable/ic_more_vert_black_24dp" />
         </LinearLayout>
+
     </android.support.v7.widget.CardView>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/textline" />
+
 </LinearLayout>

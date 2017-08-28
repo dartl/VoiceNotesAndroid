@@ -63,7 +63,7 @@
                 <ImageButton
                     android:id="@+id/imageButtonMoreMenu"
                     style="@style/GawkMaterialTheme.IconNoBackground"
-                    android:layout_width="wrap_content"
+                    android:layout_width="48dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_vertical"
                     app:srcCompat="@drawable/ic_more_vert_black_24dp" />

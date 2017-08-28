@@ -53,6 +53,7 @@ public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerA
             super(v);
             parent = v;
             mImageButtonIconNote = v.findViewById(R.id.imageButtonIconNote);
+            mImageButtonMoreMenu = v.findViewById(R.id.imageButtonMoreMenu);
             textView = v.findViewById(R.id.textViewListText);
             dateView = v.findViewById(R.id.textViewListDate);
             cardView = v.findViewById(R.id.card_view);
@@ -62,7 +63,7 @@ public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerA
             final int position = c.getPosition();
             final long id = noteRecyclerAdapter.getItemId(getLayoutPosition());
 
-            changeItemSelect(noteRecyclerAdapter.getActionsListNotes().checkSelectNote(id));
+            changeItemSelect(noteRecyclerAdapter.getActionsListNotes().checkSelectElement(id));
             textView.setText(c.getString(c.getColumnIndex(SQLiteDBHelper.NOTES_TABLE_COLUMN_TEXT_NOTE)));
 
             mImageButtonIconNote.setImageResource(R.drawable.ic_insert_drive_file_black_24dp);
@@ -83,16 +84,25 @@ public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerA
                         parent.performLongClick();
                     }
                 });
+                mImageButtonMoreMenu.setVisibility(View.INVISIBLE);
             } else {
                 mImageButtonIconNote.setBackgroundResource(0);
                 mImageButtonIconNote.setOnClickListener(null);
+                mImageButtonMoreMenu.setVisibility(View.VISIBLE);
             }
+
+            mImageButtonMoreMenu.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    noteRecyclerAdapter.getActionsListNotes().showBottomMenu(id);
+                }
+            });
 
             parent.setLongClickable(true);
             parent.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
-                    changeItemSelect(noteRecyclerAdapter.getActionsListNotes().selectNote(id));
+                    changeItemSelect(noteRecyclerAdapter.getActionsListNotes().selectElement(id));
                     return true;
                 }
             });
