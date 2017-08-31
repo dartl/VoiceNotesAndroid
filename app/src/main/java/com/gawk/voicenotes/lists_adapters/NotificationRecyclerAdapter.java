@@ -122,6 +122,7 @@ public class NotificationRecyclerAdapter extends CursorRecyclerViewAdapter<Notif
             // Находим заметку для текущего оповещения
             long note_id = notification.getId_note();
             Cursor noteCursor = db.getNoteById(note_id);
+            Log.e("GAWK_ERR","SetData() notification = " + notification.toString());
 
             noteCursor.moveToFirst();
 

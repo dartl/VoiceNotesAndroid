@@ -10,7 +10,6 @@ import android.util.Log;
 
 import com.gawk.voicenotes.models.Note;
 import com.gawk.voicenotes.models.Notification;
-import com.gawk.voicenotes.preferences.PrefUtil;
 
 /**
  * Created by GAWK on 31.08.2017.
@@ -33,12 +32,12 @@ public class NotificationAdapter {
         c.putByteArray("note", ParcelableUtil.marshall(note));
         c.putByteArray("notification", ParcelableUtil.marshall(notification));
         intent.putExtras(c);
-        int requestCodeIntent =  (int) notification.getId();
+        int requestCodeIntent = (int) notification.getId();
         PendingIntent pendingIntent = PendingIntent.getBroadcast(mContext, -requestCodeIntent,
-                intent, 0);
+                intent, PendingIntent.FLAG_UPDATE_CURRENT);
         // На случай, если мы ранее запускали активити, а потом поменяли время,
         // откажемся от уведомления
-        am.cancel(pendingIntent);
+        //am.cancel(pendingIntent);
         if(Build.VERSION.SDK_INT < 23){
             if(Build.VERSION.SDK_INT >= 19){
                 Log.e("GAWK_ERR","Build.VERSION.SDK_INT >= 19");

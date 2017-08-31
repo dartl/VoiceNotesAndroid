@@ -46,6 +46,7 @@ public class TimeNotification extends BroadcastReceiver {
     NotificationManager nm;
     @Override
     public void onReceive(Context context, Intent intent) {
+        Log.e("GAWK_ERR","OnReceive()");
         nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         mNotificationAdapter = new NotificationAdapter(context);
         mPrefUtil = new PrefUtil(context);
@@ -88,16 +89,14 @@ public class TimeNotification extends BroadcastReceiver {
         } else if (voice){
             nb.setDefaults(Notification.DEFAULT_SOUND); // выставляет звук по умолчанию
         }
-        nm.notify(NOTIFY_TAG + note.getId(), idNotification, nb.build());
+        nm.notify(NOTIFY_TAG, idNotification, nb.build());
         Statistics mStatistics = new Statistics(context);
         mStatistics.addPointGetNotifications();
 
-        Log.e("GAWK_ERR","long_interval = " + long_interval + ". notification.isRepeat() = " + notification.isRepeat());
         if (long_interval != 0 && notification.isRepeat()) {
             Date date = new Date(notification.getDate().getTime() + long_interval);
             notification.setDate(date);
             mNotificationAdapter.restartNotify(note,notification);
-            Log.e("GAWK_ERR","Restart notification");
         }
     }
 }

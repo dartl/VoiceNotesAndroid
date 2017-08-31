@@ -1,36 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <Switch
         android:id="@+id/switchNotification"
         style="@style/GawkMaterialTheme.NewNoteNotificationSwitcherTop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/new_note_remind"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/new_note_remind" />
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:id="@+id/notificationLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="@dimen/activity_horizontal_margin"
-        android:layout_below="@+id/switchNotification">
+        android:layout_below="@+id/switchNotification"
+        android:layout_marginTop="@dimen/activity_horizontal_margin">
 
         <LinearLayout
+            android:id="@+id/linearLayout3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:id="@+id/linearLayout3">
+            android:layout_alignParentTop="true"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:id="@+id/relativeLayout"
@@ -147,23 +148,13 @@
             style="@style/GawkMaterialTheme.ButtonChangeTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:enabled="false"
-            android:text="@string/new_note_select_time"
             android:layout_below="@+id/linearLayout3"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:enabled="false"
+            android:text="@string/new_note_select_time" />
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/buttonSave"
-            style="@style/GawkMaterialTheme.DefaultButtonNoBackground"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/cancel"
-            android:layout_alignParentBottom="true"
-            android:layout_toLeftOf="@+id/buttonClose"
-            android:layout_toStartOf="@+id/buttonClose" />
-
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/buttonClose"
             style="@style/GawkMaterialTheme.DefaultButtonNoBackground"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -171,5 +162,15 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:text="@string/yes" />
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/buttonClose"
+            style="@style/GawkMaterialTheme.DefaultButtonNoBackground"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_toLeftOf="@+id/buttonSave"
+            android:layout_toStartOf="@+id/buttonSave"
+            android:text="@string/cancel" />
     </RelativeLayout>
 </RelativeLayout>

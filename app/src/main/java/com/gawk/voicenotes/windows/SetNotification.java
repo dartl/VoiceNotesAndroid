@@ -3,31 +3,54 @@ package com.gawk.voicenotes.windows;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.AppCompatButton;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
+import android.widget.TextView;
 
+import com.gawk.voicenotes.NoteView;
 import com.gawk.voicenotes.R;
 import com.gawk.voicenotes.adapters.NotificationAdapter;
+import com.gawk.voicenotes.adapters.SQLiteDBHelper;
+import com.gawk.voicenotes.date_and_time.DateAndTimeCombine;
+import com.gawk.voicenotes.listeners.TimePickerReturn;
+import com.gawk.voicenotes.models.Notification;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * Created by GAWK on 26.08.2017.
  */
 
-public class SetNotification extends DialogFragment {
+public class SetNotification extends DialogFragment implements TimePickerReturn {
     private Dialog mDlg;
+    private Switch switchNotification, mSwitchSound, mSwitchVibrate, mSwitchRepeat;
     private View mView;
     private ArrayList<View> allChildren;
     private Switch mSwitchNotification;
+    private AppCompatButton selectTime, mButtonSave, mButtonClose;
+    private TextView textViewNowDate;
+    private Calendar dateNotification;
+    private DateAndTimeCombine mDateAndTimeCombine;
+    private boolean checkError, checkNotification = false;
+    private NoteView mNoteView;
+    public SQLiteDBHelper dbHelper;
 
-    public SetNotification() {}
+    private final Notification notification = new Notification();
+
+    public SetNotification(long id_note) {notification.setId_note(id_note);}
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -35,9 +58,11 @@ public class SetNotification extends DialogFragment {
         // Get the layout inflater
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
-
         mView = inflater.inflate(R.layout.new_note_notifications, null);
         builder.setView(mView);
+
+        dbHelper = SQLiteDBHelper.getInstance(getContext());
+        dbHelper.connection();
 
         RelativeLayout notificationLayout =  mView.findViewById(R.id.notificationLayout);
         mSwitchNotification = mView.findViewById(R.id.switchNotification);
@@ -48,6 +73,58 @@ public class SetNotification extends DialogFragment {
         }
 
         mSwitchNotification.setVisibility(View.GONE);
+
+        switchNotification =  mView.findViewById(R.id.switchNotification);
+        selectTime = mView.findViewById(R.id.buttonSelectTime);
+        textViewNowDate = mView.findViewById(R.id.textViewNowDate);
+        mSwitchSound = mView.findViewById(R.id.switchSound);
+        mSwitchVibrate = mView.findViewById(R.id.switchVibrate);
+        mSwitchRepeat = mView.findViewById(R.id.switchRepeat);
+        mButtonSave = mView.findViewById(R.id.buttonSave);
+        mButtonClose = mView.findViewById(R.id.buttonClose);
+
+        mButtonClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dismiss();
+            }
+        });
+
+        mButtonSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mNoteView.saveNotification(notification);
+                dismiss();
+            }
+        });
+
+        selectTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showTimePickerDialog();
+            }
+        });
+
+        mSwitchSound.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                notification.setSound(isChecked);
+            }
+        });
+
+        mSwitchVibrate.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                notification.setShake(isChecked);
+            }
+        });
+
+        mSwitchRepeat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                notification.setRepeat(isChecked);
+            }
+        });
+
+        dateNotification = Calendar.getInstance();
+        setNotificationTime();
 
         mDlg = builder.create();
         return mDlg;
@@ -66,6 +143,44 @@ public class SetNotification extends DialogFragment {
     @Override
     public void onDismiss(DialogInterface dialog) {
         super.onDismiss(dialog);
+    }
+
+    public void showTimePickerDialog() {
+        if (mDateAndTimeCombine == null) {
+            mDateAndTimeCombine = new DateAndTimeCombine(this);
+        }
+        mDateAndTimeCombine.show(getFragmentManager());
+    }
+
+    private void setNotificationTime() {
+        DateFormat dateFormat = SimpleDateFormat.getDateTimeInstance();
+        textViewNowDate.setText(dateFormat.format(dateNotification.getTime()));
+        notification.setDate(dateNotification.getTime());
+    }
+
+    @Override
+    public void setTimeAndDate(Calendar calendar) {
+        checkError = true;
+        dateNotification = calendar;
+        setNotificationTime();
+    }
+
+    @Override
+    public void fail() {
+        Snackbar.make(mView, getString(R.string.new_note_error_date), Snackbar.LENGTH_LONG).show();
+        checkError = false;
+        switchNotification.setChecked(false);
+    }
+
+    public Notification getNotification() {
+        if (checkError && checkNotification) {
+            return notification;
+        }
+        return null;
+    }
+
+    public boolean haveNotification() {
+        return (checkError && checkNotification);
     }
 
     private ArrayList<View> getAllChildren(View v) {
@@ -90,5 +205,13 @@ public class SetNotification extends DialogFragment {
             result.addAll(viewArrayList);
         }
         return result;
+    }
+
+    public NoteView getNoteView() {
+        return mNoteView;
+    }
+
+    public void setNoteView(NoteView mNoteView) {
+        this.mNoteView = mNoteView;
     }
 }

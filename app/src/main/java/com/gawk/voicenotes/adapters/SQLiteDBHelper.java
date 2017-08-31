@@ -235,7 +235,6 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         if (!isConnect()) {
             connection();
         }
-        Log.e("GAWK_ERR","getCursorAllNotification()");
         return db.rawQuery("SELECT * FROM " +
                 SQLiteDBHelper.NOTIFICATIONS_TABLE_NAME + " ORDER BY " + SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_DATE
                 + " ASC", null);
@@ -306,8 +305,8 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
      * @return возвращает результат запроса к БД
      */
     public long saveNotification(Notification notification, int action) {
-        if (!db.isOpen()) {
-            return -1;
+        if (!isConnect()) {
+            connection();
         }
 
         mStatistics.addPointCreateNotifications();

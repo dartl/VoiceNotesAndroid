@@ -28,6 +28,7 @@ import com.gawk.voicenotes.adapters.NotificationAdapter;
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
 import com.gawk.voicenotes.lists_adapters.ListAdapters;
 import com.gawk.voicenotes.lists_adapters.NotificationRecyclerAdapter;
+import com.gawk.voicenotes.models.Notification;
 import com.gawk.voicenotes.preferences.PrefUtil;
 import com.gawk.voicenotes.models.Note;
 import com.gawk.voicenotes.windows.SetNotification;
@@ -47,6 +48,7 @@ import java.util.Locale;
 
 public class NoteView extends ParentActivity implements ActionMenuBottom, RecognitionListener {
     private TextView textViewDate;
+    private NoteView mThis;
     private EditText editTextNoteText;
     private Note note;
     private ListAdapters mListAdapters;
@@ -63,12 +65,13 @@ public class NoteView extends ParentActivity implements ActionMenuBottom, Recogn
     private SpeechRecognitionDialog mSpeechRecognitionDialog;
     private boolean mCheckPartialResults = false;
     private String mPartialResultsStart;
+    private SetNotification mSetNotification;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.note_view);
-
+        mThis = this;
         dbHelper.connection();
 
         mView = findViewById(R.id.view_note);
@@ -82,8 +85,9 @@ public class NoteView extends ParentActivity implements ActionMenuBottom, Recogn
         mButtonAddReminder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SetNotification setNotification = new SetNotification();
-                setNotification.show(getSupportFragmentManager(),"setNotification");
+                mSetNotification = new SetNotification(note.getId());
+                mSetNotification.setNoteView(mThis);
+                mSetNotification.show(getSupportFragmentManager(),"setNotification");
             }
         });
 
@@ -116,6 +120,7 @@ public class NoteView extends ParentActivity implements ActionMenuBottom, Recogn
     public void onResume() {
         super.onResume();
         initAdMob(true);
+        updateList();
     }
 
     @Override
@@ -174,8 +179,10 @@ public class NoteView extends ParentActivity implements ActionMenuBottom, Recogn
             ringtoneManager.getRingtone(ringtoneManager.getRingtonePosition(Uri.parse(stringRingtone))).stop();
         }
 
+        Log.e("GAWK_ERR","id note = " + id);
         note = new Note(dbHelper.getNoteById(id));
         editTextNoteText.setText(note.getText_note());
+
 
         DateFormat dateFormat;
         dateFormat = SimpleDateFormat.getDateTimeInstance();
@@ -229,9 +236,16 @@ public class NoteView extends ParentActivity implements ActionMenuBottom, Recogn
         mSpeechRecognitionDialog.show(getFragmentManager(),"SpeechRecognitionDialog");
     }
 
+    public void saveNotification(Notification notification) {
+        notification.setId(dbHelper.saveNotification(notification,0));
+        NotificationAdapter notificationAdapter = new NotificationAdapter(this);
+        notificationAdapter.restartNotify(note, notification);
+        updateList();
+    }
+
     @Override
     public void updateList() {
-        Cursor notificationCursor =  dbHelper.getAllNotificationByNote(id);
+        Cursor notificationCursor = dbHelper.getAllNotificationByNote(id);
         mAdapter.changeCursor(notificationCursor);
         mAdapter.notifyDataSetChanged();
     }

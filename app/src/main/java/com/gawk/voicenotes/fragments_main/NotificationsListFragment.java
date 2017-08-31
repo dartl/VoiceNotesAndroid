@@ -84,6 +84,7 @@ public class NotificationsListFragment extends FragmentParent {
     @Override
     public void updateList() {
         super.updateList();
+        dbHelper.deleteAllOldNotification();
         Cursor cursor = dbHelper.getCursorAllNotification();
         Log.e("GAWK_ERR","updateList() Notification. cursor.getCount() = " + cursor.getCount());
         mAdapter.changeCursor(cursor);
