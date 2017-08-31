@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -35,7 +36,7 @@ public class NewNote extends ParentActivity implements TimePickerReturn {
     private NewNoteText newNoteText;
 
     /* объявляем все элементы активные */
-    private ImageButton newNoteAddNotification;
+    private Button newNoteAddNotification;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +53,7 @@ public class NewNote extends ParentActivity implements TimePickerReturn {
         tabLayout.setupWithViewPager(viewPager);
         createTabIcons();
 
-        newNoteAddNotification =  (ImageButton) findViewById(R.id.button_save_note);
+        newNoteAddNotification =  (Button) findViewById(R.id.button_save_note);
         newNoteAddNotification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -72,7 +72,6 @@ public class SettingsActivity extends ParentActivity {
     @Override
     public void onResume() {
         super.onResume();
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view_menu);
         navigationView.getMenu().findItem(R.id.menu_settings).setCheckable(true).setChecked(true);
     }
@@ -134,6 +133,7 @@ public class SettingsActivity extends ParentActivity {
     }
 
     public void setIntervalNotification(long time) {
+        time = 60000;
         mPrefUtil.saveLong(PrefUtil.NOTIFICATION_INTERVAL,time);
         final int timeInterval = (int) time/60000;
         switch (timeInterval) {

@@ -46,6 +46,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
     private Context context;
     private ParentActivity activity;
     private Statistics mStatistics;
+    private NotificationAdapter mNotificationAdapter;
 
     public static final int DATABASE_VERSION = 3;
     public static final String DATABASE_NAME = "VOICE_NOTES.DB";
@@ -79,6 +80,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
     public SQLiteDBHelper(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
+        mNotificationAdapter = new NotificationAdapter(context);
         mStatistics = new Statistics(context);
     }
 
@@ -262,8 +264,8 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
      * @return возвращает результат запроса к БД
      */
     public Cursor getAllNotificationByNote(long id) {
-        if (!db.isOpen()) {
-            return null;
+        if (!isConnect()) {
+            connection();
         }
         return db.rawQuery("SELECT * FROM " +
                 SQLiteDBHelper.NOTIFICATIONS_TABLE_NAME + " WHERE " + SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_ID_NOTE
@@ -334,7 +336,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
      * @return результат удаления
      */
     public boolean deleteNotification(long id) {
-        this.activity.deleteNotify(id);
+        mNotificationAdapter.removeNotify(id);
         int deleteRow = db.delete(SQLiteDBHelper.NOTIFICATIONS_TABLE_NAME, "_id = ?" ,new String[] { String.valueOf(id) });
         if (deleteRow == 1) {
             return true;

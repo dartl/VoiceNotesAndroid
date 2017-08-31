@@ -8,19 +8,26 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.RelativeLayout;
+import android.widget.Switch;
 
 import com.gawk.voicenotes.R;
+import com.gawk.voicenotes.adapters.NotificationAdapter;
+
+import java.util.ArrayList;
 
 /**
  * Created by GAWK on 26.08.2017.
  */
 
-public class SetNotification extends DialogFragment{
+public class SetNotification extends DialogFragment {
     private Dialog mDlg;
     private View mView;
+    private ArrayList<View> allChildren;
+    private Switch mSwitchNotification;
 
-    public SetNotification() {
-    }
+    public SetNotification() {}
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -28,8 +35,19 @@ public class SetNotification extends DialogFragment{
         // Get the layout inflater
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
+
         mView = inflater.inflate(R.layout.new_note_notifications, null);
         builder.setView(mView);
+
+        RelativeLayout notificationLayout =  mView.findViewById(R.id.notificationLayout);
+        mSwitchNotification = mView.findViewById(R.id.switchNotification);
+
+        allChildren = getAllChildren(notificationLayout);
+        for (int i = 0; i < allChildren.size(); i++) {
+            allChildren.get(i).setEnabled(true);
+        }
+
+        mSwitchNotification.setVisibility(View.GONE);
 
         mDlg = builder.create();
         return mDlg;
@@ -50,4 +68,27 @@ public class SetNotification extends DialogFragment{
         super.onDismiss(dialog);
     }
 
+    private ArrayList<View> getAllChildren(View v) {
+
+        if (!(v instanceof ViewGroup)) {
+            ArrayList<View> viewArrayList = new ArrayList<View>();
+            viewArrayList.add(v);
+            return viewArrayList;
+        }
+
+        ArrayList<View> result = new ArrayList<View>();
+
+        ViewGroup viewGroup = (ViewGroup) v;
+        for (int i = 0; i < viewGroup.getChildCount(); i++) {
+
+            View child = viewGroup.getChildAt(i);
+
+            ArrayList<View> viewArrayList = new ArrayList<View>();
+            viewArrayList.add(v);
+            viewArrayList.addAll(getAllChildren(child));
+
+            result.addAll(viewArrayList);
+        }
+        return result;
+    }
 }

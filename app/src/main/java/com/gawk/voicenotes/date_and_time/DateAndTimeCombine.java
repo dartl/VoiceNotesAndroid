@@ -18,17 +18,20 @@ public class DateAndTimeCombine {
     private Calendar mCalendar;
     private FragmentManager mFragmentManager;
     private TimePickerReturn mTimePickerReturn;
+    private boolean mCheckShowTimeDialog = true;
 
     public DateAndTimeCombine(TimePickerReturn timePickerReturn) {
-        this.mDatePickerFragment = new DatePickerFragment(this);
-        this.mTimePickerFragment = new TimePickerFragment(this);
         this.mTimePickerReturn = timePickerReturn;
     }
 
     public void show(FragmentManager fragmentManager) {
         mCalendar = Calendar.getInstance();
         mFragmentManager = fragmentManager;
+        if (this.mDatePickerFragment == null) {
+            this.mDatePickerFragment = new DatePickerFragment(this);
+        }
         mDatePickerFragment.show(mFragmentManager, "datePicker");
+        mCheckShowTimeDialog = true;
     }
 
     public void fail() {
@@ -36,14 +39,18 @@ public class DateAndTimeCombine {
     }
 
     public void endSelectData(int year,int month,int dayOfMonth) {
-        mCalendar.set(year, month, dayOfMonth,
-                mCalendar.get(Calendar.HOUR), mCalendar.get(Calendar.MINUTE), 0);
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
-        if (mCalendar.before(calendar)) {
-            mTimePickerReturn.fail();
-        } else {
-            mTimePickerFragment.show(mFragmentManager, "timePicker");
+        if (mCheckShowTimeDialog) {
+            mCheckShowTimeDialog = false;
+            mCalendar.set(year, month, dayOfMonth,
+                    mCalendar.get(Calendar.HOUR), mCalendar.get(Calendar.MINUTE), 0);
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
+            mTimePickerFragment = new TimePickerFragment(this);
+            if (mCalendar.before(calendar)) {
+                mTimePickerReturn.fail();
+            } else {
+                mTimePickerFragment.show(mFragmentManager, "timePicker");
+            }
         }
     }
 

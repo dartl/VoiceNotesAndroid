@@ -39,6 +39,7 @@
 
     <string name="menu_statistics">Statistics</string>
     <string name="social_action_title">Tell us about your friends</string>
+
     <!-- Статистика -->
     <string name="statistics_level1">Beginner</string>
     <string name="statistics_level2">Specialist</string>
@@ -98,6 +99,7 @@
     <!-- Заметки просмотр -->
     <string name="note_view_remind_title">Voice Notes will remind you</string>
     <string name="note_view_remind_no_body">Never</string>
+    <string name="note_view_add_reminder">add reminder</string>
 
     <!-- Экспорт и импорт -->
     <string name="export_import_export">Export</string>

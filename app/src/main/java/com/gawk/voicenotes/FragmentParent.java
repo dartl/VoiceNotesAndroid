@@ -4,6 +4,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
+import com.gawk.voicenotes.adapters.ActionMenuBottom;
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
 
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
  * Created by GAWK on 05.03.2017.
  */
 
-public class FragmentParent extends Fragment {
+public class FragmentParent extends Fragment implements ActionMenuBottom {
     public SQLiteDBHelper dbHelper;
 
     @Override
@@ -43,11 +44,24 @@ public class FragmentParent extends Fragment {
     // функция поиска
     public void search(String text) {}
 
-    public void updateList() {}
 
-    public void deleteItemList(long id, boolean stateRemoveAllNotification, ArrayList selectItems) {}
+    @Override
+    public void updateList() {
 
-    public void shareItemList(long id, ArrayList selectItems) {}
+    }
 
-    public void refreshSelectedList() {}
+    @Override
+    public void deleteItemList(long id, boolean stateRemoveAllNotification, ArrayList selectItems) {
+
+    }
+
+    @Override
+    public void shareItemList(long id, ArrayList selectItems) {
+
+    }
+
+    @Override
+    public void refreshSelectedList() {
+
+    }
 }

@@ -35,6 +35,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.vending.billing.IInAppBillingService;
+import com.gawk.voicenotes.adapters.NotificationAdapter;
 import com.gawk.voicenotes.lists_adapters.NoteRecyclerAdapter;
 import com.gawk.voicenotes.adapters.ParcelableUtil;
 import com.gawk.voicenotes.listeners.SocialShare;
@@ -73,12 +74,15 @@ public class ParentActivity extends AppCompatActivity
             mButtonOdnoklassnik;
     private ImageView mImageViewLevelIcon;
     private TextView mTextViewLevelRank, mTextViewLevelLevel, mTextViewLevelExperience;
+    private NotificationAdapter mNotificationAdapter;
     protected GooglePlaySubs mGooglePlaySubs;
     protected ParentActivity mActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mNotificationAdapter = new NotificationAdapter(this);
 
         PrefUtil prefUtil = new PrefUtil(this);
 
@@ -365,49 +369,12 @@ public class ParentActivity extends AppCompatActivity
         }
     }
 
-    protected void restartNotify(Note note, Notification notification) {
-        AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(this, TimeNotification.class);
-        intent.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
-
-        PrefUtil prefUtil = new PrefUtil(this);
-        String sound_link = prefUtil.getString(PrefUtil.NOTIFICATION_SOUND,"a");
-        Bundle c = new Bundle();
-        c.putString("sound_link", sound_link);
-        c.putByteArray("note", ParcelableUtil.marshall(note));
-        c.putByteArray("notification", ParcelableUtil.marshall(notification));
-        intent.putExtras(c);
-        int requestCodeIntent =  (int) notification.getId();
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, -requestCodeIntent,
-                intent, 0);
-        // На случай, если мы ранее запускали активити, а потом поменяли время,
-        // откажемся от уведомления
-        am.cancel(pendingIntent);
-        if(Build.VERSION.SDK_INT < 23){
-            if(Build.VERSION.SDK_INT >= 19){
-                Log.e("GAWK_ERR","Build.VERSION.SDK_INT >= 19");
-                am.setExact(AlarmManager.RTC_WAKEUP,  notification.getDate().getTime() , pendingIntent);
-            }
-            else{
-                Log.e("GAWK_ERR","NO Build.VERSION.SDK_INT >= 19");
-                am.set(AlarmManager.RTC_WAKEUP,  notification.getDate().getTime() , pendingIntent);
-            }
-        }
-        else{
-            Log.e("GAWK_ERR","NO Build.VERSION.SDK_INT < 23");
-            am.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP,  notification.getDate().getTime() , pendingIntent);
-        }
+    public void restartNotify(Note note, Notification notification) {
+        mNotificationAdapter.restartNotify(note,notification);
     }
 
     public void deleteNotify(long id) {
-        AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(this, TimeNotification.class);
-        int requestCodeIntent =  (int) id;
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, -requestCodeIntent,
-                intent, 0);
-        // На случай, если мы ранее запускали активити, а потом поменяли время,
-        // откажемся от уведомления
-        am.cancel(pendingIntent);
+        mNotificationAdapter.removeNotify(id);
     }
 
     protected void installIcon() {

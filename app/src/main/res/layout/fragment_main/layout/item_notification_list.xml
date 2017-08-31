@@ -33,6 +33,7 @@
                 android:layout_height="wrap_content"
                 style="@style/GawkMaterialTheme.ListNoteElementTextAndDate"
                 android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
                 android:layout_weight="1"
                 android:orientation="vertical">
 

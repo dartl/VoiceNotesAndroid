@@ -1,46 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
+    android:id="@+id/view_note"
+    android:background="@color/windowBackground"
+    android:weightSum="2"
     android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/editTextNoteText"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:ems="10"
-        android:gravity="start"
-        android:inputType="textMultiLine"
-        android:layout_above="@+id/imageView2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textViewDate" />
+        android:layout_weight="1"
+        android:orientation="vertical">
 
-    <TextView
-        android:text="TextView"
+        <TextView
+            android:id="@+id/textViewDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/GawkMaterialTheme.NoteViewDate"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:gravity="end"
+            android:text="TextView" />
+
+        <EditText
+            android:id="@+id/editTextNoteText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textViewDate"
+            style="@style/GawkMaterialTheme.NoteViewEditeText"
+            android:ems="10"
+            android:gravity="start"
+            android:inputType="textMultiLine" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/scrollViewReminders"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textViewDate"
-        android:gravity="end"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_height="match_parent"
+        android:layout_weight="1">
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/textViewBodyNotification"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textViewBodyNotification"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/note_view_remind_no_body"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/imageView2"
-        android:layout_toEndOf="@+id/imageView2" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-</RelativeLayout>
+                <TextView
+                    android:id="@+id/textViewViewNoteReminder"
+                    style="@style/GawkMaterialTheme.NoteViewRemindersTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="@string/settings_notification_title" />
+
+                <Button
+                    android:id="@+id/buttonAddReminder"
+                    style="@style/GawkMaterialTheme.DefaultButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/note_view_add_reminder" />
+
+                <include
+                    layout="@layout/notifications_list_fragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

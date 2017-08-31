@@ -16,6 +16,7 @@ import android.os.RemoteException;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
+import android.support.design.widget.FloatingActionButton;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -40,15 +41,13 @@ import java.util.Locale;
 
 public class NewNoteText extends FragmentParent implements RecognitionListener{
     private TextView editText_NewNoteText;
-    private ImageButton imageButton_NewNoteAdd, imageButton_NewNoteClear;
+    private FloatingActionButton imageButton_NewNoteAdd, imageButton_NewNoteClear;
     private SpeechRecognizer mRecognizerIntent;
     private SpeechRecognitionDialog mSpeechRecognitionDialog;
     private boolean mCheckPartialResults = false;
     private String mPartialResultsStart;
 
-    public NewNoteText() {
-        // Required empty public constructor
-    }
+    public NewNoteText() {}
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -59,9 +58,9 @@ public class NewNoteText extends FragmentParent implements RecognitionListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.new_note_text, null);
-        editText_NewNoteText = (TextView) view.findViewById(R.id.editText_NewNoteText);
-        imageButton_NewNoteAdd = (ImageButton) view.findViewById(R.id.imageButton_NewNoteAdd);
-        imageButton_NewNoteClear = (ImageButton) view.findViewById(R.id.imageButton_NewNoteClear);
+        editText_NewNoteText = view.findViewById(R.id.editText_NewNoteText);
+        imageButton_NewNoteAdd = view.findViewById(R.id.imageButton_NewNoteAdd);
+        imageButton_NewNoteClear =  view.findViewById(R.id.imageButton_NewNoteClear);
 
         imageButton_NewNoteAdd.setOnClickListener(new View.OnClickListener() {
             @Override

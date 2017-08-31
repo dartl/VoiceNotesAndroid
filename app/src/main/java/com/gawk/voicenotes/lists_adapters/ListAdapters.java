@@ -1,9 +1,12 @@
 package com.gawk.voicenotes.lists_adapters;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.AppCompatImageView;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.View;
@@ -14,6 +17,7 @@ import android.widget.TextView;
 import com.cocosw.bottomsheet.BottomSheet;
 import com.gawk.voicenotes.FragmentParent;
 import com.gawk.voicenotes.R;
+import com.gawk.voicenotes.adapters.ActionMenuBottom;
 import com.gawk.voicenotes.adapters.ActionsListNotes;
 
 import java.util.ArrayList;
@@ -25,21 +29,25 @@ import java.util.ArrayList;
 public class ListAdapters implements ActionsListNotes {
     private ArrayList mSelectItems = new ArrayList<>();
     private long mId_item;
-    private ImageButton mImageButtonDelete, mImageButtonShare;
+    private AppCompatImageView mImageButtonDelete, mImageButtonShare;
     private TextView mTextViewNoteSelectCount;
     private RelativeLayout mRelativeLayoutBottomMenu;
     private BottomSheet mBottomMenu;
     private boolean mStateSelected;
 
     private View mParentView;
-    private FragmentParent mFragmentParent;
+    private ActionMenuBottom mActionMenuBottom;
+    private Activity mActivity;
 
-    public ListAdapters(View mParent, FragmentParent mContext) {
-        this.mParentView = mParent;
-        this.mFragmentParent = mContext;
+    public ListAdapters(View mParentView, ActionMenuBottom mActionMenuBottom, Activity mActivity) {
+        this.mParentView = mParentView;
+        this.mActionMenuBottom = mActionMenuBottom;
+        this.mActivity = mActivity;
+        init();
+    }
 
+    private void init() {
         mRelativeLayoutBottomMenu = mParentView.findViewById(R.id.relativeLayoutBottomMenu);
-
         mTextViewNoteSelectCount = mParentView.findViewById(R.id.textViewNoteSelectCount);
         mImageButtonDelete = mParentView.findViewById(R.id.imageButtonDelete);
         mImageButtonDelete.setOnClickListener(new View.OnClickListener() {
@@ -53,13 +61,13 @@ public class ListAdapters implements ActionsListNotes {
         mImageButtonShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mFragmentParent.shareItemList(-1,mSelectItems);
+                mActionMenuBottom.shareItemList(-1,mSelectItems);
                 mSelectItems.clear();
                 changeBottomMenu();
             }
         });
 
-        mBottomMenu = new BottomSheet.Builder(mFragmentParent.getActivity()).title(mFragmentParent.getResources()
+        mBottomMenu = new BottomSheet.Builder(mActivity).title(mActivity.getResources()
                 .getText(R.string.main_action_element))
                 .sheet(R.menu.menu_list_actions)
                 .listener(new DialogInterface.OnClickListener() {
@@ -70,16 +78,17 @@ public class ListAdapters implements ActionsListNotes {
                                 showDialogDelete(mId_item);
                                 break;
                             case R.id.action_share_element:
-                                mFragmentParent.shareItemList(mId_item,mSelectItems);
+                                mActionMenuBottom.shareItemList(mId_item,mSelectItems);
                                 break;
                         }
                     }
                 }).build();
     }
 
+
     public void showDialogDelete(final long _id) {
         if (mSelectItems.size() > 0|| _id != -1 ) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(mFragmentParent.getContext());
+            AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
             // 2. Chain together various setter methods to set the dialog characteristics
             builder.setMessage(R.string.dialogDeleteMessage)
                     .setTitle(R.string.dialogDeleteTitle);
@@ -87,7 +96,7 @@ public class ListAdapters implements ActionsListNotes {
             // Add the buttons
             builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
-                    mFragmentParent.deleteItemList(_id,false,mSelectItems);
+                    mActionMenuBottom.deleteItemList(_id,false,mSelectItems);
                     mSelectItems.clear();
                     changeBottomMenu();
                 }
@@ -100,7 +109,7 @@ public class ListAdapters implements ActionsListNotes {
             AlertDialog dialog = builder.create();
             dialog.show();
         } else {
-            Snackbar.make(mParentView, mFragmentParent.getResources().getString(R.string.main_view_error_select), Snackbar.LENGTH_LONG).show();
+            Snackbar.make(mParentView, mActivity.getResources().getString(R.string.main_view_error_select), Snackbar.LENGTH_LONG).show();
         }
     }
 
@@ -132,9 +141,13 @@ public class ListAdapters implements ActionsListNotes {
         mBottomMenu.getMenu().findItem(id).setVisible(visible);
     }
 
+    public void changeVisibleItemSelectedMenu(int id, int visible) {
+        mParentView.findViewById(id).setVisibility(visible);
+    }
+
     private void changeBottomMenu() {
-        mFragmentParent.refreshSelectedList();
-        mTextViewNoteSelectCount.setText(mSelectItems.size() + " " + mFragmentParent.getResources().getText(R.string.main_selected_element));
+        mActionMenuBottom.refreshSelectedList();
+        mTextViewNoteSelectCount.setText(mSelectItems.size() + " " + mActivity.getResources().getText(R.string.main_selected_element));
         if (mSelectItems.size() > 0) {
             mStateSelected = true;
             mRelativeLayoutBottomMenu.getLayoutParams().height = dpToPx(64);

@@ -58,7 +58,7 @@ public class NotesListFragment extends FragmentParent{
 
         Cursor noteCursor = dbHelper.getCursorAllNotes();
 
-        mListAdapters = new ListAdapters(view,this);
+        mListAdapters = new ListAdapters(view,this,getActivity());
 
         /* new NoteRecycler */
         mAdapter = new NoteRecyclerAdapter(getActivity(), noteCursor, mListAdapters);

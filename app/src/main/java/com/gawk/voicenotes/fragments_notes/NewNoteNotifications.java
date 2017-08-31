@@ -2,6 +2,7 @@ package com.gawk.voicenotes.fragments_notes;
 
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,17 +12,16 @@ import android.widget.CompoundButton;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.ToggleButton;
 
 import com.gawk.voicenotes.FragmentParent;
 import com.gawk.voicenotes.R;
 import com.gawk.voicenotes.listeners.TimePickerReturn;
 import com.gawk.voicenotes.date_and_time.DateAndTimeCombine;
-import com.gawk.voicenotes.logs.CustomLogger;
 import com.gawk.voicenotes.models.Notification;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
@@ -32,13 +32,14 @@ public class NewNoteNotifications extends FragmentParent implements TimePickerRe
 
     private Switch switchNotification, mSwitchSound, mSwitchVibrate, mSwitchRepeat;
     private RelativeLayout notificationLayout;
-    private Button selectTime;
+    private AppCompatButton selectTime, mButtonSave, mButtonClose;
     private TextView textViewNowDate;
 
     private Calendar dateNotification;
     private DateAndTimeCombine mDateAndTimeCombine;
     private boolean checkError, checkNotification = false;
     private View mView;
+    private ArrayList<View> allChildren;
 
     private final Notification notification = new Notification();
 
@@ -61,6 +62,15 @@ public class NewNoteNotifications extends FragmentParent implements TimePickerRe
         mSwitchSound = mView.findViewById(R.id.switchSound);
         mSwitchVibrate = mView.findViewById(R.id.switchVibrate);
         mSwitchRepeat = mView.findViewById(R.id.switchRepeat);
+        mButtonSave = mView.findViewById(R.id.buttonSave);
+        mButtonClose = mView.findViewById(R.id.buttonClose);
+
+        mButtonSave.setVisibility(View.GONE);
+        mButtonClose.setVisibility(View.GONE);
+        allChildren = getAllChildren(notificationLayout);
+        for (int i = 0; i < allChildren.size(); i++) {
+            allChildren.get(i).setEnabled(false);
+        }
 
         selectTime.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,8 +84,8 @@ public class NewNoteNotifications extends FragmentParent implements TimePickerRe
                 if (isChecked && !checkError) {
                     showTimePickerDialog();
                 }
-                for (int i = 0; i < notificationLayout.getChildCount(); i++) {
-                    notificationLayout.getChildAt(i).setEnabled(isChecked);
+                for (int i = 0; i < allChildren.size(); i++) {
+                    allChildren.get(i).setEnabled(isChecked);
                 }
                 checkNotification = isChecked;
             }
@@ -96,6 +106,7 @@ public class NewNoteNotifications extends FragmentParent implements TimePickerRe
         mSwitchRepeat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 notification.setRepeat(isChecked);
+                Log.e("GAWK_ERR","mSwitchRepeat isChecked = " + isChecked);
             }
         });
 
@@ -140,5 +151,29 @@ public class NewNoteNotifications extends FragmentParent implements TimePickerRe
 
     public boolean haveNotification() {
         return (checkError && checkNotification);
+    }
+
+    private ArrayList<View> getAllChildren(View v) {
+
+        if (!(v instanceof ViewGroup)) {
+            ArrayList<View> viewArrayList = new ArrayList<View>();
+            viewArrayList.add(v);
+            return viewArrayList;
+        }
+
+        ArrayList<View> result = new ArrayList<View>();
+
+        ViewGroup viewGroup = (ViewGroup) v;
+        for (int i = 0; i < viewGroup.getChildCount(); i++) {
+
+            View child = viewGroup.getChildAt(i);
+
+            ArrayList<View> viewArrayList = new ArrayList<View>();
+            viewArrayList.add(v);
+            viewArrayList.addAll(getAllChildren(child));
+
+            result.addAll(viewArrayList);
+        }
+        return result;
     }
 }

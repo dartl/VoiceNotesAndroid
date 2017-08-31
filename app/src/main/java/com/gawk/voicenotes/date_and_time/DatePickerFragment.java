@@ -32,6 +32,7 @@ public class DatePickerFragment extends DialogFragment
         if (current == null) {
             current = Calendar.getInstance();
         }
+
         year = current.get(Calendar.YEAR);
         month = current.get(Calendar.MONTH);
         dayOfMonth = current.get(Calendar.DAY_OF_MONTH);

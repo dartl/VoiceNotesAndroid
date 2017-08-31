@@ -17,6 +17,35 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="GawkMaterialTheme.DefaultButton">
+        <item name="android:background">@drawable/selector_button_white</item>
+        <item name="android:minHeight">56dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/colorPrimary500</item>
+    </style>
+
+    <style name="GawkMaterialTheme.PrimaryButton">
+        <item name="android:background">@drawable/selector_button_primary</item>
+        <item name="android:minHeight">56dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="GawkMaterialTheme.DefaultButtonNoBackground">
+        <item name="android:background">@color/colorTransparent</item>
+        <item name="android:minHeight">56dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/colorPrimary500</item>
+    </style>
+
     <!-- Главное окно -->
     <style name="GawkMaterialTheme.TabLayoutStyle" parent="Widget.Design.TabLayout">
         <item name="tabIndicatorColor">@color/colorWhite</item>
@@ -66,7 +95,7 @@
     </style>
 
     <style name="GawkMaterialTheme.ListNoteActions">
-        <item name="android:background">@android:drawable/dialog_holo_light_frame</item>
+        <item name="android:background">@drawable/button_white</item>
         <item name="android:minHeight">64dp</item>
     </style>
 
@@ -136,6 +165,79 @@
         <item name="android:gravity">end</item>
     </style>
 
+    <!-- Окно новой заметки -->
+    <style name="GawkMaterialTheme.NewNoteSave" parent="GawkMaterialTheme.PrimaryButton">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:layout_marginLeft">@dimen/activity_horizontal_margin</item>
+        <item name="android:layout_marginRight">@dimen/activity_horizontal_margin</item>
+        <item name="android:layout_marginBottom">@dimen/activity_horizontal_margin</item>
+    </style>
+
+    <style name="GawkMaterialTheme.NewNoteText">
+        <item name="android:textColor">@color/colorGrey500</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:layout_marginLeft">@dimen/activity_horizontal_margin</item>
+        <item name="android:layout_marginRight">@dimen/activity_horizontal_margin</item>
+        <item name="android:layout_marginTop">@dimen/activity_horizontal_margin</item>
+    </style>
+
+    <style name="GawkMaterialTheme.NewNoteTextIcon">
+        <item name="android:tint">@color/colorPrimary500</item>
+        <item name="android:layout_marginRight">@dimen/activity_horizontal_margin</item>
+        <item name="android:layout_marginBottom">@dimen/activity_horizontal_margin</item>
+    </style>
+
+    <style name="GawkMaterialTheme.NewNoteNotificationSwitcherTop">
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/colorGrey600</item>
+        <item name="android:paddingTop">@dimen/activity_horizontal_margin</item>
+        <item name="android:paddingBottom">@dimen/activity_horizontal_margin</item>
+        <item name="android:paddingLeft">@dimen/activity_horizontal_margin</item>
+        <item name="android:paddingRight">@dimen/activity_horizontal_margin</item>
+    </style>
+
+    <style name="GawkMaterialTheme.NewNoteNotificationSwitcher">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/colorGrey500</item>
+        <item name="android:paddingLeft">@dimen/activity_horizontal_margin</item>
+        <item name="android:paddingRight">@dimen/activity_horizontal_margin</item>
+    </style>
+
+    <style name="GawkMaterialTheme.NewNoteNotificationDateAndTime">
+    </style>
+
+    <style name="GawkMaterialTheme.NewNoteNotificationDate">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorGrey500</item>
+    </style>
+
+    <style name="GawkMaterialTheme.NewNoteNotificationHead">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/colorGrey500</item>
+    </style>
+
+    <style name="GawkMaterialTheme.NewNoteNotificationIcon">
+        <item name="android:paddingRight">@dimen/activity_horizontal_margin</item>
+    </style>
+
+    <style name="GawkMaterialTheme.NewNoteNotificationSwitchText">
+        <item name="android:textColor">@color/colorGrey500</item>
+        <item name="android:paddingLeft">@dimen/activity_horizontal_margin</item>
+        <item name="android:paddingTop">@dimen/activity_horizontal_margin</item>
+        <item name="android:paddingBottom">@dimen/activity_horizontal_margin</item>
+    </style>
+
+    <style name="GawkMaterialTheme.ButtonChangeTime" parent="GawkMaterialTheme.DefaultButton">
+        <item name="android:textColor">@color/colorPrimary500</item>
+        <item name="android:drawableStart">@drawable/alarm_colored</item>
+        <item name="android:drawablePadding">12dp</item>
+        <item name="android:layout_margin">8dp</item>
+    </style>
 
     <!-- Drawer -->
     <style name="GawkMaterialTheme.DrawerHeadText1">
@@ -164,4 +266,21 @@
         <item name="android:gravity">center_horizontal</item>
     </style>
 
+    <!-- Окно просмотра заметки -->
+    <style name="GawkMaterialTheme.NoteViewRemindersTitle">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorGrey500</item>
+    </style>
+
+    <style name="GawkMaterialTheme.NoteViewDate">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/colorGrey500</item>
+        <item name="android:layout_marginRight">@dimen/activity_horizontal_margin</item>
+        <item name="android:layout_marginTop">@dimen/activity_horizontal_margin</item>
+    </style>
+
+    <style name="GawkMaterialTheme.NoteViewEditeText">
+        <item name="android:padding">@dimen/activity_horizontal_margin</item>
+    </style>
 </resources>

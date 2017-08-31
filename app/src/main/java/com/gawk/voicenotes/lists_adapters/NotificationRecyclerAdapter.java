@@ -36,6 +36,7 @@ public class NotificationRecyclerAdapter extends CursorRecyclerViewAdapter<Notif
 
     private ActionsListNotes actionsListNotes;
     private SQLiteDBHelper db;
+    private boolean mViewNote = false;
 
     public NotificationRecyclerAdapter(Context context, Cursor cursor, ActionsListNotes actionsListNotes, SQLiteDBHelper db) {
         super(context, cursor);
@@ -96,7 +97,6 @@ public class NotificationRecyclerAdapter extends CursorRecyclerViewAdapter<Notif
                     mImageButtonNotificationIcon.setImageResource(R.drawable.ic_alarm_white_24dp);
                     mImageButtonNotificationIcon.setBackgroundResource(R.drawable.list_item_circle);
                 }
-
                 mImageButtonMoreMenu.setVisibility(View.INVISIBLE);
             } else {
                 mImageButtonNotificationIcon.setBackgroundResource(0);
@@ -122,12 +122,22 @@ public class NotificationRecyclerAdapter extends CursorRecyclerViewAdapter<Notif
             // Находим заметку для текущего оповещения
             long note_id = notification.getId_note();
             Cursor noteCursor = db.getNoteById(note_id);
+
             noteCursor.moveToFirst();
+
             if (noteCursor.getCount() == 0) {
                 db.deleteAllNotificationByNote(note_id);
                 return;
             }
-            Note note = new Note(noteCursor);
+
+            if (!notificationRecyclerAdapter.isViewNote()) {
+                Note note = new Note(noteCursor);
+                // Выводим текст заметки, к которой относится оповещение
+                textViewTextNote.setText(note.getText_note());
+            } else {
+                textViewTextNote.setVisibility(View.GONE);
+                parent.setLongClickable(false);
+            }
 
             Calendar cToday = Calendar.getInstance();   // получаем сегодняшний день и время
             cToday.set(
@@ -145,9 +155,6 @@ public class NotificationRecyclerAdapter extends CursorRecyclerViewAdapter<Notif
                 dateFormat = SimpleDateFormat.getDateTimeInstance();
             }
             textViewDateNotification.setText(dateFormat.format(date));
-
-            // Выводим текст заметки, к которой относится оповещение
-            textViewTextNote.setText(note.getText_note());
 
             // Задаем иконку для состояния звука оповещения
             if (notification.isSound()) {
@@ -193,7 +200,7 @@ public class NotificationRecyclerAdapter extends CursorRecyclerViewAdapter<Notif
 
     @Override
     public int getItemCount() {
-        if (this.db.isConnect()) return super.getItemCount();
+        if (db.isConnect()) return super.getItemCount();
         return 0;
     }
 
@@ -208,5 +215,13 @@ public class NotificationRecyclerAdapter extends CursorRecyclerViewAdapter<Notif
 
     public void setActionsListNotes(ActionsListNotes actionsListNotes) {
         this.actionsListNotes = actionsListNotes;
+    }
+
+    public boolean isViewNote() {
+        return mViewNote;
+    }
+
+    public void setViewNote(boolean mViewNote) {
+        this.mViewNote = mViewNote;
     }
 }
