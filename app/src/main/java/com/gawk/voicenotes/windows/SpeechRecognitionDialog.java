@@ -33,6 +33,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.gawk.voicenotes.R;
+import com.gawk.voicenotes.adapters.ActionSpeechRecognition;
 import com.gawk.voicenotes.fragments_notes.NewNoteText;
 
 /**
@@ -41,7 +42,7 @@ import com.gawk.voicenotes.fragments_notes.NewNoteText;
 
 public class SpeechRecognitionDialog extends DialogFragment {
 
-    private NewNoteText mFragmentParent;
+    private ActionSpeechRecognition mFragmentParent;
     private ImageView mImageViewVoiceValue;
     private ImageButton mImageButtonVoice;
     private TextView mTextViewMainText;
@@ -83,7 +84,7 @@ public class SpeechRecognitionDialog extends DialogFragment {
                     case SpeechRecognizer.ERROR_CLIENT:
                         break;
                     case SpeechRecognizer.ERROR_INSUFFICIENT_PERMISSIONS:
-                        startInstalledAppDetailsActivity(mFragmentParent.getActivity());
+                        startInstalledAppDetailsActivity(getActivity());
                         break;
                     case SpeechRecognizer.ERROR_NETWORK:
                         break;
@@ -219,7 +220,7 @@ public class SpeechRecognitionDialog extends DialogFragment {
                 break;
             case SpeechRecognizer.ERROR_SERVER:
                 mErrorMessage = getString(R.string.new_note_speech_recognition_error_server);
-                if (!hasConnection(mFragmentParent.getContext())) {
+                if (!hasConnection(getActivity())) {
                     mButtonFix.setVisibility(View.VISIBLE);
                     mErrorMessage = getString(R.string.new_note_speech_recognition_error_server_fix);
                 }
@@ -278,11 +279,11 @@ public class SpeechRecognitionDialog extends DialogFragment {
         return false;
     }
 
-    public NewNoteText getmFragmentParent() {
+    public ActionSpeechRecognition getFragmentParent() {
         return mFragmentParent;
     }
 
-    public void setmFragmentParent(NewNoteText mFragmentParent) {
+    public void setFragmentParent(ActionSpeechRecognition mFragmentParent) {
         this.mFragmentParent = mFragmentParent;
     }
 }

@@ -1,10 +1,16 @@
 package com.gawk.voicenotes;
 
-import android.content.res.Configuration;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.speech.RecognitionListener;
+import android.speech.RecognizerIntent;
+import android.speech.SpeechRecognizer;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -15,9 +21,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.gawk.voicenotes.adapters.ActionMenuBottom;
+import com.gawk.voicenotes.adapters.ActionSpeechRecognition;
 import com.gawk.voicenotes.adapters.NotificationAdapter;
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
 import com.gawk.voicenotes.lists_adapters.ListAdapters;
@@ -25,6 +31,7 @@ import com.gawk.voicenotes.lists_adapters.NotificationRecyclerAdapter;
 import com.gawk.voicenotes.preferences.PrefUtil;
 import com.gawk.voicenotes.models.Note;
 import com.gawk.voicenotes.windows.SetNotification;
+import com.gawk.voicenotes.windows.SpeechRecognitionDialog;
 
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
@@ -32,12 +39,13 @@ import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventList
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 /**
  * Created by GAWK on 01.03.2017.
  */
 
-public class NoteView extends ParentActivity implements ActionMenuBottom {
+public class NoteView extends ParentActivity implements ActionMenuBottom, RecognitionListener {
     private TextView textViewDate;
     private EditText editTextNoteText;
     private Note note;
@@ -50,6 +58,11 @@ public class NoteView extends ParentActivity implements ActionMenuBottom {
     private long id;
     private Button mButtonAddReminder;
     private NotificationAdapter mNotificationAdapter;
+    private FloatingActionButton imageButton_NewNoteAdd, imageButton_NewNoteClear;
+    private ActionSpeechRecognition mActionSpeechRecognition;
+    private SpeechRecognitionDialog mSpeechRecognitionDialog;
+    private boolean mCheckPartialResults = false;
+    private String mPartialResultsStart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +84,23 @@ public class NoteView extends ParentActivity implements ActionMenuBottom {
             public void onClick(View view) {
                 SetNotification setNotification = new SetNotification();
                 setNotification.show(getSupportFragmentManager(),"setNotification");
+            }
+        });
+
+        imageButton_NewNoteAdd = (FloatingActionButton) findViewById(R.id.imageButton_NewNoteAdd);
+        imageButton_NewNoteClear =  (FloatingActionButton) findViewById(R.id.imageButton_NewNoteClear);
+
+        imageButton_NewNoteClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editTextNoteText.setText("");
+            }
+        });
+
+        imageButton_NewNoteAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showRecognizeDialog();
             }
         });
 
@@ -169,7 +199,6 @@ public class NoteView extends ParentActivity implements ActionMenuBottom {
 
         mNotificationAdapter = new NotificationAdapter(this);
         long id_notification = getIntent().getLongExtra("id_notification",-1);
-        Log.e("GAWK_ERR","notification remove - mNotificationAdapter = " + id_notification);
         if (id_notification != -1) {
             dbHelper.deleteNotification(id);
             mNotificationAdapter.removeNotify(id_notification);
@@ -193,6 +222,13 @@ public class NoteView extends ParentActivity implements ActionMenuBottom {
                 });
     }
 
+    private void showRecognizeDialog() {
+        mSpeechRecognitionDialog = new SpeechRecognitionDialog();
+        mActionSpeechRecognition = new ActionSpeechRecognition(this,this,mSpeechRecognitionDialog,this);
+        mSpeechRecognitionDialog.setFragmentParent(mActionSpeechRecognition);
+        mSpeechRecognitionDialog.show(getFragmentManager(),"SpeechRecognitionDialog");
+    }
+
     @Override
     public void updateList() {
         Cursor notificationCursor =  dbHelper.getAllNotificationByNote(id);
@@ -212,6 +248,79 @@ public class NoteView extends ParentActivity implements ActionMenuBottom {
 
     @Override
     public void refreshSelectedList() {
+
+    }
+
+    /* Recognition Speech */
+
+    @Override
+    public void onReadyForSpeech(Bundle bundle) {
+        Log.e("GAWK_ERR","onReadyForSpeech()");
+        mSpeechRecognitionDialog.setActive();
+        mCheckPartialResults = false;
+    }
+
+    @Override
+    public void onBeginningOfSpeech() {
+
+    }
+
+    @Override
+    public void onRmsChanged(float v) {
+        if (mSpeechRecognitionDialog != null) {
+            mSpeechRecognitionDialog.changeVoiceValue((int) (mActionSpeechRecognition.convertDpToPixel((v*6),this)+
+                    getResources().getDimension(R.dimen.dialog_recognize_circle_min_size)));
+        }
+    }
+
+    @Override
+    public void onBufferReceived(byte[] bytes) {
+
+    }
+
+    @Override
+    public void onEndOfSpeech() {
+
+    }
+
+    @Override
+    public void onError(int i) {
+        mActionSpeechRecognition.endRecognition();
+        mSpeechRecognitionDialog.setInactive();
+        mSpeechRecognitionDialog.errorMessage(i);
+    }
+
+    @Override
+    public void onResults(Bundle results) {
+        Log.e("GAWK_ERR","onResults(Bundle results)");
+        ArrayList<String> thingsYouSaid = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+        if (thingsYouSaid != null) {
+            if (mPartialResultsStart.length() == 0) {
+                editTextNoteText.setText(thingsYouSaid.get(0));
+            } else {
+                editTextNoteText.setText(mPartialResultsStart + thingsYouSaid.get(0));
+            }
+            mSpeechRecognitionDialog.dismiss();
+        }
+        mActionSpeechRecognition.endRecognition();
+    }
+
+    @Override
+    public void onPartialResults(Bundle bundle) {
+        Log.e("GAWK_ERR","onPartialResults(Bundle partialResults)");
+        if (!mCheckPartialResults) {
+            mPartialResultsStart = editTextNoteText.getText().toString();
+            mCheckPartialResults = true;
+            if (editTextNoteText.length() > 0) {
+                mPartialResultsStart += " ";
+            }
+        }
+        ArrayList<String> thingsYouSaid = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+        editTextNoteText.setText(mPartialResultsStart+thingsYouSaid.get(0));
+    }
+
+    @Override
+    public void onEvent(int i, Bundle bundle) {
 
     }
 
