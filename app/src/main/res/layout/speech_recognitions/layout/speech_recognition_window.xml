@@ -4,12 +4,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:paddingTop="@dimen/activity_horizontal_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/textViewMainText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        style="@style/GawkMaterialTheme.SpeechRecognitionTitle"
         android:text="@string/new_note_speech_recognition_message"
         android:textAlignment="center"
         android:visibility="invisible" />
@@ -35,7 +39,8 @@
             android:layout_height="@dimen/dialog_recognize_circle_min_size"
             android:background="@drawable/speech_recognition_circle_grey"
             android:minHeight="@dimen/dialog_recognize_circle_min_size"
-
+            app:srcCompat="@drawable/ic_mic_black_48dp"
+            android:tint="@color/colorWhite"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true" />
 
@@ -49,17 +54,19 @@
 
         <Button
             android:id="@+id/buttonClose"
-            android:layout_width="match_parent"
+            style="@style/GawkMaterialTheme.DefaultButtonNoBackground"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/new_note_speech_recognition_close" />
+            android:text="@string/new_note_speech_recognition_close"
+            android:layout_width="wrap_content" />
 
         <Button
             android:id="@+id/buttonFix"
-            android:layout_width="match_parent"
+            style="@style/GawkMaterialTheme.DefaultButtonNoBackground"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:visibility="gone"
-            android:text="@string/new_note_speech_recognition_fix" />
+            android:text="@string/new_note_speech_recognition_fix"
+            android:visibility="gone" />
     </LinearLayout>
 </LinearLayout>

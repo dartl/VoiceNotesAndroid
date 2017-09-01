@@ -117,13 +117,13 @@ public class SpeechRecognitionDialog extends DialogFragment {
             public void onClick(View v) {
                 if (!mActive) {
                     setActive();
-                    mFragmentParent.startRecognize();
                     if (mFragmentParent != null) {
                         mFragmentParent.startRecognize();
                     }
                 } else {
                     setInactive();
                     if (mFragmentParent != null) {
+                        changeVoiceValue(100);
                         mFragmentParent.endRecognition();
                     }
                 }
@@ -164,10 +164,10 @@ public class SpeechRecognitionDialog extends DialogFragment {
 
     public void changeVisibleSpeak(int state) {
         mTextViewMainText.setVisibility(state);
+        mImageButtonVoice.setVisibility(state);
     }
 
     public void setInactive() {
-        Log.e("GAWK_ERR","setInactive()");
         mImageButtonVoice.setBackgroundResource(R.drawable.speech_recognition_circle_grey);
         mTextViewMainText.setText(getText(R.string.new_note_speech_recognition_start));
         mActive = false;
@@ -232,11 +232,11 @@ public class SpeechRecognitionDialog extends DialogFragment {
                 Log.e("GAWK_ERR","onError(int error) - SpeechRecognizer.ERROR_SPEECH_TIMEOUT");
                 break;
         }
-        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            mTextViewMainText.setTextAppearance(R.style.GawkMaterialTheme_RecognitionTextError);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            mTextViewMainText.setTextAppearance(R.style.GawkMaterialTheme_SpeechRecognitionTextError);
         } else {
-            mTextViewMainText.setTextAppearance(getActivity(),R.style.GawkMaterialTheme_RecognitionTextError);
-        }*/
+            mTextViewMainText.setTextAppearance(getActivity(),R.style.GawkMaterialTheme_SpeechRecognitionTextError);
+        }
         mTextViewMainText.setText(mErrorMessage);
         changeVisibleSpeak(View.VISIBLE);
         mAreaRecognition.setVisibility(View.GONE);

@@ -76,9 +76,9 @@
 
     </android.support.v7.widget.CardView>
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
+    <View
+        android:id="@+id/view2"
+        android:layout_width="fill_parent"
         android:layout_height="1dp"
-        android:background="@drawable/textline" />
+        android:background="#E0E0E0" />
 </LinearLayout>

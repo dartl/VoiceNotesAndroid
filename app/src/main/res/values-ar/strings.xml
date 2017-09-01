@@ -29,12 +29,9 @@
     <string name="new_note_text">الملاحظات النصية</string>
     <string name="new_note_remind">تذكير؟</string>
     <string name="new_note_we_remind">سوف تلاحظ صوت أذكركم</string>
-    <string name="new_note_select_date">حدد تاريخا</string>
-    <string name="new_note_select_time">حدد الوقت</string>
-    <string name="new_note_sound_off">الصوت مقفل</string>
-    <string name="new_note_sound_on">الصوت مفعل</string>
-    <string name="new_note_shake_off">الاهتزاز قبالة</string>
-    <string name="new_note_shake_on">الاهتزاز على</string>
+    <string name="new_note_select_time">تغيير الوقت</string>
+    <string name="new_note_sound_on">صوت</string>
+    <string name="new_note_shake_on">اهتزا</string>
     <string name="new_note_error_date">حدد التاريخ والوقت في المستقبل</string>
     <string name="new_note_error_speech_recognition_title">خطأ في التعرف على الكلام</string>
     <string name="new_note_error_speech_recognition">لم يتم تثبيت تطبيق غوغل مطلوب أو تم تعطيله. هل ترغب في تثبيت / تمكين ذلك؟\nسيكون لديك لإعادة تشغيل بالكامل التطبيق / الهاتف الذكي بعد ذلك.</string>
@@ -101,6 +98,22 @@
     <string name="statistics_imports_title">الأوقات المستوردة:</string>
     <string name="statistics_level_title">مستوى</string>
     <string name="statistics_experience_title">تجربة</string>
+
+    <string name="main_share_text">الملاحظات التي تم إنشاؤها باستخدام التطبيق:</string>
+    <string name="main_share">شارك</string>
+    <string name="main_selected_element">العناصر</string>
+    <string name="main_action_element">أفعال</string>
+    <string name="main_action_remove">حذف</string>
+    <string name="action_remove">احذف المختار</string>
+    <string name="new_note_repeat_on">كرر</string>
+    <string name="note_view_add_reminder">إضافة تذكير</string>
+    <string name="settings_notification_repetition_select10">10 دقائق</string>
+    <string name="settings_notification_repetition_select15">15 دقيقة</string>
+    <string name="settings_notification_repetition_select30">30 دقيقة</string>
+    <string name="settings_notification_repetition_select5">5 دقائق</string>
+    <string name="settings_notification_repetition_select60">60 دقيقة</string>
+    <string name="settings_notification_repetition_text">الوقت لتكرار تذكير</string>
+    <string name="settings_notification_repetition_title">زمن التكرار</string>
 
     <string-array name="export_import_type">
         <item>JSON</item>

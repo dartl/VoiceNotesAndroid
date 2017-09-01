@@ -20,6 +20,8 @@ public class DatePickerFragment extends DialogFragment
     DateAndTimeCombine mDateAndTimeCombine;
     Calendar current;
 
+    public DatePickerFragment() {}
+
     public DatePickerFragment(DateAndTimeCombine mDateAndTimeCombine) {
         this.mDateAndTimeCombine = mDateAndTimeCombine;
     }

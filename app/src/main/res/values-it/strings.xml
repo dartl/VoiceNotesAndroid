@@ -28,12 +28,9 @@
     <string name="new_note_text">Note di testo</string>
     <string name="new_note_remind">Ricordare?</string>
     <string name="new_note_we_remind">Le note vocali ti ricordano</string>
-    <string name="new_note_select_date">Seleziona una data</string>
-    <string name="new_note_select_time">Seleziona un\'ora</string>
-    <string name="new_note_sound_off">Audio Disattivato</string>
-    <string name="new_note_sound_on">Suono acceso</string>
-    <string name="new_note_shake_off">Vibrare via</string>
-    <string name="new_note_shake_on">Vibrare</string>
+    <string name="new_note_select_time">Cambiare il tempo</string>
+    <string name="new_note_sound_on">Suono</string>
+    <string name="new_note_shake_on">Vibrazione</string>
     <string name="new_note_error_date">Seleziona una data e l\'ora in futuro</string>
     <string name="new_note_error_speech_recognition_title">Errore di riconoscimento vocale</string>
     <string name="new_note_error_speech_recognition">Un\'applicazione Google richiesta non è installata o è stata disattivata. Vuoi installarlo / abilitarlo?\n
@@ -101,6 +98,22 @@
     <string name="statistics_imports_title">Tempi importati:</string>
     <string name="statistics_level_title">Livello</string>
     <string name="statistics_experience_title">Esperienza</string>
+
+    <string name="main_share_text">Note create con l\'applicazione:</string>
+    <string name="main_share">Condividere</string>
+    <string name="main_selected_element">elementi</string>
+    <string name="main_action_element">Azioni</string>
+    <string name="main_action_remove">Elimina</string>
+    <string name="action_remove">Elimina selezionato</string>
+    <string name="new_note_repeat_on">Ripetere</string>
+    <string name="note_view_add_reminder">aggiungere il promemoria</string>
+    <string name="settings_notification_repetition_select10">10 minuti</string>
+    <string name="settings_notification_repetition_select15">15 minuti</string>
+    <string name="settings_notification_repetition_select30">30 minuti</string>
+    <string name="settings_notification_repetition_select5">5 minuti</string>
+    <string name="settings_notification_repetition_select60">60 minuti</string>
+    <string name="settings_notification_repetition_text">Tempo per ripetere il promemoria</string>
+    <string name="settings_notification_repetition_title">Tempo di ripetizione</string>
 
     <string-array name="export_import_type">
         <item>JSON</item>

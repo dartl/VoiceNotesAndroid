@@ -50,12 +50,9 @@
     <string name="new_note_text">टेक्स्ट नोट्स</string>
     <string name="new_note_remind">याद दिलाएँ?</string>
     <string name="new_note_we_remind">वॉयस नोट्स आपको याद दिलाएगा</string>
-    <string name="new_note_select_date">कोई तारीख चुनें</string>
-    <string name="new_note_select_time">समय चुनें</string>
-    <string name="new_note_sound_off">साउंड ऑफ</string>
-    <string name="new_note_sound_on">साउंड ऑन</string>
-    <string name="new_note_shake_off">वाइब्रेट ऑफ</string>
-    <string name="new_note_shake_on">वाइब्रेट ऑन</string>
+    <string name="new_note_select_time">समय बदलें</string>
+    <string name="new_note_sound_on">ध्वनि</string>
+    <string name="new_note_shake_on">कंपन</string>
     <string name="new_note_error_date">भविष्य की कोई तारीख व समय चुनें</string>
     <string name="new_note_error_speech_recognition_title">स्पीच पहचान संबंधी त्रुटि</string>
     <string name="new_note_error_speech_recognition">एक आवश्यक Google ऐप्लिकेशन या तो इंस्टॉल नहीं है या फिर सक्षम नहीं किया गया है। क्या आप इसे इंस्टॉल/सक्षम करना चाहेंगे?
@@ -113,6 +110,22 @@
     <string name="settings_other_title">अन्य</string>
 
     <string name="settings_add_icon_add_title">आइकन जोड़ें</string>
+    <string name="main_share_text">एप्लिकेशन के उपयोग से बनाए गए नोट्स:</string>
+    <string name="main_share">शेयर</string>
+    <string name="main_selected_element">आइटम</string>
+    <string name="main_action_element">क्रिया</string>
+    <string name="main_action_remove">हटाना</string>
+
+    <string name="action_remove">चयनित मिटाएं</string>
+    <string name="new_note_repeat_on">दोहराना</string>
+    <string name="note_view_add_reminder">रिमाइंडर जोड़ें</string>
+    <string name="settings_notification_repetition_select10">10 मिनटों</string>
+    <string name="settings_notification_repetition_select15">15 मिनट</string>
+    <string name="settings_notification_repetition_select30">30 मिनिट</string>
+    <string name="settings_notification_repetition_select5">5 मिनट</string>
+    <string name="settings_notification_repetition_select60">60 मिनट</string>
+    <string name="settings_notification_repetition_text">अनुस्मारक को दोहराने का समय</string>
+    <string name="settings_notification_repetition_title">पुनरावृत्ति का समय</string>
     <!-- Подписки -->
     <string name="subs_inner_text">सभी सदस्यताएँ ऐप से विज्ञापन हटा देती हैं और डेवलपर को दान देना इंगित करती हैं</string>
     <string-array name="export_import_type">

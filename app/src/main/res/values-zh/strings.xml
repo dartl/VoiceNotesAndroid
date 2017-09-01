@@ -28,11 +28,8 @@
     <string name="new_note_text">文字说明</string>
     <string name="new_note_remind">提醒？</string>
     <string name="new_note_we_remind">语音留言将提醒您</string>
-    <string name="new_note_select_date">选择日期</string>
-    <string name="new_note_select_time">选择一个时间</string>
-    <string name="new_note_sound_off">声音关闭</string>
+    <string name="new_note_select_time">改变时间</string>
     <string name="new_note_sound_on">声音</string>
-    <string name="new_note_shake_off">振动关闭</string>
     <string name="new_note_shake_on">振动</string>
     <string name="new_note_error_date">选择将来的日期和时间</string>
     <string name="new_note_error_speech_recognition_title">语音识别错误</string>
@@ -99,6 +96,23 @@
     <string name="statistics_imports_title">進口時間：</string>
     <string name="statistics_level_title">水平</string>
     <string name="statistics_experience_title">經驗</string>
+
+    <string name="main_share_text">使用应用程序创建的注释：</string>
+    <string name="main_share">分享</string>
+    <string name="main_selected_element">项目</string>
+    <string name="main_action_element">操作</string>
+    <string name="main_action_remove">删除</string>
+
+    <string name="action_remove">删除所选</string>
+    <string name="new_note_repeat_on">重复</string>
+    <string name="note_view_add_reminder">添加提醒</string>
+    <string name="settings_notification_repetition_select10">10分钟</string>
+    <string name="settings_notification_repetition_select15">15分钟</string>
+    <string name="settings_notification_repetition_select30">30分钟</string>
+    <string name="settings_notification_repetition_select5">5分钟</string>
+    <string name="settings_notification_repetition_select60">60分钟</string>
+    <string name="settings_notification_repetition_text">时间重复提醒</string>
+    <string name="settings_notification_repetition_title">重复时间</string>
 
     <string-array name="export_import_type">
         <item>JSON</item>

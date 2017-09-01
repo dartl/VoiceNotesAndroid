@@ -192,6 +192,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         while (crucifyIterator.hasNext()) {
             temp = crucifyIterator.next();
             ContentValues newValues = new ContentValues();
+            newValues.put(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_ID_NOTE, temp.getId());
             newValues.put(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_ID_NOTE, temp.getId_note());
             newValues.put(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_DATE, temp.getDate().getTime());
             newValues.put(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_SOUND, temp.isSound());

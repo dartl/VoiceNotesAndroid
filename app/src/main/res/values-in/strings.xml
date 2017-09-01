@@ -50,12 +50,9 @@
     <string name="new_note_text">Catatan teks</string>
     <string name="new_note_remind">Ingatkan?</string>
     <string name="new_note_we_remind">Catatan Suara akan mengingatkan Anda</string>
-    <string name="new_note_select_date">Pilih tanggal</string>
-    <string name="new_note_select_time">Pilih waktu</string>
-    <string name="new_note_sound_off">Senyapkan</string>
-    <string name="new_note_sound_on">Suarakan</string>
-    <string name="new_note_shake_off">Tidak bergetar</string>
-    <string name="new_note_shake_on">Bergetar</string>
+    <string name="new_note_select_time">Ubah waktu</string>
+    <string name="new_note_sound_on">Suara</string>
+    <string name="new_note_shake_on">Getaran</string>
     <string name="new_note_error_date">Pilih tanggal dan waktu di masa mendatang</string>
     <string name="new_note_error_speech_recognition_title">Kesalahan pengenalan suara</string>
     <string name="new_note_error_speech_recognition">Aplikasi Google yang diperlukan belum diinstal atau telah dinonaktifkan. Apakah Anda ingin menginstal/mengaktifkannya?
@@ -113,6 +110,23 @@
     <string name="settings_other_title">Lain</string>
 
     <string name="settings_add_icon_add_title">Tambahkan ikon</string>
+
+    <string name="main_share_text">Catatan dibuat dengan menggunakan aplikasi:</string>
+    <string name="main_share">Bagikan</string>
+    <string name="main_selected_element">Item</string>
+    <string name="main_action_element">Tindakan</string>
+    <string name="main_action_remove">Menghapus</string>
+
+    <string name="action_remove">Hapus yang dipilih</string>
+    <string name="new_note_repeat_on">Ulangi</string>
+    <string name="note_view_add_reminder">tambahkan pengingat</string>
+    <string name="settings_notification_repetition_select10">10 menit</string>
+    <string name="settings_notification_repetition_select15">15 menit</string>
+    <string name="settings_notification_repetition_select30">30 menit</string>
+    <string name="settings_notification_repetition_select5">5 menit</string>
+    <string name="settings_notification_repetition_select60">60 menit</string>
+    <string name="settings_notification_repetition_text">Waktunya mengulang pengingat</string>
+    <string name="settings_notification_repetition_title">Waktu pengulangan</string>
     <!-- Подписки -->
     <string name="subs_inner_text">Semua langganan akan menghapus iklan dari aplikasi ini dan menjadi sumbangan untuk pengembang</string>
     <string-array name="export_import_type">

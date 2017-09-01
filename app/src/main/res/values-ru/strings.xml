@@ -51,12 +51,9 @@
     <string name="new_note_text">Текст заметки</string>
     <string name="new_note_remind">Напомнить?</string>
     <string name="new_note_we_remind">Время напоминания</string>
-    <string name="new_note_select_date">Выберите дату</string>
-    <string name="new_note_select_time">Выберите время</string>
-    <string name="new_note_sound_off">Звук выкл.</string>
-    <string name="new_note_sound_on">Звук вкл.</string>
-    <string name="new_note_shake_off">Вибрация выкл.</string>
-    <string name="new_note_shake_on">Вибрация вкл.</string>
+    <string name="new_note_select_time">Изменить время</string>
+    <string name="new_note_sound_on">Звук</string>
+    <string name="new_note_shake_on">Вибрация</string>
     <string name="new_note_error_date">Выберите дату и время в будущем</string>
     <string name="new_note_error_speech_recognition_title">Ошибка распознавания речи</string>
     <string name="new_note_error_speech_recognition">У вас нет или выключено необходимое приложение от Google. Хотите установить/включить его?
@@ -114,6 +111,23 @@
     <string name="settings_other_title">Другие</string>
 
     <string name="settings_add_icon_add_title">Добавить иконку</string>
+
+    <string name="main_share_text">Примечания созданы с помощью приложения:</string>
+    <string name="main_share">Поделиться</string>
+    <string name="main_selected_element">объектов</string>
+    <string name="main_action_element">Действия</string>
+    <string name="main_action_remove">Удалить</string>
+
+    <string name="action_remove">Удалить выбранное</string>
+    <string name="new_note_repeat_on">Повторение</string>
+    <string name="note_view_add_reminder">Добавить напоминание</string>
+    <string name="settings_notification_repetition_select10">10 минут</string>
+    <string name="settings_notification_repetition_select15">15 минут</string>
+    <string name="settings_notification_repetition_select30">30 минут</string>
+    <string name="settings_notification_repetition_select5">5 минут</string>
+    <string name="settings_notification_repetition_select60">60 минут</string>
+    <string name="settings_notification_repetition_text">Время повторения напоминания</string>
+    <string name="settings_notification_repetition_title">Время повторения</string>
     <!-- Подписки -->
     <string name="subs_inner_text">Все подписки удаляют рекламные объявления из приложения и являются пожертвованиями для разработчика</string>
 

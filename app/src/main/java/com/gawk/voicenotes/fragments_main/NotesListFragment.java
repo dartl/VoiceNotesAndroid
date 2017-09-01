@@ -109,7 +109,9 @@ public class NotesListFragment extends FragmentParent{
             dbHelper.noteDelete(id);
         }
         updateList();
-        mainActivity.getFragment(1).updateList();
+        if (mainActivity.getFragment(1) != null) {
+            mainActivity.getFragment(1).updateList();
+        }
         mainActivity.refreshNavHeader();
     }
 

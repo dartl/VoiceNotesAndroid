@@ -76,7 +76,10 @@ public class ActionSpeechRecognition {
     }
 
     public void endRecognition() {
-
+        if (mRecognizerIntent != null) {
+            mRecognizerIntent.stopListening();
+            mRecognizerIntent.destroy();
+        }
     }
 
     public static boolean isIntentAvailable(Context context, Intent intent) {

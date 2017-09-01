@@ -153,9 +153,6 @@ public class ParentActivity extends AppCompatActivity
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (mService != null) {
-            unbindService(mServiceConn);
-        }
     }
 
     @Override

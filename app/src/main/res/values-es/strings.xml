@@ -51,12 +51,9 @@
     <string name="new_note_text">Notas de texto</string>
     <string name="new_note_remind">¿Recordar?</string>
     <string name="new_note_we_remind">Notas de voz se lo recordarán</string>
-    <string name="new_note_select_date">Seleccione una fecha</string>
-    <string name="new_note_select_time">Seleccione una hora</string>
-    <string name="new_note_sound_off">Sonido OFF</string>
-    <string name="new_note_sound_on">Sonido ON</string>
-    <string name="new_note_shake_off">Vibración OFF</string>
-    <string name="new_note_shake_on">Vibración ON</string>
+    <string name="new_note_select_time">Cambiar hora</string>
+    <string name="new_note_sound_on">Sonido</string>
+    <string name="new_note_shake_on">Vibración</string>
     <string name="new_note_error_date">Seleccione una fecha y hora futuras</string>
     <string name="new_note_error_speech_recognition_title">Error de reconocimiento de voz</string>
     <string name="new_note_error_speech_recognition">No tiene instalada o tiene deshabilitada una aplicación de Google necesaria para el funcionamiento del servicio. ¿Desea instalar/habilitarla?
@@ -114,6 +111,23 @@
     <string name="settings_other_title">Otro</string>
 
     <string name="settings_add_icon_add_title">Agregar icono</string>
+
+    <string name="main_share_text">Notas creadas con la aplicación:</string>
+    <string name="main_share">Compartir</string>
+    <string name="main_selected_element">artículos</string>
+    <string name="main_action_element">Comportamiento</string>
+    <string name="main_action_remove">Borrar</string>
+
+    <string name="action_remove">Eliminar seleccionado</string>
+    <string name="new_note_repeat_on">Repetir</string>
+    <string name="note_view_add_reminder">Agregar recordatorio</string>
+    <string name="settings_notification_repetition_select10">10 minutos</string>
+    <string name="settings_notification_repetition_select15">15 minutos</string>
+    <string name="settings_notification_repetition_select30">30 minutos</string>
+    <string name="settings_notification_repetition_select5">5 minutos</string>
+    <string name="settings_notification_repetition_select60">60 minutos</string>
+    <string name="settings_notification_repetition_text">Hora de repetir el recordatorio</string>
+    <string name="settings_notification_repetition_title">Tiempo de repetición</string>
     <!-- Подписки -->
     <string name="subs_inner_text">La suscripción permite eliminar los anuncios y representa una donación para el desarrollador de la aplicación</string>
     <string-array name="export_import_type">

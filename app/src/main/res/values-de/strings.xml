@@ -27,8 +27,6 @@
     <string name="action_save">Speichern</string>
     <string name="action_settings">Auswahl löschen</string>
     <string name="action_search">Suche</string>
-    <string name="menu_statistics">Statistiken</string>
-    <string name="social_action_title">Erzähl uns von deinen Freunden</string>
     <!-- Статистика -->
     <string name="statistics_level1">Anfänger</string>
     <string name="statistics_level2">Spezialist</string>
@@ -50,12 +48,9 @@
     <string name="new_note_text">Text-Notizen</string>
     <string name="new_note_remind">Erinnern?</string>
     <string name="new_note_we_remind">Sprachnotizen wird Sie erinnern</string>
-    <string name="new_note_select_date">Datum auswählen</string>
-    <string name="new_note_select_time">Uhrzeit auswählen</string>
-    <string name="new_note_sound_off">Ton aus</string>
-    <string name="new_note_sound_on">Ton an</string>
-    <string name="new_note_shake_off">Vibration aus</string>
-    <string name="new_note_shake_on">Vibration aus</string>
+    <string name="new_note_select_time">Zeit ändern</string>
+    <string name="new_note_sound_on">Ton</string>
+    <string name="new_note_shake_on">Schwingung</string>
     <string name="new_note_error_date">Wählen Sie ein Datum und eine Uhrzeit in der Zukunft aus</string>
     <string name="new_note_error_speech_recognition_title">Spracherkennungsfehler</string>
     <string name="new_note_error_speech_recognition">Eine erforderliche Google-Anwendung ist nicht installiert oder deaktiviert. Soll die Anwendung installiert bzw. aktiviert werden?        \nDie Anwendung bzw. das Smartphone muss danach neu gestartet werden.</string>
@@ -111,6 +106,25 @@
     <string name="settings_other_title">Andere</string>
 
     <string name="settings_add_icon_add_title">Symbol hinzufügen</string>
+
+    <string name="main_share_text">Mit der Anwendung erstellte Notizen:</string>
+    <string name="main_share">Aktie</string>
+    <string name="main_selected_element">Artikel</string>
+    <string name="main_action_element">Aktionen</string>
+    <string name="main_action_remove">Löschen</string>
+
+    <string name="action_remove">Ausgewählte löschen</string>
+    <string name="menu_statistics">Statistiken</string>
+    <string name="new_note_repeat_on">Wiederholen</string>
+    <string name="note_view_add_reminder">Mahnanzeige hinzufügen</string>
+    <string name="settings_notification_repetition_select10">10 Minuten</string>
+    <string name="settings_notification_repetition_select15">15 Minuten</string>
+    <string name="settings_notification_repetition_select30">30 Minuten</string>
+    <string name="settings_notification_repetition_select5">5 Minuten</string>
+    <string name="settings_notification_repetition_select60">60 Minuten</string>
+    <string name="settings_notification_repetition_text">Zeit, die Erinnerung zu wiederholen</string>
+    <string name="settings_notification_repetition_title">Wiederholungszeit</string>
+    <string name="social_action_title">Erzähl uns von deinen Freunden</string>
     <!-- Подписки -->
     <string name="subs_inner_text">Alle Abonnements entfernen Anzeigen aus der App und verstehen sich als Spenden an die Entwickler</string>
     <string-array name="export_import_type">

@@ -51,12 +51,9 @@
     <string name="new_note_text">テキストメモ</string>
     <string name="new_note_remind">通知しますか？</string>
     <string name="new_note_we_remind">音声メモが通知します</string>
-    <string name="new_note_select_date">日付を選択</string>
-    <string name="new_note_select_time">時間を選択</string>
-    <string name="new_note_sound_off">サウンド オフ</string>
-    <string name="new_note_sound_on">サウンド オン</string>
-    <string name="new_note_shake_off">バイブ オフ</string>
-    <string name="new_note_shake_on">バイブ オン</string>
+    <string name="new_note_select_time">時間を変更する</string>
+    <string name="new_note_sound_on">サウンド</string>
+    <string name="new_note_shake_on">振動</string>
     <string name="new_note_error_date">未来の日時を選択してください</string>
     <string name="new_note_error_speech_recognition_title">音声認識エラー</string>
     <string name="new_note_error_speech_recognition">必要な Google 社製アプリケーションがインストールされていないか、無効になっています。インストールまたは有効化を行いますか？
@@ -114,6 +111,22 @@
     <string name="settings_other_title">その他</string>
 
     <string name="settings_add_icon_add_title">アイコンを追加</string>
+    <string name="main_share_text">アプリケーションを使用して作成されたノート：</string>
+    <string name="main_share">シェア</string>
+    <string name="main_selected_element">アイテム</string>
+    <string name="main_action_element">行動</string>
+    <string name="main_action_remove">削除</string>
+
+    <string name="action_remove">選択を削除します</string>
+    <string name="new_note_repeat_on">繰り返す</string>
+    <string name="note_view_add_reminder">リマインダを追加する</string>
+    <string name="settings_notification_repetition_select10">10分</string>
+    <string name="settings_notification_repetition_select15">15分</string>
+    <string name="settings_notification_repetition_select30">30分</string>
+    <string name="settings_notification_repetition_select5">5分</string>
+    <string name="settings_notification_repetition_select60">60分</string>
+    <string name="settings_notification_repetition_text">リマインダを繰り返す時間</string>
+    <string name="settings_notification_repetition_title">繰り返し時間</string>
     <!-- Подписки -->
     <string name="subs_inner_text">どのサブスクリプションでもアプリから広告が削除され、開発者への寄付が行われます。</string>
     <string-array name="export_import_type">

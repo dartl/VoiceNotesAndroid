@@ -95,7 +95,7 @@
     </style>
 
     <style name="GawkMaterialTheme.ListNoteActions">
-        <item name="android:background">@drawable/button_white</item>
+        <item name="android:background">@android:drawable/dialog_holo_light_frame</item>
         <item name="android:minHeight">64dp</item>
     </style>
 
@@ -342,5 +342,16 @@
         <item name="android:textSize">14sp</item>
         <item name="android:layout_marginLeft">@dimen/activity_horizontal_margin</item>
         <item name="android:layout_marginRight">@dimen/activity_horizontal_margin</item>
+    </style>
+
+    <!-- Окно распознователя речи -->
+    <style name="GawkMaterialTheme.SpeechRecognitionTitle">
+        <item name="android:textColor">@color/colorGrey600</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="GawkMaterialTheme.SpeechRecognitionTextError">
+        <item name="android:textColor">@color/colorGrey600</item>
+        <item name="android:textSize">16sp</item>
     </style>
 </resources>

@@ -151,7 +151,6 @@ public class NewNoteText extends FragmentParent implements RecognitionListener{
     }
 
 
-
     @Override
     public void onPause() {
         if (mActionSpeechRecognition != null) {
