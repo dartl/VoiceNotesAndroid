@@ -283,4 +283,64 @@
     <style name="GawkMaterialTheme.NoteViewEditeText">
         <item name="android:padding">@dimen/activity_horizontal_margin</item>
     </style>
+
+    <!-- Окно Экспорта/Импорта -->
+    <style name="GawkMaterialTheme.ExportImportTitle">
+        <item name="android:background">@drawable/plate_titile</item>
+        <item name="android:textColor">@color/colorGrey600</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="android:paddingLeft">@dimen/activity_horizontal_margin</item>
+        <item name="android:paddingRight">@dimen/activity_horizontal_margin</item>
+        <item name="android:paddingBottom">24dp</item>
+        <item name="android:paddingTop">24dp</item>
+    </style>
+
+    <style name="GawkMaterialTheme.ExportImportFileSelect">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/colorGrey400</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="GawkMaterialTheme.ExportImportTitleSub">
+        <item name="android:layout_marginTop">@dimen/activity_horizontal_margin</item>
+        <item name="android:layout_marginRight">@dimen/activity_horizontal_margin</item>
+        <item name="android:layout_marginLeft">@dimen/activity_horizontal_margin</item>
+        <item name="android:textColor">@color/colorGrey600</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="GawkMaterialTheme.ExportImportText">
+        <item name="android:layout_marginRight">@dimen/activity_horizontal_margin</item>
+        <item name="android:layout_marginLeft">@dimen/activity_horizontal_margin</item>
+        <item name="android:textColor">@color/colorGrey500</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <!-- Окно Настроек -->
+    <style name="GawkMaterialTheme.SettingsTitle">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginTop">@dimen/activity_horizontal_margin</item>
+        <item name="android:layout_marginRight">@dimen/activity_horizontal_margin</item>
+        <item name="android:layout_marginLeft">@dimen/activity_horizontal_margin</item>
+        <item name="android:layout_marginBottom">8dp</item>
+    </style>
+
+    <style name="GawkMaterialTheme.SettingsButton" parent="GawkMaterialTheme.DefaultButtonNoBackground">
+        <item name="android:textColor">@color/colorGrey800</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="android:gravity">left|bottom</item>
+    </style>
+
+    <style name="GawkMaterialTheme.SettingsHelp">
+        <item name="android:textColor">@color/colorGrey500</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_marginLeft">@dimen/activity_horizontal_margin</item>
+        <item name="android:layout_marginRight">@dimen/activity_horizontal_margin</item>
+    </style>
 </resources>

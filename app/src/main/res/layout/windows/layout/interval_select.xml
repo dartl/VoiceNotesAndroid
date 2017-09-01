@@ -5,30 +5,35 @@
 
     <Button
         android:id="@+id/buttonIntervalSelect5"
+        style="@style/GawkMaterialTheme.DefaultButtonNoBackground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/settings_notification_repetition_select5" />
 
     <Button
         android:id="@+id/buttonIntervalSelect10"
+        style="@style/GawkMaterialTheme.DefaultButtonNoBackground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/settings_notification_repetition_select10" />
 
     <Button
         android:id="@+id/buttonIntervalSelect15"
+        style="@style/GawkMaterialTheme.DefaultButtonNoBackground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/settings_notification_repetition_select15" />
 
     <Button
         android:id="@+id/buttonIntervalSelect30"
+        style="@style/GawkMaterialTheme.DefaultButtonNoBackground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/settings_notification_repetition_select30" />
 
     <Button
         android:id="@+id/buttonIntervalSelect60"
+        style="@style/GawkMaterialTheme.DefaultButtonNoBackground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/settings_notification_repetition_select60" />

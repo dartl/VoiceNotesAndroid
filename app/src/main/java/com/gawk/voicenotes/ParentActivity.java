@@ -96,11 +96,6 @@ public class ParentActivity extends AppCompatActivity
 
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         mActivity = this;
-
-        Intent serviceIntent =
-                new Intent("com.android.vending.billing.InAppBillingService.BIND");
-        serviceIntent.setPackage("com.android.vending");
-        bindService(serviceIntent, mServiceConn, Context.BIND_AUTO_CREATE);
     }
 
     ServiceConnection mServiceConn = new ServiceConnection() {
@@ -130,6 +125,10 @@ public class ParentActivity extends AppCompatActivity
     @Override
     public void onResume() {
         super.onResume();
+        Intent serviceIntent =
+                new Intent("com.android.vending.billing.InAppBillingService.BIND");
+        serviceIntent.setPackage("com.android.vending");
+        bindService(serviceIntent, mServiceConn, Context.BIND_AUTO_CREATE);
         dbHelper.connection();
         Cursor noteCursor = dbHelper.getCursorAllNotes();
         NoteRecyclerAdapter noteCursorAdapter = new NoteRecyclerAdapter(this, noteCursor);
@@ -146,6 +145,7 @@ public class ParentActivity extends AppCompatActivity
 
     @Override
     public void onStop() {
+        unbindService(mServiceConn);
         super.onStop();
         dbHelper.disconnection();
     }

@@ -116,6 +116,7 @@
 
                     <ImageButton
                         android:id="@+id/buttonFacebook"
+                        style="@style/GawkMaterialTheme.DefaultButtonNoBackground"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -125,6 +126,7 @@
 
                     <ImageButton
                         android:id="@+id/buttonVk"
+                        style="@style/GawkMaterialTheme.DefaultButtonNoBackground"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -133,6 +135,7 @@
 
                     <ImageButton
                         android:id="@+id/buttonGoogle"
+                        style="@style/GawkMaterialTheme.DefaultButtonNoBackground"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -149,6 +152,7 @@
 
                     <ImageButton
                         android:id="@+id/buttonTwitter"
+                        style="@style/GawkMaterialTheme.DefaultButtonNoBackground"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -157,6 +161,7 @@
 
                     <ImageButton
                         android:id="@+id/buttonLinkedln"
+                        style="@style/GawkMaterialTheme.DefaultButtonNoBackground"
                         android:layout_width="fill_parent"
                         android:layout_height="match_parent"
                         android:scaleType="fitCenter"
@@ -166,12 +171,14 @@
 
                     <ImageButton
                         android:id="@+id/buttonOdnoklassnik"
+                        style="@style/GawkMaterialTheme.DefaultButtonNoBackground"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="fitCenter"
                         android:layout_weight="1"
                         android:layout_gravity="center"
                         app:srcCompat="@drawable/odnoklassniki" />
+
 
                 </LinearLayout>
             </LinearLayout>

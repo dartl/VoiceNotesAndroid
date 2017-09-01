@@ -11,6 +11,7 @@ import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -126,6 +127,9 @@ public class NoteView extends ParentActivity implements ActionMenuBottom, Recogn
     @Override
     public void onPause() {
         super.onPause();
+        if (mActionSpeechRecognition != null) {
+            mActionSpeechRecognition.destroy();
+        }
         mAdView.destroy();
     }
 
@@ -243,6 +247,10 @@ public class NoteView extends ParentActivity implements ActionMenuBottom, Recogn
         updateList();
     }
 
+    public void failSetNotification() {
+        Snackbar.make(mView, getString(R.string.new_note_error_date), Snackbar.LENGTH_LONG).show();
+    }
+
     @Override
     public void updateList() {
         Cursor notificationCursor = dbHelper.getAllNotificationByNote(id);
@@ -252,7 +260,8 @@ public class NoteView extends ParentActivity implements ActionMenuBottom, Recogn
 
     @Override
     public void deleteItemList(long id, boolean stateRemoveAllNotification, ArrayList selectItems) {
-
+        dbHelper.deleteNotification(id);
+        updateList();
     }
 
     @Override

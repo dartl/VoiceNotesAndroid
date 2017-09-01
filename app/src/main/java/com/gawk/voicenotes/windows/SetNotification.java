@@ -65,15 +65,8 @@ public class SetNotification extends DialogFragment implements TimePickerReturn 
         dbHelper.connection();
 
         RelativeLayout notificationLayout =  mView.findViewById(R.id.notificationLayout);
+
         mSwitchNotification = mView.findViewById(R.id.switchNotification);
-
-        allChildren = getAllChildren(notificationLayout);
-        for (int i = 0; i < allChildren.size(); i++) {
-            allChildren.get(i).setEnabled(true);
-        }
-
-        mSwitchNotification.setVisibility(View.GONE);
-
         switchNotification =  mView.findViewById(R.id.switchNotification);
         selectTime = mView.findViewById(R.id.buttonSelectTime);
         textViewNowDate = mView.findViewById(R.id.textViewNowDate);
@@ -82,6 +75,15 @@ public class SetNotification extends DialogFragment implements TimePickerReturn 
         mSwitchRepeat = mView.findViewById(R.id.switchRepeat);
         mButtonSave = mView.findViewById(R.id.buttonSave);
         mButtonClose = mView.findViewById(R.id.buttonClose);
+
+
+        allChildren = getAllChildren(notificationLayout);
+        for (int i = 0; i < allChildren.size(); i++) {
+            allChildren.get(i).setEnabled(true);
+        }
+
+        mSwitchNotification.setVisibility(View.GONE);
+        selectTime.setVisibility(View.GONE);
 
         mButtonClose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,13 +97,6 @@ public class SetNotification extends DialogFragment implements TimePickerReturn 
             public void onClick(View view) {
                 mNoteView.saveNotification(notification);
                 dismiss();
-            }
-        });
-
-        selectTime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showTimePickerDialog();
             }
         });
 
@@ -133,6 +128,7 @@ public class SetNotification extends DialogFragment implements TimePickerReturn 
     @Override
     public void show(FragmentManager manager, String tag) {
         super.show(manager, tag);
+        showTimePickerDialog();
     }
 
     @Override
@@ -167,9 +163,10 @@ public class SetNotification extends DialogFragment implements TimePickerReturn 
 
     @Override
     public void fail() {
-        Snackbar.make(mView, getString(R.string.new_note_error_date), Snackbar.LENGTH_LONG).show();
+        mNoteView.failSetNotification();
         checkError = false;
         switchNotification.setChecked(false);
+        dismiss();
     }
 
     public Notification getNotification() {

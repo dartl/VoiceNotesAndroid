@@ -133,7 +133,6 @@ public class SettingsActivity extends ParentActivity {
     }
 
     public void setIntervalNotification(long time) {
-        time = 60000;
         mPrefUtil.saveLong(PrefUtil.NOTIFICATION_INTERVAL,time);
         final int timeInterval = (int) time/60000;
         switch (timeInterval) {
