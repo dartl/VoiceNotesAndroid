@@ -190,7 +190,9 @@ public class NoteView extends ParentActivity implements ActionMenuBottom, Recogn
 
         DateFormat dateFormat;
         dateFormat = SimpleDateFormat.getDateTimeInstance();
-        textViewDate.setText(dateFormat.format(note.getDate()));
+        if (textViewDate != null) {
+            textViewDate.setText(dateFormat.format(note.getDate()));
+        }
 
         Cursor notificationCursor =  dbHelper.getAllNotificationByNote(id);
 

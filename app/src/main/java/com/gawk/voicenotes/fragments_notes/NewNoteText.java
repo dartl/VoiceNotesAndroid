@@ -93,8 +93,11 @@ public class NewNoteText extends FragmentParent implements RecognitionListener{
     @Override
     public void onRmsChanged(float rmsdB) {
         if (mSpeechRecognitionDialog != null) {
-            mSpeechRecognitionDialog.changeVoiceValue((int) (mActionSpeechRecognition.convertDpToPixel((rmsdB*6), getContext())+
-                    getResources().getDimension(R.dimen.dialog_recognize_circle_min_size)));
+            int size = (int) (mActionSpeechRecognition.convertDpToPixel((rmsdB*6), getContext())+
+                    getResources().getDimension(R.dimen.dialog_recognize_circle_min_size));
+            if (size >= 0) {
+                mSpeechRecognitionDialog.changeVoiceValue(size);
+            }
         }
     }
 

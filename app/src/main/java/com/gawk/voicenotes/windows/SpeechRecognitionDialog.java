@@ -157,9 +157,13 @@ public class SpeechRecognitionDialog extends DialogFragment {
     }
 
     public void changeVoiceValue(int valueDestine) {
-        mImageViewVoiceValue.getLayoutParams().height = valueDestine;
-        mImageViewVoiceValue.getLayoutParams().width = valueDestine;
-        mImageViewVoiceValue.requestLayout();
+        try {
+            mImageViewVoiceValue.getLayoutParams().height = valueDestine;
+            mImageViewVoiceValue.getLayoutParams().width = valueDestine;
+            mImageViewVoiceValue.requestLayout();
+        } catch (NullPointerException e) {
+            e.printStackTrace(System.err);
+        }
     }
 
     public void changeVisibleSpeak(int state) {
