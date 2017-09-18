@@ -16,6 +16,8 @@
     <string name="new_note_notifications">रिमाइंडर</string>
     <string name="main_view_error_select">कोई ऑब्जेक्ट नहीं चुना गया</string>
     <string name="main_permissions_error">आपने सभी अनुमतियां नहीं दीं। हम आवेदन की कार्य क्षमता की गारंटी नहीं देते हैं।</string>
+    <string name="main_empty_notes">आपके पास अभी तक कोई नोट नहीं है</string>
+    <string name="main_empty_notification">आपके पास अभी तक कोई अनुस्मारक नहीं है</string>
     <!-- Меню -->
     <string name="menu_add">नोट जोड़ें</string>
     <string name="menu_notes_list">सभी नोट्स</string>

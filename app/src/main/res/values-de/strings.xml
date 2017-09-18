@@ -13,9 +13,11 @@
     <string name="app_name_export_import">Export/Import</string>
     <!-- Главное окно -->
     <string name="new_notes">Notizen</string>
-    <string name="new_note_notifications">Reminder</string>
+    <string name="new_note_notifications">Erinnerungen</string>
     <string name="main_view_error_select">Keine Objekte ausgewählt</string>
     <string name="main_permissions_error">Du hast nicht alle Berechtigungen zur Verfügung gestellt. Wir garantieren nicht die Arbeitsfähigkeit des Antrags.</string>
+    <string name="main_empty_notes">Du hast noch keine Notizen</string>
+    <string name="main_empty_notification">Du hast noch keine Erinnerungen</string>
     <!-- Меню -->
     <string name="menu_add">Notiz hinzufügen</string>
     <string name="menu_notes_list">Alle Notizen</string>

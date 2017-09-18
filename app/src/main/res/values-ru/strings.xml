@@ -15,8 +15,9 @@
     <string name="new_notes">Заметки</string>
     <string name="new_note_notifications">Напоминания</string>
     <string name="main_view_error_select">Нет выбранных объектов</string>
-
     <string name="main_permissions_error">Вы не указали все разрешения. Мы не гарантируем работоспособность приложения.</string>
+    <string name="main_empty_notes">У вас пока нет ни одной заметки</string>
+    <string name="main_empty_notification">У вас пока нет ни одного напоминания</string>
     <!-- Меню -->
     <string name="menu_add">Добавить заметку</string>
     <string name="menu_notes_list">Все заметки</string>

@@ -15,8 +15,10 @@
     <string name="new_notes">Notas</string>
     <string name="new_note_notifications">Lembretes</string>
     <string name="main_view_error_select">Não há objetos selecionados</string>
-
     <string name="main_permissions_error">Você não forneceu todas as permissões. Não garantimos a capacidade de trabalho da aplicação.</string>
+
+    <string name="main_empty_notes">Ainda não tem notas</string>
+    <string name="main_empty_notification">Você ainda não possui lembretes</string>
     <!-- Меню -->
     <string name="menu_add">Adicionar nota</string>
     <string name="menu_notes_list">Todas as notas</string>

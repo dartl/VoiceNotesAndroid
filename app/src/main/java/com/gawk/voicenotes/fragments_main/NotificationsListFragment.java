@@ -39,6 +39,7 @@ public class NotificationsListFragment extends FragmentParent {
     private NotificationRecyclerAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ListAdapters mListAdapters;
+    private RelativeLayout mRelativeLayoutEmptyNotifications;
 
     public NotificationsListFragment() {
         // Required empty public constructor
@@ -57,6 +58,8 @@ public class NotificationsListFragment extends FragmentParent {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.notifications_list_fragment, null);
+
+        mRelativeLayoutEmptyNotifications = view.findViewById(R.id.relativeLayoutEmptyNotifications);
 
         dbHelper = SQLiteDBHelper.getInstance(getActivity());
         dbHelper.connection();
@@ -91,6 +94,11 @@ public class NotificationsListFragment extends FragmentParent {
         Cursor cursor = dbHelper.getCursorAllNotification();
         Log.e("GAWK_ERR","updateList() Notification. cursor.getCount() = " + cursor.getCount());
         mAdapter.changeCursor(cursor);
+        if (mAdapter.getItemCount() > 0) {
+            mRelativeLayoutEmptyNotifications.setVisibility(View.GONE);
+        } else {
+            mRelativeLayoutEmptyNotifications.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

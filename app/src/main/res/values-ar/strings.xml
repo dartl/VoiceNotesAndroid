@@ -98,7 +98,6 @@
     <string name="statistics_imports_title">الأوقات المستوردة:</string>
     <string name="statistics_level_title">مستوى</string>
     <string name="statistics_experience_title">تجربة</string>
-
     <string name="main_share_text">الملاحظات التي تم إنشاؤها باستخدام التطبيق:</string>
     <string name="main_share">شارك</string>
     <string name="main_selected_element">العناصر</string>
@@ -114,6 +113,9 @@
     <string name="settings_notification_repetition_select60">60 دقيقة</string>
     <string name="settings_notification_repetition_text">الوقت لتكرار تذكير</string>
     <string name="settings_notification_repetition_title">زمن التكرار</string>
+
+    <string name="main_empty_notes">ليست لديك أية ملاحظات حتى الآن</string>
+    <string name="main_empty_notification">ليس لديك أي تذكيرات حتى الآن</string>
 
     <string-array name="export_import_type">
         <item>JSON</item>

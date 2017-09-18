@@ -15,8 +15,9 @@
     <string name="new_notes">Notes</string>
     <string name="new_note_notifications">Rappels</string>
     <string name="main_view_error_select">Aucun objet sélectionné</string>
-
     <string name="main_permissions_error">Vous n’avez pas fourni toutes les autorisations. Nous ne garantissons pas la capacité de travail de l’application.</string>
+    <string name="main_empty_notes">Vous n’avez pas encore de notes</string>
+    <string name="main_empty_notification">Vous n’avez pas encore de rappels</string>
     <!-- Меню -->
     <string name="menu_add">Ajouter une note</string>
     <string name="menu_notes_list">Toutes les notes</string>

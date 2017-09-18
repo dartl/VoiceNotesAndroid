@@ -344,7 +344,7 @@ public class ParentActivity extends AppCompatActivity
                 // to the app after tapping on an ad.
             }
         });
-        if (check && (aBoolean != 2) && false) {
+        if (check && (aBoolean != 2)) {
             AdRequest adRequest = new AdRequest.Builder().build();
             mAdView.loadAd(adRequest);
             mAdView.bringToFront();

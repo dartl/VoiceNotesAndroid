@@ -16,6 +16,8 @@
     <string name="new_note_notifications">Pengingat</string>
     <string name="main_view_error_select">Tidak ada objek yang dipilih</string>
     <string name="main_permissions_error">Anda tidak memberikan semua izin. Kami tidak menjamin kapasitas aplikasi.</string>
+    <string name="main_empty_notes">Anda belum memiliki catatan</string>
+    <string name="main_empty_notification">Anda belum memiliki pengingat</string>
     <!-- Меню -->
     <string name="menu_add">Tambahkan catatan</string>
     <string name="menu_notes_list">Semua catatan</string>

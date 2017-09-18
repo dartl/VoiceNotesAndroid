@@ -111,6 +111,10 @@
     <string name="settings_notification_repetition_text">Час повторити нагадування</string>
     <string name="settings_notification_repetition_title">Час повторення</string>
     <string name="subs_inner_text">Усі підписи видаляють оголошення з додатка та подають пожертви розробнику</string>
+
+    <string name="main_empty_notes">У вас ще немає записів</string>
+    <string name="main_empty_notification">У вас ще немає нагадувань</string>
+
     <string-array name="export_import_type">
         <item>JSON</item>
         <item>txt</item>

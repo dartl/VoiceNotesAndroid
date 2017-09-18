@@ -15,8 +15,9 @@
     <string name="new_notes">메모</string>
     <string name="new_note_notifications">알림</string>
     <string name="main_view_error_select">선택한 개체가 없습니다.</string>
-
     <string name="main_permissions_error">모든 권한을 제공하지 않았습니다. 우리는 응용 프로그램의 작업 용량을 보장하지 않습니다.</string>
+    <string name="main_empty_notes">아직 메모가 없습니다.</string>
+    <string name="main_empty_notification">아직 알림이 없습니다.</string>
     <!-- Меню -->
     <string name="menu_add">메모 추가</string>
     <string name="menu_notes_list">모든 메모</string>

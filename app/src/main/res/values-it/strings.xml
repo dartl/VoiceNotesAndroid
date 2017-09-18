@@ -98,7 +98,6 @@
     <string name="statistics_imports_title">Tempi importati:</string>
     <string name="statistics_level_title">Livello</string>
     <string name="statistics_experience_title">Esperienza</string>
-
     <string name="main_share_text">Note create con l\'applicazione:</string>
     <string name="main_share">Condividere</string>
     <string name="main_selected_element">elementi</string>
@@ -114,6 +113,9 @@
     <string name="settings_notification_repetition_select60">60 minuti</string>
     <string name="settings_notification_repetition_text">Tempo per ripetere il promemoria</string>
     <string name="settings_notification_repetition_title">Tempo di ripetizione</string>
+
+    <string name="main_empty_notes">Non hai ancora nessuna nota</string>
+    <string name="main_empty_notification">Non hai ancora alcun promemoria</string>
 
     <string-array name="export_import_type">
         <item>JSON</item>

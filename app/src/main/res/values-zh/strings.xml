@@ -114,6 +114,9 @@
     <string name="settings_notification_repetition_text">时间重复提醒</string>
     <string name="settings_notification_repetition_title">重复时间</string>
 
+    <string name="main_empty_notes">你還沒有任何筆記</string>
+    <string name="main_empty_notification">你還沒有任何提醒</string>
+
     <string-array name="export_import_type">
         <item>JSON</item>
         <item>txt</item>

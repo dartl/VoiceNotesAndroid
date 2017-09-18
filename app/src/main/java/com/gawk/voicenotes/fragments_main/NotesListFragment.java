@@ -10,6 +10,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.gawk.voicenotes.FragmentParent;
@@ -33,6 +35,7 @@ public class NotesListFragment extends FragmentParent{
     private MainActivity mainActivity;
     private ListAdapters mListAdapters;
     private NoteRecyclerAdapter mAdapter;
+    private RelativeLayout mRelativeLayoutEmptyNotes;
 
     public NotesListFragment() {
         // Required empty public constructor
@@ -52,6 +55,8 @@ public class NotesListFragment extends FragmentParent{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.notes_list_fragment, null);
+
+        mRelativeLayoutEmptyNotes = view.findViewById(R.id.relativeLayoutEmptyNotes);
 
         dbHelper = SQLiteDBHelper.getInstance(getActivity());
         dbHelper.connection();
@@ -92,6 +97,11 @@ public class NotesListFragment extends FragmentParent{
         NavigationView navigationView =  getActivity().findViewById(R.id.nav_view_menu);
         TextView view = (TextView) navigationView.getMenu().findItem(R.id.menu_notes_list).getActionView();
         view.setText(mAdapter.getItemCount() > 0 ? String.valueOf(mAdapter.getItemCount()) : null);
+        if (mAdapter.getItemCount() > 0) {
+            mRelativeLayoutEmptyNotes.setVisibility(View.GONE);
+        } else {
+            mRelativeLayoutEmptyNotes.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

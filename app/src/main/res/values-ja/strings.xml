@@ -15,8 +15,9 @@
     <string name="new_notes">メモ</string>
     <string name="new_note_notifications">リマインダー</string>
     <string name="main_view_error_select">オブジェクトが選択されていません</string>
-
     <string name="main_permissions_error">あなたはすべての権限を提供していません。 当社は、アプリケーションの作業能力を保証するものではありません。</string>
+    <string name="main_empty_notes">あなたはまだメモを持っていません</string>
+    <string name="main_empty_notification">まだリマインダーはありません</string>
     <!-- Меню -->
     <string name="menu_add">メモを追加</string>
     <string name="menu_notes_list">すべてのメモ</string>
