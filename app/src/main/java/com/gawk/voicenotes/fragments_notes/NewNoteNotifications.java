@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.RelativeLayout;
@@ -106,7 +107,6 @@ public class NewNoteNotifications extends FragmentParent implements TimePickerRe
         mSwitchRepeat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 notification.setRepeat(isChecked);
-                Log.e("GAWK_ERR","mSwitchRepeat isChecked = " + isChecked);
             }
         });
 
