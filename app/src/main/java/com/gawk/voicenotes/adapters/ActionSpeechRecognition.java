@@ -77,8 +77,7 @@ public class ActionSpeechRecognition {
 
     public void endRecognition() {
         if (mRecognizerIntent != null) {
-            mRecognizerIntent.stopListening();
-            mRecognizerIntent.destroy();
+            mRecognizerIntent.cancel();
         }
     }
 
@@ -110,12 +109,12 @@ public class ActionSpeechRecognition {
 
     public void destroy() {
         if (mRecognizerIntent != null) {
-            mRecognizerIntent.destroy();
+            mRecognizerIntent.cancel();
         }
     }
 
-    public static float convertDpToPixel(float dp, Context context){
-        Resources resources = context.getResources();
+    public float convertDpToPixel(float dp, Context context){
+        Resources resources = mContext.getResources();
         DisplayMetrics metrics = resources.getDisplayMetrics();
         return dp * ((float)metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
     }

@@ -118,7 +118,6 @@ public class NewNoteText extends FragmentParent implements RecognitionListener{
 
     @Override
     public void onResults(Bundle results) {
-        Log.e("GAWK_ERR","onResults(Bundle results)");
         ArrayList<String> thingsYouSaid = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
         if (thingsYouSaid != null) {
             if (mPartialResultsStart.length() == 0) {
@@ -133,7 +132,6 @@ public class NewNoteText extends FragmentParent implements RecognitionListener{
 
     @Override
     public void onPartialResults(Bundle partialResults) {
-        Log.e("GAWK_ERR","onPartialResults(Bundle partialResults)");
         if (!mCheckPartialResults) {
             mPartialResultsStart = editText_NewNoteText.getText().toString();
             mCheckPartialResults = true;

@@ -84,7 +84,7 @@ public class SettingsActivity extends ParentActivity {
         // Sets the custom shortcut's title
         intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, getString(R.string.menu_add));
         // Set the custom shortcut icon
-        intent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, Intent.ShortcutIconResource.fromContext(this, R.drawable.icon175x175_big));
+        intent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, Intent.ShortcutIconResource.fromContext(this, R.drawable.icon175x175));
         // add the shortcut
         intent.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
         sendBroadcast(intent);

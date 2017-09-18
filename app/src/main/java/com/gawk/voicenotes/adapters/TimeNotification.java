@@ -68,7 +68,7 @@ public class TimeNotification extends BroadcastReceiver {
         intentTL.putExtra("id_notification", notification.getId());
         NotificationCompat.Builder nb = new NotificationCompat.Builder(context)
                 .setSmallIcon(R.drawable.icon175x175)
-                .setLargeIcon(BitmapFactory.decodeResource(res, R.drawable.icon175x175_big))
+                .setLargeIcon(BitmapFactory.decodeResource(res, R.drawable.icon_notification))
                 .setAutoCancel(true) //уведомление закроется по клику на него
                 .setTicker(context.getString(R.string.new_note_notification)) //текст, который отобразится вверху статус-бара при создании уведомления
                 .setContentText(text) // Основной текст уведомления

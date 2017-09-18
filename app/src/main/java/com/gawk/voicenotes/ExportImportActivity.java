@@ -139,7 +139,7 @@ public class ExportImportActivity extends ParentActivity implements View.OnClick
     public void onResume() {
         super.onResume();
         initAdMob(true);
-        if (checkPermissions(this,2)) {
+        if (!checkPermissions(this,2)) {
             Snackbar.make(mView, getString(R.string.main_permissions_error), Snackbar.LENGTH_LONG).show();
         }
 

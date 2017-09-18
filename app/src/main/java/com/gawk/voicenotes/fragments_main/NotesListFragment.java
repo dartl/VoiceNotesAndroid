@@ -109,10 +109,12 @@ public class NotesListFragment extends FragmentParent{
             dbHelper.noteDelete(id);
         }
         updateList();
-        if (mainActivity.getFragment(1) != null) {
+        if (mainActivity != null && mainActivity.getFragment(1) != null) {
             mainActivity.getFragment(1).updateList();
         }
-        mainActivity.refreshNavHeader();
+        if (mainActivity != null) {
+            mainActivity.refreshNavHeader();
+        }
     }
 
     @Override
@@ -153,7 +155,9 @@ public class NotesListFragment extends FragmentParent{
 
     @Override
     public void search(String text) {
-        dbHelper.connection();
-        mAdapter.changeCursor(dbHelper.getCursorAllNotes());
+        if (dbHelper != null) {
+            dbHelper.connection();
+            mAdapter.changeCursor(dbHelper.getCursorAllNotes(text));
+        }
     }
 }

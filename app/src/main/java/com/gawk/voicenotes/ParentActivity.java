@@ -145,7 +145,6 @@ public class ParentActivity extends AppCompatActivity
 
     @Override
     public void onStop() {
-        unbindService(mServiceConn);
         super.onStop();
         dbHelper.disconnection();
     }
@@ -345,7 +344,7 @@ public class ParentActivity extends AppCompatActivity
                 // to the app after tapping on an ad.
             }
         });
-        if (check && (aBoolean != 2)) {
+        if (check && (aBoolean != 2) && false) {
             AdRequest adRequest = new AdRequest.Builder().build();
             mAdView.loadAd(adRequest);
             mAdView.bringToFront();
@@ -383,7 +382,7 @@ public class ParentActivity extends AppCompatActivity
         // Sets the custom shortcut's title
         intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, getString(R.string.app_name));
         // Set the custom shortcut icon
-        intent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, Intent.ShortcutIconResource.fromContext(this, R.drawable.icon175x175_big));
+        intent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, Intent.ShortcutIconResource.fromContext(this, R.drawable.icon175x175));
         // add the shortcut
         intent.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
         sendBroadcast(intent);
