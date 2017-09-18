@@ -18,6 +18,7 @@ import com.gawk.voicenotes.NoteView;
 import com.gawk.voicenotes.R;
 import com.gawk.voicenotes.adapters.ActionsListNotes;
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
+import com.gawk.voicenotes.models.Note;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -44,7 +45,7 @@ public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerA
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView textView, dateView;
+        TextView textView, dateView, mTextViewGroup;
         ImageButton mImageButtonIconNote, mImageButtonMoreMenu;
         CardView cardView;
         View parent;
@@ -56,15 +57,18 @@ public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerA
             textView = v.findViewById(R.id.textViewListText);
             dateView = v.findViewById(R.id.textViewListDate);
             cardView = v.findViewById(R.id.card_view);
+            mTextViewGroup = v.findViewById(R.id.textViewGroup);
         }
 
         public void setData(final Cursor c, final NoteRecyclerAdapter noteRecyclerAdapter) {
             final int position = c.getPosition();
             final long id = noteRecyclerAdapter.getItemId(getLayoutPosition());
+            Log.e("GAWK_ERR","position note = " + id);
 
             changeItemSelect(noteRecyclerAdapter.getActionsListNotes().checkSelectElement(id));
+            Note note = new Note(c);
 
-            textView.setText(c.getString(c.getColumnIndex(SQLiteDBHelper.NOTES_TABLE_COLUMN_TEXT_NOTE)));
+            textView.setText(note.getText_note());
             mImageButtonIconNote.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -119,25 +123,20 @@ public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerA
                 }
             });
 
-
-            long dateLong = c.getLong(c.getColumnIndex
-                    (SQLiteDBHelper.NOTES_TABLE_COLUMN_DATE));  // получаем дату в виде числа
+            Date date = note.getDate();
             DateFormat dateFormat;
-            Date date = new Date(dateLong);
-            Calendar cToday = Calendar.getInstance();   // получаем сегодняшний день и время
-            cToday.set(
-                    cToday.get(Calendar.YEAR),
-                    cToday.get(Calendar.MONTH),
-                    cToday.get(Calendar.DAY_OF_MONTH),
-                    0,0);   // меняем дату на начало дня
-            if (date.after(cToday.getTime())) { // если дата сегодняшняя, то выводим только время
-                dateFormat = SimpleDateFormat.getTimeInstance();
-                dateView.setText(dateFormat.format(date));
-            } else {    // если дата не сегодняшняя, то выводим с датой
-                dateFormat = SimpleDateFormat.getDateTimeInstance();
-                String date_and_time = dateFormat.format(date);
-                dateView.setText(date_and_time);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(date.getTime());
+            if (!noteRecyclerAdapter.checkDateNote(calendar)) {
+                dateFormat = SimpleDateFormat.getDateInstance();
+                String date_string = dateFormat.format(date);
+                mTextViewGroup.setText(date_string);
+                mTextViewGroup.setVisibility(View.VISIBLE);
+            } else {
+                mTextViewGroup.setVisibility(View.GONE);
             }
+            dateFormat = SimpleDateFormat.getTimeInstance();
+            dateView.setText(dateFormat.format(date));
         }
 
         private void changeItemSelect(boolean state) {
@@ -147,6 +146,7 @@ public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerA
                 cardView.setBackgroundColor(ContextCompat.getColor(parent.getContext(), R.color.colorWhite));
             }
         }
+
     }
 
     @Override
@@ -190,4 +190,21 @@ public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerA
         this.actionsListNotes = actionsListNotes;
     }
 
+    @Override
+    public Cursor swapCursor(Cursor newCursor) {
+        // инициализируем сегодняшним днем
+        mGroupEndDate = Calendar.getInstance();
+        mGroupEndDate.set(
+                mGroupEndDate.get(Calendar.YEAR),
+                mGroupEndDate.get(Calendar.MONTH),
+                mGroupEndDate.get(Calendar.DAY_OF_MONTH)+2,
+                0,0);
+        mGroupStartDate = Calendar.getInstance();
+        mGroupStartDate.set(
+                mGroupStartDate.get(Calendar.YEAR),
+                mGroupStartDate.get(Calendar.MONTH),
+                mGroupStartDate.get(Calendar.DAY_OF_MONTH)+1,
+                0,0);
+        return super.swapCursor(newCursor);
+    }
 }

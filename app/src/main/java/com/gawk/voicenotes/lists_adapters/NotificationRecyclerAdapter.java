@@ -51,7 +51,7 @@ public class NotificationRecyclerAdapter extends CursorRecyclerViewAdapter<Notif
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView imageViewSound, imageViewShake;
-        public TextView textViewTextNote, textViewDateNotification;
+        public TextView textViewTextNote, textViewDateNotification, mTextViewGroup;
         private ImageButton mImageButtonNotificationIcon, mImageButtonMoreMenu;
         CardView cardView;
         public View parent;
@@ -66,6 +66,7 @@ public class NotificationRecyclerAdapter extends CursorRecyclerViewAdapter<Notif
             mImageButtonNotificationIcon = v.findViewById(R.id.imageButtonNotificationIcon);
             mImageButtonMoreMenu = v.findViewById(R.id.imageButtonMoreMenu);
             cardView = v.findViewById(R.id.card_view);
+            mTextViewGroup = v.findViewById(R.id.textViewGroup);
         }
 
         public void setData(final Cursor c, final NotificationRecyclerAdapter notificationRecyclerAdapter, SQLiteDBHelper db) {
@@ -140,21 +141,20 @@ public class NotificationRecyclerAdapter extends CursorRecyclerViewAdapter<Notif
                 parent.setLongClickable(false);
             }
 
-            Calendar cToday = Calendar.getInstance();   // получаем сегодняшний день и время
-            cToday.set(
-                    cToday.get(Calendar.YEAR),
-                    cToday.get(Calendar.MONTH),
-                    cToday.get(Calendar.DAY_OF_MONTH),
-                    23,59);   // меняем дату на начало дня
-
-            // Выводим дату и время срабатывания оповещения
-            Date date = notification.getDate();
             DateFormat dateFormat;
-            if (date.before(cToday.getTime())) {
-                dateFormat = SimpleDateFormat.getTimeInstance();
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(notification.getDate().getTime());
+            Date date = notification.getDate();
+
+            if (!notificationRecyclerAdapter.checkDateNotification(calendar)) {
+                dateFormat = SimpleDateFormat.getDateInstance();
+                String date_string = dateFormat.format(date);
+                mTextViewGroup.setText(date_string);
+                mTextViewGroup.setVisibility(View.VISIBLE);
             } else {
-                dateFormat = SimpleDateFormat.getDateTimeInstance();
+                mTextViewGroup.setVisibility(View.GONE);
             }
+            dateFormat = SimpleDateFormat.getTimeInstance();
             textViewDateNotification.setText(dateFormat.format(date));
 
             // Задаем иконку для состояния звука оповещения
@@ -224,5 +224,22 @@ public class NotificationRecyclerAdapter extends CursorRecyclerViewAdapter<Notif
 
     public void setViewNote(boolean mViewNote) {
         this.mViewNote = mViewNote;
+    }
+
+    @Override
+    public Cursor swapCursor(Cursor newCursor) {
+        mGroupEndDate = Calendar.getInstance();
+        mGroupEndDate.set(
+                mGroupEndDate.get(Calendar.YEAR),
+                mGroupEndDate.get(Calendar.MONTH),
+                mGroupEndDate.get(Calendar.DAY_OF_MONTH),
+                0,0);
+        mGroupStartDate = Calendar.getInstance();
+        mGroupStartDate.set(
+                mGroupStartDate.get(Calendar.YEAR),
+                mGroupStartDate.get(Calendar.MONTH),
+                mGroupStartDate.get(Calendar.DAY_OF_MONTH)-1,
+                0,0);
+        return super.swapCursor(newCursor);
     }
 }

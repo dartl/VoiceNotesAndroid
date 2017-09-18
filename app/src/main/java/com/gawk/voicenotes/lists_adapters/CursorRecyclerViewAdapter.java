@@ -4,6 +4,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.DataSetObserver;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by GAWK on 24.03.2017.
@@ -23,7 +27,12 @@ public abstract class CursorRecyclerViewAdapter<VH extends RecyclerView.ViewHold
 
     private boolean mStateSelected = false;;
 
+    // Для группировок
+    Calendar mGroupStartDate, mGroupEndDate;
+
     public CursorRecyclerViewAdapter(Context context, Cursor cursor) {
+        mGroupEndDate = Calendar.getInstance();
+        mGroupStartDate = Calendar.getInstance();
         mContext = context;
         mCursor = cursor;
         mDataValid = cursor != null;
@@ -108,7 +117,6 @@ public abstract class CursorRecyclerViewAdapter<VH extends RecyclerView.ViewHold
             mRowIdColumn = -1;
             mDataValid = false;
             notifyDataSetChanged();
-            //There is no notifyDataSetInvalidated() method in RecyclerView.Adapter
         }
         return oldCursor;
     }
@@ -126,8 +134,49 @@ public abstract class CursorRecyclerViewAdapter<VH extends RecyclerView.ViewHold
             super.onInvalidated();
             mDataValid = false;
             notifyDataSetChanged();
-            //There is no notifyDataSetInvalidated() method in RecyclerView.Adapter
         }
+    }
+
+    protected boolean checkDateNote(Calendar date) {
+        if (date.before(mGroupEndDate)) {
+            if (date.after(mGroupStartDate)) {
+                return true;
+            } else {
+                mGroupEndDate.set(
+                        date.get(Calendar.YEAR),
+                        date.get(Calendar.MONTH),
+                        date.get(Calendar.DAY_OF_MONTH)+1,
+                        0,0);
+                mGroupStartDate.set(
+                        date.get(Calendar.YEAR),
+                        date.get(Calendar.MONTH),
+                        date.get(Calendar.DAY_OF_MONTH),
+                        0,0);
+                return false;
+            }
+        }
+        return true;
+    }
+
+    protected boolean checkDateNotification(Calendar date) {
+        if (date.after(mGroupStartDate)) {
+            if (date.before(mGroupEndDate)) {
+                return true;
+            } else {
+                mGroupEndDate.set(
+                        date.get(Calendar.YEAR),
+                        date.get(Calendar.MONTH),
+                        date.get(Calendar.DAY_OF_MONTH)+1,
+                        0,0);
+                mGroupStartDate.set(
+                        date.get(Calendar.YEAR),
+                        date.get(Calendar.MONTH),
+                        date.get(Calendar.DAY_OF_MONTH),
+                        0,0);
+                return false;
+            }
+        }
+        return true;
     }
 
     public Context getContext() {

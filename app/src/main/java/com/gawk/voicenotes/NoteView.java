@@ -183,7 +183,6 @@ public class NoteView extends ParentActivity implements ActionMenuBottom, Recogn
             ringtoneManager.getRingtone(ringtoneManager.getRingtonePosition(Uri.parse(stringRingtone))).stop();
         }
 
-        Log.e("GAWK_ERR","id note = " + id);
         note = new Note(dbHelper.getNoteById(id));
         editTextNoteText.setText(note.getText_note());
 
