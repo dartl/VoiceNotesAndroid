@@ -25,8 +25,8 @@ public class NewNoteText extends FragmentParent implements RecognitionListener{
     private TextView editText_NewNoteText;
     private FloatingActionButton imageButton_NewNoteAdd, imageButton_NewNoteClear;
     private SpeechRecognitionDialog mSpeechRecognitionDialog;
-    private boolean mCheckPartialResults = false;
-    private String mPartialResultsStart;
+    private ArrayList<String> mSuggestions = new ArrayList<>();
+    private String mPartialResults;
     private ActionSpeechRecognition mActionSpeechRecognition;
 
     public NewNoteText() {}
@@ -55,6 +55,7 @@ public class NewNoteText extends FragmentParent implements RecognitionListener{
             @Override
             public void onClick(View v) {
                 editText_NewNoteText.setText("");
+                mSuggestions = new ArrayList<>();
             }
         });
 
@@ -76,13 +77,48 @@ public class NewNoteText extends FragmentParent implements RecognitionListener{
         return "";
     }
 
+    public String getFullText() {
+        String fullText = "";
+        for (int i = 0; i < mSuggestions.size(); i++) {
+            Log.e("GAWK_ERR", "mSuggestions.get(i) = " + mSuggestions.get(i));
+            fullText += mSuggestions.get(i) + " ";
+        }
+        return fullText;
+    }
+
+    public void addText(String newText) {
+        newText = newText.trim();
+        if (newText.length() != 0) {
+            String[] partsNewText = newText.split(".");
+            if (partsNewText.length > 0 ) {
+                for (String partNewText : partsNewText) {
+                    addTextSuggestions(partNewText, true);
+                }
+            } else {
+                addTextSuggestions(newText, false);
+            }
+        }
+    }
+
+    private void addTextSuggestions(String newText, boolean dot) {
+        String doted = "";
+        if (dot) {
+            doted = ".";
+        }
+        if (mSuggestions.size() == 0 || mSuggestions.get(mSuggestions.size() - 1).contains(".")) {
+            newText = newText.substring(0, 1).toUpperCase() + newText.substring(1);
+            mSuggestions.add(newText + doted);
+        } else {
+            mSuggestions.set(mSuggestions.size() - 1, mSuggestions.get(mSuggestions.size() - 1) + " " + newText + doted);
+        }
+    }
+
     // RecognitionListener
 
     @Override
     public void onReadyForSpeech(Bundle params) {
         Log.e("GAWK_ERR","onReadyForSpeech()");
         mSpeechRecognitionDialog.setActive();
-        mCheckPartialResults = false;
     }
 
     @Override
@@ -123,11 +159,8 @@ public class NewNoteText extends FragmentParent implements RecognitionListener{
     public void onResults(Bundle results) {
         ArrayList<String> thingsYouSaid = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
         if (thingsYouSaid != null) {
-            if (mPartialResultsStart.length() == 0) {
-                editText_NewNoteText.setText(thingsYouSaid.get(0));
-            } else {
-                editText_NewNoteText.setText(mPartialResultsStart + thingsYouSaid.get(0));
-            }
+            addText(thingsYouSaid.get(0));
+            editText_NewNoteText.setText(getFullText());
             mSpeechRecognitionDialog.dismiss();
         }
         mActionSpeechRecognition.endRecognition();
@@ -135,15 +168,11 @@ public class NewNoteText extends FragmentParent implements RecognitionListener{
 
     @Override
     public void onPartialResults(Bundle partialResults) {
-        if (!mCheckPartialResults) {
-            mPartialResultsStart = editText_NewNoteText.getText().toString();
-            mCheckPartialResults = true;
-            if (editText_NewNoteText.length() > 0) {
-                mPartialResultsStart += " ";
-            }
-        }
         ArrayList<String> thingsYouSaid = partialResults.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
-        editText_NewNoteText.setText(mPartialResultsStart+thingsYouSaid.get(0));
+        if (thingsYouSaid != null) {
+            String text = getFullText() + thingsYouSaid.get(0);
+            editText_NewNoteText.setText(text);
+        }
     }
 
     @Override
