@@ -25,6 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by GAWK on 24.03.2017.
@@ -135,7 +136,7 @@ public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerA
             } else {
                 mTextViewGroup.setVisibility(View.GONE);
             }
-            dateFormat = SimpleDateFormat.getTimeInstance();
+            dateFormat = SimpleDateFormat.getTimeInstance(DateFormat.SHORT, Locale.getDefault());
             dateView.setText(dateFormat.format(date));
         }
 

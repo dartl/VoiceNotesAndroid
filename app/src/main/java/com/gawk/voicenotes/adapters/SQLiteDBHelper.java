@@ -34,6 +34,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.Locale;
 
 /**
  * Адаптер для подключения к БД
@@ -436,31 +437,40 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
     }
 
     public boolean importDB(File file) {
+        Log.e("GAWK_ERR","start import");
         String json = "";
         if (file.canRead()) {
             try {
                 FileInputStream fin = new FileInputStream(file);
                 json = convertStreamToString(fin);
+                Log.e("GAWK_ERR","importDB: openFile()");
             } catch (Exception e) {
                 e.printStackTrace();
             }
             try {
                 JSONArray jreader = new JSONArray(json);
-                if (jreader.toString().length() >= 1) {
+                Log.e("GAWK_ERR","importDB: start json reader");
+                if (jreader.length() >= 1) {
+                    Log.e("GAWK_ERR","importDB: jreader.toString().length() >= 1. length = " + jreader.length());
                     JSONObject objNote;
                     String textNote, date;
                     DateFormat dateFormat;
-                    dateFormat = SimpleDateFormat.getDateTimeInstance();
+                    dateFormat = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.US);
                     for (int  i = 0; i < jreader.length(); i++) {
+                        Log.e("GAWK_ERR","importDB: jreader for each start");
                         objNote=(JSONObject)jreader.get(i);
+                        Log.e("GAWK_ERR","importDB: objNote = " + objNote);
                         textNote = objNote.getString(NOTES_TABLE_COLUMN_TEXT_NOTE);
+                        Log.e("GAWK_ERR","importDB: textNote = " + textNote);
                         date = objNote.getString(NOTES_TABLE_COLUMN_DATE);
                         Date dt = dateFormat.parse(date);
+                        Log.e("GAWK_ERR","importDB: date = " + dt );
                         if (textNote != null) {
+                            Log.e("GAWK_ERR","importDB: textNote != null");
                             ContentValues newValues = new ContentValues();
                             newValues.put(SQLiteDBHelper.NOTES_TABLE_COLUMN_TEXT_NOTE, textNote);
                             newValues.put(SQLiteDBHelper.NOTES_TABLE_COLUMN_DATE, dt.getTime());
-                            db.insert(SQLiteDBHelper.NOTES_TABLE_NAME, null, newValues);
+                            Log.e("GAWK_ERR","importDB: db.insert() = " + db.insert(SQLiteDBHelper.NOTES_TABLE_NAME, null, newValues));
                             mStatistics.addPointImports();
                         } else {
                             return false;
@@ -468,6 +478,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
                     }
                 }
             } catch (JSONException | ParseException e) {
+                Log.e("GAWK_ERR","importDB: JSONException | ParseException e");
                 e.printStackTrace();
             }
         }
@@ -480,7 +491,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         Cursor cursor = getCursorAllNotes();
         JSONArray resultJson = new JSONArray();
         DateFormat dateFormat;
-        dateFormat = SimpleDateFormat.getDateTimeInstance();
+        dateFormat = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.US);
         try {
             for (int i = 0; i < cursor.getCount(); i++) {
                 cursor.moveToPosition(i);

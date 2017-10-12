@@ -52,6 +52,7 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.yandex.metrica.YandexMetrica;
 
 
 /**
@@ -60,6 +61,7 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 
 public class ParentActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    public final String API_KEY = "d766dee6-1292-4981-8845-966d5c4fd00c";
     public final String INSTALL_PREF = "install_app";
     private Toolbar toolbar;
     protected MenuItem actionSave, actionSearch;
@@ -81,6 +83,11 @@ public class ParentActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Инициализация AppMetrica SDK
+        YandexMetrica.activate(getApplicationContext(), API_KEY);
+        // Отслеживание активности пользователей
+        YandexMetrica.enableActivityAutoTracking(getApplication());
 
         mNotificationAdapter = new NotificationAdapter(this);
 
