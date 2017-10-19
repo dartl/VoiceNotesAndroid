@@ -1,7 +1,5 @@
 package com.gawk.voicenotes.adapters;
 
-import android.app.NotificationManager;
-import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -11,8 +9,8 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-
 import com.gawk.voicenotes.ParentActivity;
+import com.gawk.voicenotes.models.Category;
 import com.gawk.voicenotes.models.Note;
 import com.gawk.voicenotes.models.Notification;
 import com.gawk.voicenotes.models.Statistics;
@@ -52,11 +50,14 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 3;
     public static final String DATABASE_NAME = "VOICE_NOTES.DB";
 
+    /* Поля и переменные таблицы Заметки */
     public static final String NOTES_TABLE_NAME = "NOTES";
     public static final String NOTES_TABLE_COLUMN_ID = "_id";
     public static final String NOTES_TABLE_COLUMN_TEXT_NOTE = "TEXT_NOTE";
     public static final String NOTES_TABLE_COLUMN_DATE = "DATE";
+    public static final String NOTES_TABLE_COLUMN_CATEGORY = "CATEGORY";
 
+    /* Поля и переменные таблицы Напоминания */
     public static final String NOTIFICATIONS_TABLE_NAME = "NOTIFICATIONS";
     public static final String NOTIFICATIONS_TABLE_COLUMN_ID = "_id";
     public static final String NOTIFICATIONS_TABLE_COLUMN_ID_NOTE = "ID_NOTE";
@@ -64,6 +65,11 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
     public static final String NOTIFICATIONS_TABLE_COLUMN_SOUND = "SOUND";
     public static final String NOTIFICATIONS_TABLE_COLUMN_VIBRATE = "VIBRATE";
     public static final String NOTIFICATIONS_TABLE_COLUMN_REPEAT = "REPEAT";
+
+    /* Поля и переменные таблицы Категории */
+    public static final String CATEGORIES_TABLE_NAME = "CATEGORIES";
+    public static final String CATEGORIES_TABLE_COLUMN_ID = "_id";
+    public static final String CATEGORIES_TABLE_COLUMN_NAME = "NAME_CATEGORY";
 
     /**
      * Метод для получения ссылки на статический класс
@@ -95,7 +101,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         db.execSQL(
                 "create table " + NOTES_TABLE_NAME +
                         "(" + NOTES_TABLE_COLUMN_ID + " integer primary key, " +
-                        NOTES_TABLE_COLUMN_TEXT_NOTE + " text, " + NOTES_TABLE_COLUMN_DATE + " integer)"
+                        NOTES_TABLE_COLUMN_TEXT_NOTE + " text, " + NOTES_TABLE_COLUMN_DATE + " integer, " +NOTES_TABLE_COLUMN_CATEGORY+ "integer)"
         );
         // Создаем таблицу оповещений
         db.execSQL(
@@ -103,6 +109,11 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
                         "(" + NOTIFICATIONS_TABLE_COLUMN_ID + " integer primary key, " +
                         NOTIFICATIONS_TABLE_COLUMN_ID_NOTE + " integer, " + NOTIFICATIONS_TABLE_COLUMN_DATE + " text, "
                         + NOTIFICATIONS_TABLE_COLUMN_SOUND + " integer, " + NOTIFICATIONS_TABLE_COLUMN_REPEAT + " integer, " + NOTIFICATIONS_TABLE_COLUMN_VIBRATE + " integer)"
+        );
+
+        db.execSQL(
+                "create table " + CATEGORIES_TABLE_NAME +
+                        "(" + CATEGORIES_TABLE_COLUMN_ID + " integer primary key, " + CATEGORIES_TABLE_COLUMN_NAME + " text)"
         );
     }
 
@@ -113,11 +124,14 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
     {
         // Если версия 2, то
-        if (oldVersion == 1) {
+        if (oldVersion >= 1) {
             upgradeTo2(db);
         }
-        if (oldVersion == 2) {
+        if (oldVersion >= 2) {
             upgradeTo3(db);
+        }
+        if (oldVersion >= 3) {
+            upgradeTo4(db);
         }
     }
 
@@ -140,7 +154,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
             try {
                 Date date = dateFormat.parse(data);
                 temp = new Note(cursor.getLong(cursor.getColumnIndex(NOTES_TABLE_COLUMN_ID)),
-                        cursor.getString(cursor.getColumnIndex(NOTES_TABLE_COLUMN_TEXT_NOTE)),date);
+                        cursor.getString(cursor.getColumnIndex(NOTES_TABLE_COLUMN_TEXT_NOTE)),date, -1);
                 array.add(temp);
             } catch (ParseException e) {
                 e.printStackTrace();
@@ -189,19 +203,57 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
                         + NOTIFICATIONS_TABLE_COLUMN_SOUND + " integer, " + NOTIFICATIONS_TABLE_COLUMN_REPEAT + " integer, " + NOTIFICATIONS_TABLE_COLUMN_VIBRATE + " integer)"
         );
 
-        Iterator<Notification> crucifyIterator = array.iterator();
-        while (crucifyIterator.hasNext()) {
-            temp = crucifyIterator.next();
+        for (Notification anArray : array) {
             ContentValues newValues = new ContentValues();
-            newValues.put(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_ID_NOTE, temp.getId());
-            newValues.put(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_ID_NOTE, temp.getId_note());
-            newValues.put(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_DATE, temp.getDate().getTime());
-            newValues.put(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_SOUND, temp.isSound());
-            newValues.put(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_REPEAT, temp.isRepeat());
-            newValues.put(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_VIBRATE, temp.isShake());
+            newValues.put(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_ID_NOTE, anArray.getId());
+            newValues.put(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_ID_NOTE, anArray.getId_note());
+            newValues.put(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_DATE, anArray.getDate().getTime());
+            newValues.put(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_SOUND, anArray.isSound());
+            newValues.put(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_REPEAT, anArray.isRepeat());
+            newValues.put(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_VIBRATE, anArray.isShake());
             long i = db.insert(SQLiteDBHelper.NOTIFICATIONS_TABLE_NAME, null, newValues);
         }
         // Обновляем таблицу заметок
+    }
+
+    private void upgradeTo4(SQLiteDatabase db) {
+        db.execSQL("DROP TABLE IF EXISTS " + CATEGORIES_TABLE_NAME);
+        // Создаем таблицу оповещений
+        db.execSQL(
+                "create table " + CATEGORIES_TABLE_NAME +
+                        "(" + CATEGORIES_TABLE_COLUMN_ID + " integer primary key, " + CATEGORIES_TABLE_COLUMN_NAME + " text)"
+        );
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " +
+                SQLiteDBHelper.NOTES_TABLE_NAME + " ORDER BY " + SQLiteDBHelper.NOTES_TABLE_COLUMN_DATE
+                + " DESC", null);
+        ArrayList<Note> array = new ArrayList<Note>();
+        Note temp;
+        while (cursor.moveToNext()) {
+            String data = cursor.getString(cursor.getColumnIndex(NOTES_TABLE_COLUMN_DATE));
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy kk:mm",Locale.US);
+            try {
+                Date date = dateFormat.parse(data);
+                temp = new Note(cursor.getLong(cursor.getColumnIndex(NOTES_TABLE_COLUMN_ID)),
+                        cursor.getString(cursor.getColumnIndex(NOTES_TABLE_COLUMN_TEXT_NOTE)),date, -1);
+                array.add(temp);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+        db.execSQL("DROP TABLE IF EXISTS "+NOTES_TABLE_NAME);
+        db.execSQL(
+                "create table " + NOTES_TABLE_NAME +
+                        "(" + NOTES_TABLE_COLUMN_ID + " integer primary key, " +
+                        NOTES_TABLE_COLUMN_TEXT_NOTE + " text, " + NOTES_TABLE_COLUMN_DATE + " integer, " +NOTES_TABLE_COLUMN_CATEGORY+ "integer)"
+        );
+
+        for (Note anArray : array) {
+            ContentValues newValues = new ContentValues();
+            newValues.put(SQLiteDBHelper.NOTES_TABLE_COLUMN_TEXT_NOTE, anArray.getText_note());
+            newValues.put(SQLiteDBHelper.NOTES_TABLE_COLUMN_DATE, anArray.getDate().getTime());
+            db.insert(SQLiteDBHelper.NOTES_TABLE_NAME, null, newValues);
+        }
     }
 
     // Подключаемся к БД
@@ -223,6 +275,39 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
             } catch (SQLiteException ex) {
             }
         }
+    }
+
+    /*
+        Методы для работы с Категориями
+     */
+    public boolean addCategory(Category category, int action) {
+        if (!isConnect()) {
+            connection();
+        }
+        mStatistics.addPointCreateNotifications();
+        ContentValues newValues = new ContentValues();
+        newValues.put(SQLiteDBHelper.CATEGORIES_TABLE_COLUMN_ID, category.getId());
+        newValues.put(SQLiteDBHelper.CATEGORIES_TABLE_COLUMN_NAME, category.getName());
+        long result = 0;
+        switch (action) {
+            case 0:
+                result = db.insert(SQLiteDBHelper.CATEGORIES_TABLE_NAME, null, newValues);
+            case 1:
+                result = db.update(SQLiteDBHelper.NOTIFICATIONS_TABLE_NAME, newValues, NOTIFICATIONS_TABLE_COLUMN_ID +" = ?",
+                        new String[] { String.valueOf(category.getId()) });
+        }
+        if (result < 0) return false;
+        return true;
+    }
+
+    public String getNameCategory(long id) {
+        if (!isConnect()) {
+            connection();
+        }
+        Cursor category = db.rawQuery("SELECT * FROM " +
+                SQLiteDBHelper.CATEGORIES_TABLE_NAME + " WHERE " + SQLiteDBHelper.CATEGORIES_TABLE_COLUMN_ID
+                + " = " + id, null);
+        return category.getString(category.getColumnIndex(SQLiteDBHelper.CATEGORIES_TABLE_COLUMN_NAME));
     }
 
     /*
@@ -253,9 +338,9 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         Cursor oldNotificationCursor = db.rawQuery("SELECT * FROM " +
                 SQLiteDBHelper.NOTIFICATIONS_TABLE_NAME + " WHERE " + SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_DATE
                 + " < " + new Date().getTime(), null);
-            while (oldNotificationCursor.moveToNext()) {
-                deleteNotification(oldNotificationCursor.getInt(oldNotificationCursor.getColumnIndex(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_ID)));
-            }
+        while (oldNotificationCursor.moveToNext()) {
+            deleteNotification(oldNotificationCursor.getInt(oldNotificationCursor.getColumnIndex(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_ID)));
+        }
         return true;
     }
 
