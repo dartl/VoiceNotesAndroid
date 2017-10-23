@@ -80,7 +80,7 @@ public class NotificationRecyclerAdapter extends CursorRecyclerViewAdapter<Notif
             changeItemSelect(stateSelected);
 
             mImageButtonNotificationIcon.setImageResource(R.drawable.ic_alarm_white_24dp);
-            mImageButtonNotificationIcon.setColorFilter(ContextCompat.getColor(notificationRecyclerAdapter.getContext(), mNotificationRecyclerAdapter.getColorByAttr(R.attr.primaryColor500)));
+            mImageButtonNotificationIcon.setColorFilter(mNotificationRecyclerAdapter.getColorByAttr(R.attr.primaryColor500));
 
             mImageButtonNotificationIcon.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -161,14 +161,14 @@ public class NotificationRecyclerAdapter extends CursorRecyclerViewAdapter<Notif
 
             // Задаем иконку для состояния звука оповещения
             if (notification.isSound()) {
-                imageViewSound.setColorFilter(ContextCompat.getColor(notificationRecyclerAdapter.getContext(), mNotificationRecyclerAdapter.getColorByAttr(R.attr.primaryColor500)));
+                imageViewSound.setColorFilter(mNotificationRecyclerAdapter.getColorByAttr(R.attr.primaryColor500));
             } else {
                 imageViewSound.setColorFilter(ContextCompat.getColor(notificationRecyclerAdapter.getContext(), R.color.colorGrey300));
             }
 
             // Задаем иконку для состояния вибрации оповещения
             if (notification.isShake()) {
-                imageViewShake.setColorFilter(ContextCompat.getColor(notificationRecyclerAdapter.getContext(), mNotificationRecyclerAdapter.getColorByAttr(R.attr.primaryColor500)));
+                imageViewShake.setColorFilter(mNotificationRecyclerAdapter.getColorByAttr(R.attr.primaryColor500));
             } else {
                 imageViewShake.setColorFilter(ContextCompat.getColor(notificationRecyclerAdapter.getContext(), R.color.colorGrey300));
             }
@@ -176,7 +176,7 @@ public class NotificationRecyclerAdapter extends CursorRecyclerViewAdapter<Notif
 
         private void changeItemSelect(boolean state) {
             if (state) {
-                cardView.setBackgroundColor(ContextCompat.getColor(parent.getContext(), mNotificationRecyclerAdapter.getColorByAttr(R.attr.colorSelectListItem)));
+                cardView.setBackgroundColor(mNotificationRecyclerAdapter.getColorByAttr(R.attr.colorSelectListItem));
             } else {
                 cardView.setBackgroundColor(ContextCompat.getColor(parent.getContext(), R.color.colorWhite));
             }

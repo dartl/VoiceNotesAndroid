@@ -23,6 +23,7 @@ import android.widget.TextView;
 
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
 import com.gawk.voicenotes.adapters.ViewPagerAdapter;
+import com.gawk.voicenotes.fragments_main.CategoryListFragment;
 import com.gawk.voicenotes.fragments_main.NotesListFragment;
 import com.gawk.voicenotes.fragments_main.NotificationsListFragment;
 import com.gawk.voicenotes.preferences.PrefUtil;
@@ -111,12 +112,19 @@ public class MainActivity extends ParentActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
+
         NotesListFragment notesListFragment = new NotesListFragment();
         notesListFragment.setMainActivity(this);
         adapter.addFragment(notesListFragment, getResources().getString(R.string.new_notes));
+
         NotificationsListFragment notificationsListFragment = new NotificationsListFragment();
         notificationsListFragment.setMainActivity(this);
         adapter.addFragment(notificationsListFragment, getResources().getString(R.string.new_note_notifications));
+
+        CategoryListFragment categoryListFragment = new CategoryListFragment();
+        categoryListFragment.setMainActivity(this);
+        adapter.addFragment(categoryListFragment, getResources().getString(R.string.main_view_categories_title));
+
         viewPager.setAdapter(adapter);
     }
 
@@ -134,6 +142,13 @@ public class MainActivity extends ParentActivity {
         ImageView tabTwoIcon = tabTwo.findViewById(R.id.imageViewTabIcon);
         tabTwoIcon.setImageResource(R.drawable.ic_alarm_white_24dp);
         tabLayout.getTabAt(1).setCustomView(tabTwo);
+
+        View tabThree = LayoutInflater.from(this).inflate(R.layout.tab_header, null);
+        TextView tabThreeName = tabThree.findViewById(R.id.textViewTabTitle);
+        tabThreeName.setText(adapter.getPageTitle(2));
+        ImageView tabThreeIcon = tabThree.findViewById(R.id.imageViewTabIcon);
+        tabThreeIcon.setImageResource(R.drawable.ic_collections_bookmark_white_24dp);
+        tabLayout.getTabAt(2).setCustomView(tabThree);
     }
 
     @Override
