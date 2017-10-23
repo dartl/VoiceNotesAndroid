@@ -20,5 +20,7 @@
         <attr name="colorGrey800" format="reference|color" />
         <attr name="colorTransparent" format="reference|color" />
         <attr name="colorSelectListItem" format="reference|color" />
+
+        <attr name="drawableDefaultSelector" format="reference|color" />
     </declare-styleable>
 </resources>

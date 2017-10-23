@@ -22,7 +22,7 @@
     <color name="tealColor50">#E0F2F1</color>
 
     <!-- Основной стиль (Deep Purple) -->
-    <color name="deepPurpleColor300">#7E57C2</color>
+    <color name="deepPurpleColor300">#9575CD</color>
     <color name="deepPurpleColor500">#673AB7</color>
     <color name="deepPurpleColor900">#311B92</color>
     <color name="deepPurpleColorA700">#6200EA</color>
