@@ -86,13 +86,41 @@
 
         <Button
             android:id="@+id/buttonAddShortcut"
+            style="@style/GawkMaterialTheme.SettingsButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/GawkMaterialTheme.SettingsButton"
             android:text="@string/settings_add_icon_add_title" />
 
         <TextView
             android:id="@+id/textView8"
+            style="@style/GawkMaterialTheme.SettingsHelp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_add_icon_add" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view7"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#E0E0E0" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="12dp">
+
+        <Button
+            android:id="@+id/buttonSelectTheme"
+            style="@style/GawkMaterialTheme.SettingsButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_select_theme_title" />
+
+        <TextView
+            android:id="@+id/textView9"
             style="@style/GawkMaterialTheme.SettingsHelp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

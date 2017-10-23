@@ -170,7 +170,7 @@ public class MainActivity extends ParentActivity {
                 );
                 return true;
             }
-        } catch (NullPointerException e) {
+        } catch (NullPointerException ignored) {
 
         }
 

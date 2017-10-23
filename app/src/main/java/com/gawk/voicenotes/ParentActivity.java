@@ -57,6 +57,8 @@ import com.google.android.gms.ads.AdView;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.yandex.metrica.YandexMetrica;
 
+import java.lang.reflect.Method;
+
 
 /**
  * Created by GAWK on 06.02.2017.
@@ -82,10 +84,14 @@ public class ParentActivity extends AppCompatActivity
     private NotificationAdapter mNotificationAdapter;
     protected GooglePlaySubs mGooglePlaySubs;
     protected ParentActivity mActivity;
+    PrefUtil mPrefUtil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(R.style.GawkMaterialTheme_BaseDeepPurple);
+        mPrefUtil = new PrefUtil(this);
+        if (mPrefUtil.getInt(PrefUtil.THEME,-1) != -1) {
+            setTheme(mPrefUtil.getInt(PrefUtil.THEME,-1));
+        }
         super.onCreate(savedInstanceState);
 
         // Инициализация AppMetrica SDK
@@ -95,11 +101,9 @@ public class ParentActivity extends AppCompatActivity
 
         mNotificationAdapter = new NotificationAdapter(this);
 
-        PrefUtil prefUtil = new PrefUtil(this);
-
         /* Проверяем наличие настройки для интервала напоминания, если нет - добавляем стандартные 5 минут */
-        if (prefUtil.getLong(prefUtil.NOTIFICATION_INTERVAL,-1) == -1) {
-            prefUtil.saveLong(prefUtil.NOTIFICATION_INTERVAL,60000 * 5);
+        if (mPrefUtil.getLong(PrefUtil.NOTIFICATION_INTERVAL,-1) == -1) {
+            mPrefUtil.saveLong(PrefUtil.NOTIFICATION_INTERVAL,60000 * 5);
         }
 
         dbHelper = SQLiteDBHelper.getInstance(this);
@@ -136,6 +140,10 @@ public class ParentActivity extends AppCompatActivity
     @Override
     public void onResume() {
         super.onResume();
+        int newTheme = mPrefUtil.getInt(PrefUtil.THEME,-1);
+        if (newTheme != -1 && newTheme != getThemeId()) {
+            recreate();
+        }
         Intent serviceIntent =
                 new Intent("com.android.vending.billing.InAppBillingService.BIND");
         serviceIntent.setPackage("com.android.vending");
@@ -435,4 +443,17 @@ public class ParentActivity extends AppCompatActivity
         @ColorInt int color = typedValue.data;
         return color;
     }
+
+    int getThemeId() {
+        try {
+            Class<?> wrapper = Context.class;
+            Method method = wrapper.getMethod("getThemeResId");
+            method.setAccessible(true);
+            return (Integer) method.invoke(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
 }

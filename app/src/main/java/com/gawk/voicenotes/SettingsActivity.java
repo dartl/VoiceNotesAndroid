@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.gawk.voicenotes.preferences.PrefUtil;
 import com.gawk.voicenotes.windows.SelectIntervalDialog;
+import com.gawk.voicenotes.windows.SelectTheme;
 
 /**
  * Created by GAWK on 30.03.2017.
@@ -22,11 +23,12 @@ import com.gawk.voicenotes.windows.SelectIntervalDialog;
 
 public class SettingsActivity extends ParentActivity {
     private int CODE_RESULT_SOUND = 1;
-    private Button addShortcut, buttonSelectSound, mButtonRepetitionView;
+    private Button addShortcut, buttonSelectSound, mButtonRepetitionView, mSelectTheme;
     private TextView textViewSelectSound;
     private PrefUtil mPrefUtil;
     private TextView mTextViewRepetition;
     private SettingsActivity mSettingsActivity;
+    private SelectTheme mSelectThemeDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +64,15 @@ public class SettingsActivity extends ParentActivity {
             public void onClick(View view) {
                 SelectIntervalDialog selectIntervalDialog = new SelectIntervalDialog(mSettingsActivity);
                 selectIntervalDialog.show(getFragmentManager(),"selectIntervalDialog");
+            }
+        });
+
+        mSelectTheme = (Button) findViewById(R.id.buttonSelectTheme);
+        mSelectTheme.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mSelectThemeDialog = new SelectTheme();
+                mSelectThemeDialog.show(getFragmentManager(),"SelectTheme");
             }
         });
 
@@ -152,5 +163,21 @@ public class SettingsActivity extends ParentActivity {
                 mTextViewRepetition.setText(getText(R.string.settings_notification_repetition_text) + " - " + getText(R.string.settings_notification_repetition_select60));
                 break;
         }
+    }
+
+    public void changeTheme(int color) {
+        mSelectThemeDialog.dismiss();
+        PrefUtil prefUtil = new PrefUtil(this);
+        int theme = prefUtil.getInt(PrefUtil.THEME,-1);
+        switch (color) {
+            case R.color.tealColor500:
+                theme = R.style.GawkMaterialTheme_Base;
+                break;
+            case R.color.deepPurpleColor500:
+                theme = R.style.GawkMaterialTheme_BaseDeepPurple;
+                break;
+        }
+        recreate();
+        prefUtil.saveInt(PrefUtil.THEME,theme);
     }
 }
