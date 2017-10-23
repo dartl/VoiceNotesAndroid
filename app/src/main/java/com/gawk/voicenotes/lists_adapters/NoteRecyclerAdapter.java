@@ -86,7 +86,7 @@ public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerA
             });
 
             mImageButtonIconNote.setImageResource(R.drawable.ic_insert_drive_file_black_24dp);
-            mImageButtonIconNote.setColorFilter(ContextCompat.getColor(noteRecyclerAdapter.getContext(), mNoteRecyclerAdapter.getColorByAttr(R.attr.primaryColor500)));
+            mImageButtonIconNote.setColorFilter(mNoteRecyclerAdapter.getColorByAttr(R.attr.primaryColor500));
 
             if (noteRecyclerAdapter.getActionsListNotes().isStateSelected()) {
                 if (noteRecyclerAdapter.getActionsListNotes().checkSelectElement(id)) {
@@ -148,7 +148,7 @@ public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerA
 
         private void changeItemSelect(boolean state) {
             if (state) {
-                cardView.setBackgroundColor(ContextCompat.getColor(parent.getContext(),  mNoteRecyclerAdapter.getColorByAttr(R.attr.colorSelectListItem)));
+                cardView.setBackgroundColor(mNoteRecyclerAdapter.getColorByAttr(R.attr.colorSelectListItem));
             } else {
                 cardView.setBackgroundColor(ContextCompat.getColor(parent.getContext(), R.color.colorWhite));
             }

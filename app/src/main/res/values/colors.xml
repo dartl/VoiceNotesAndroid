@@ -12,6 +12,7 @@
     <color name="colorGrey500">#9E9E9E</color>
     <color name="colorGrey600">#757575</color>
     <color name="colorGrey800">#424242</color>
+    <color name="colorGrey900">#212121</color>
     <color name="colorTransparent">#00FFFFFF</color>
 
     <!-- Основной стиль (Teal) -->
@@ -34,4 +35,103 @@
     <color name="red900">#B71C1C</color>
     <color name="redA700">#D50000</color>
     <color name="red50">#FFEBEE</color>
+
+    <!-- Основной стиль (Pink) -->
+    <color name="Pink300">#F06292</color>
+    <color name="Pink500">#E91E63</color>
+    <color name="Pink900">#880E4F</color>
+    <color name="PinkA700">#C51162</color>
+    <color name="Pink50">#FCE4EC</color>
+
+    <!-- Основной стиль (Purple) -->
+    <color name="Purple50">#F3E5F5</color>
+    <color name="Purple300">#BA68C8</color>
+    <color name="Purple500">#9C27B0</color>
+    <color name="Purple900">#4A148C</color>
+    <color name="PurpleA700">#AA00FF</color>
+
+    <!-- Основной стиль (Indigo) -->
+    <color name="Indigo50">#E8EAF6</color>
+    <color name="Indigo300">#7986CB</color>
+    <color name="Indigo500">#3F51B5</color>
+    <color name="Indigo900">#1A237E</color>
+    <color name="IndigoA700">#304FFE</color>
+
+    <!-- Основной стиль (Blue) -->
+    <color name="Blue50">#E3F2FD</color>
+    <color name="Blue300">#64B5F6</color>
+    <color name="Blue500">#2196F3</color>
+    <color name="Blue900">#0D47A1</color>
+    <color name="BlueA700">#2962FF</color>
+
+    <!-- Основной стиль (Light Blue) -->
+    <color name="LightBlue50">#E1F5FE</color>
+    <color name="LightBlue300">#4FC3F7</color>
+    <color name="LightBlue500">#03A9F4</color>
+    <color name="LightBlue900">#0D47A1</color>
+    <color name="LightBlueA700">#0091EA</color>
+
+    <!-- Основной стиль (Cyan) -->
+    <color name="Cyan50">#E0F7FA</color>
+    <color name="Cyan300">#4DD0E1</color>
+    <color name="Cyan500">#00BCD4</color>
+    <color name="Cyan900">#006064</color>
+    <color name="CyanA700">#00B8D4</color>
+
+    <!-- Основной стиль (Green) -->
+    <color name="Green50">#E8F5E9</color>
+    <color name="Green300">#81C784</color>
+    <color name="Green500">#4CAF50</color>
+    <color name="Green900">#1B5E20</color>
+    <color name="GreenA700">#00C853</color>
+
+    <!-- Основной стиль (Light Green) -->
+    <color name="LightGreen50">#F1F8E9</color>
+    <color name="LightGreen300">#AED581</color>
+    <color name="LightGreen500">#8BC34A</color>
+    <color name="LightGreen900">#33691E</color>
+    <color name="LightGreenA700">#64DD17</color>
+
+    <!-- Основной стиль (Lime) -->
+    <color name="Lime50">#F9FBE7</color>
+    <color name="Lime300">#DCE775</color>
+    <color name="Lime500">#CDDC39</color>
+    <color name="Lime900">#827717</color>
+    <color name="LimeA700">#AEEA00</color>
+
+    <!-- Основной стиль (Yellow) -->
+    <color name="Yellow50">#FFFDE7</color>
+    <color name="Yellow500">#FFEB3B</color>
+    <color name="Yellow700">#FBC02D</color>
+    <color name="Yellow800">#F9A825</color>
+    <color name="Yellow900">#F57F17</color>
+    <color name="YellowA700">#FFD600</color>
+
+    <!-- Основной стиль (Amber) -->
+    <color name="Amber50">#FFF8E1</color>
+    <color name="Amber300">#FFD54F</color>
+    <color name="Amber500">#FFC107</color>
+    <color name="Amber900">#FF6F00</color>
+    <color name="AmberA700">#FFAB00</color>
+
+    <!-- Основной стиль (Orange) -->
+    <color name="Orange50">#FFF3E0</color>
+    <color name="Orange300">#FFB74D</color>
+    <color name="Orange500">#FF9800</color>
+    <color name="Orange900">#E65100</color>
+    <color name="OrangeA700">#FF6D00</color>
+
+    <!-- Основной стиль (Deep Orange) -->
+    <color name="DeepOrange50">#FBE9E7</color>
+    <color name="DeepOrange300">#FF8A65</color>
+    <color name="DeepOrange500">#FF5722</color>
+    <color name="DeepOrange900">#BF360C</color>
+    <color name="DeepOrangeA700">#DD2C00</color>
+
+    <!-- Основной стиль (Brown) -->
+    <color name="Brown50">#EFEBE9</color>
+    <color name="Brown300">#A1887F</color>
+    <color name="Brown500">#795548</color>
+    <color name="Brown900">#3E2723</color>
+    <color name="BrownA700">#5D4037</color>
 </resources>

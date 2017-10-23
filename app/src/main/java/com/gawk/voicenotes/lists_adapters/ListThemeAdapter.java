@@ -56,8 +56,8 @@ public class ListThemeAdapter extends RecyclerView.Adapter<ListThemeAdapter.View
     public void onBindViewHolder(ViewHolder holder, final int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        holder.mButton.setText(mDataset[position]);
-        holder.mButton.setTextColor(ContextCompat.getColor(mContext, mDataset[position]));
+        holder.mButton.setText(mContext.getText(R.string.app_name));
+        holder.mButton.setTextColor(ContextCompat.getColor(mContext, R.color.colorWhite));
         holder.mButton.setBackgroundColor(ContextCompat.getColor(mContext, mDataset[position]));
         holder.mButton.setOnClickListener(new View.OnClickListener() {
             @Override

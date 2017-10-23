@@ -476,6 +476,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         }
         ContentValues newValues = new ContentValues();
         newValues.put(SQLiteDBHelper.NOTES_TABLE_COLUMN_TEXT_NOTE, note.getText_note());
+        Log.e("GAWK_ERR",note.toString() );
         newValues.put(SQLiteDBHelper.NOTES_TABLE_COLUMN_DATE, note.getDate().getTime());
         switch (action) {
             case 0:

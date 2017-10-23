@@ -176,6 +176,54 @@ public class SettingsActivity extends ParentActivity {
             case R.color.deepPurpleColor500:
                 theme = R.style.GawkMaterialTheme_BaseDeepPurple;
                 break;
+            case R.color.colorGrey500:
+                theme = R.style.GawkMaterialTheme_BaseGrey;
+                break;
+            case R.color.red500:
+                theme = R.style.GawkMaterialTheme_BaseRed;
+                break;
+            case R.color.Pink500:
+                theme = R.style.GawkMaterialTheme_BasePink;
+                break;
+            case R.color.Purple500:
+                theme = R.style.GawkMaterialTheme_BasePurple;
+                break;
+            case R.color.Indigo500:
+                theme = R.style.GawkMaterialTheme_BaseIndigo;
+                break;
+            case R.color.Blue500:
+                theme = R.style.GawkMaterialTheme_BaseBlue;
+                break;
+            case R.color.LightBlue500:
+                theme = R.style.GawkMaterialTheme_BaseLightBlue;
+                break;
+            case R.color.Cyan500:
+                theme = R.style.GawkMaterialTheme_BaseCyan;
+                break;
+            case R.color.Green500:
+                theme = R.style.GawkMaterialTheme_BaseGreen;
+                break;
+            case R.color.LightGreen500:
+                theme = R.style.GawkMaterialTheme_BaseLightGreen;
+                break;
+            case R.color.Lime500:
+                theme = R.style.GawkMaterialTheme_BaseLime;
+                break;
+            case R.color.Yellow500:
+                theme = R.style.GawkMaterialTheme_BaseYellow;
+                break;
+            case R.color.Amber500:
+                theme = R.style.GawkMaterialTheme_BaseAmber;
+                break;
+            case R.color.Orange500:
+                theme = R.style.GawkMaterialTheme_BaseOrange;
+                break;
+            case R.color.DeepOrange500:
+                theme = R.style.GawkMaterialTheme_BaseDeepOrange;
+                break;
+            case R.color.Brown500:
+                theme = R.style.GawkMaterialTheme_BaseBrown;
+                break;
         }
         recreate();
         prefUtil.saveInt(PrefUtil.THEME,theme);

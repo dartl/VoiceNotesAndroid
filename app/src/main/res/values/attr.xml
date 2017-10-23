@@ -21,6 +21,6 @@
         <attr name="colorTransparent" format="reference|color" />
         <attr name="colorSelectListItem" format="reference|color" />
 
-        <attr name="drawableDefaultSelector" format="reference|color" />
+        <attr name="drawableDefaultButtonSelector" format="reference|color" />
     </declare-styleable>
 </resources>

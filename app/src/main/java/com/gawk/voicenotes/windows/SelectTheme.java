@@ -28,7 +28,26 @@ public class SelectTheme extends DialogFragment {
     private Button mButtonCancel;
     private RecyclerView mRecyclerViewSelectTheme;
     private RecyclerView.LayoutManager mLayoutManager;
-    int[] values = new int[] { R.color.tealColor500, R.color.deepPurpleColor500, R.color.red500 };
+    int[] values = new int[] {
+            R.color.colorGrey500,
+            R.color.red500,
+            R.color.Pink500,
+            R.color.Purple500,
+            R.color.deepPurpleColor500,
+            R.color.Indigo500,
+            R.color.Blue500,
+            R.color.LightBlue500,
+            R.color.Cyan500,
+            R.color.tealColor500,
+            R.color.Green500,
+            R.color.LightGreen500,
+            R.color.Lime500,
+            R.color.Yellow500,
+            R.color.Amber500,
+            R.color.Orange500,
+            R.color.DeepOrange500,
+            R.color.Brown500
+    };
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {

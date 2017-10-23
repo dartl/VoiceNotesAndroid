@@ -16,7 +16,7 @@
         <item name="tabIndicatorColor">@color/colorWhite</item>
         <item name="tabIndicatorHeight">2dp</item>
 
-        <item name="drawableDefaultButtonSelector">@drawable/default_button_selector</item>
+        <item name="drawableDefaultButtonSelector">@drawable/default_button_selector_teal</item>
     </style>
 
     <style name="GawkMaterialTheme.BaseDeepPurple" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -28,11 +28,301 @@
 
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
+        <item name="colorPrimary">?primaryColor500</item>
+        <item name="colorPrimaryDark">?primaryColorDark</item>
+        <item name="colorAccent">?accentColor</item>
+        <item name="tabIndicatorColor">@color/colorWhite</item>
+        <item name="tabIndicatorHeight">2dp</item>
+
+        <item name="drawableDefaultButtonSelector">@drawable/default_button_selector_deeppurple</item>
+    </style>
+
+    <style name="GawkMaterialTheme.BaseGrey" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="primaryColor">@color/colorGrey500</item>
+        <item name="primaryColor500">@color/colorGrey800</item>
+        <item name="primaryColorDark">@color/colorGrey900</item>
+        <item name="colorSelectListItem">@color/colorGrey50</item>
+        <item name="accentColor">@color/colorGrey800</item>
+
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="colorPrimary">?primaryColor500</item>
+        <item name="colorPrimaryDark">?primaryColorDark</item>
+        <item name="colorAccent">?accentColor</item>
+        <item name="tabIndicatorColor">@color/colorWhite</item>
+        <item name="tabIndicatorHeight">2dp</item>
+
+        <item name="drawableDefaultButtonSelector">@drawable/default_button_selector_grey</item>
+    </style>
+
+    <style name="GawkMaterialTheme.BaseRed" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="primaryColor">@color/red300</item>
+        <item name="primaryColor500">@color/red500</item>
+        <item name="primaryColorDark">@color/red900</item>
+        <item name="colorSelectListItem">@color/red50</item>
+        <item name="accentColor">@color/redA700</item>
+
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
         <item name="colorPrimary">?primaryColor</item>
         <item name="colorPrimaryDark">?primaryColorDark</item>
         <item name="colorAccent">?accentColor</item>
         <item name="tabIndicatorColor">@color/colorWhite</item>
         <item name="tabIndicatorHeight">2dp</item>
+
+        <item name="drawableDefaultButtonSelector">@drawable/default_button_selector_red</item>
+    </style>
+
+    <style name="GawkMaterialTheme.BasePink" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="primaryColor">@color/Pink300</item>
+        <item name="primaryColor500">@color/Pink500</item>
+        <item name="primaryColorDark">@color/Pink900</item>
+        <item name="colorSelectListItem">@color/Pink50</item>
+        <item name="accentColor">@color/PinkA700</item>
+
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="colorPrimary">?primaryColor</item>
+        <item name="colorPrimaryDark">?primaryColorDark</item>
+        <item name="colorAccent">?accentColor</item>
+        <item name="tabIndicatorColor">@color/colorWhite</item>
+        <item name="tabIndicatorHeight">2dp</item>
+
+        <item name="drawableDefaultButtonSelector">@drawable/default_button_selector_pink</item>
+    </style>
+
+    <style name="GawkMaterialTheme.BasePurple" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="primaryColor">@color/Purple300</item>
+        <item name="primaryColor500">@color/Purple500</item>
+        <item name="primaryColorDark">@color/Purple900</item>
+        <item name="colorSelectListItem">@color/Purple50</item>
+        <item name="accentColor">@color/PurpleA700</item>
+
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="colorPrimary">?primaryColor</item>
+        <item name="colorPrimaryDark">?primaryColorDark</item>
+        <item name="colorAccent">?accentColor</item>
+        <item name="tabIndicatorColor">@color/colorWhite</item>
+        <item name="tabIndicatorHeight">2dp</item>
+
+        <item name="drawableDefaultButtonSelector">@drawable/default_button_selector_purple</item>
+    </style>
+
+    <style name="GawkMaterialTheme.BaseIndigo" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="primaryColor">@color/Indigo300</item>
+        <item name="primaryColor500">@color/Indigo500</item>
+        <item name="primaryColorDark">@color/Indigo900</item>
+        <item name="colorSelectListItem">@color/Indigo50</item>
+        <item name="accentColor">@color/IndigoA700</item>
+
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="colorPrimary">?primaryColor</item>
+        <item name="colorPrimaryDark">?primaryColorDark</item>
+        <item name="colorAccent">?accentColor</item>
+        <item name="tabIndicatorColor">@color/colorWhite</item>
+        <item name="tabIndicatorHeight">2dp</item>
+
+        <item name="drawableDefaultButtonSelector">@drawable/default_button_selector_indigo</item>
+    </style>
+
+    <style name="GawkMaterialTheme.BaseBlue" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="primaryColor">@color/Blue300</item>
+        <item name="primaryColor500">@color/Blue500</item>
+        <item name="primaryColorDark">@color/Blue900</item>
+        <item name="colorSelectListItem">@color/Blue50</item>
+        <item name="accentColor">@color/BlueA700</item>
+
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="colorPrimary">?primaryColor</item>
+        <item name="colorPrimaryDark">?primaryColorDark</item>
+        <item name="colorAccent">?accentColor</item>
+        <item name="tabIndicatorColor">@color/colorWhite</item>
+        <item name="tabIndicatorHeight">2dp</item>
+
+        <item name="drawableDefaultButtonSelector">@drawable/default_button_selector_blue</item>
+    </style>
+
+    <style name="GawkMaterialTheme.BaseLightBlue" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="primaryColor">@color/LightBlue300</item>
+        <item name="primaryColor500">@color/LightBlue500</item>
+        <item name="primaryColorDark">@color/LightBlue900</item>
+        <item name="colorSelectListItem">@color/LightBlue50</item>
+        <item name="accentColor">@color/LightBlueA700</item>
+
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="colorPrimary">?primaryColor</item>
+        <item name="colorPrimaryDark">?primaryColorDark</item>
+        <item name="colorAccent">?accentColor</item>
+        <item name="tabIndicatorColor">@color/colorWhite</item>
+        <item name="tabIndicatorHeight">2dp</item>
+
+        <item name="drawableDefaultButtonSelector">@drawable/default_button_selector_lightblue</item>
+    </style>
+
+    <style name="GawkMaterialTheme.BaseCyan" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="primaryColor">@color/Cyan300</item>
+        <item name="primaryColor500">@color/Cyan500</item>
+        <item name="primaryColorDark">@color/Cyan900</item>
+        <item name="colorSelectListItem">@color/Cyan50</item>
+        <item name="accentColor">@color/CyanA700</item>
+
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="colorPrimary">?primaryColor</item>
+        <item name="colorPrimaryDark">?primaryColorDark</item>
+        <item name="colorAccent">?accentColor</item>
+        <item name="tabIndicatorColor">@color/colorWhite</item>
+        <item name="tabIndicatorHeight">2dp</item>
+
+        <item name="drawableDefaultButtonSelector">@drawable/default_button_selector_cyan</item>
+    </style>
+
+    <style name="GawkMaterialTheme.BaseGreen" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="primaryColor">@color/Green300</item>
+        <item name="primaryColor500">@color/Green500</item>
+        <item name="primaryColorDark">@color/Green900</item>
+        <item name="colorSelectListItem">@color/Green50</item>
+        <item name="accentColor">@color/GreenA700</item>
+
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="colorPrimary">?primaryColor</item>
+        <item name="colorPrimaryDark">?primaryColorDark</item>
+        <item name="colorAccent">?accentColor</item>
+        <item name="tabIndicatorColor">@color/colorWhite</item>
+        <item name="tabIndicatorHeight">2dp</item>
+
+        <item name="drawableDefaultButtonSelector">@drawable/default_button_selector_green</item>
+    </style>
+
+    <style name="GawkMaterialTheme.BaseLightGreen" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="primaryColor">@color/LightGreen300</item>
+        <item name="primaryColor500">@color/LightGreen500</item>
+        <item name="primaryColorDark">@color/LightGreen900</item>
+        <item name="colorSelectListItem">@color/LightGreen50</item>
+        <item name="accentColor">@color/LightGreenA700</item>
+
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="colorPrimary">?primaryColor</item>
+        <item name="colorPrimaryDark">?primaryColorDark</item>
+        <item name="colorAccent">?accentColor</item>
+        <item name="tabIndicatorColor">@color/colorWhite</item>
+        <item name="tabIndicatorHeight">2dp</item>
+
+        <item name="drawableDefaultButtonSelector">@drawable/default_button_selector_lightgreen</item>
+    </style>
+
+    <style name="GawkMaterialTheme.BaseLime" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="primaryColor">@color/Lime300</item>
+        <item name="primaryColor500">@color/Lime500</item>
+        <item name="primaryColorDark">@color/Lime900</item>
+        <item name="colorSelectListItem">@color/Lime50</item>
+        <item name="accentColor">@color/LimeA700</item>
+
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="colorPrimary">?primaryColor</item>
+        <item name="colorPrimaryDark">?primaryColorDark</item>
+        <item name="colorAccent">?accentColor</item>
+        <item name="tabIndicatorColor">@color/colorWhite</item>
+        <item name="tabIndicatorHeight">2dp</item>
+
+        <item name="drawableDefaultButtonSelector">@drawable/default_button_selector_lime</item>
+    </style>
+
+    <style name="GawkMaterialTheme.BaseYellow" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="primaryColor">@color/Yellow700</item>
+        <item name="primaryColor500">@color/Yellow800</item>
+        <item name="primaryColorDark">@color/Yellow900</item>
+        <item name="colorSelectListItem">@color/Yellow50</item>
+        <item name="accentColor">@color/YellowA700</item>
+
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="colorPrimary">@color/Yellow800</item>
+        <item name="colorPrimaryDark">?primaryColorDark</item>
+        <item name="colorAccent">?accentColor</item>
+        <item name="tabIndicatorColor">@color/colorWhite</item>
+        <item name="tabIndicatorHeight">2dp</item>
+
+        <item name="drawableDefaultButtonSelector">@drawable/default_button_selector_yellow</item>
+    </style>
+
+    <style name="GawkMaterialTheme.BaseAmber" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="primaryColor">@color/Amber300</item>
+        <item name="primaryColor500">@color/Amber500</item>
+        <item name="primaryColorDark">@color/Amber900</item>
+        <item name="colorSelectListItem">@color/Amber50</item>
+        <item name="accentColor">@color/AmberA700</item>
+
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="colorPrimary">?primaryColor</item>
+        <item name="colorPrimaryDark">?primaryColorDark</item>
+        <item name="colorAccent">?accentColor</item>
+        <item name="tabIndicatorColor">@color/colorWhite</item>
+        <item name="tabIndicatorHeight">2dp</item>
+
+        <item name="drawableDefaultButtonSelector">@drawable/default_button_selector_amber</item>
+    </style>
+
+    <style name="GawkMaterialTheme.BaseOrange" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="primaryColor">@color/Orange300</item>
+        <item name="primaryColor500">@color/Orange500</item>
+        <item name="primaryColorDark">@color/Orange900</item>
+        <item name="colorSelectListItem">@color/Orange50</item>
+        <item name="accentColor">@color/OrangeA700</item>
+
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="colorPrimary">?primaryColor</item>
+        <item name="colorPrimaryDark">?primaryColorDark</item>
+        <item name="colorAccent">?accentColor</item>
+        <item name="tabIndicatorColor">@color/colorWhite</item>
+        <item name="tabIndicatorHeight">2dp</item>
+
+        <item name="drawableDefaultButtonSelector">@drawable/default_button_selector_orange</item>
+    </style>
+
+    <style name="GawkMaterialTheme.BaseDeepOrange" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="primaryColor">@color/DeepOrange300</item>
+        <item name="primaryColor500">@color/DeepOrange500</item>
+        <item name="primaryColorDark">@color/DeepOrange900</item>
+        <item name="colorSelectListItem">@color/DeepOrange50</item>
+        <item name="accentColor">@color/DeepOrangeA700</item>
+
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="colorPrimary">?primaryColor</item>
+        <item name="colorPrimaryDark">?primaryColorDark</item>
+        <item name="colorAccent">?accentColor</item>
+        <item name="tabIndicatorColor">@color/colorWhite</item>
+        <item name="tabIndicatorHeight">2dp</item>
+
+        <item name="drawableDefaultButtonSelector">@drawable/default_button_selector_deeporange</item>
+    </style>
+
+    <style name="GawkMaterialTheme.BaseBrown" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="primaryColor">@color/Brown300</item>
+        <item name="primaryColor500">@color/Brown500</item>
+        <item name="primaryColorDark">@color/Brown900</item>
+        <item name="colorSelectListItem">@color/Brown50</item>
+        <item name="accentColor">@color/BrownA700</item>
+
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="colorPrimary">?primaryColor</item>
+        <item name="colorPrimaryDark">?primaryColorDark</item>
+        <item name="colorAccent">?accentColor</item>
+        <item name="tabIndicatorColor">@color/colorWhite</item>
+        <item name="tabIndicatorHeight">2dp</item>
+
+        <item name="drawableDefaultButtonSelector">@drawable/default_button_selector_brown</item>
     </style>
 
     <style name="GawkMaterialTheme.NoActionBar">
@@ -51,7 +341,7 @@
     </style>
 
     <style name="GawkMaterialTheme.PrimaryButton">
-        <item name="android:background">?drawableDefaultSelector</item>
+        <item name="android:background">?drawableDefaultButtonSelector</item>
         <item name="android:minHeight">56dp</item>
         <item name="android:textSize">14sp</item>
         <item name="android:paddingLeft">16dp</item>

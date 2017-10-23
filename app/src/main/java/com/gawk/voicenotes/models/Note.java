@@ -7,6 +7,7 @@ import android.os.Parcelable;
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -22,12 +23,12 @@ public class Note implements Serializable, Parcelable {
     public Note() {
         this.id = -1;
         this.text_note = null;
-        this.date = null;
+        this.date = Calendar.getInstance().getTime();
         this.mCategoryId = -1;
     }
 
     public Note(long _id, String _text_note, Date _date) {
-        new Note(_id, _text_note, _date,-1);
+        this(_id, _text_note, _date,-1);
     }
 
     public Note(long _id, String _text_note, Date _date, long _categoryId) {
@@ -43,7 +44,7 @@ public class Note implements Serializable, Parcelable {
             this.text_note = elem.getString(elem.getColumnIndex(SQLiteDBHelper.NOTES_TABLE_COLUMN_TEXT_NOTE));
             long temp = elem.getLong(elem.getColumnIndex(SQLiteDBHelper.NOTES_TABLE_COLUMN_DATE));
             this.date = new Date(temp);
-            this.mCategoryId = elem.getLong(elem.getColumnIndex(SQLiteDBHelper.NOTES_TABLE_COLUMN_CATEGORY));
+            //this.mCategoryId = elem.getLong(elem.getColumnIndex(SQLiteDBHelper.NOTES_TABLE_COLUMN_CATEGORY));
         } /*else if () {
             this.id = elem.getLong(elem.getColumnIndex(SQLiteDBHelper.NOTES_TABLE_COLUMN_ID));
             this.text_note = elem.getString(elem.getColumnIndex(SQLiteDBHelper.NOTES_TABLE_COLUMN_TEXT_NOTE));

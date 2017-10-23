@@ -77,7 +77,6 @@ public class NewNote extends ParentActivity implements TimePickerReturn {
         newNoteAddNotification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 startSaveNote();
             }
         });
@@ -129,7 +128,9 @@ public class NewNote extends ParentActivity implements TimePickerReturn {
         // сохранение заметки
         dbHelper.connection();
         NewNoteText newNoteText = (NewNoteText) adapter.getItem(0);
+        Log.e("GAWK_ERR", "newNoteText.getTextNote() = " + newNoteText.getTextNote() );
         Note newNote = new Note(-1,newNoteText.getTextNote(), Calendar.getInstance().getTime());
+        Log.e("GAWK_ERR",newNote.toString() );
         long note_id = dbHelper.saveNote(newNote, 0);
         newNote.setId(note_id);
 
