@@ -3,11 +3,33 @@
     <style name="GawkMaterialTheme" parent="GawkMaterialTheme.Base"></style>
 
     <style name="GawkMaterialTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="primaryColor">@color/tealColor300</item>
+        <item name="primaryColor500">@color/tealColor500</item>
+        <item name="primaryColorDark">@color/tealColor900</item>
+        <item name="colorSelectListItem">#EDFAEF</item>
+        <item name="accentColor">@color/tealColorA700</item>
+
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">?primaryColor</item>
+        <item name="colorPrimaryDark">?primaryColorDark</item>
+        <item name="colorAccent">?accentColor</item>
+        <item name="tabIndicatorColor">@color/colorWhite</item>
+        <item name="tabIndicatorHeight">2dp</item>
+    </style>
+
+    <style name="GawkMaterialTheme.BaseDeepPurple" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="primaryColor">@color/deepPurpleColor300</item>
+        <item name="primaryColor500">@color/deepPurpleColor500</item>
+        <item name="primaryColorDark">@color/deepPurpleColor900</item>
+        <item name="colorSelectListItem">@color/deepPurpleColor50</item>
+        <item name="accentColor">@color/deepPurpleColorA700</item>
+
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="colorPrimary">?primaryColor</item>
+        <item name="colorPrimaryDark">?primaryColorDark</item>
+        <item name="colorAccent">?accentColor</item>
         <item name="tabIndicatorColor">@color/colorWhite</item>
         <item name="tabIndicatorHeight">2dp</item>
     </style>
@@ -18,7 +40,7 @@
     </style>
 
     <style name="GawkMaterialTheme.DefaultButton">
-        <item name="android:textColor">@color/colorPrimary500</item>
+        <item name="android:textColor">?primaryColor500</item>
         <item name="android:background">@drawable/selector_button_white</item>
         <item name="android:minHeight">56dp</item>
         <item name="android:textSize">14sp</item>
@@ -43,7 +65,7 @@
         <item name="android:paddingLeft">16dp</item>
         <item name="android:paddingRight">16dp</item>
         <item name="android:textAllCaps">true</item>
-        <item name="android:textColor">@color/colorPrimary500</item>
+        <item name="android:textColor">?primaryColor500</item>
     </style>
 
     <!-- Главное окно -->
@@ -90,6 +112,7 @@
 
     <style name="GawkMaterialTheme.ListNoteElementIconNote" parent="GawkMaterialTheme.IconNoBackground">
         <item name="android:padding">8dp</item>
+        <item name="android:tint">?primaryColor500</item>
     </style>
 
     <style name="GawkMaterialTheme.ListNoteElementDate">
@@ -111,6 +134,10 @@
 
     <style name="GawkMaterialTheme.ListNoteActionsIcons" parent="GawkMaterialTheme.IconNoBackground">
         <item name="android:layout_marginLeft">8dp</item>
+        <item name="android:layout_height">@dimen/actions_icon_size</item>
+        <item name="android:layout_width">@dimen/actions_icon_size</item>
+        <item name="android:padding">@dimen/actions_icon_padding</item>
+        <item name="android:tint">@color/colorGrey600</item>
     </style>
 
     <style name="GawkMaterialTheme.ListNoteActionsTitle">
@@ -121,6 +148,7 @@
 
     <style name="GawkMaterialTheme.ListNotificationIconsState" parent="GawkMaterialTheme.IconNoBackground">
         <item name="android:layout_marginLeft">8dp</item>
+        <item name="android:tint">?primaryColor500</item>
     </style>
 
     <!-- Окно статистики -->
@@ -143,7 +171,7 @@
         <item name="android:textAllCaps">true</item>
         <item name="android:textSize">18sp</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/colorPrimary500</item>
+        <item name="android:textColor">?primaryColor500</item>
         <item name="android:gravity">center_horizontal</item>
     </style>
 
@@ -171,7 +199,7 @@
 
     <style name="GawkMaterialTheme.StatisticsItemCounter">
         <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/colorPrimary500</item>
+        <item name="android:textColor">?primaryColor500</item>
         <item name="android:gravity">end</item>
     </style>
 
@@ -195,7 +223,7 @@
     </style>
 
     <style name="GawkMaterialTheme.NewNoteTextIcon">
-        <item name="android:tint">@color/colorPrimary500</item>
+        <item name="android:tint">?primaryColor500</item>
         <item name="android:layout_marginBottom">@dimen/activity_horizontal_margin</item>
     </style>
 
@@ -242,7 +270,7 @@
     </style>
 
     <style name="GawkMaterialTheme.ButtonChangeTime" parent="GawkMaterialTheme.DefaultButton">
-        <item name="android:textColor">@color/colorPrimary500</item>
+        <item name="android:textColor">?primaryColor500</item>
         <item name="android:drawableStart">@drawable/alarm_colored</item>
         <item name="android:drawablePadding">12dp</item>
         <item name="android:layout_margin">8dp</item>
@@ -329,7 +357,7 @@
 
     <!-- Окно Настроек -->
     <style name="GawkMaterialTheme.SettingsTitle">
-        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textColor">?primaryColor</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:layout_marginTop">@dimen/activity_horizontal_margin</item>
@@ -363,4 +391,5 @@
         <item name="android:textColor">@color/colorGrey600</item>
         <item name="android:textSize">16sp</item>
     </style>
+
 </resources>

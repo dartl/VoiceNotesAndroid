@@ -2,12 +2,15 @@ package com.gawk.voicenotes.lists_adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.PorterDuff;
+import android.support.annotation.ColorInt;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,6 +53,8 @@ public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerA
         ImageButton mImageButtonIconNote, mImageButtonMoreMenu;
         CardView cardView;
         View parent;
+        NoteRecyclerAdapter mNoteRecyclerAdapter;
+
         public ViewHolder(View v) {
             super(v);
             parent = v;
@@ -62,6 +67,7 @@ public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerA
         }
 
         public void setData(final Cursor c, final NoteRecyclerAdapter noteRecyclerAdapter) {
+            mNoteRecyclerAdapter = noteRecyclerAdapter;
             final int position = c.getPosition();
             final long id = noteRecyclerAdapter.getItemId(getLayoutPosition());
             Log.e("GAWK_ERR","position note = " + id);
@@ -80,7 +86,7 @@ public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerA
             });
 
             mImageButtonIconNote.setImageResource(R.drawable.ic_insert_drive_file_black_24dp);
-            mImageButtonIconNote.setColorFilter(ContextCompat.getColor(noteRecyclerAdapter.getContext(), R.color.colorPrimary500));
+            mImageButtonIconNote.setColorFilter(ContextCompat.getColor(noteRecyclerAdapter.getContext(), mNoteRecyclerAdapter.getColorByAttr(R.attr.primaryColor500)));
 
             if (noteRecyclerAdapter.getActionsListNotes().isStateSelected()) {
                 if (noteRecyclerAdapter.getActionsListNotes().checkSelectElement(id)) {
@@ -142,7 +148,7 @@ public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerA
 
         private void changeItemSelect(boolean state) {
             if (state) {
-                cardView.setBackgroundColor(ContextCompat.getColor(parent.getContext(), R.color.colorSelectListItem));
+                cardView.setBackgroundColor(ContextCompat.getColor(parent.getContext(),  mNoteRecyclerAdapter.getColorByAttr(R.attr.colorSelectListItem)));
             } else {
                 cardView.setBackgroundColor(ContextCompat.getColor(parent.getContext(), R.color.colorWhite));
             }
@@ -169,7 +175,7 @@ public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerA
 
     @Override
     public boolean onLongClick(View view) {
-        view.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
+        view.setBackgroundColor(ContextCompat.getColor(getContext(),getColorByAttr(R.attr.primaryColor)));
         return false;
     }
 

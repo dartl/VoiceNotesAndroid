@@ -71,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:text="@string/export_import_select_folder"
-                android:textColor="@color/colorPrimary500"
+                android:textColor="?primaryColor500"
                 android:layout_alignParentTop="true"
                 android:layout_toLeftOf="@+id/buttonExport"
                 android:layout_toStartOf="@+id/buttonExport" />
@@ -119,7 +119,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:text="@string/export_import_select_file"
-                android:textColor="@color/colorPrimary500"
+                android:textColor="?primaryColor500"
                 android:layout_alignParentTop="true"
                 android:layout_toLeftOf="@+id/buttonImport"
                 android:layout_toStartOf="@+id/buttonImport" />

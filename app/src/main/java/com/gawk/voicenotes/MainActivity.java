@@ -94,7 +94,7 @@ public class MainActivity extends ParentActivity {
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view_menu);
         navigationView.getMenu().findItem(R.id.menu_notes_list).setCheckable(true).setChecked(true);
         TextView textView = navigationView.getMenu().findItem(R.id.menu_notes_list).getActionView().findViewById(R.id.counterNotes);
-        textView.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary));
+        textView.setTextColor(getColorByAttr(R.attr.primaryColor));
     }
 
     @Override

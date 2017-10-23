@@ -96,7 +96,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:text="@string/note_view_add_reminder"
-                    android:textColor="@color/colorPrimary500" />
+                    android:textColor="?primaryColor500" />
 
                 <include
                     layout="@layout/notifications_list_fragment"

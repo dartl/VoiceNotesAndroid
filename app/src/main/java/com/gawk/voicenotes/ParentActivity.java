@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -15,6 +16,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.support.annotation.ColorInt;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
@@ -25,6 +27,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -82,6 +85,7 @@ public class ParentActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.GawkMaterialTheme_BaseDeepPurple);
         super.onCreate(savedInstanceState);
 
         // Инициализация AppMetrica SDK
@@ -422,5 +426,13 @@ public class ParentActivity extends AppCompatActivity
             }
         }
         return true;
+    }
+
+    public int getColorByAttr(int attr) {
+        TypedValue typedValue = new TypedValue();
+        Resources.Theme theme = this.getTheme();
+        theme.resolveAttribute(attr, typedValue, true);
+        @ColorInt int color = typedValue.data;
+        return color;
     }
 }

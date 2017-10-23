@@ -33,7 +33,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:scaleType="fitCenter"
-                    android:tint="@color/colorPrimary500"
                     app:srcCompat="@drawable/ic_insert_drive_file_black_24dp" />
 
                 <LinearLayout

@@ -26,6 +26,10 @@ public class Note implements Serializable, Parcelable {
         this.mCategoryId = -1;
     }
 
+    public Note(long _id, String _text_note, Date _date) {
+        new Note(_id, _text_note, _date,-1);
+    }
+
     public Note(long _id, String _text_note, Date _date, long _categoryId) {
         this.id = _id;
         this.text_note = _text_note;

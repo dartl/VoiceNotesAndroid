@@ -296,8 +296,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
                 result = db.update(SQLiteDBHelper.NOTIFICATIONS_TABLE_NAME, newValues, NOTIFICATIONS_TABLE_COLUMN_ID +" = ?",
                         new String[] { String.valueOf(category.getId()) });
         }
-        if (result < 0) return false;
-        return true;
+        return result >= 0;
     }
 
     public String getNameCategory(long id) {

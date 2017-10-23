@@ -46,7 +46,7 @@ public class ExportImportActivity extends ParentActivity implements View.OnClick
         initAdMob(true);
 
         openDirectoryDialog = new OpenFileDialog(this)
-                .setFileSelectedColor(R.color.colorPrimary)
+                .setFileSelectedColor(getColorByAttr(R.attr.primaryColor))
                 .setFolderSelectable(true).setOnCloseListener(new OpenFileDialog.OnCloseListener(){
                     public void onCancel(){}
 
@@ -58,7 +58,7 @@ public class ExportImportActivity extends ParentActivity implements View.OnClick
                     }
                 });
         openFileDialog = new OpenFileDialog(this).setFolderSelectable(true)
-                .setFileSelectedColor(R.color.colorPrimary)
+                .setFileSelectedColor(getColorByAttr(R.attr.primaryColor))
                 .setOnCloseListener(new OpenFileDialog.OnCloseListener(){
                     public void onCancel(){}
 

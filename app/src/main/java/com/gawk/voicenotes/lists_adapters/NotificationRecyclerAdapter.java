@@ -50,13 +50,14 @@ public class NotificationRecyclerAdapter extends CursorRecyclerViewAdapter<Notif
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public ImageView imageViewSound, imageViewShake;
-        public TextView textViewTextNote, textViewDateNotification, mTextViewGroup;
-        private ImageButton mImageButtonNotificationIcon, mImageButtonMoreMenu;
+        ImageView imageViewSound, imageViewShake;
+        TextView textViewTextNote, textViewDateNotification, mTextViewGroup;
+        ImageButton mImageButtonNotificationIcon, mImageButtonMoreMenu;
         CardView cardView;
+        NotificationRecyclerAdapter mNotificationRecyclerAdapter;
         public View parent;
 
-        public ViewHolder(View v) {
+        ViewHolder(View v) {
             super(v);
             parent = v;
             imageViewSound = v.findViewById(R.id.imageViewSound);
@@ -69,7 +70,8 @@ public class NotificationRecyclerAdapter extends CursorRecyclerViewAdapter<Notif
             mTextViewGroup = v.findViewById(R.id.textViewGroup);
         }
 
-        public void setData(final Cursor c, final NotificationRecyclerAdapter notificationRecyclerAdapter, SQLiteDBHelper db) {
+        void setData(final Cursor c, final NotificationRecyclerAdapter notificationRecyclerAdapter, SQLiteDBHelper db) {
+            mNotificationRecyclerAdapter = notificationRecyclerAdapter;
             final long id = notificationRecyclerAdapter.getItemId(getLayoutPosition());
 
             Notification notification = new Notification(c);
@@ -78,7 +80,7 @@ public class NotificationRecyclerAdapter extends CursorRecyclerViewAdapter<Notif
             changeItemSelect(stateSelected);
 
             mImageButtonNotificationIcon.setImageResource(R.drawable.ic_alarm_white_24dp);
-            mImageButtonNotificationIcon.setColorFilter(ContextCompat.getColor(notificationRecyclerAdapter.getContext(), R.color.colorPrimary500));
+            mImageButtonNotificationIcon.setColorFilter(ContextCompat.getColor(notificationRecyclerAdapter.getContext(), mNotificationRecyclerAdapter.getColorByAttr(R.attr.primaryColor500)));
 
             mImageButtonNotificationIcon.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -159,14 +161,14 @@ public class NotificationRecyclerAdapter extends CursorRecyclerViewAdapter<Notif
 
             // Задаем иконку для состояния звука оповещения
             if (notification.isSound()) {
-                imageViewSound.setColorFilter(ContextCompat.getColor(notificationRecyclerAdapter.getContext(), R.color.colorPrimary500));
+                imageViewSound.setColorFilter(ContextCompat.getColor(notificationRecyclerAdapter.getContext(), mNotificationRecyclerAdapter.getColorByAttr(R.attr.primaryColor500)));
             } else {
                 imageViewSound.setColorFilter(ContextCompat.getColor(notificationRecyclerAdapter.getContext(), R.color.colorGrey300));
             }
 
             // Задаем иконку для состояния вибрации оповещения
             if (notification.isShake()) {
-                imageViewShake.setColorFilter(ContextCompat.getColor(notificationRecyclerAdapter.getContext(), R.color.colorPrimary500));
+                imageViewShake.setColorFilter(ContextCompat.getColor(notificationRecyclerAdapter.getContext(), mNotificationRecyclerAdapter.getColorByAttr(R.attr.primaryColor500)));
             } else {
                 imageViewShake.setColorFilter(ContextCompat.getColor(notificationRecyclerAdapter.getContext(), R.color.colorGrey300));
             }
@@ -174,7 +176,7 @@ public class NotificationRecyclerAdapter extends CursorRecyclerViewAdapter<Notif
 
         private void changeItemSelect(boolean state) {
             if (state) {
-                cardView.setBackgroundColor(ContextCompat.getColor(parent.getContext(), R.color.colorSelectListItem));
+                cardView.setBackgroundColor(ContextCompat.getColor(parent.getContext(), mNotificationRecyclerAdapter.getColorByAttr(R.attr.colorSelectListItem)));
             } else {
                 cardView.setBackgroundColor(ContextCompat.getColor(parent.getContext(), R.color.colorWhite));
             }

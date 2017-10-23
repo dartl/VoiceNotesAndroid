@@ -1,10 +1,13 @@
 package com.gawk.voicenotes.lists_adapters;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.DataSetObserver;
+import android.support.annotation.ColorInt;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.util.TypedValue;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -193,5 +196,13 @@ public abstract class CursorRecyclerViewAdapter<VH extends RecyclerView.ViewHold
 
     public void setStateSelected(boolean mStateSelected) {
         this.mStateSelected = mStateSelected;
+    }
+
+    public int getColorByAttr(int attr) {
+        TypedValue typedValue = new TypedValue();
+        Resources.Theme theme = mContext.getTheme();
+        theme.resolveAttribute(attr, typedValue, true);
+        @ColorInt int color = typedValue.data;
+        return color;
     }
 }

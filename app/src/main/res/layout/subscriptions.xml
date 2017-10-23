@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/GawkMaterialTheme.DefaultButton"
-        android:textColor="@color/colorPrimary500"
+        android:textColor="?primaryColor500"
         android:text="@string/donate_small" />
 
     <Button
