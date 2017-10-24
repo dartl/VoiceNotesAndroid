@@ -1,31 +1,25 @@
-package com.gawk.voicenotes.fragments_main;
+package com.gawk.voicenotes.activities.fragments.main_activity;
 
-import android.content.Context;
-import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.ImageButton;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
-import com.cocosw.bottomsheet.BottomSheet;
-import com.gawk.voicenotes.FragmentParent;
-import com.gawk.voicenotes.MainActivity;
-import com.gawk.voicenotes.ParentActivity;
+import com.gawk.voicenotes.activities.fragments.FragmentParent;
+import com.gawk.voicenotes.activities.ParentActivity;
 import com.gawk.voicenotes.R;
+import com.gawk.voicenotes.adapters.NotificationAdapter;
 import com.gawk.voicenotes.lists_adapters.ListAdapters;
 import com.gawk.voicenotes.lists_adapters.NotificationRecyclerAdapter;
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
+import com.gawk.voicenotes.models.Note;
+import com.gawk.voicenotes.models.Notification;
 
 import java.util.ArrayList;
 
@@ -33,20 +27,16 @@ import java.util.ArrayList;
  * Created by GAWK on 02.02.2017.
  */
 
-public class NotificationsListFragment extends FragmentParent {
-    private MainActivity mainActivity;
+public class NotificationsListFragment extends FragmentParent  {
     private RecyclerView mRecyclerView;
     private NotificationRecyclerAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ListAdapters mListAdapters;
     private RelativeLayout mRelativeLayoutEmptyNotifications;
+    private Note note;
 
     public NotificationsListFragment() {
         // Required empty public constructor
-    }
-
-    public void setMainActivity(MainActivity mainActivity) {
-        this.mainActivity = mainActivity;
     }
 
     @Override
@@ -57,7 +47,7 @@ public class NotificationsListFragment extends FragmentParent {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.notifications_list_fragment, null);
+        View view = inflater.inflate(R.layout.activity_main_fragment_notifications, null);
 
         mRelativeLayoutEmptyNotifications = view.findViewById(R.id.relativeLayoutEmptyNotifications);
 
@@ -127,5 +117,16 @@ public class NotificationsListFragment extends FragmentParent {
     @Override
     public void refreshSelectedList() {
         onResume();
+    }
+
+    public void saveNotification(Notification notification) {
+        notification.setId(dbHelper.saveNotification(notification,0));
+        NotificationAdapter notificationAdapter = new NotificationAdapter(getContext());
+        notificationAdapter.restartNotify(note, notification);
+        updateList();
+    }
+
+    public void failSetNotification() {
+        Snackbar.make(getView(), getString(R.string.new_note_error_date), Snackbar.LENGTH_LONG).show();
     }
 }

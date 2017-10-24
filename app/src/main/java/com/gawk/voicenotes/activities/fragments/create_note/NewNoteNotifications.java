@@ -1,20 +1,17 @@
-package com.gawk.voicenotes.fragments_notes;
+package com.gawk.voicenotes.activities.fragments.create_note;
 
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.AppCompatButton;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import com.gawk.voicenotes.FragmentParent;
+import com.gawk.voicenotes.activities.fragments.FragmentParent;
 import com.gawk.voicenotes.R;
 import com.gawk.voicenotes.listeners.TimePickerReturn;
 import com.gawk.voicenotes.date_and_time.DateAndTimeCombine;
@@ -54,7 +51,7 @@ public class NewNoteNotifications extends FragmentParent implements TimePickerRe
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.new_note_notifications, null);
+        mView = inflater.inflate(R.layout.activity_create_note_fragment_notification, null);
 
         switchNotification =  mView.findViewById(R.id.switchNotification);
         notificationLayout =  mView.findViewById(R.id.notificationLayout);

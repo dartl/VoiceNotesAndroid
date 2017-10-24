@@ -1,4 +1,4 @@
-package com.gawk.voicenotes.fragments_main;
+package com.gawk.voicenotes.activities.fragments.main_activity;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -10,13 +10,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.gawk.voicenotes.FragmentParent;
-import com.gawk.voicenotes.MainActivity;
-import com.gawk.voicenotes.NewNote;
+import com.gawk.voicenotes.activities.fragments.FragmentParent;
+import com.gawk.voicenotes.activities.MainActivity;
+import com.gawk.voicenotes.activities.CreateNoteActivity;
 import com.gawk.voicenotes.R;
 import com.gawk.voicenotes.lists_adapters.ListAdapters;
 import com.gawk.voicenotes.lists_adapters.NoteRecyclerAdapter;
@@ -54,7 +53,7 @@ public class NotesListFragment extends FragmentParent{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.notes_list_fragment, null);
+        View view = inflater.inflate(R.layout.activity_main_fragment_notes, null);
 
         mRelativeLayoutEmptyNotes = view.findViewById(R.id.relativeLayoutEmptyNotes);
 
@@ -79,7 +78,7 @@ public class NotesListFragment extends FragmentParent{
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), NewNote.class);
+                Intent intent = new Intent(getActivity(), CreateNoteActivity.class);
                 startActivity(intent);
             }
         });

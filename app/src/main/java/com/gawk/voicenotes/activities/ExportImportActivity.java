@@ -1,11 +1,10 @@
-package com.gawk.voicenotes;
+package com.gawk.voicenotes.activities;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -14,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.gawk.voicenotes.R;
 import com.gawk.voicenotes.windows.OpenFileDialog;
 
 import java.io.File;
@@ -40,7 +40,7 @@ public class ExportImportActivity extends ParentActivity implements View.OnClick
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.export_import);
+        setContentView(R.layout.activity_export_import);
         mView = findViewById(R.id.export_import);
 
         initAdMob(true);

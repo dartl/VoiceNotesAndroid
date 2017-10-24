@@ -1,18 +1,14 @@
 package com.gawk.voicenotes.lists_adapters;
 
-import android.content.Context;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.gawk.voicenotes.R;
-import com.gawk.voicenotes.SettingsActivity;
+import com.gawk.voicenotes.activities.SettingsActivity;
 
 /**
  * Created by GAWK on 23.10.2017.
@@ -47,7 +43,7 @@ public class ListThemeAdapter extends RecyclerView.Adapter<ListThemeAdapter.View
                                                    int viewType) {
         // create a new view
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_select_theme, parent, false);
+                .inflate(R.layout.list_item_select_theme, parent, false);
         return new ViewHolder((Button) v);
     }
 

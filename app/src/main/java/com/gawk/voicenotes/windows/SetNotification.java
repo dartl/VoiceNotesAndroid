@@ -3,12 +3,10 @@ package com.gawk.voicenotes.windows;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatButton;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,9 +15,8 @@ import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import com.gawk.voicenotes.NoteView;
 import com.gawk.voicenotes.R;
-import com.gawk.voicenotes.adapters.NotificationAdapter;
+import com.gawk.voicenotes.activities.fragments.main_activity.NotificationsListFragment;
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
 import com.gawk.voicenotes.date_and_time.DateAndTimeCombine;
 import com.gawk.voicenotes.listeners.TimePickerReturn;
@@ -45,7 +42,7 @@ public class SetNotification extends DialogFragment implements TimePickerReturn 
     private Calendar dateNotification;
     private DateAndTimeCombine mDateAndTimeCombine;
     private boolean checkError, checkNotification = false;
-    private NoteView mNoteView;
+    private NotificationsListFragment mNotificationsListFragment;
     public SQLiteDBHelper dbHelper;
 
     private final Notification notification = new Notification();
@@ -58,7 +55,7 @@ public class SetNotification extends DialogFragment implements TimePickerReturn 
         // Get the layout inflater
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
-        mView = inflater.inflate(R.layout.new_note_notifications, null);
+        mView = inflater.inflate(R.layout.activity_create_note_fragment_notification, null);
         builder.setView(mView);
 
         dbHelper = SQLiteDBHelper.getInstance(getContext());
@@ -95,7 +92,7 @@ public class SetNotification extends DialogFragment implements TimePickerReturn 
         mButtonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mNoteView.saveNotification(notification);
+                mNotificationsListFragment.saveNotification(notification);
                 dismiss();
             }
         });
@@ -163,7 +160,7 @@ public class SetNotification extends DialogFragment implements TimePickerReturn 
 
     @Override
     public void fail() {
-        mNoteView.failSetNotification();
+        mNotificationsListFragment.failSetNotification();
         checkError = false;
         switchNotification.setChecked(false);
         dismiss();
@@ -204,11 +201,11 @@ public class SetNotification extends DialogFragment implements TimePickerReturn 
         return result;
     }
 
-    public NoteView getNoteView() {
-        return mNoteView;
+    public NotificationsListFragment getNoteView() {
+        return mNotificationsListFragment;
     }
 
-    public void setNoteView(NoteView mNoteView) {
-        this.mNoteView = mNoteView;
+    public void setNoteView(NotificationsListFragment mNotificationsListFragment) {
+        this.mNotificationsListFragment = mNotificationsListFragment;
     }
 }

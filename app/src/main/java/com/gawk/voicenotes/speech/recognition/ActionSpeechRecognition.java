@@ -1,4 +1,4 @@
-package com.gawk.voicenotes.adapters;
+package com.gawk.voicenotes.speech.recognition;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -17,7 +17,7 @@ import android.util.DisplayMetrics;
 import android.widget.Toast;
 
 import com.gawk.voicenotes.R;
-import com.gawk.voicenotes.windows.SpeechRecognitionDialog;
+import com.gawk.voicenotes.speech.recognition.dialog.SpeechRecognitionDialog;
 
 import java.util.List;
 import java.util.Locale;

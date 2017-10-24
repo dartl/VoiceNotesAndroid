@@ -1,18 +1,13 @@
 package com.gawk.voicenotes.subs;
 
-import android.app.Activity;
 import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.RemoteException;
-import android.util.Log;
 
 import com.android.vending.billing.IInAppBillingService;
-import com.gawk.voicenotes.ParentActivity;
-import com.gawk.voicenotes.R;
+import com.gawk.voicenotes.activities.ParentActivity;
 import com.gawk.voicenotes.preferences.PrefUtil;
 
 import org.json.JSONException;

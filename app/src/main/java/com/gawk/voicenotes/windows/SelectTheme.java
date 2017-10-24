@@ -4,19 +4,16 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListView;
 
 import com.gawk.voicenotes.R;
-import com.gawk.voicenotes.SettingsActivity;
+import com.gawk.voicenotes.activities.SettingsActivity;
 import com.gawk.voicenotes.lists_adapters.ListThemeAdapter;
 
 /**
@@ -55,7 +52,7 @@ public class SelectTheme extends DialogFragment {
         // Get the layout inflater
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
-        View view = inflater.inflate(R.layout.select_theme, null);
+        View view = inflater.inflate(R.layout.dialog_settings_select_theme, null);
         mRecyclerViewSelectTheme = view.findViewById(R.id.recyclerViewSelectTheme);
         mButtonCancel = view.findViewById(R.id.buttonCancel);
         mButtonCancel.setOnClickListener(new View.OnClickListener() {

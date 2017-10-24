@@ -33,5 +33,5 @@
             android:textColor="@color/colorGrey500" />
     </RelativeLayout>
 
-    <include layout="@layout/list_main_menu" />
+    <include layout="@layout/menu_actions_elements" />
 </RelativeLayout>

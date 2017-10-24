@@ -1,4 +1,4 @@
-package com.gawk.voicenotes;
+package com.gawk.voicenotes.activities.fragments;
 
 import android.database.Cursor;
 import android.os.Bundle;

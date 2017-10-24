@@ -1,25 +1,20 @@
-package com.gawk.voicenotes.windows;
+package com.gawk.voicenotes.speech.recognition.dialog;
 
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.speech.SpeechRecognizer;
 import android.support.v4.app.ActivityCompat;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -33,8 +28,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.gawk.voicenotes.R;
-import com.gawk.voicenotes.adapters.ActionSpeechRecognition;
-import com.gawk.voicenotes.fragments_notes.NewNoteText;
+import com.gawk.voicenotes.speech.recognition.ActionSpeechRecognition;
 
 /**
  * Created by GAWK on 08.07.2017.
@@ -60,13 +54,13 @@ public class SpeechRecognitionDialog extends DialogFragment {
         // Get the layout inflater
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
-        View view = inflater.inflate(R.layout.speech_recognition_window, null);
-        mImageViewVoiceValue = (ImageView) view.findViewById(R.id.imageViewVoiceValue);
-        mTextViewMainText = (TextView) view.findViewById(R.id.textViewMainText);
-        mImageButtonVoice = (ImageButton) view.findViewById(R.id.imageButtonVoice);
-        mButtonClose = (Button) view.findViewById(R.id.buttonClose);
-        mButtonFix = (Button) view.findViewById(R.id.buttonFix);
-        mAreaRecognition = (RelativeLayout) view.findViewById(R.id.areaRecognition);
+        View view = inflater.inflate(R.layout.dialog_speech_recognition, null);
+        mImageViewVoiceValue = view.findViewById(R.id.imageViewVoiceValue);
+        mTextViewMainText = view.findViewById(R.id.textViewMainText);
+        mImageButtonVoice =  view.findViewById(R.id.imageButtonVoice);
+        mButtonClose = view.findViewById(R.id.buttonClose);
+        mButtonFix = view.findViewById(R.id.buttonFix);
+        mAreaRecognition = view.findViewById(R.id.areaRecognition);
 
         mButtonClose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -263,7 +257,7 @@ public class SpeechRecognitionDialog extends DialogFragment {
 
     public void startOpenSettings() {
         Intent callGPSSettingIntent = new Intent(Intent.ACTION_MAIN);
-        callGPSSettingIntent.setClassName("com.android.settings", "com.android.settings.LanguageSettings");
+
         startActivity(callGPSSettingIntent);
     }
 

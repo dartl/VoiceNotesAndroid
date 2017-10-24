@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.gawk.voicenotes.R;
-import com.gawk.voicenotes.SettingsActivity;
+import com.gawk.voicenotes.activities.SettingsActivity;
 
 /**
  * Created by GAWK on 24.08.2017.
@@ -33,7 +33,7 @@ public class SelectIntervalDialog extends DialogFragment implements View.OnClick
         // Get the layout inflater
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
-        mView = inflater.inflate(R.layout.interval_select, null);
+        mView = inflater.inflate(R.layout.dialog_settings_select_interval, null);
         builder.setView(mView);
 
         mButton5 = mView.findViewById(R.id.buttonIntervalSelect5);

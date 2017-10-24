@@ -2,31 +2,25 @@ package com.gawk.voicenotes.lists_adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.database.Cursor;
-import android.graphics.PorterDuff;
-import android.support.annotation.ColorInt;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.gawk.voicenotes.NoteView;
+import com.gawk.voicenotes.activities.ViewNoteActivity;
 import com.gawk.voicenotes.R;
 import com.gawk.voicenotes.adapters.ActionsListNotes;
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
-import com.gawk.voicenotes.models.Category;
 import com.gawk.voicenotes.models.Note;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -73,14 +67,14 @@ public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerA
             mTextViewGroup = v.findViewById(R.id.textViewGroup);
         }
 
-        public void setData(final Cursor c, final NoteRecyclerAdapter noteRecyclerAdapter, SQLiteDBHelper db, Context context) {
+        public void setData(final Cursor c, final NoteRecyclerAdapter noteRecyclerAdapter, SQLiteDBHelper db) {
             mNoteRecyclerAdapter = noteRecyclerAdapter;
             final int position = c.getPosition();
             final long id = noteRecyclerAdapter.getItemId(getLayoutPosition());
 
             changeItemSelect(noteRecyclerAdapter.getActionsListNotes().checkSelectElement(id));
             Note note = new Note(c);
-
+            Log.e("GAWK_ERR","note = " + note.toString());
             String categoryName = db.getNameCategory(note.getCategoryId());
 
             mTextViewListCategory.setText(categoryName);
@@ -134,7 +128,7 @@ public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerA
                 public void onClick(View v) {
                     Intent intent;
                     long id = noteRecyclerAdapter.getItemId(position);
-                    intent = new Intent(v.getContext(), NoteView.class);
+                    intent = new Intent(v.getContext(), ViewNoteActivity.class);
                     intent.putExtra("id",id);
                     v.getContext().startActivity(intent);
                 }
@@ -173,14 +167,14 @@ public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerA
 
     @Override
     public NoteRecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(getContext()).inflate(R.layout.item_notes_list, parent, false);
+        View v = LayoutInflater.from(getContext()).inflate(R.layout.list_item_notes, parent, false);
         return new NoteRecyclerAdapter.ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(NoteRecyclerAdapter.ViewHolder viewHolder, Cursor cursor) {
         cursor.moveToPosition(cursor.getPosition());
-        viewHolder.setData(cursor, this, db, mContext);
+        viewHolder.setData(cursor, this, db);
     }
 
     @Override

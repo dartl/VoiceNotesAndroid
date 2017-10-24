@@ -8,7 +8,7 @@
         android:id="@+id/menu_notes_list"
         android:title="@string/menu_notes_list"
         android:icon="@drawable/ic_note_grey_24dp"
-        app:actionLayout="@layout/note_counter"/>
+        app:actionLayout="@layout/drawer_count_notes"/>
     <item
         android:id="@+id/menu_import_export"
         android:icon="@drawable/ic_swap_vert_grey_24dp"

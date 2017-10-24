@@ -3,9 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/windowBackground"
     android:layout_width="match_parent" android:layout_height="match_parent">
-
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerViewCategories"
+        android:id="@+id/listViewAllNotes"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/relativeLayoutBottomMenu"
@@ -14,7 +13,7 @@
         android:layout_alignParentStart="true" />
 
     <RelativeLayout
-        android:id="@+id/relativeLayoutEmptyCategory"
+        android:id="@+id/relativeLayoutEmptyNotes"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -23,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:tint="@color/colorGrey300"
-            app:srcCompat="@drawable/ic_collections_bookmark_black_48dp"
+            app:srcCompat="@drawable/ic_note_black_48dp"
             android:layout_above="@+id/textView10"
             android:layout_centerHorizontal="true" />
 
@@ -32,21 +31,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorGrey500"
-            android:text="@string/main_empty_categories"
+            android:text="@string/main_empty_notes"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true" />
     </RelativeLayout>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fabAddCategory"
+        android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/relativeLayoutBottomMenu"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
         android:layout_margin="@dimen/fab_margin"
+        app:fabSize="normal"
         android:src="@drawable/ic_note_add_white_36dp"
-        app:fabSize="normal" />
+        android:layout_above="@+id/relativeLayoutBottomMenu"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
-    <include layout="@layout/list_main_menu" />
+    <include layout="@layout/menu_actions_elements" />
 </RelativeLayout>

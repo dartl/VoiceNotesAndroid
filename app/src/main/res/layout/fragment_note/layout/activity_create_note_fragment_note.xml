@@ -11,8 +11,9 @@
         android:gravity="start"
         android:hint="@string/new_note_text"
         android:id="@+id/editText_NewNoteText"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/spinnerSelectCategory"
+        android:layout_above="@+id/imageButton_NewNoteAdd" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/imageButton_NewNoteAdd"
@@ -38,5 +39,14 @@
         android:layout_alignLeft="@+id/editText_NewNoteText"
         android:layout_alignStart="@+id/editText_NewNoteText"
         android:layout_marginBottom="14dp" />
+
+    <Spinner
+        android:id="@+id/spinnerSelectCategory"
+        style="@style/GawkMaterialTheme.SpinnerSelectCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:spinnerMode="dialog"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

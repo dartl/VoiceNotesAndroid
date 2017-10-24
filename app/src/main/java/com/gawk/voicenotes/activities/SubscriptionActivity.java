@@ -1,26 +1,21 @@
-package com.gawk.voicenotes;
+package com.gawk.voicenotes.activities;
 
-import android.app.PendingIntent;
 import android.content.Intent;
-import android.content.IntentSender;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.RemoteException;
 import android.support.design.widget.NavigationView;
-import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.gawk.voicenotes.R;
 import com.gawk.voicenotes.subs.GooglePlaySubs;
 import com.gawk.voicenotes.subs.SubsInterface;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -35,7 +30,7 @@ public class SubscriptionActivity extends ParentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.subscriptions);
+        setContentView(R.layout.activity_subscriptions);
 
         mGooglePlaySubs = new GooglePlaySubs(this,mService);
 

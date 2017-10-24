@@ -7,31 +7,18 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.database.Cursor;
 import android.graphics.BitmapFactory;
-import android.media.AudioAttributes;
 import android.media.AudioManager;
-import android.media.MediaPlayer;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
 import android.net.Uri;
-import android.os.Bundle;
-import android.os.Vibrator;
-import android.provider.MediaStore;
-import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
-import android.support.v4.media.session.MediaSessionCompat;
 import android.util.Log;
 
-import com.gawk.voicenotes.NoteView;
-import com.gawk.voicenotes.ParentActivity;
+import com.gawk.voicenotes.activities.ViewNoteActivity;
 import com.gawk.voicenotes.R;
-import com.gawk.voicenotes.logs.CustomLogger;
 import com.gawk.voicenotes.models.Note;
 import com.gawk.voicenotes.models.Statistics;
 import com.gawk.voicenotes.preferences.PrefUtil;
 
-import java.io.IOException;
 import java.util.Date;
 
 /**
@@ -51,7 +38,7 @@ public class TimeNotification extends BroadcastReceiver {
         mNotificationAdapter = new NotificationAdapter(context);
         mPrefUtil = new PrefUtil(context);
         //Интент для активити, которую мы хотим запускать при нажатии на уведомление
-        Intent intentTL = new Intent(context, NoteView.class);
+        Intent intentTL = new Intent(context, ViewNoteActivity.class);
         Note note = ParcelableUtil.unmarshall(intent.getByteArrayExtra("note"), Note.CREATOR);
         com.gawk.voicenotes.models.Notification notification =
                 ParcelableUtil.unmarshall(intent.getByteArrayExtra("notification"),

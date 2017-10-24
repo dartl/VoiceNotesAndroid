@@ -85,7 +85,7 @@ public class OpenFileDialog extends Dialog {
     private OnCloseListener mOnCloseListener;
 
     /***
-     * Constructs an OpenFileDialog object with default settings.
+     * Constructs an OpenFileDialog object with default
      *
      * @param context The Context the view is running in, through which it can
      *        access the current theme, resources, etc.
@@ -96,7 +96,7 @@ public class OpenFileDialog extends Dialog {
     }
 
     /***
-     * Constructs an OpenFileDialog object with default settings and a custom cancel listener.
+     * Constructs an OpenFileDialog object with default and a custom cancel listener.
      *
      * @param context The Context the view is running in, through which it can
      *        access the current theme, resources, etc.
@@ -108,7 +108,7 @@ public class OpenFileDialog extends Dialog {
     }
 
     /***
-     * Constructs an OpenFileDialog object with default settings.
+     * Constructs an OpenFileDialog object with default .
      *
      * @param context The Context the view is running in, through which it can
      *        access the current theme, resources, etc.
@@ -500,7 +500,7 @@ public class OpenFileDialog extends Dialog {
         @Override
         public FileListRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.open_file_dialog_item_layout, parent, false);
+                    .inflate(R.layout.dialog_openfile_item, parent, false);
             return new FileListRecyclerViewAdapter.ViewHolder(view);
         }
 

@@ -1,8 +1,6 @@
-package com.gawk.voicenotes;
+package com.gawk.voicenotes.activities;
 
 import android.app.Activity;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -12,7 +10,6 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
@@ -20,13 +17,11 @@ import android.support.annotation.ColorInt;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -38,15 +33,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.vending.billing.IInAppBillingService;
+import com.gawk.voicenotes.R;
 import com.gawk.voicenotes.adapters.NotificationAdapter;
 import com.gawk.voicenotes.lists_adapters.NoteRecyclerAdapter;
-import com.gawk.voicenotes.adapters.ParcelableUtil;
 import com.gawk.voicenotes.listeners.SocialShare;
-import com.gawk.voicenotes.logs.CustomLogger;
 import com.gawk.voicenotes.models.Statistics;
 import com.gawk.voicenotes.preferences.PrefUtil;
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
-import com.gawk.voicenotes.adapters.TimeNotification;
 import com.gawk.voicenotes.models.Note;
 import com.gawk.voicenotes.models.Notification;
 import com.gawk.voicenotes.subs.GooglePlaySubs;
@@ -295,7 +288,7 @@ public class ParentActivity extends AppCompatActivity
         int id = item.getItemId();
         Intent intent;
         if (id == R.id.menu_add) {
-            intent = new Intent(this, NewNote.class);
+            intent = new Intent(this, CreateNoteActivity.class);
             startActivity(intent);
         } else if (id == R.id.menu_notes_list) {
             intent = new Intent(this, MainActivity.class);

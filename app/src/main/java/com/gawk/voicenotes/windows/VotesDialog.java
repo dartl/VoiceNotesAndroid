@@ -17,8 +17,6 @@ import android.widget.TextView;
 
 import com.gawk.voicenotes.R;
 
-import org.w3c.dom.Text;
-
 /**
  * Created by GAWK on 17.08.2017.
  */
@@ -35,7 +33,7 @@ public class VotesDialog extends DialogFragment {
         // Get the layout inflater
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
-        View view = inflater.inflate(R.layout.votes_dialog, null);
+        View view = inflater.inflate(R.layout.dialog_votes, null);
 
         mRatingBarVotes = view.findViewById(R.id.ratingBarVotes);
 

@@ -1,21 +1,16 @@
 package com.gawk.voicenotes.lists_adapters;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatImageView;
-import android.util.DisplayMetrics;
-import android.util.TypedValue;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.cocosw.bottomsheet.BottomSheet;
-import com.gawk.voicenotes.FragmentParent;
 import com.gawk.voicenotes.R;
 import com.gawk.voicenotes.adapters.ActionMenuBottom;
 import com.gawk.voicenotes.adapters.ActionsListNotes;

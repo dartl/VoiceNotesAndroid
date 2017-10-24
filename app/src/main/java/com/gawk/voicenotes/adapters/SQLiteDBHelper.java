@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.gawk.voicenotes.ParentActivity;
+import com.gawk.voicenotes.activities.ParentActivity;
 import com.gawk.voicenotes.models.Category;
 import com.gawk.voicenotes.models.Note;
 import com.gawk.voicenotes.models.Notification;
@@ -309,10 +309,10 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         Cursor category = db.rawQuery("SELECT * FROM " +
                 SQLiteDBHelper.CATEGORIES_TABLE_NAME + " WHERE " + SQLiteDBHelper.CATEGORIES_TABLE_COLUMN_ID
                 + " = " + id, null);
-        category.moveToFirst();
         if (category.getCount() == 0) {
             return "";
         }
+        category.moveToFirst();
         return category.getString(category.getColumnIndex(SQLiteDBHelper.CATEGORIES_TABLE_COLUMN_NAME));
     }
 
@@ -501,7 +501,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         ContentValues newValues = new ContentValues();
         newValues.put(SQLiteDBHelper.NOTES_TABLE_COLUMN_TEXT_NOTE, note.getText_note());
         newValues.put(SQLiteDBHelper.NOTES_TABLE_COLUMN_DATE, note.getDate().getTime());
-        newValues.put(SQLiteDBHelper.NOTES_TABLE_COLUMN_CATEGORY, -1);
+        newValues.put(SQLiteDBHelper.NOTES_TABLE_COLUMN_CATEGORY, note.getCategoryId());
         switch (action) {
             case 0:
                 long i = db.insert(SQLiteDBHelper.NOTES_TABLE_NAME, null, newValues);

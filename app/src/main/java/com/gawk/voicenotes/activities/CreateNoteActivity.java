@@ -1,4 +1,4 @@
-package com.gawk.voicenotes;
+package com.gawk.voicenotes.activities;
 
 
 import android.content.Context;
@@ -8,21 +8,18 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.gawk.voicenotes.R;
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
 import com.gawk.voicenotes.listeners.TimePickerReturn;
 import com.gawk.voicenotes.adapters.ViewPagerAdapter;
-import com.gawk.voicenotes.fragments_notes.NewNoteNotifications;
-import com.gawk.voicenotes.fragments_notes.NewNoteText;
-import com.gawk.voicenotes.logs.CustomLogger;
+import com.gawk.voicenotes.activities.fragments.create_note.NewNoteNotifications;
+import com.gawk.voicenotes.activities.fragments.create_note.NewNoteText;
 import com.gawk.voicenotes.models.Note;
 import com.gawk.voicenotes.models.Notification;
 
@@ -32,7 +29,7 @@ import java.util.Calendar;
  * Created by GAWK on 12.02.2017.
  */
 
-public class NewNote extends ParentActivity implements TimePickerReturn {
+public class CreateNoteActivity extends ParentActivity implements TimePickerReturn {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private ViewPagerAdapter adapter;
@@ -44,7 +41,7 @@ public class NewNote extends ParentActivity implements TimePickerReturn {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.new_note);
+        setContentView(R.layout.activity_create_note);
 
         TabLayout tab = (TabLayout) findViewById(R.id.tabs);
         tab.setVisibility(View.VISIBLE);
@@ -53,6 +50,10 @@ public class NewNote extends ParentActivity implements TimePickerReturn {
         setupViewPager(viewPager);
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setTabMode(TabLayout.MODE_FIXED);
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
+
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -128,9 +129,8 @@ public class NewNote extends ParentActivity implements TimePickerReturn {
         // сохранение заметки
         dbHelper.connection();
         NewNoteText newNoteText = (NewNoteText) adapter.getItem(0);
-        Log.e("GAWK_ERR", "newNoteText.getTextNote() = " + newNoteText.getTextNote() );
-        Note newNote = new Note(-1,newNoteText.getTextNote(), Calendar.getInstance().getTime());
-        Log.e("GAWK_ERR",newNote.toString() );
+        Note newNote = new Note(-1,newNoteText.getTextNote(), Calendar.getInstance().getTime(),newNoteText.getSelectedCategoryId());
+        Log.e("GAWK_ERR",newNote.toString());
         long note_id = dbHelper.saveNote(newNote, 0);
         newNote.setId(note_id);
 

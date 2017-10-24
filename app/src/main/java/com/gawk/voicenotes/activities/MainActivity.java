@@ -1,16 +1,12 @@
-package com.gawk.voicenotes;
+package com.gawk.voicenotes.activities;
 
-import android.*;
-import android.Manifest;
 import android.app.Activity;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.SearchView;
@@ -21,15 +17,14 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.gawk.voicenotes.R;
+import com.gawk.voicenotes.activities.fragments.FragmentParent;
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
 import com.gawk.voicenotes.adapters.ViewPagerAdapter;
-import com.gawk.voicenotes.fragments_main.CategoryListFragment;
-import com.gawk.voicenotes.fragments_main.NotesListFragment;
-import com.gawk.voicenotes.fragments_main.NotificationsListFragment;
+import com.gawk.voicenotes.activities.fragments.main_activity.CategoryListFragment;
+import com.gawk.voicenotes.activities.fragments.main_activity.NotesListFragment;
+import com.gawk.voicenotes.activities.fragments.main_activity.NotificationsListFragment;
 import com.gawk.voicenotes.preferences.PrefUtil;
-import com.gawk.voicenotes.windows.VotesDialog;
-
-import org.w3c.dom.Text;
 
 public class MainActivity extends ParentActivity {
     private TabLayout tabLayout;
@@ -41,13 +36,14 @@ public class MainActivity extends ParentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_first);
+        setContentView(com.gawk.voicenotes.R.layout.activity_main);
         initAdMob(true);
 
         mView = findViewById(R.id.activity_main);
+
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setVisibility(View.VISIBLE);
-        tabLayout.setTabMode(TabLayout.MODE_FIXED );
+        tabLayout.setTabGravity(TabLayout.GRAVITY_CENTER);
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
@@ -119,7 +115,6 @@ public class MainActivity extends ParentActivity {
         adapter.addFragment(notesListFragment, getResources().getString(R.string.new_notes));
 
         NotificationsListFragment notificationsListFragment = new NotificationsListFragment();
-        notificationsListFragment.setMainActivity(this);
         adapter.addFragment(notificationsListFragment, getResources().getString(R.string.new_note_notifications));
 
         CategoryListFragment categoryListFragment = new CategoryListFragment();

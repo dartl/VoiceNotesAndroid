@@ -1,29 +1,19 @@
 package com.gawk.voicenotes.lists_adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.gawk.voicenotes.NoteView;
 import com.gawk.voicenotes.R;
 import com.gawk.voicenotes.adapters.ActionsListNotes;
 import com.gawk.voicenotes.models.Category;
-import com.gawk.voicenotes.models.Note;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 
 /**
  * Created by GAWK on 24.10.2017.
@@ -57,7 +47,6 @@ public class CategoriesRecyclerAdapter extends CursorRecyclerViewAdapter<Categor
 
         void setData(final Cursor c, final CategoriesRecyclerAdapter categoriesRecyclerAdapter) {
             mCategoriesRecyclerAdapter = categoriesRecyclerAdapter;
-            final int position = c.getPosition();
             final long id = mCategoriesRecyclerAdapter.getItemId(getLayoutPosition());
 
             changeItemSelect(mCategoriesRecyclerAdapter.getActionsListNotes().checkSelectElement(id));
@@ -108,11 +97,6 @@ public class CategoriesRecyclerAdapter extends CursorRecyclerViewAdapter<Categor
             parent.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent;
-                    long id = mCategoriesRecyclerAdapter.getItemId(position);
-                    intent = new Intent(v.getContext(), NoteView.class);
-                    intent.putExtra("id", id);
-                    v.getContext().startActivity(intent);
                 }
             });
 
@@ -137,7 +121,7 @@ public class CategoriesRecyclerAdapter extends CursorRecyclerViewAdapter<Categor
 
     @Override
     public CategoriesRecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(getContext()).inflate(R.layout.item_category, parent, false);
+        View v = LayoutInflater.from(getContext()).inflate(R.layout.list_item_category, parent, false);
         return new CategoriesRecyclerAdapter.ViewHolder(v);
     }
 
@@ -167,7 +151,4 @@ public class CategoriesRecyclerAdapter extends CursorRecyclerViewAdapter<Categor
         return actionsListNotes;
     }
 
-    public void setActionsListNotes(ActionsListNotes actionsListNotes) {
-        this.actionsListNotes = actionsListNotes;
-    }
 }

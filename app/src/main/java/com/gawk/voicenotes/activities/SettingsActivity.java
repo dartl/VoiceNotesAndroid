@@ -1,4 +1,4 @@
-package com.gawk.voicenotes;
+package com.gawk.voicenotes.activities;
 
 import android.content.Intent;
 import android.media.Ringtone;
@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.gawk.voicenotes.R;
 import com.gawk.voicenotes.preferences.PrefUtil;
 import com.gawk.voicenotes.windows.SelectIntervalDialog;
 import com.gawk.voicenotes.windows.SelectTheme;
@@ -31,7 +32,7 @@ public class SettingsActivity extends ParentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.settings);
+        setContentView(R.layout.activity_settings);
         mSettingsActivity = this;
         mPrefUtil = new PrefUtil(this);
 
@@ -86,7 +87,7 @@ public class SettingsActivity extends ParentActivity {
     }
 
     protected void installIconAddNote() {
-        final Intent shortcutIntent = new Intent(this, NewNote.class);
+        final Intent shortcutIntent = new Intent(this, CreateNoteActivity.class);
         final Intent intent = new Intent();
         intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
         shortcutIntent.setAction(Intent.ACTION_CREATE_DOCUMENT);

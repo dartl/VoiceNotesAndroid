@@ -118,6 +118,7 @@ public class Note implements Serializable, Parcelable {
                 "id=" + id +
                 ", text_note='" + text_note + '\'' +
                 ", date=" + date +
+                ", mCategoryId=" + mCategoryId +
                 '}';
     }
 }

@@ -6,14 +6,13 @@ import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.gawk.voicenotes.R;
-import com.gawk.voicenotes.fragments_main.CategoryListFragment;
+import com.gawk.voicenotes.activities.fragments.main_activity.CategoryListFragment;
 import com.gawk.voicenotes.models.Category;
 
 /**
@@ -49,7 +48,7 @@ public class AddNewCategory extends DialogFragment {
         // Get the layout inflater
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
-        View view = inflater.inflate(R.layout.add_category_dialog, null);
+        View view = inflater.inflate(R.layout.dialog_add_category, null);
 
         mButtonSave = view.findViewById(R.id.buttonSave);
         mButtonCancel = view.findViewById(R.id.buttonCancel);

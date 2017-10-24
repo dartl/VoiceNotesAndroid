@@ -1,19 +1,14 @@
-package com.gawk.voicenotes;
+package com.gawk.voicenotes.activities;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.design.widget.NavigationView;
-import android.view.Menu;
-import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.gawk.voicenotes.R;
 import com.gawk.voicenotes.models.Statistics;
-import com.gawk.voicenotes.subs.GooglePlaySubs;
-import com.gawk.voicenotes.subs.SubsInterface;
 
 /**
  * Created by GAWK on 10.08.2017.
@@ -28,7 +23,7 @@ public class StatisticsActivity extends ParentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.statistics);
+        setContentView(R.layout.activity_statistics);
 
         mTextViewCreateNotes = (TextView) findViewById(R.id.textViewCreateNotes);
         mTextViewCreateNotifications = (TextView) findViewById(R.id.textViewCreateNotifications);

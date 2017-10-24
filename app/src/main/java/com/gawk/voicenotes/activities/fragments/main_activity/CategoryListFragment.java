@@ -1,4 +1,4 @@
-package com.gawk.voicenotes.fragments_main;
+package com.gawk.voicenotes.activities.fragments.main_activity;
 
 import android.database.Cursor;
 import android.os.Bundle;
@@ -10,8 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
-import com.gawk.voicenotes.FragmentParent;
-import com.gawk.voicenotes.MainActivity;
+import com.gawk.voicenotes.activities.fragments.FragmentParent;
+import com.gawk.voicenotes.activities.MainActivity;
 import com.gawk.voicenotes.R;
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
 import com.gawk.voicenotes.lists_adapters.CategoriesRecyclerAdapter;
@@ -51,7 +51,7 @@ public class CategoryListFragment extends FragmentParent{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.categories, null);
+        View view = inflater.inflate(R.layout.activity_main_fragment_categories, null);
 
         mRelativeLayoutEmptyCategory = view.findViewById(R.id.relativeLayoutEmptyCategory);
 

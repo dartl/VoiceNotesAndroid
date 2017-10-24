@@ -1,9 +1,10 @@
-package com.gawk.voicenotes;
+package com.gawk.voicenotes.activities;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.view.Menu;
 import android.webkit.WebView;
+
+import com.gawk.voicenotes.R;
 
 /**
  * Created by GAWK on 02.04.2017.
@@ -14,7 +15,7 @@ public class HelpActivity extends ParentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.help);
+        setContentView(R.layout.activity_help);
 
         webView = (WebView) findViewById(R.id.webView);
         webView.loadUrl("http://voicenotes.cofp.ru/");
