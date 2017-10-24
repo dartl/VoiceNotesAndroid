@@ -124,7 +124,7 @@
             style="@style/GawkMaterialTheme.SettingsHelp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/settings_add_icon_add" />
+            android:text="@string/settings_select_theme_text" />
 
     </LinearLayout>
 

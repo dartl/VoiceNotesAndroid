@@ -47,7 +47,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
     private Statistics mStatistics;
     private NotificationAdapter mNotificationAdapter;
 
-    public static final int DATABASE_VERSION = 3;
+    public static final int DATABASE_VERSION = 4;
     public static final String DATABASE_NAME = "VOICE_NOTES.DB";
 
     /* Поля и переменные таблицы Заметки */
@@ -101,7 +101,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         db.execSQL(
                 "create table " + NOTES_TABLE_NAME +
                         "(" + NOTES_TABLE_COLUMN_ID + " integer primary key, " +
-                        NOTES_TABLE_COLUMN_TEXT_NOTE + " text, " + NOTES_TABLE_COLUMN_DATE + " integer, " +NOTES_TABLE_COLUMN_CATEGORY+ "integer)"
+                        NOTES_TABLE_COLUMN_TEXT_NOTE + " text, " + NOTES_TABLE_COLUMN_DATE + " integer, " +NOTES_TABLE_COLUMN_CATEGORY+ " integer)"
         );
         // Создаем таблицу оповещений
         db.execSQL(
@@ -124,13 +124,13 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
     {
         // Если версия 2, то
-        if (oldVersion >= 1) {
+        if (oldVersion <= 1) {
             upgradeTo2(db);
         }
-        if (oldVersion >= 2) {
+        if (oldVersion <= 2) {
             upgradeTo3(db);
         }
-        if (oldVersion >= 3) {
+        if (oldVersion <= 3) {
             upgradeTo4(db);
         }
     }
@@ -245,13 +245,14 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         db.execSQL(
                 "create table " + NOTES_TABLE_NAME +
                         "(" + NOTES_TABLE_COLUMN_ID + " integer primary key, " +
-                        NOTES_TABLE_COLUMN_TEXT_NOTE + " text, " + NOTES_TABLE_COLUMN_DATE + " integer, " +NOTES_TABLE_COLUMN_CATEGORY+ "integer)"
+                        NOTES_TABLE_COLUMN_TEXT_NOTE + " text, " + NOTES_TABLE_COLUMN_DATE + " integer, " +NOTES_TABLE_COLUMN_CATEGORY+ " integer)"
         );
 
         for (Note anArray : array) {
             ContentValues newValues = new ContentValues();
             newValues.put(SQLiteDBHelper.NOTES_TABLE_COLUMN_TEXT_NOTE, anArray.getText_note());
             newValues.put(SQLiteDBHelper.NOTES_TABLE_COLUMN_DATE, anArray.getDate().getTime());
+            newValues.put(SQLiteDBHelper.NOTES_TABLE_COLUMN_CATEGORY, -1);
             db.insert(SQLiteDBHelper.NOTES_TABLE_NAME, null, newValues);
         }
     }
@@ -478,6 +479,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         newValues.put(SQLiteDBHelper.NOTES_TABLE_COLUMN_TEXT_NOTE, note.getText_note());
         Log.e("GAWK_ERR",note.toString() );
         newValues.put(SQLiteDBHelper.NOTES_TABLE_COLUMN_DATE, note.getDate().getTime());
+        newValues.put(SQLiteDBHelper.NOTES_TABLE_COLUMN_CATEGORY, -1);
         switch (action) {
             case 0:
                 long i = db.insert(SQLiteDBHelper.NOTES_TABLE_NAME, null, newValues);

@@ -27,7 +27,7 @@
 
     <string name="main_empty_notes">You do not have any notes yet</string>
     <string name="main_empty_notification">You do not have any reminders yet</string>
-    <string name="main_empty_categories">You do not have any categories yet</string>
+    <string name="main_empty_categories">You do not have any categories yet</string>    <!-- NEW -->
 
     <!-- Меню -->
     <string name="menu_add">Add note</string>
@@ -138,8 +138,8 @@
     <string name="settings_notification_repetition_select60">60 minutes</string>
     <string name="settings_other_title">Other</string>
     <string name="settings_add_icon_add_title">Add icon</string>
-    <string name="settings_select_theme_title">Change theme</string>
-    <string name="settings_select_theme_text">Add icon</string>
+    <string name="settings_select_theme_title">Change theme</string> <!-- NEW -->
+    <string name="settings_select_theme_text">Choose a color scheme that you like</string>  <!-- NEW -->
 
     <!-- Подписки -->
     <string name="subs_inner_text">All subscriptions remove ads from the app and represent donations to the developer</string>
