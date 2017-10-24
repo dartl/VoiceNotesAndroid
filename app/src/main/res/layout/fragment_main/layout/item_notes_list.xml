@@ -51,13 +51,29 @@
                         android:maxLines="2"
                         android:text="Text" />
 
-                    <TextView
-                        android:id="@+id/textViewListDate"
-                        style="@style/GawkMaterialTheme.ListNoteElementDate"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Date" />
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
 
+                        <TextView
+                            android:id="@+id/textViewListDate"
+                            style="@style/GawkMaterialTheme.ListNoteElementDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Date" />
+
+                        <TextView
+                            android:id="@+id/textViewListCategory"
+                            style="@style/GawkMaterialTheme.ListNoteElementDate"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:gravity="end"
+                            android:text="Date" />
+                    </LinearLayout>
 
                 </LinearLayout>
 

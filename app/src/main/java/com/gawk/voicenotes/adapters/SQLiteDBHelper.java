@@ -281,23 +281,25 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
     /*
         Методы для работы с Категориями
      */
-    public boolean addCategory(Category category, int action) {
+    public boolean saveCategory(Category category, int action) {
         if (!isConnect()) {
             connection();
         }
         mStatistics.addPointCreateNotifications();
         ContentValues newValues = new ContentValues();
-        newValues.put(SQLiteDBHelper.CATEGORIES_TABLE_COLUMN_ID, category.getId());
         newValues.put(SQLiteDBHelper.CATEGORIES_TABLE_COLUMN_NAME, category.getName());
         long result = 0;
         switch (action) {
             case 0:
                 result = db.insert(SQLiteDBHelper.CATEGORIES_TABLE_NAME, null, newValues);
+                break;
             case 1:
-                result = db.update(SQLiteDBHelper.NOTIFICATIONS_TABLE_NAME, newValues, NOTIFICATIONS_TABLE_COLUMN_ID +" = ?",
+                newValues.put(SQLiteDBHelper.CATEGORIES_TABLE_COLUMN_ID, category.getId());
+                result = db.update(SQLiteDBHelper.CATEGORIES_TABLE_NAME, newValues, CATEGORIES_TABLE_COLUMN_ID +" = ?",
                         new String[] { String.valueOf(category.getId()) });
+                break;
         }
-        return result >= 0;
+        return result >= -1;
     }
 
     public String getNameCategory(long id) {
@@ -307,7 +309,28 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         Cursor category = db.rawQuery("SELECT * FROM " +
                 SQLiteDBHelper.CATEGORIES_TABLE_NAME + " WHERE " + SQLiteDBHelper.CATEGORIES_TABLE_COLUMN_ID
                 + " = " + id, null);
+        category.moveToFirst();
+        if (category.getCount() == 0) {
+            return "";
+        }
         return category.getString(category.getColumnIndex(SQLiteDBHelper.CATEGORIES_TABLE_COLUMN_NAME));
+    }
+
+    public boolean removeCategory(long id) {
+        if (!isConnect()) {
+            connection();
+        }
+        int deleteRow = db.delete(SQLiteDBHelper.CATEGORIES_TABLE_NAME, "_id = ?" ,new String[] { String.valueOf(id) });
+        return deleteRow == 1;
+    }
+
+    public Cursor getCursorAllCategories() {
+        if (!isConnect()) {
+            connection();
+        }
+        return db.rawQuery("SELECT * FROM " +
+                SQLiteDBHelper.CATEGORIES_TABLE_NAME + " ORDER BY " + SQLiteDBHelper.CATEGORIES_TABLE_COLUMN_ID
+                + " ASC", null);
     }
 
     /*
@@ -477,7 +500,6 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         }
         ContentValues newValues = new ContentValues();
         newValues.put(SQLiteDBHelper.NOTES_TABLE_COLUMN_TEXT_NOTE, note.getText_note());
-        Log.e("GAWK_ERR",note.toString() );
         newValues.put(SQLiteDBHelper.NOTES_TABLE_COLUMN_DATE, note.getDate().getTime());
         newValues.put(SQLiteDBHelper.NOTES_TABLE_COLUMN_CATEGORY, -1);
         switch (action) {

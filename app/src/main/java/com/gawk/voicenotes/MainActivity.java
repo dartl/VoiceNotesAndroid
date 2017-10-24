@@ -47,6 +47,7 @@ public class MainActivity extends ParentActivity {
         mView = findViewById(R.id.activity_main);
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setVisibility(View.VISIBLE);
+        tabLayout.setTabMode(TabLayout.MODE_FIXED );
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
@@ -243,8 +244,6 @@ public class MainActivity extends ParentActivity {
                     Snackbar.make(mView, getString(R.string.success), Snackbar.LENGTH_LONG).show();
                 } else {
                     Snackbar.make(mView, getString(R.string.main_permissions_error), Snackbar.LENGTH_LONG).show();
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
                 }
             }
         }

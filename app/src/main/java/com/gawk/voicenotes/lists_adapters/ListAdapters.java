@@ -80,6 +80,9 @@ public class ListAdapters implements ActionsListNotes {
                             case R.id.action_share_element:
                                 mActionMenuBottom.shareItemList(mId_item,mSelectItems);
                                 break;
+                            case R.id.action_edited_element:
+                                mActionMenuBottom.editedItemList(mId_item);
+                                break;
                         }
                     }
                 }).build();

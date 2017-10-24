@@ -1,29 +1,24 @@
 package com.gawk.voicenotes.fragments_main;
 
-import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.NavigationView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.gawk.voicenotes.FragmentParent;
 import com.gawk.voicenotes.MainActivity;
-import com.gawk.voicenotes.NewNote;
 import com.gawk.voicenotes.R;
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
+import com.gawk.voicenotes.lists_adapters.CategoriesRecyclerAdapter;
 import com.gawk.voicenotes.lists_adapters.ListAdapters;
-import com.gawk.voicenotes.lists_adapters.NoteRecyclerAdapter;
-import com.gawk.voicenotes.models.Note;
+import com.gawk.voicenotes.models.Category;
+import com.gawk.voicenotes.windows.AddNewCategory;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 /**
@@ -33,10 +28,14 @@ import java.util.ArrayList;
 public class CategoryListFragment extends FragmentParent{
     private MainActivity mainActivity;
     private ListAdapters mListAdapters;
+    private CategoriesRecyclerAdapter mAdapter;
     private RelativeLayout mRelativeLayoutEmptyCategory;
+    private AddNewCategory mAddNewCategory;
+    private CategoryListFragment mCategoryListFragment;
 
     public CategoryListFragment() {
         // Required empty public constructor
+        mCategoryListFragment = this;
     }
 
     public void setMainActivity(MainActivity mainActivity) {
@@ -59,25 +58,33 @@ public class CategoryListFragment extends FragmentParent{
         dbHelper = SQLiteDBHelper.getInstance(getActivity());
         dbHelper.connection();
 
-        Cursor noteCursor = dbHelper.getCursorAllNotes();
+        Cursor categoryCursor = dbHelper.getCursorAllCategories();
 
         mListAdapters = new ListAdapters(view,this,getActivity());
+        mListAdapters.changeVisibleItemMenu(R.id.action_edited_element,true);
 
         /* new NoteRecycler */
-        //mAdapter = new NoteRecyclerAdapter(getActivity(), noteCursor, mListAdapters);
+        mAdapter = new CategoriesRecyclerAdapter(getActivity(), categoryCursor, mListAdapters);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         RecyclerView mRecyclerView = view.findViewById(R.id.recyclerViewCategories);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        //mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setAdapter(mAdapter);
 
-        FloatingActionButton fab =  view.findViewById(R.id.fabAddCategory);
+        FloatingActionButton fab = view.findViewById(R.id.fabAddCategory);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mAddNewCategory = new AddNewCategory(mCategoryListFragment);
+                mAddNewCategory.show(getActivity().getFragmentManager(),"AddNewCategory");
             }
         });
         return view;
+    }
+
+    public void saveCategory(Category category, int action) {
+        dbHelper.saveCategory(category, action);
+        updateList();
     }
 
     @Override
@@ -89,21 +96,36 @@ public class CategoryListFragment extends FragmentParent{
     @Override
     public void updateList() {
         super.updateList();
-        /*mAdapter.changeCursor(dbHelper.getCursorAllNotes());
-        NavigationView navigationView =  getActivity().findViewById(R.id.nav_view_menu);
-        TextView view = (TextView) navigationView.getMenu().findItem(R.id.menu_notes_list).getActionView();
-        view.setText(mAdapter.getItemCount() > 0 ? String.valueOf(mAdapter.getItemCount()) : null);
+        mAdapter.changeCursor(dbHelper.getCursorAllCategories());
         if (mAdapter.getItemCount() > 0) {
-            mRelativeLayoutEmptyNotes.setVisibility(View.GONE);
+            mRelativeLayoutEmptyCategory.setVisibility(View.GONE);
         } else {
-            mRelativeLayoutEmptyNotes.setVisibility(View.VISIBLE);
-        }*/
+            mRelativeLayoutEmptyCategory.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
     public void deleteItemList(long id, boolean stateRemoveAllNotification, ArrayList selectItems) {
         super.deleteItemList(id,stateRemoveAllNotification,selectItems);
         dbHelper.connection();
+        if (id == -1) {
+            long id_temp;
+            while (!selectItems.isEmpty()) {
+                id_temp = (Long) selectItems.get(0);
+                selectItems.remove(0);
+                dbHelper.removeCategory(id_temp);
+            }
+        } else {
+            dbHelper.removeCategory(id);
+        }
+        updateList();
+    }
+
+    @Override
+    public void editedItemList(long id) {
+        Category category =  new Category(id, dbHelper.getNameCategory(id));
+        mAddNewCategory = new AddNewCategory(category,mCategoryListFragment);
+        mAddNewCategory.show(getActivity().getFragmentManager(),"AddNewCategory");
     }
 
     @Override

@@ -18,6 +18,8 @@ public class Category implements Serializable, Parcelable {
     private String mName;
 
     public Category() {
+        this.mId = -1;
+        this.mName = "";
     }
 
     public Category(long mId, String mName) {

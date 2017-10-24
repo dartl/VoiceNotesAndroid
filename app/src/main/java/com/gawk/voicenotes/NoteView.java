@@ -271,6 +271,11 @@ public class NoteView extends ParentActivity implements ActionMenuBottom, Recogn
     }
 
     @Override
+    public void editedItemList(long id) {
+
+    }
+
+    @Override
     public void refreshSelectedList() {
 
     }

@@ -8,11 +8,13 @@ import java.util.ArrayList;
 
 public interface ActionMenuBottom {
 
-    public void updateList();
+    void updateList();
 
-    public void deleteItemList(long id, boolean stateRemoveAllNotification, ArrayList selectItems);
+    void deleteItemList(long id, boolean stateRemoveAllNotification, ArrayList selectItems);
 
-    public void shareItemList(long id, ArrayList selectItems);
+    void shareItemList(long id, ArrayList selectItems);
 
-    public void refreshSelectedList();
+    void editedItemList(long id);
+
+    void refreshSelectedList();
 }

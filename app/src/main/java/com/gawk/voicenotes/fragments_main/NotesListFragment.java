@@ -64,9 +64,11 @@ public class NotesListFragment extends FragmentParent{
         Cursor noteCursor = dbHelper.getCursorAllNotes();
 
         mListAdapters = new ListAdapters(view,this,getActivity());
+        mListAdapters.changeVisibleItemMenu(R.id.action_share_element,true);
+        mListAdapters.changeVisibleItemSelectedMenu(R.id.imageButtonShare,View.VISIBLE);
 
         /* new NoteRecycler */
-        mAdapter = new NoteRecyclerAdapter(getActivity(), noteCursor, mListAdapters);
+        mAdapter = new NoteRecyclerAdapter(getActivity(), noteCursor, mListAdapters, dbHelper);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         RecyclerView mRecyclerView = view.findViewById(R.id.listViewAllNotes);

@@ -21,6 +21,7 @@ import com.gawk.voicenotes.NoteView;
 import com.gawk.voicenotes.R;
 import com.gawk.voicenotes.adapters.ActionsListNotes;
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
+import com.gawk.voicenotes.models.Category;
 import com.gawk.voicenotes.models.Note;
 
 import java.text.DateFormat;
@@ -37,11 +38,16 @@ import java.util.Locale;
 public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerAdapter.ViewHolder> implements View.OnLongClickListener {
 
     private ActionsListNotes actionsListNotes;
+    private SQLiteDBHelper db;
+    private Context mContext;
     private Boolean mStateSelected = false;
 
-    public NoteRecyclerAdapter(Context context, Cursor cursor, ActionsListNotes actionsListNotes) {
+    public NoteRecyclerAdapter(Context context, Cursor cursor, ActionsListNotes actionsListNotes,  SQLiteDBHelper db) {
         super(context, cursor);
+        this.mContext = context;
         this.actionsListNotes = actionsListNotes;
+        this.db = db;
+        this.db.connection();
     }
 
     public NoteRecyclerAdapter(Context context, Cursor cursor) {
@@ -49,7 +55,7 @@ public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerA
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView textView, dateView, mTextViewGroup;
+        TextView textView, dateView, mTextViewGroup, mTextViewListCategory;
         ImageButton mImageButtonIconNote, mImageButtonMoreMenu;
         CardView cardView;
         View parent;
@@ -62,18 +68,22 @@ public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerA
             mImageButtonMoreMenu = v.findViewById(R.id.imageButtonMoreMenu);
             textView = v.findViewById(R.id.textViewListText);
             dateView = v.findViewById(R.id.textViewListDate);
+            mTextViewListCategory = v.findViewById(R.id.textViewListCategory);
             cardView = v.findViewById(R.id.card_view);
             mTextViewGroup = v.findViewById(R.id.textViewGroup);
         }
 
-        public void setData(final Cursor c, final NoteRecyclerAdapter noteRecyclerAdapter) {
+        public void setData(final Cursor c, final NoteRecyclerAdapter noteRecyclerAdapter, SQLiteDBHelper db, Context context) {
             mNoteRecyclerAdapter = noteRecyclerAdapter;
             final int position = c.getPosition();
             final long id = noteRecyclerAdapter.getItemId(getLayoutPosition());
-            Log.e("GAWK_ERR","position note = " + id);
 
             changeItemSelect(noteRecyclerAdapter.getActionsListNotes().checkSelectElement(id));
             Note note = new Note(c);
+
+            String categoryName = db.getNameCategory(note.getCategoryId());
+
+            mTextViewListCategory.setText(categoryName);
 
             textView.setText(note.getText_note());
             mImageButtonIconNote.setOnClickListener(new View.OnClickListener() {
@@ -170,7 +180,7 @@ public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerA
     @Override
     public void onBindViewHolder(NoteRecyclerAdapter.ViewHolder viewHolder, Cursor cursor) {
         cursor.moveToPosition(cursor.getPosition());
-        viewHolder.setData(cursor, this);
+        viewHolder.setData(cursor, this, db, mContext);
     }
 
     @Override

@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.gawk.voicenotes.NoteView;
 import com.gawk.voicenotes.R;
 import com.gawk.voicenotes.adapters.ActionsListNotes;
+import com.gawk.voicenotes.models.Category;
 import com.gawk.voicenotes.models.Note;
 
 import java.text.DateFormat;
@@ -38,27 +39,23 @@ public class CategoriesRecyclerAdapter extends CursorRecyclerViewAdapter<Categor
         this.actionsListNotes = actionsListNotes;
     }
 
-    public CategoriesRecyclerAdapter(Context context, Cursor cursor) {
-        super(context, cursor);
-    }
-
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView mTextViewCategoryName;
         ImageButton mImageButtonMoreMenu, mImageButtonIconCategory;
-        CardView cardView;
+        CardView mCardView;
         View parent;
         CategoriesRecyclerAdapter mCategoriesRecyclerAdapter;
 
-        public ViewHolder(View v) {
+        ViewHolder(View v) {
             super(v);
             parent = v;
             mImageButtonMoreMenu = v.findViewById(R.id.imageButtonMoreMenu);
             mImageButtonIconCategory = v.findViewById(R.id.imageButtonIconCategory);
-            cardView = v.findViewById(R.id.card_viewCategory);
+            mCardView = v.findViewById(R.id.card_viewCategory);
             mTextViewCategoryName = v.findViewById(R.id.textViewCategoryName);
         }
 
-        public void setData(final Cursor c, final CategoriesRecyclerAdapter categoriesRecyclerAdapter) {
+        void setData(final Cursor c, final CategoriesRecyclerAdapter categoriesRecyclerAdapter) {
             mCategoriesRecyclerAdapter = categoriesRecyclerAdapter;
             final int position = c.getPosition();
             final long id = mCategoriesRecyclerAdapter.getItemId(getLayoutPosition());
@@ -74,14 +71,21 @@ public class CategoriesRecyclerAdapter extends CursorRecyclerViewAdapter<Categor
                 }
             });
 
+            mImageButtonIconCategory.setImageResource(R.drawable.ic_collections_bookmark_white_24dp);
+            mImageButtonIconCategory.setColorFilter(mCategoriesRecyclerAdapter.getColorByAttr(R.attr.primaryColor500));
+
             if (mCategoriesRecyclerAdapter.getActionsListNotes().isStateSelected()) {
                 if (mCategoriesRecyclerAdapter.getActionsListNotes().checkSelectElement(id)) {
-
+                    mImageButtonIconCategory.setImageResource(R.drawable.ic_done_white_24dp);
+                    mImageButtonIconCategory.setColorFilter(ContextCompat.getColor(mCategoriesRecyclerAdapter.getContext(), R.color.colorWhite));
+                    mImageButtonIconCategory.setBackgroundResource(R.drawable.list_item_circle_primary);
                 } else {
-
+                    mImageButtonIconCategory.setImageResource(R.drawable.ic_collections_bookmark_white_24dp);
+                    mImageButtonIconCategory.setBackgroundResource(R.drawable.list_item_circle);
                 }
                 mImageButtonMoreMenu.setVisibility(View.INVISIBLE);
             } else {
+                mImageButtonIconCategory.setBackgroundResource(0);
                 mImageButtonMoreMenu.setVisibility(View.VISIBLE);
             }
 
@@ -112,14 +116,15 @@ public class CategoriesRecyclerAdapter extends CursorRecyclerViewAdapter<Categor
                 }
             });
 
-
+            Category category = new Category(c);
+            mTextViewCategoryName.setText(category.getName());
         }
 
         private void changeItemSelect(boolean state) {
             if (state) {
-                cardView.setBackgroundColor(mCategoriesRecyclerAdapter.getColorByAttr(R.attr.colorSelectListItem));
+                mCardView.setBackgroundColor(mCategoriesRecyclerAdapter.getColorByAttr(R.attr.colorSelectListItem));
             } else {
-                cardView.setBackgroundColor(ContextCompat.getColor(parent.getContext(), R.color.colorWhite));
+                mCardView.setBackgroundColor(ContextCompat.getColor(parent.getContext(), R.color.colorWhite));
             }
         }
 
@@ -132,7 +137,7 @@ public class CategoriesRecyclerAdapter extends CursorRecyclerViewAdapter<Categor
 
     @Override
     public CategoriesRecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(getContext()).inflate(R.layout.item_notes_list, parent, false);
+        View v = LayoutInflater.from(getContext()).inflate(R.layout.item_category, parent, false);
         return new CategoriesRecyclerAdapter.ViewHolder(v);
     }
 
@@ -164,23 +169,5 @@ public class CategoriesRecyclerAdapter extends CursorRecyclerViewAdapter<Categor
 
     public void setActionsListNotes(ActionsListNotes actionsListNotes) {
         this.actionsListNotes = actionsListNotes;
-    }
-
-    @Override
-    public Cursor swapCursor(Cursor newCursor) {
-        // инициализируем сегодняшним днем
-        mGroupEndDate = Calendar.getInstance();
-        mGroupEndDate.set(
-                mGroupEndDate.get(Calendar.YEAR),
-                mGroupEndDate.get(Calendar.MONTH),
-                mGroupEndDate.get(Calendar.DAY_OF_MONTH) + 2,
-                0, 0);
-        mGroupStartDate = Calendar.getInstance();
-        mGroupStartDate.set(
-                mGroupStartDate.get(Calendar.YEAR),
-                mGroupStartDate.get(Calendar.MONTH),
-                mGroupStartDate.get(Calendar.DAY_OF_MONTH) + 1,
-                0, 0);
-        return super.swapCursor(newCursor);
     }
 }
