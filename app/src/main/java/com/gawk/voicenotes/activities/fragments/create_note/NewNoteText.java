@@ -13,6 +13,7 @@ import android.widget.Spinner;
 
 import com.gawk.voicenotes.activities.fragments.FragmentParent;
 import com.gawk.voicenotes.R;
+import com.gawk.voicenotes.createnote.CategoriesSpinner;
 import com.gawk.voicenotes.models.Category;
 import com.gawk.voicenotes.speech.recognition.ListenerSpeechRecognition;
 
@@ -27,9 +28,7 @@ public class NewNoteText extends FragmentParent{
     private Spinner mSpinnerSelectCategory;
     private FloatingActionButton imageButton_NewNoteAdd, imageButton_NewNoteClear;
     private ListenerSpeechRecognition mListenerSpeechRecognition;
-    private ArrayList<Category> mCategories = new ArrayList<>();
-    private String[] mCategoriesNames;
-    private int selectedCategoryId;
+    private CategoriesSpinner mCategoriesSpinner;
 
     public NewNoteText() {}
 
@@ -47,33 +46,7 @@ public class NewNoteText extends FragmentParent{
         imageButton_NewNoteClear =  view.findViewById(R.id.imageButton_NewNoteClear);
         mSpinnerSelectCategory = view.findViewById(R.id.spinnerSelectCategory);
 
-        upDateCategoriesArray();
-        ArrayAdapter adapter = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item, mCategoriesNames);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mSpinnerSelectCategory.setAdapter(adapter);
-
-        mSpinnerSelectCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view,
-                                       int position, long id) {
-                if (position == 0) {
-                    selectedCategoryId = -1;
-                } else {
-                    selectedCategoryId = getCategoryIdByName(mCategoriesNames[position]);
-                }
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> arg0) {
-            }
-
-            private int getCategoryIdByName(String name) {
-                for(int i = 0; i < mCategories.size(); i++) {
-                    if (mCategories.get(i).getName().equals(name))
-                        return (int) mCategories.get(i).getId();
-                }
-                return -1;
-            }
-        });
+        mCategoriesSpinner = new CategoriesSpinner(dbHelper, getContext(), mSpinnerSelectCategory);
 
         imageButton_NewNoteAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,19 +67,6 @@ public class NewNoteText extends FragmentParent{
         return view;
     }
 
-    private void upDateCategoriesArray() {
-        Cursor categories = dbHelper.getCursorAllCategories();
-        Category category;
-        mCategoriesNames = new String[categories.getCount()+1];
-        mCategoriesNames[0] = getString(R.string.main_unassigned);
-        for (int i = 0; i < categories.getCount(); i++) {
-            categories.moveToPosition(i);
-            category = new Category(categories);
-            mCategories.add(category);
-            mCategoriesNames[i+1] = category.getName();
-        }
-    }
-
     private void showRecognizeDialog() {
         if (mListenerSpeechRecognition == null) mListenerSpeechRecognition = new ListenerSpeechRecognition(getActivity(), editText_NewNoteText);
         mListenerSpeechRecognition.show();
@@ -119,8 +79,8 @@ public class NewNoteText extends FragmentParent{
         return "";
     }
 
-    public int getSelectedCategoryId() {
-        return selectedCategoryId;
+    public long getSelectedCategoryId() {
+        return mCategoriesSpinner.getSelectedCategoryId();
     }
 
 }

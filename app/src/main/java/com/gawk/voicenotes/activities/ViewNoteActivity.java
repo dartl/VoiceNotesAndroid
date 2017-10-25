@@ -25,7 +25,6 @@ public class ViewNoteActivity extends ParentActivity {
     private ViewPager viewPager;
     private ViewPagerAdapter mViewPagerAdapter;
 
-    private Note note;
     private long id;
 
     @Override
@@ -112,8 +111,8 @@ public class ViewNoteActivity extends ParentActivity {
         dbHelper.connection();
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_save_note) {
-            //note.setText_note(editTextNoteText.getText().toString());
-            dbHelper.saveNote(note,1);
+            NoteViewFragment noteViewFragment = (NoteViewFragment) mViewPagerAdapter.getItem(0);
+            dbHelper.saveNote(noteViewFragment.getUpdateNote(),1);
             finish();
             return true;
         }

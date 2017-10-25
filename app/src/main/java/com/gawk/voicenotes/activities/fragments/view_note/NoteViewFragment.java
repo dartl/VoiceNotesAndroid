@@ -5,11 +5,15 @@ import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.gawk.voicenotes.activities.fragments.FragmentParent;
 import com.gawk.voicenotes.R;
+import com.gawk.voicenotes.createnote.CategoriesSpinner;
 import com.gawk.voicenotes.models.Note;
 import com.gawk.voicenotes.speech.recognition.ListenerSpeechRecognition;
 
@@ -23,10 +27,14 @@ import java.text.SimpleDateFormat;
 
 public class NoteViewFragment extends FragmentParent {
     private EditText mEditTextNoteText;
-    private TextView mTextViewDate, mTextViewCategoryName;
+    private TextView mTextViewDate;
     private FloatingActionButton mImageButton_NewNoteAdd, mImageButton_NewNoteClear;
-    private ListenerSpeechRecognition mListenerSpeechRecognition;
+    private Spinner mSpinnerSelectCategory;
+    private Note mNote;
     private long id;
+
+    private ListenerSpeechRecognition mListenerSpeechRecognition;
+    private CategoriesSpinner mCategoriesSpinner;
 
     public NoteViewFragment(long id) {
         this.id = id;
@@ -42,9 +50,12 @@ public class NoteViewFragment extends FragmentParent {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_viewnote_fragment_note, null);
         mTextViewDate =  view.findViewById(R.id.textViewDate);
-        mTextViewCategoryName = view.findViewById(R.id.textViewCategoryName);
         mEditTextNoteText = view.findViewById(R.id.editTextNoteText);
+        mSpinnerSelectCategory = view.findViewById(R.id.spinnerSelectCategory);
 
+        mNote = new Note(dbHelper.getNoteById(id));
+
+        mCategoriesSpinner = new CategoriesSpinner(dbHelper, getContext(), mSpinnerSelectCategory, mNote.getCategoryId());
 
         mImageButton_NewNoteAdd = view.findViewById(R.id.imageButton_NewNoteAdd);
         mImageButton_NewNoteClear =  view.findViewById(R.id.imageButton_NewNoteClear);
@@ -63,16 +74,14 @@ public class NoteViewFragment extends FragmentParent {
             }
         });
 
-        Note note = new Note(dbHelper.getNoteById(id));
-        mEditTextNoteText.setText(note.getText_note());
+
+        mEditTextNoteText.setText(mNote.getText_note());
 
         DateFormat dateFormat;
         dateFormat = SimpleDateFormat.getDateTimeInstance();
         if (mTextViewDate != null) {
-            mTextViewDate.setText(dateFormat.format(note.getDate()));
+            mTextViewDate.setText(dateFormat.format(mNote.getDate()));
         }
-
-        mTextViewCategoryName.setText(dbHelper.getNameCategory(note.getCategoryId()));
 
         return view;
     }
@@ -80,6 +89,12 @@ public class NoteViewFragment extends FragmentParent {
     private void showRecognizeDialog() {
         if (mListenerSpeechRecognition == null) mListenerSpeechRecognition = new ListenerSpeechRecognition(getActivity(), mEditTextNoteText);
         mListenerSpeechRecognition.show();
+    }
+
+    public Note getUpdateNote() {
+        mNote.setText_note(mEditTextNoteText.getText().toString());
+        mNote.setCategoryId(mCategoriesSpinner.getSelectedCategoryId());
+        return mNote;
     }
 
     @Override
