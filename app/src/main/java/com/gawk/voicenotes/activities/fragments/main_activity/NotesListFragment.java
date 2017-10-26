@@ -10,13 +10,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.gawk.voicenotes.activities.fragments.FragmentParent;
 import com.gawk.voicenotes.activities.MainActivity;
 import com.gawk.voicenotes.activities.CreateNoteActivity;
 import com.gawk.voicenotes.R;
+import com.gawk.voicenotes.activities.fragments.create_note.adapters.CategoriesSpinner;
+import com.gawk.voicenotes.activities.fragments.main_activity.adapters.ListenerSelectFilterCategory;
 import com.gawk.voicenotes.adapters.lists_adapters.ListAdapters;
 import com.gawk.voicenotes.adapters.lists_adapters.NoteRecyclerAdapter;
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
@@ -30,11 +34,18 @@ import java.util.ArrayList;
  * Created by GAWK on 02.02.2017.
  */
 
-public class NotesListFragment extends FragmentParent{
+public class NotesListFragment extends FragmentParent implements ListenerSelectFilterCategory {
     private MainActivity mainActivity;
     private ListAdapters mListAdapters;
     private NoteRecyclerAdapter mAdapter;
     private RelativeLayout mRelativeLayoutEmptyNotes;
+
+    private Spinner mSpinnerFilter;
+    private CategoriesSpinner mCategoriesSpinner;
+    private RelativeLayout mRelativeLayoutFilter;
+    private ImageButton mImageButtonCloseFilter;
+    private String mSearchText;
+    private long mFilterCategory = -1;
 
     public NotesListFragment() {
         // Required empty public constructor
@@ -56,6 +67,19 @@ public class NotesListFragment extends FragmentParent{
         View view = inflater.inflate(R.layout.activity_main_fragment_notes, null);
 
         mRelativeLayoutEmptyNotes = view.findViewById(R.id.relativeLayoutEmptyNotes);
+        mSpinnerFilter = view.findViewById(R.id.spinnerFilter);
+        mRelativeLayoutFilter = view.findViewById(R.id.relativeLayoutFilter);
+        mImageButtonCloseFilter = view.findViewById(R.id.imageButtonCloseFilter);
+
+        mImageButtonCloseFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                closeFilter();
+            }
+        });
+
+        mCategoriesSpinner = new CategoriesSpinner(dbHelper, getContext(), mSpinnerFilter, -1);
+        mCategoriesSpinner.setListenerSelectFilterCategory(this);
 
         dbHelper = SQLiteDBHelper.getInstance(getActivity());
         dbHelper.connection();
@@ -168,7 +192,33 @@ public class NotesListFragment extends FragmentParent{
     public void search(String text) {
         if (dbHelper != null) {
             dbHelper.connection();
-            mAdapter.changeCursor(dbHelper.getCursorAllNotes(text));
+            mSearchText = text;
+            if (mSearchText != null && mSearchText.equals("")) {
+                mSearchText = null;
+            }
+            mAdapter.changeCursor(dbHelper.getCursorAllNotes(mSearchText,mFilterCategory));
         }
+    }
+
+    public void filter() {
+        if (mRelativeLayoutFilter.getVisibility() == View.VISIBLE) {
+            closeFilter();
+        } else {
+            mRelativeLayoutFilter.setVisibility(View.VISIBLE);
+            mSpinnerFilter.performClick();
+        }
+    }
+
+    @Override
+    public void changeCategoryFilter(long newCategoryId) {
+        mFilterCategory = newCategoryId;
+        mAdapter.changeCursor(dbHelper.getCursorAllNotes(mSearchText,mFilterCategory));
+    }
+
+    public void closeFilter() {
+        mFilterCategory = -1;
+        mRelativeLayoutFilter.setVisibility(View.GONE);
+        mAdapter.changeCursor(dbHelper.getCursorAllNotes(mSearchText,mFilterCategory));
+        mCategoriesSpinner.refresh();
     }
 }

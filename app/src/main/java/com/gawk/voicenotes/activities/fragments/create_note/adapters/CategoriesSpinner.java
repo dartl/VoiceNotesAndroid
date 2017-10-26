@@ -9,7 +9,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import com.gawk.voicenotes.R;
+import com.gawk.voicenotes.activities.fragments.main_activity.adapters.ListenerSelectFilterCategory;
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
+import com.gawk.voicenotes.adapters.speech_recognition.ListenerSpeechRecognition;
 import com.gawk.voicenotes.models.Category;
 
 import java.util.ArrayList;
@@ -26,6 +28,8 @@ public class CategoriesSpinner {
     private String[] mCategoriesNames;
     private long selectedCategoryId = -1;
     private int positionSelectedCategory = 0;
+    private ListenerSelectFilterCategory mListenerSelectFilterCategory;
+    private ArrayAdapter mAdapter;
 
     public CategoriesSpinner(SQLiteDBHelper dbHelper, Context mContext, Spinner mSpinner) {
         this.dbHelper = dbHelper;
@@ -45,10 +49,11 @@ public class CategoriesSpinner {
     private void init() {
         upDateCategoriesArray();
 
-        ArrayAdapter adapter = new ArrayAdapter(mContext, R.layout.simple_spinner_item, mCategoriesNames);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mSpinnerSelectCategory.setAdapter(adapter);
+        mAdapter = new ArrayAdapter(mContext, R.layout.simple_spinner_item, mCategoriesNames);
+        mAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mSpinnerSelectCategory.setAdapter(mAdapter);
         mSpinnerSelectCategory.setSelection(positionSelectedCategory);
+        mSpinnerSelectCategory.setPrompt(mContext.getText(R.string.category_spinner_title));
 
         mSpinnerSelectCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -58,6 +63,9 @@ public class CategoriesSpinner {
                     selectedCategoryId = -1;
                 } else {
                     selectedCategoryId = getCategoryIdByName(mCategoriesNames[position]);
+                }
+                if (mListenerSelectFilterCategory != null) {
+                    mListenerSelectFilterCategory.changeCategoryFilter(selectedCategoryId);
                 }
             }
             @Override
@@ -92,5 +100,17 @@ public class CategoriesSpinner {
 
     public long getSelectedCategoryId() {
         return selectedCategoryId;
+    }
+
+    public ListenerSelectFilterCategory getListenerSelectFilterCategory() {
+        return mListenerSelectFilterCategory;
+    }
+
+    public void setListenerSelectFilterCategory(ListenerSelectFilterCategory mListenerSelectFilterCategory) {
+        this.mListenerSelectFilterCategory = mListenerSelectFilterCategory;
+    }
+
+    public void refresh() {
+        mSpinnerSelectCategory.setAdapter(mAdapter);
     }
 }

@@ -3,14 +3,47 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/windowBackground"
     android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayoutFilter"
+        style="@style/GawkMaterialTheme.ExportImportTitle.Filter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:visibility="gone">
+
+        <Spinner
+            android:id="@+id/spinnerFilter"
+            style="@style/GawkMaterialTheme.SpinnerSelectCategory.Filter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/imageButtonCloseFilter"
+            android:layout_toStartOf="@+id/imageButtonCloseFilter"
+            android:spinnerMode="dialog" />
+
+        <ImageButton
+            android:id="@+id/imageButtonCloseFilter"
+            style="@style/GawkMaterialTheme.DefaultButtonNoBackground.Primary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            app:srcCompat="@drawable/ic_close_black_36dp" />
+
+    </RelativeLayout>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/listViewAllNotes"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/relativeLayoutBottomMenu"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/relativeLayoutFilter" />
 
     <RelativeLayout
         android:id="@+id/relativeLayoutEmptyNotes"

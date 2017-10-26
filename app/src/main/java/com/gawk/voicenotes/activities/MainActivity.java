@@ -10,15 +10,19 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.gawk.voicenotes.R;
 import com.gawk.voicenotes.activities.fragments.FragmentParent;
+import com.gawk.voicenotes.activities.fragments.create_note.adapters.CategoriesSpinner;
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
 import com.gawk.voicenotes.adapters.ViewPagerAdapter;
 import com.gawk.voicenotes.activities.fragments.main_activity.CategoryListFragment;
@@ -44,6 +48,7 @@ public class MainActivity extends ParentActivity {
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setVisibility(View.VISIBLE);
         tabLayout.setTabGravity(TabLayout.GRAVITY_CENTER);
+
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
@@ -157,11 +162,11 @@ public class MainActivity extends ParentActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+        final NotesListFragment listFragment = (NotesListFragment) adapter.getItem(viewPager.getCurrentItem());
+        switch (id) {
+            case R.id.action_search:
 
-        try {
-            if (id == R.id.action_search) {
-                final FragmentParent listFragment = (FragmentParent) adapter.getItem(viewPager.getCurrentItem());
-
+                Log.e("GAWK_ERR","action SEARCH");
                 searchView =
                         (SearchView) MenuItemCompat.getActionView(actionSearch);
                 searchView.setQueryHint(getResources().getString(R.string.action_search) + "...");
@@ -179,10 +184,11 @@ public class MainActivity extends ParentActivity {
                             }
                         }
                 );
-                return true;
-            }
-        } catch (NullPointerException ignored) {
-
+                break;
+            case R.id.action_filter:
+                Log.e("GAWK_ERR","action FILTER");
+                listFragment.filter();
+                break;
         }
 
 
@@ -196,6 +202,7 @@ public class MainActivity extends ParentActivity {
     public boolean actionSearchVisible(boolean b) {
         if (actionSearch != null) {
             actionSearch.setVisible(b);
+            actionFilter.setVisible(b);
         }
         return true;
     }

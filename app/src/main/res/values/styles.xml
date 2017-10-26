@@ -378,6 +378,11 @@
         <item name="tabSelectedTextColor">@android:color/white</item>
     </style>
 
+    <style name="GawkMaterialTheme.ExportImportTitle.Filter">
+        <item name="android:paddingBottom">0dp</item>
+        <item name="android:paddingTop">0dp</item>
+    </style>
+
     <style name="GawkMaterialTheme.TabTextAppearance">
         <item name="android:textSize">14sp</item>
         <item name="android:paddingLeft">8dp</item>
@@ -578,10 +583,17 @@
     <style name="GawkMaterialTheme.SpinnerSelectCategory"  parent="android:Widget.TextView.SpinnerItem">
         <item name="android:layout_margin">@dimen/activity_horizontal_margin</item>
         <item name="android:textSize">16sp</item>
-        <item name="android:spinnerItemStyle">@color/colorGrey400</item>
         <item name="android:paddingTop">6dp</item>
         <item name="android:paddingBottom">6dp</item>
         <item name="android:textColor">@color/colorGrey400</item>
+    </style>
+
+    <style name="GawkMaterialTheme.SpinnerSelectCategory.Filter">
+        <item name="android:layout_marginRight">0dp</item>
+        <item name="android:layout_marginTop">0dp</item>
+        <item name="android:layout_marginBottom">0dp</item>
+        <item name="android:layout_marginLeft">@dimen/activity_horizontal_margin</item>
+        <item name="android:padding">2dp</item>
     </style>
 
     <!-- Drawer -->

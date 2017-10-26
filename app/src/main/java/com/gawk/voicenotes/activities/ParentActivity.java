@@ -62,7 +62,7 @@ public class ParentActivity extends AppCompatActivity
     public final String API_KEY = "d766dee6-1292-4981-8845-966d5c4fd00c";
     public final String INSTALL_PREF = "install_app";
     private Toolbar toolbar;
-    protected MenuItem actionSave, actionSearch;
+    protected MenuItem actionSave, actionSearch, actionFilter;
     private NavigationView navigationView, navigationViewMenu;
     public SQLiteDBHelper dbHelper;
     protected AdView mAdView;
@@ -269,6 +269,7 @@ public class ParentActivity extends AppCompatActivity
         getMenuInflater().inflate(R.menu.main, menu);
         actionSave = menu.findItem(R.id.action_save_note);
         actionSearch = menu.findItem(R.id.action_search);
+        actionFilter = menu.findItem(R.id.action_filter);
         return true;
     }
 
@@ -277,7 +278,6 @@ public class ParentActivity extends AppCompatActivity
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
         return super.onOptionsItemSelected(item);
     }
 

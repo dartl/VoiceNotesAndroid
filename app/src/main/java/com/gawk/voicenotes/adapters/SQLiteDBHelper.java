@@ -474,14 +474,25 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
     }
 
     // Получить указатель на все заметки с искомым вхождением
-    public Cursor getCursorAllNotes(String text) {
+    public Cursor getCursorAllNotes(String text, long category) {
         if (!isConnect()) {
             connection();
         }
+        String where ="";
+        if (text != null || category != -1) where = "WHERE ";
+        if (text != null) {
+            where += "lower(" +
+                    SQLiteDBHelper.NOTES_TABLE_COLUMN_TEXT_NOTE + ") like lower('%" + text
+                            + "%')";
+            if (category != -1) {
+                where += " AND ";
+            }
+        }
+        if (category != -1) {
+            where += SQLiteDBHelper.NOTES_TABLE_COLUMN_CATEGORY + " = " + category;
+        }
         return db.rawQuery("SELECT * FROM " +
-                SQLiteDBHelper.NOTES_TABLE_NAME + " WHERE lower(" +
-                SQLiteDBHelper.NOTES_TABLE_COLUMN_TEXT_NOTE + ") like lower('%" + text
-                + "%') ORDER BY " + SQLiteDBHelper.NOTES_TABLE_COLUMN_DATE
+                SQLiteDBHelper.NOTES_TABLE_NAME + " " + where + " ORDER BY " + SQLiteDBHelper.NOTES_TABLE_COLUMN_DATE
                 + " DESC", null);
     }
 
