@@ -5,11 +5,14 @@ import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 
 import com.gawk.voicenotes.activities.fragments.FragmentParent;
 import com.gawk.voicenotes.R;
+import com.gawk.voicenotes.activities.fragments.create_note.adapters.ActionsEditedNote;
 import com.gawk.voicenotes.createnote.CategoriesSpinner;
 import com.gawk.voicenotes.adapters.speech_recognition.ListenerSpeechRecognition;
 
@@ -20,7 +23,8 @@ import com.gawk.voicenotes.adapters.speech_recognition.ListenerSpeechRecognition
 public class NewNoteText extends FragmentParent{
     private EditText editText_NewNoteText;
     private Spinner mSpinnerSelectCategory;
-    private FloatingActionButton imageButton_NewNoteAdd, imageButton_NewNoteClear;
+    private ImageButton mImageButton_NewNoteAdd, mImageButton_NewNoteClear;
+    private Button mButton_NewNoteEdited;
     private ListenerSpeechRecognition mListenerSpeechRecognition;
     private CategoriesSpinner mCategoriesSpinner;
 
@@ -36,24 +40,21 @@ public class NewNoteText extends FragmentParent{
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_create_note_fragment_note, null);
         editText_NewNoteText = view.findViewById(R.id.editText_NewNoteText);
-        imageButton_NewNoteAdd = view.findViewById(R.id.imageButton_NewNoteAdd);
-        imageButton_NewNoteClear =  view.findViewById(R.id.imageButton_NewNoteClear);
+        mImageButton_NewNoteAdd = view.findViewById(R.id.imageButton_NewNoteAdd);
+        mImageButton_NewNoteClear =  view.findViewById(R.id.imageButton_NewNoteClear);
+        mButton_NewNoteEdited = view.findViewById(R.id.button_NewNoteEdited);
         mSpinnerSelectCategory = view.findViewById(R.id.spinnerSelectCategory);
+
 
         mCategoriesSpinner = new CategoriesSpinner(dbHelper, getContext(), mSpinnerSelectCategory);
 
-        imageButton_NewNoteAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showRecognizeDialog();
-            }
-        });
+        ActionsEditedNote actionsEditedNote = new ActionsEditedNote(mImageButton_NewNoteClear, mButton_NewNoteEdited, editText_NewNoteText);
+        actionsEditedNote.init();
 
-        imageButton_NewNoteClear.setOnClickListener(new View.OnClickListener() {
+        mImageButton_NewNoteAdd.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                editText_NewNoteText.setText("");
-                mListenerSpeechRecognition.clearSuggestions();
+            public void onClick(View view) {
+                showRecognizeDialog();
             }
         });
 

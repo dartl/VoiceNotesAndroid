@@ -361,6 +361,12 @@
         <item name="android:textColor">?primaryColor500</item>
     </style>
 
+    <style name="GawkMaterialTheme.DefaultButtonNoBackground.Primary">
+        <item name="android:tint">?primaryColor500</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
     <!-- Главное окно -->
     <style name="GawkMaterialTheme.TabLayoutStyle" parent="Widget.Design.TabLayout">
         <item name="tabIndicatorColor">@color/colorWhite</item>

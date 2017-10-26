@@ -5,12 +5,15 @@ import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.gawk.voicenotes.activities.fragments.FragmentParent;
 import com.gawk.voicenotes.R;
+import com.gawk.voicenotes.activities.fragments.create_note.adapters.ActionsEditedNote;
 import com.gawk.voicenotes.createnote.CategoriesSpinner;
 import com.gawk.voicenotes.models.Note;
 import com.gawk.voicenotes.adapters.speech_recognition.ListenerSpeechRecognition;
@@ -26,7 +29,8 @@ import java.text.SimpleDateFormat;
 public class NoteViewFragment extends FragmentParent {
     private EditText mEditTextNoteText;
     private TextView mTextViewDate;
-    private FloatingActionButton mImageButton_NewNoteAdd, mImageButton_NewNoteClear;
+    private ImageButton mImageButton_NewNoteAdd, mImageButton_NewNoteClear;
+    private Button mButton_NewNoteEdited;
     private Spinner mSpinnerSelectCategory;
     private Note mNote;
     private long id;
@@ -57,13 +61,8 @@ public class NoteViewFragment extends FragmentParent {
 
         mImageButton_NewNoteAdd = view.findViewById(R.id.imageButton_NewNoteAdd);
         mImageButton_NewNoteClear =  view.findViewById(R.id.imageButton_NewNoteClear);
+        mButton_NewNoteEdited =  view.findViewById(R.id.button_NewNoteEdited);
 
-        mImageButton_NewNoteClear.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mEditTextNoteText.setText("");
-            }
-        });
 
         mImageButton_NewNoteAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,6 +71,8 @@ public class NoteViewFragment extends FragmentParent {
             }
         });
 
+        ActionsEditedNote actionsEditedNote = new ActionsEditedNote(mImageButton_NewNoteClear, mButton_NewNoteEdited, mEditTextNoteText);
+        actionsEditedNote.init();
 
         mEditTextNoteText.setText(mNote.getText_note());
 
