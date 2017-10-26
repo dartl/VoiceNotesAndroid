@@ -40,9 +40,9 @@ public class ActionsEditedNote {
             public void onClick(View view) {
                 long currentTime = System.currentTimeMillis();
                 String str = mEditText.getText().toString();
-                str = str.trim();
                 if (currentTime - mLastClickButton_NewNoteEdited > 1000) {
                     state = 0;
+                    str = str.trim();
                     str += ".";
                 } else {
                     state++;
