@@ -1,4 +1,4 @@
-package com.gawk.voicenotes.lists_adapters;
+package com.gawk.voicenotes.adapters.lists_adapters;
 
 import android.app.Activity;
 import android.content.DialogInterface;

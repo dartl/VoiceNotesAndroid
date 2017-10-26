@@ -1,4 +1,4 @@
-package com.gawk.voicenotes.speech.recognition;
+package com.gawk.voicenotes.adapters.speech_recognition;
 
 /**
  * Created by GAWK on 24.10.2017.

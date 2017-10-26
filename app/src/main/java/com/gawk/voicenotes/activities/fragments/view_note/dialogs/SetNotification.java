@@ -1,4 +1,4 @@
-package com.gawk.voicenotes.windows;
+package com.gawk.voicenotes.activities.fragments.view_note.dialogs;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -18,8 +18,8 @@ import android.widget.TextView;
 import com.gawk.voicenotes.R;
 import com.gawk.voicenotes.activities.fragments.main_activity.NotificationsListFragment;
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
-import com.gawk.voicenotes.date_and_time.DateAndTimeCombine;
-import com.gawk.voicenotes.listeners.TimePickerReturn;
+import com.gawk.voicenotes.adapters.date_and_time.DateAndTimeCombine;
+import com.gawk.voicenotes.adapters.listeners.TimePickerReturn;
 import com.gawk.voicenotes.models.Notification;
 
 import java.text.DateFormat;

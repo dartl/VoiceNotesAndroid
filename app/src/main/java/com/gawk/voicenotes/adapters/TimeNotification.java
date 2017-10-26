@@ -17,7 +17,7 @@ import com.gawk.voicenotes.activities.ViewNoteActivity;
 import com.gawk.voicenotes.R;
 import com.gawk.voicenotes.models.Note;
 import com.gawk.voicenotes.models.Statistics;
-import com.gawk.voicenotes.preferences.PrefUtil;
+import com.gawk.voicenotes.adapters.preferences.PrefUtil;
 
 import java.util.Date;
 

@@ -1,4 +1,4 @@
-package com.gawk.voicenotes.speech.recognition.dialog;
+package com.gawk.voicenotes.adapters.speech_recognition.dialogs;
 
 import android.Manifest;
 import android.app.Activity;
@@ -28,7 +28,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.gawk.voicenotes.R;
-import com.gawk.voicenotes.speech.recognition.ActionSpeechRecognition;
+import com.gawk.voicenotes.adapters.speech_recognition.ActionSpeechRecognition;
 
 /**
  * Created by GAWK on 08.07.2017.

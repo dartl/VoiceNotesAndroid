@@ -5,8 +5,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -15,7 +13,7 @@ import com.gawk.voicenotes.activities.fragments.FragmentParent;
 import com.gawk.voicenotes.R;
 import com.gawk.voicenotes.createnote.CategoriesSpinner;
 import com.gawk.voicenotes.models.Note;
-import com.gawk.voicenotes.speech.recognition.ListenerSpeechRecognition;
+import com.gawk.voicenotes.adapters.speech_recognition.ListenerSpeechRecognition;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

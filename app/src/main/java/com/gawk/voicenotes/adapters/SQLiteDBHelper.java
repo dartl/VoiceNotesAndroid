@@ -321,6 +321,9 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
             connection();
         }
         int deleteRow = db.delete(SQLiteDBHelper.CATEGORIES_TABLE_NAME, "_id = ?" ,new String[] { String.valueOf(id) });
+        ContentValues cv = new ContentValues();
+        cv.put(NOTES_TABLE_COLUMN_CATEGORY,-1);
+        int updateNote = db.update(NOTES_TABLE_NAME, cv, NOTES_TABLE_COLUMN_CATEGORY + " = " + id, null);
         return deleteRow == 1;
     }
 

@@ -52,7 +52,7 @@ public class ViewNoteActivity extends ParentActivity {
         NoteViewFragment noteViewFragment = new NoteViewFragment(id);
         mViewPagerAdapter.addFragment(noteViewFragment, getResources().getString(R.string.app_name_note));
 
-        NotificationsListFragment notificationsListFragment = new NotificationsListFragment();
+        NotificationsListFragment notificationsListFragment = new NotificationsListFragment(id);
         mViewPagerAdapter.addFragment(notificationsListFragment, getResources().getString(R.string.new_note_notifications));
 
         viewPager.setAdapter(mViewPagerAdapter);

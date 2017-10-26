@@ -1,4 +1,4 @@
-package com.gawk.voicenotes.date_and_time;
+package com.gawk.voicenotes.adapters.date_and_time;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;

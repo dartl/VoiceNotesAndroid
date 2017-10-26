@@ -1,9 +1,7 @@
-package com.gawk.voicenotes.preferences;
+package com.gawk.voicenotes.adapters.preferences;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 
 /**
  * Created by GAWK on 03.07.2017.

@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import com.gawk.voicenotes.R;
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
-import com.gawk.voicenotes.listeners.TimePickerReturn;
+import com.gawk.voicenotes.adapters.listeners.TimePickerReturn;
 import com.gawk.voicenotes.adapters.ViewPagerAdapter;
 import com.gawk.voicenotes.activities.fragments.create_note.NewNoteNotifications;
 import com.gawk.voicenotes.activities.fragments.create_note.NewNoteText;

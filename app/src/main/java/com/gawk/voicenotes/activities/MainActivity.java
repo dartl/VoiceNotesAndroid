@@ -24,7 +24,7 @@ import com.gawk.voicenotes.adapters.ViewPagerAdapter;
 import com.gawk.voicenotes.activities.fragments.main_activity.CategoryListFragment;
 import com.gawk.voicenotes.activities.fragments.main_activity.NotesListFragment;
 import com.gawk.voicenotes.activities.fragments.main_activity.NotificationsListFragment;
-import com.gawk.voicenotes.preferences.PrefUtil;
+import com.gawk.voicenotes.adapters.preferences.PrefUtil;
 
 public class MainActivity extends ParentActivity {
     private TabLayout tabLayout;
@@ -117,7 +117,7 @@ public class MainActivity extends ParentActivity {
         NotificationsListFragment notificationsListFragment = new NotificationsListFragment();
         adapter.addFragment(notificationsListFragment, getResources().getString(R.string.new_note_notifications));
 
-        CategoryListFragment categoryListFragment = new CategoryListFragment();
+        CategoryListFragment categoryListFragment = new CategoryListFragment(notesListFragment);
         categoryListFragment.setMainActivity(this);
         adapter.addFragment(categoryListFragment, getResources().getString(R.string.main_view_categories_title));
 

@@ -14,8 +14,8 @@ import com.gawk.voicenotes.activities.fragments.FragmentParent;
 import com.gawk.voicenotes.activities.MainActivity;
 import com.gawk.voicenotes.R;
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
-import com.gawk.voicenotes.lists_adapters.CategoriesRecyclerAdapter;
-import com.gawk.voicenotes.lists_adapters.ListAdapters;
+import com.gawk.voicenotes.adapters.lists_adapters.CategoriesRecyclerAdapter;
+import com.gawk.voicenotes.adapters.lists_adapters.ListAdapters;
 import com.gawk.voicenotes.models.Category;
 import com.gawk.voicenotes.windows.AddNewCategory;
 
@@ -32,10 +32,17 @@ public class CategoryListFragment extends FragmentParent{
     private RelativeLayout mRelativeLayoutEmptyCategory;
     private AddNewCategory mAddNewCategory;
     private CategoryListFragment mCategoryListFragment;
+    private NotesListFragment mNotesListFragment;
 
     public CategoryListFragment() {
         // Required empty public constructor
         mCategoryListFragment = this;
+    }
+
+    public CategoryListFragment(NotesListFragment notesListFragment) {
+        // Required empty public constructor
+        mCategoryListFragment = this;
+        mNotesListFragment = notesListFragment;
     }
 
     public void setMainActivity(MainActivity mainActivity) {
@@ -119,6 +126,7 @@ public class CategoryListFragment extends FragmentParent{
             dbHelper.removeCategory(id);
         }
         updateList();
+        mNotesListFragment.updateList();
     }
 
     @Override

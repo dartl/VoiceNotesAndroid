@@ -1,9 +1,8 @@
 package com.gawk.voicenotes.models;
 
-import android.app.Activity;
 import android.content.Context;
 
-import com.gawk.voicenotes.preferences.PrefUtil;
+import com.gawk.voicenotes.adapters.preferences.PrefUtil;
 
 /**
  * Created by GAWK on 07.08.2017.

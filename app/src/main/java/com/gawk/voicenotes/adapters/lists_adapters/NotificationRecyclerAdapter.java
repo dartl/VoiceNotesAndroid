@@ -1,4 +1,4 @@
-package com.gawk.voicenotes.lists_adapters;
+package com.gawk.voicenotes.adapters.lists_adapters;
 
 import android.content.Context;
 import android.database.Cursor;

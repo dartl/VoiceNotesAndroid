@@ -1,10 +1,6 @@
-package com.gawk.voicenotes.subs;
+package com.gawk.voicenotes.adapters.subs;
 
-import android.app.Activity;
-import android.content.Context;
 import android.os.RemoteException;
-
-import com.android.vending.billing.IInAppBillingService;
 
 import org.json.JSONObject;
 

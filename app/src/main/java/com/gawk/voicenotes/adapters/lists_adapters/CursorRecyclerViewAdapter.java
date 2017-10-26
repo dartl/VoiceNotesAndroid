@@ -1,4 +1,4 @@
-package com.gawk.voicenotes.lists_adapters;
+package com.gawk.voicenotes.adapters.lists_adapters;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -6,11 +6,9 @@ import android.database.Cursor;
 import android.database.DataSetObserver;
 import android.support.annotation.ColorInt;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.util.TypedValue;
 
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  * Created by GAWK on 24.03.2017.

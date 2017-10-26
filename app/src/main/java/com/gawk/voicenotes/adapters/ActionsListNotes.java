@@ -1,7 +1,7 @@
 package com.gawk.voicenotes.adapters;
 
-import com.gawk.voicenotes.lists_adapters.NoteRecyclerAdapter;
-import com.gawk.voicenotes.lists_adapters.NotificationRecyclerAdapter;
+import com.gawk.voicenotes.adapters.lists_adapters.NoteRecyclerAdapter;
+import com.gawk.voicenotes.adapters.lists_adapters.NotificationRecyclerAdapter;
 
 /**
  * Этот интерфейс необходим для того, чтобы в адаптерах {@link NoteRecyclerAdapter} и {@link NotificationRecyclerAdapter}

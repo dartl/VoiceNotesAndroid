@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.gawk.voicenotes.R;
-import com.gawk.voicenotes.preferences.PrefUtil;
+import com.gawk.voicenotes.adapters.preferences.PrefUtil;
 import com.gawk.voicenotes.windows.SelectIntervalDialog;
 import com.gawk.voicenotes.windows.SelectTheme;
 

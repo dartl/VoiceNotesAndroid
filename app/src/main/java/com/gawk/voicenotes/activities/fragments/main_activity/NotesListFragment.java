@@ -17,8 +17,8 @@ import com.gawk.voicenotes.activities.fragments.FragmentParent;
 import com.gawk.voicenotes.activities.MainActivity;
 import com.gawk.voicenotes.activities.CreateNoteActivity;
 import com.gawk.voicenotes.R;
-import com.gawk.voicenotes.lists_adapters.ListAdapters;
-import com.gawk.voicenotes.lists_adapters.NoteRecyclerAdapter;
+import com.gawk.voicenotes.adapters.lists_adapters.ListAdapters;
+import com.gawk.voicenotes.adapters.lists_adapters.NoteRecyclerAdapter;
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
 import com.gawk.voicenotes.models.Note;
 

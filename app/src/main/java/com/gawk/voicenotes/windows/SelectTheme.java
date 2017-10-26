@@ -14,7 +14,7 @@ import android.widget.Button;
 
 import com.gawk.voicenotes.R;
 import com.gawk.voicenotes.activities.SettingsActivity;
-import com.gawk.voicenotes.lists_adapters.ListThemeAdapter;
+import com.gawk.voicenotes.adapters.lists_adapters.ListThemeAdapter;
 
 /**
  * Created by GAWK on 23.10.2017.

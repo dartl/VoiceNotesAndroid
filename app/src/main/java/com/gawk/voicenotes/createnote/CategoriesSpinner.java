@@ -48,7 +48,6 @@ public class CategoriesSpinner {
         ArrayAdapter adapter = new ArrayAdapter(mContext, android.R.layout.simple_spinner_item, mCategoriesNames);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mSpinnerSelectCategory.setAdapter(adapter);
-        Log.e("GAWK_ERR", "positionSelectedCategory = " + positionSelectedCategory);
         mSpinnerSelectCategory.setSelection(positionSelectedCategory);
 
         mSpinnerSelectCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

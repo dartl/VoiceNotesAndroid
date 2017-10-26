@@ -11,8 +11,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.gawk.voicenotes.R;
-import com.gawk.voicenotes.subs.GooglePlaySubs;
-import com.gawk.voicenotes.subs.SubsInterface;
+import com.gawk.voicenotes.adapters.subs.GooglePlaySubs;
+import com.gawk.voicenotes.adapters.subs.SubsInterface;
 
 import org.json.JSONException;
 import org.json.JSONObject;

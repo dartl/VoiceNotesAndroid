@@ -1,4 +1,4 @@
-package com.gawk.voicenotes.lists_adapters;
+package com.gawk.voicenotes.adapters.lists_adapters;
 
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;

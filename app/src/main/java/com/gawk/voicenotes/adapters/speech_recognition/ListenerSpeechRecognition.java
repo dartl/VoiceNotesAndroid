@@ -1,6 +1,5 @@
-package com.gawk.voicenotes.speech.recognition;
+package com.gawk.voicenotes.adapters.speech_recognition;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.speech.RecognitionListener;
 import android.speech.SpeechRecognizer;
@@ -9,7 +8,7 @@ import android.util.Log;
 import android.widget.EditText;
 
 import com.gawk.voicenotes.R;
-import com.gawk.voicenotes.speech.recognition.dialog.SpeechRecognitionDialog;
+import com.gawk.voicenotes.adapters.speech_recognition.dialogs.SpeechRecognitionDialog;
 
 import java.util.ArrayList;
 

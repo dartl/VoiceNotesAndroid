@@ -1,10 +1,9 @@
-package com.gawk.voicenotes.date_and_time;
+package com.gawk.voicenotes.adapters.date_and_time;
 
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 
-import com.gawk.voicenotes.listeners.TimePickerReturn;
+import com.gawk.voicenotes.adapters.listeners.TimePickerReturn;
 
 import java.util.Calendar;
 
