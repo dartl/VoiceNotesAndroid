@@ -45,7 +45,7 @@ public class CategoriesSpinner {
     private void init() {
         upDateCategoriesArray();
 
-        ArrayAdapter adapter = new ArrayAdapter(mContext, android.R.layout.simple_spinner_item, mCategoriesNames);
+        ArrayAdapter adapter = new ArrayAdapter(mContext, R.layout.simple_spinner_item, mCategoriesNames);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mSpinnerSelectCategory.setAdapter(adapter);
         mSpinnerSelectCategory.setSelection(positionSelectedCategory);
