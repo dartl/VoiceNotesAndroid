@@ -20,7 +20,6 @@ public class ListenerSpeechRecognition implements RecognitionListener {
     private SpeechRecognitionDialog mSpeechRecognitionDialog;
     private ActionSpeechRecognition mActionSpeechRecognition;
     private FragmentActivity mFragmentActivity;
-    private ArrayList<String> mSuggestions = new ArrayList<>();
     private EditText mEditText;
     private String mOldText = "";
 
@@ -100,6 +99,7 @@ public class ListenerSpeechRecognition implements RecognitionListener {
     public void show() {
         mSpeechRecognitionDialog.setFragmentParent(mActionSpeechRecognition);
         mSpeechRecognitionDialog.show(mFragmentActivity.getFragmentManager(),"SpeechRecognitionDialog");
+        updateText();
     }
 
     public void pause() {
@@ -108,42 +108,18 @@ public class ListenerSpeechRecognition implements RecognitionListener {
         }
     }
 
-    public void clearSuggestions() {
-        mSuggestions = new ArrayList<>();
-    }
-
     private String getFullText() {
-        String fullText = mOldText;
-        for (int i = 0; i < mSuggestions.size(); i++) {
-            fullText += mSuggestions.get(i) + " ";
-        }
-        return fullText;
+        return mOldText;
     }
 
     private void addText(String newText) {
         newText = newText.trim();
         if (newText.length() != 0) {
-            String[] partsNewText = newText.split(".");
-            if (partsNewText.length > 0 ) {
-                for (String partNewText : partsNewText) {
-                    addTextSuggestions(partNewText, true);
-                }
-            } else {
-                addTextSuggestions(newText, false);
-            }
+            mOldText += newText;
         }
     }
 
-    private void addTextSuggestions(String newText, boolean dot) {
-        String doted = "";
-        if (dot) {
-            doted = ".";
-        }
-        if (mSuggestions.size() == 0 || mSuggestions.get(mSuggestions.size() - 1).contains(".")) {
-            newText = newText.substring(0, 1).toUpperCase() + newText.substring(1);
-            mSuggestions.add(newText + doted);
-        } else {
-            mSuggestions.set(mSuggestions.size() - 1, mSuggestions.get(mSuggestions.size() - 1) + " " + newText + doted);
-        }
+    private void updateText() {
+        mOldText = mEditText.getText().toString();
     }
 }

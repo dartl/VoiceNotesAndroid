@@ -1,4 +1,4 @@
-package com.gawk.voicenotes.createnote;
+package com.gawk.voicenotes.activities.fragments.create_note.adapters;
 
 import android.content.Context;
 import android.database.Cursor;

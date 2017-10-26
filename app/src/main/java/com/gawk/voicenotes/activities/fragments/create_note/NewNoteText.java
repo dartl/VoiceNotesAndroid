@@ -1,7 +1,6 @@
 package com.gawk.voicenotes.activities.fragments.create_note;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,7 @@ import android.widget.Spinner;
 import com.gawk.voicenotes.activities.fragments.FragmentParent;
 import com.gawk.voicenotes.R;
 import com.gawk.voicenotes.activities.fragments.create_note.adapters.ActionsEditedNote;
-import com.gawk.voicenotes.createnote.CategoriesSpinner;
+import com.gawk.voicenotes.activities.fragments.create_note.adapters.CategoriesSpinner;
 import com.gawk.voicenotes.adapters.speech_recognition.ListenerSpeechRecognition;
 
 /**

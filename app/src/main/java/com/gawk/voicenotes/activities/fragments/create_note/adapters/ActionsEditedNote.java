@@ -28,6 +28,7 @@ public class ActionsEditedNote {
                 if (length > 0) {
                     mEditText.getText().delete(length - 1, length);
                 }
+                mEditText.setSelection(mEditText.getText().length());
             }
         });
 
@@ -39,9 +40,10 @@ public class ActionsEditedNote {
             public void onClick(View view) {
                 long currentTime = System.currentTimeMillis();
                 String str = mEditText.getText().toString();
+                str = str.trim();
                 if (currentTime - mLastClickButton_NewNoteEdited > 1000) {
                     state = 0;
-                    mEditText.setText(str + ".");
+                    str += ".";
                 } else {
                     state++;
                     str = str.substring(0,str.length() - 1);
@@ -63,8 +65,9 @@ public class ActionsEditedNote {
                             state = -1;
                             break;
                     }
-                    mEditText.setText(str);
+
                 }
+                mEditText.setText(str);
                 mEditText.setSelection(mEditText.getText().length());
                 mLastClickButton_NewNoteEdited = currentTime;
             }
