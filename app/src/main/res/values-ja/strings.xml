@@ -71,7 +71,6 @@
         アプリケーションの設定を変更し、必要な権限を与えます。</string>
     <string name="new_note_speech_recognition_error_network">その他のネットワーク関連のエラー。 インターネットの電源を入れて、もう一度やり直してください。</string>
     <string name="new_note_speech_recognition_error_network_timeout">悪いインターネット接続、それを無効にして、オフラインの認識を試してみてください。</string>
-    <string name="new_note_speech_recognition_error_no_match">認識結果が一致しません。 もっとはっきりと大声で話してみてください。</string>
     <string name="new_note_speech_recognition_error_recognizer_busy">認識サーバは現在、別のアプリケーションによって占有されています。他のアプリケーションをシャットダウンしてみて、もう一度試してください。</string>
     <string name="new_note_speech_recognition_error_server">サーバーはエラー状態を送信します。</string>
     <string name="new_note_speech_recognition_error_server_fix">設定でオフライン認識用のパッケージをダウンロードします。</string>
@@ -117,7 +116,6 @@
     <string name="main_selected_element">アイテム</string>
     <string name="main_action_element">行動</string>
     <string name="main_action_remove">削除</string>
-
     <string name="action_remove">選択を削除します</string>
     <string name="new_note_repeat_on">繰り返す</string>
     <string name="note_view_add_reminder">リマインダを追加する</string>
@@ -128,6 +126,21 @@
     <string name="settings_notification_repetition_select60">60分</string>
     <string name="settings_notification_repetition_text">リマインダを繰り返す時間</string>
     <string name="settings_notification_repetition_title">繰り返し時間</string>
+
+    <string name="main_view_categories_title">カテゴリー</string>
+    <string name="main_empty_categories">まだカテゴリはありません</string>
+    <string name="dialog_add_category_hint">新しいカテゴリの名前を入力してください</string>
+    <string name="main_edited">編集</string>
+    <string name="main_unassigned">割り当てられていない</string>
+    <string name="category_spinner_title">カテゴリを選んでください</string>
+    <string name="category_spinner_filter">フィルタ</string>
+    <string name="action_filter">フィルタ</string>
+    <string name="new_note_speech_recognition_error_no_match">結果は、言われたことに対応しないかもしれません、より正確な認識を得るためにインターネットをオンにするか、よりはっきりと大声で話そうとします。</string>
+    <string name="settings_select_theme_title">テーマを変更する</string>
+    <string name="settings_select_theme_text">好きな配色を選んでください</string>
+    <string name="settings_note_title">ノート</string>
+    <string name="settings_note_auto_save_title">自動保存</string>
+    <string name="settings_note_auto_save_text">ノートテキストを自動的に保存します。 新しいメモを参照します。</string>
     <!-- Подписки -->
     <string name="subs_inner_text">どのサブスクリプションでもアプリから広告が削除され、開発者への寄付が行われます。</string>
     <string-array name="export_import_type">

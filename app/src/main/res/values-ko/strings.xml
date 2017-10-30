@@ -72,7 +72,6 @@
         필요한 권한을 부여하여 응용 프로그램의 설정을 변경하십시오.</string>
     <string name="new_note_speech_recognition_error_network">기타 네트워크 관련 오류. 인터넷을 켜고 다시 시도하십시오.</string>
     <string name="new_note_speech_recognition_error_network_timeout">가난한 인터넷 연결을 해제하고 오프라인 인식을 시도하려고합니다.</string>
-    <string name="new_note_speech_recognition_error_no_match">인식 결과가 일치하지 않습니다. 더 분명하고 큰 소리로 말하십시오.</string>
     <string name="new_note_speech_recognition_error_recognizer_busy">인식 서버는 이제 다른 응용 프로그램에 의해 점유된다. 다른 응용 프로그램을 종료 시도하고 다시 시도하십시오.</string>
     <string name="new_note_speech_recognition_error_server">서버가 오류 상태를 보냅니다.</string>
     <string name="new_note_speech_recognition_error_server_fix">설정에서 오프라인 인식을위한 패키지를 다운로드하십시오.</string>
@@ -111,15 +110,12 @@
     <string name="settings_notification_sound">알림을위한 사운드 선택</string>
     <string name="settings_notification_not_sound">선택된 사운드 없음</string>
     <string name="settings_other_title">다른</string>
-
     <string name="settings_add_icon_add_title">아이콘 추가</string>
-
     <string name="main_share_text">애플리케이션을 사용하여 생성 된 메모 :</string>
     <string name="main_share">몫</string>
     <string name="main_selected_element">항목</string>
     <string name="main_action_element">행위</string>
     <string name="main_action_remove">지우다</string>
-
     <string name="action_remove">선택된 것을 지워 라</string>
     <string name="new_note_repeat_on">반복</string>
     <string name="note_view_add_reminder">알림 추가</string>
@@ -130,6 +126,21 @@
     <string name="settings_notification_repetition_select60">60 분</string>
     <string name="settings_notification_repetition_text">알림을 반복 할 시간</string>
     <string name="settings_notification_repetition_title">반복 시간</string>
+
+    <string name="main_view_categories_title">카테고리</string>
+    <string name="main_empty_categories">아직 카테고리가 없습니다.</string>
+    <string name="dialog_add_category_hint">새 카테고리의 이름을 입력하십시오.</string>
+    <string name="main_edited">편집하다</string>
+    <string name="main_unassigned">할당되지 않음</string>
+    <string name="category_spinner_title">카테고리 선택</string>
+    <string name="category_spinner_filter">필터</string>
+    <string name="action_filter">필터</string>
+    <string name="new_note_speech_recognition_error_no_match">그 결과는 말한 것과 일치하지 않을 수도 있고, 인터넷을 켜서보다 정확한 인정을 얻거나 더 분명하고 크게 말할 수 있습니다.</string>
+    <string name="settings_select_theme_title">테마 변경</string>
+    <string name="settings_select_theme_text">원하는 색상 구성표를 선택하십시오.</string>
+    <string name="settings_note_title">노트</string>
+    <string name="settings_note_auto_save_title">자동 저장</string>
+    <string name="settings_note_auto_save_text">메모 텍스트를 자동으로 저장합니다. 새로운 메모를 참조하십시오.</string>
     <!-- Подписки -->
     <string name="subs_inner_text">모든 구독 상품은 광고를 없애고 개발자를 후원하게 됩니다.</string>
     <string-array name="export_import_type">

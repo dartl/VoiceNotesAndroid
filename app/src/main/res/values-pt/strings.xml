@@ -71,7 +71,6 @@
     <string name="new_note_speech_recognition_error_insufficient_permissions">Permissões insuficientes.\n        Altere as configurações do aplicativo, dando as permissões necessárias.</string>
     <string name="new_note_speech_recognition_error_network">Outros erros relacionados à rede. Ligue a Internet e tente novamente.</string>
     <string name="new_note_speech_recognition_error_network_timeout">Má conexão à Internet, tente desativá-lo e tentar Reconhecimento offline.</string>
-    <string name="new_note_speech_recognition_error_no_match">Nenhum resultado de reconhecimento corresponde. Tente falar com mais clareza e voz.</string>
     <string name="new_note_speech_recognition_error_recognizer_busy">Recognition Server é agora ocupado por outra aplicação. Tente encerrar outras aplicações e tente novamente.</string>
     <string name="new_note_speech_recognition_error_server">O servidor envia o estado do erro.</string>
     <string name="new_note_speech_recognition_error_server_fix">Baixe o pacote para o reconhecimento off-line nas configurações.</string>
@@ -110,15 +109,12 @@
     <string name="settings_notification_sound">Selecione um som para um lembrete</string>
     <string name="settings_notification_not_sound">Nenhum som selecionado</string>
     <string name="settings_other_title">De outros</string>
-
     <string name="settings_add_icon_add_title">Adicionar ícone</string>
-
     <string name="main_share_text">Notas criadas usando o aplicativo:</string>
     <string name="main_share">Compartilhar</string>
     <string name="main_selected_element">Unid</string>
     <string name="main_action_element">Ações</string>
     <string name="main_action_remove">Excluir</string>
-
     <string name="action_remove">Excluir selecionado</string>
     <string name="new_note_repeat_on">Repetir</string>
     <string name="note_view_add_reminder">Adicionar lembrete</string>
@@ -129,6 +125,21 @@
     <string name="settings_notification_repetition_select60">60 minutos</string>
     <string name="settings_notification_repetition_text">Hora de repetir o lembrete</string>
     <string name="settings_notification_repetition_title">Tempo de repetição</string>
+
+    <string name="main_view_categories_title">Categorias</string>
+    <string name="main_empty_categories">Você ainda não possui nenhuma categoria</string>
+    <string name="dialog_add_category_hint">Digite um nome da nova categoria</string>
+    <string name="main_edited">Editar</string>
+    <string name="main_unassigned">Não atribuído</string>
+    <string name="category_spinner_title">Selecione a Categoria</string>
+    <string name="category_spinner_filter">Filtro</string>
+    <string name="action_filter">Filtro</string>
+    <string name="new_note_speech_recognition_error_no_match">O resultado pode não corresponder ao que foi dito, ligar a Internet para obter um reconhecimento mais preciso ou tentar falar com mais clareza e voz.</string>
+    <string name="settings_select_theme_title">Mudar tema</string>
+    <string name="settings_select_theme_text">Escolha um esquema de cores que você gosta</string>
+    <string name="settings_note_title">Notas</string>
+    <string name="settings_note_auto_save_title">Salvamento automático</string>
+    <string name="settings_note_auto_save_text">Ele salvará o texto da nota automaticamente. Refere-se a novas notas.</string>
     <!-- Подписки -->
     <string name="subs_inner_text">Todas as assinaturas removem os anúncios da aplicação e representam doações para o desenvolvedor</string>
     <string-array name="export_import_type">

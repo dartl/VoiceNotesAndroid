@@ -60,7 +60,6 @@
     <string name="new_note_speech_recognition_error_insufficient_permissions">Недостатньо дозволів. \n Змініть параметри програми, надавши необхідні дозволи.</string>
     <string name="new_note_speech_recognition_error_network">Інші помилки, пов\'язані з мережею. Будь ласка, підключіться до Інтернету та повторіть спробу.</string>
     <string name="new_note_speech_recognition_error_network_timeout">Погане підключення до Інтернету, спробуйте вимкнути його та спробуйте розпізнати офлайн.</string>
-    <string name="new_note_speech_recognition_error_no_match">Не знайдено жодного відповідного результату. Постарайтеся говорити з більшою ясністю та голосом.</string>
     <string name="new_note_speech_recognition_error_recognizer_busy">Сервер розпізнавання тепер зайнятий іншою програмою. Будь ласка, спробуйте закрити інші програми та повторіть спробу.</string>
     <string name="new_note_speech_recognition_error_server">Сервер надсилає статус помилки.</string>
     <string name="new_note_speech_recognition_error_server_fix">Завантажте пакет для розпізнавання в автономному режимі в налаштуваннях.</string>
@@ -111,9 +110,23 @@
     <string name="settings_notification_repetition_text">Час повторити нагадування</string>
     <string name="settings_notification_repetition_title">Час повторення</string>
     <string name="subs_inner_text">Усі підписи видаляють оголошення з додатка та подають пожертви розробнику</string>
-
     <string name="main_empty_notes">У вас ще немає записів</string>
     <string name="main_empty_notification">У вас ще немає нагадувань</string>
+
+    <string name="main_view_categories_title">Категорії</string>
+    <string name="main_empty_categories">У вас поки немає категорій</string>
+    <string name="dialog_add_category_hint">Введите название новой категорії</string>
+    <string name="main_edited">Редактировать</string>
+    <string name="main_unassigned">Без категорії</string>
+    <string name="category_spinner_title">Виберіть категорію</string>
+    <string name="category_spinner_filter">Фильтр</string>
+    <string name="action_filter">Фильтр</string>
+    <string name="new_note_speech_recognition_error_no_match">Результат може не відповідати тому, що було сказано, включіть Інтернет, щоб отримати більш точне відповідність або спробувати говорити чётче.</string>
+    <string name="settings_select_theme_title">Сменить тему</string>
+    <string name="settings_select_theme_text">Виберіть кольорову схему, яка вам сподобається</string>
+    <string name="settings_note_title">Заметки</string>
+    <string name="settings_note_auto_save_title">Автосохранение</string>
+    <string name="settings_note_auto_save_text">Автоматически сохранят изменяемый текст заметки. Відноситься і до нових пам'яток.</string>
 
     <string-array name="export_import_type">
         <item>JSON</item>

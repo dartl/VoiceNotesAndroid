@@ -71,8 +71,6 @@
         Измените настройки приложения, предоставив необходимые разрешения.</string>
     <string name="new_note_speech_recognition_error_network">Другие ошибки, связанные с сетью. Включите Интернет и повторите попытку.</string>
     <string name="new_note_speech_recognition_error_network_timeout">Плохая связь с интернетом, попробуйте отключить его и попробуйте офлайн распознование.</string>
-    <string name="new_note_speech_recognition_error_no_match">Полученный результат может не соответствовать
-        сказанному, включите интернет, чтобы получить более точное распознавание или постарайтесь говорить более четко.</string>
     <string name="new_note_speech_recognition_error_recognizer_busy">Сервер распознование сейчас занят другим приложнием. Попробуйте выключить другие приложения и попробуйте снова.</string>
     <string name="new_note_speech_recognition_error_server">Сервер отправляет статус ошибки.</string>
     <string name="new_note_speech_recognition_error_server_fix">Загрузите пакет для автономного распознавания в настройках.</string>
@@ -132,6 +130,21 @@
     <string name="settings_notification_repetition_title">Время повторения</string>
     <!-- Подписки -->
     <string name="subs_inner_text">Все подписки удаляют рекламные объявления из приложения и являются пожертвованиями для разработчика</string>
+
+    <string name="main_view_categories_title">Категории</string>
+    <string name="main_empty_categories">У вас пока нет категорий</string>
+    <string name="dialog_add_category_hint">Введите название новой категории</string>
+    <string name="main_edited">Редактировать</string>
+    <string name="main_unassigned">Без категории</string>
+    <string name="category_spinner_title">Выберите категорию</string>
+    <string name="category_spinner_filter">Фильтр</string>
+    <string name="action_filter">Фильтр</string>
+    <string name="new_note_speech_recognition_error_no_match">Результат может не соответствовать тому, что было сказано, включите Интернет, чтобы получить более точное соответствие или постарайтесь говорить чётче.</string>
+    <string name="settings_select_theme_title">Сменить тему</string>
+    <string name="settings_select_theme_text">Выберите цветовую схему, которая вам нравится</string>
+    <string name="settings_note_title">Заметки</string>
+    <string name="settings_note_auto_save_title">Автосохранение</string>
+    <string name="settings_note_auto_save_text">Автоматически сохранят изменяемый текст заметки. Относится и к новым заметкам.</string>
 
     <string-array name="export_import_type">
         <item>json</item>

@@ -46,7 +46,6 @@
         Modificare le impostazioni dell\'applicazione, fornendo le autorizzazioni necessarie.</string>
     <string name="new_note_speech_recognition_error_network">Altri errori correlati alla rete. Accendere Internet e riprovare.</string>
     <string name="new_note_speech_recognition_error_network_timeout">Scarsa connessione a Internet, provare a disattivarla e provare il riconoscimento offline.</string>
-    <string name="new_note_speech_recognition_error_no_match">Nessun risultato di riconoscimento corrisponde. Prova a parlare più chiaramente e ad alta voce.</string>
     <string name="new_note_speech_recognition_error_recognizer_busy">Il riconoscimento del server è ora occupato da un\'altra applicazione. Provare a disattivare altre applicazioni e riprovare.</string>
     <string name="new_note_speech_recognition_error_server">Il server invia lo stato di errore.</string>
     <string name="new_note_speech_recognition_error_server_fix">Scaricare il pacchetto per il riconoscimento offline nelle impostazioni.</string>
@@ -113,9 +112,23 @@
     <string name="settings_notification_repetition_select60">60 minuti</string>
     <string name="settings_notification_repetition_text">Tempo per ripetere il promemoria</string>
     <string name="settings_notification_repetition_title">Tempo di ripetizione</string>
-
     <string name="main_empty_notes">Non hai ancora nessuna nota</string>
     <string name="main_empty_notification">Non hai ancora alcun promemoria</string>
+
+    <string name="main_view_categories_title">Categorie</string>
+    <string name="main_empty_categories">Non hai ancora categorie</string>
+    <string name="dialog_add_category_hint">Inserire un nome nella nuova categoria</string>
+    <string name="main_edited">Modifica</string>
+    <string name="main_unassigned">Non assegnato</string>
+    <string name="category_spinner_title">Seleziona categoria</string>
+    <string name="category_spinner_filter">Filtro</string>
+    <string name="action_filter">Filtro</string>
+    <string name="new_note_speech_recognition_error_no_match">Il risultato potrebbe non corrispondere a quello che è stato detto, accendere Internet per ottenere un riconoscimento più preciso o cercare di parlare più chiaramente e in modo affidabile.</string>
+    <string name="settings_select_theme_title">Cambiare il tema</string>
+    <string name="settings_select_theme_text">Scegli uno schema di colori che ti piace</string>
+    <string name="settings_note_title">Gli appunti</string>
+    <string name="settings_note_auto_save_title">Salvataggio automatico</string>
+    <string name="settings_note_auto_save_text">Salva automaticamente il testo della nota. Si riferisce a nuove note.</string>
 
     <string-array name="export_import_type">
         <item>JSON</item>

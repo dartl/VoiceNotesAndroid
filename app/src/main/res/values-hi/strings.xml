@@ -71,7 +71,6 @@
         आवश्यक अनुमतियाँ देकर, एप्लिकेशन की सेटिंग्स को बदलें।</string>
     <string name="new_note_speech_recognition_error_network">अन्य नेटवर्क संबंधित त्रुटियाँ इंटरनेट चालू करें और पुनः प्रयास करें।</string>
     <string name="new_note_speech_recognition_error_network_timeout">धीमे इंटरनेट कनेक्शन के उसे निष्क्रिय और ऑफलाइन मान्यता कोशिश करने के लिए प्रयास करें।</string>
-    <string name="new_note_speech_recognition_error_no_match">कोई मान्यता परिणाम मिलान नहीं हुआ। अधिक स्पष्ट और जोर से बोलने की कोशिश करें</string>
     <string name="new_note_speech_recognition_error_recognizer_busy">पहचान सेवा व्यस्त</string>
     <string name="new_note_speech_recognition_error_server">सर्वर त्रुटि स्थिति भेजता है</string>
     <string name="new_note_speech_recognition_error_server_fix">सेटिंग में ऑफ़लाइन मान्यता के लिए पैकेज डाउनलोड करें</string>
@@ -110,14 +109,12 @@
     <string name="settings_notification_sound">रिमाइंडर के लिए ध्वनि चुनें</string>
     <string name="settings_notification_not_sound">कोई ध्वनि चयनित नहीं</string>
     <string name="settings_other_title">अन्य</string>
-
     <string name="settings_add_icon_add_title">आइकन जोड़ें</string>
     <string name="main_share_text">एप्लिकेशन के उपयोग से बनाए गए नोट्स:</string>
     <string name="main_share">शेयर</string>
     <string name="main_selected_element">आइटम</string>
     <string name="main_action_element">क्रिया</string>
     <string name="main_action_remove">हटाना</string>
-
     <string name="action_remove">चयनित मिटाएं</string>
     <string name="new_note_repeat_on">दोहराना</string>
     <string name="note_view_add_reminder">रिमाइंडर जोड़ें</string>
@@ -128,6 +125,21 @@
     <string name="settings_notification_repetition_select60">60 मिनट</string>
     <string name="settings_notification_repetition_text">अनुस्मारक को दोहराने का समय</string>
     <string name="settings_notification_repetition_title">पुनरावृत्ति का समय</string>
+
+    <string name="main_view_categories_title">श्रेणियाँ</string>
+    <string name="main_empty_categories">आपके पास अभी तक कोई श्रेणी नहीं है</string>
+    <string name="dialog_add_category_hint">एक नई श्रेणी दर्ज करें</string>
+    <string name="main_edited">संपादित करें</string>
+    <string name="main_unassigned">सौंपे नहीं गए</string>
+    <string name="category_spinner_title">श्रेणी का चयन करें</string>
+    <string name="category_spinner_filter">फ़िल्टर</string>
+    <string name="action_filter">फ़िल्टर</string>
+    <string name="new_note_speech_recognition_error_no_match">परिणाम जो कहा गया है, उसके अनुरूप नहीं हो सकता, अधिक सटीक मान्यता प्राप्त करने के लिए इंटरनेट को चालू करें या अधिक स्पष्ट और जोर से बोलने का प्रयास करें।</string>
+    <string name="settings_select_theme_title">थीम बदलें</string>
+    <string name="settings_select_theme_text">एक रंग योजना चुनें, जिसे आप पसंद करते हैं</string>
+    <string name="settings_note_title">टिप्पणियाँ</string>
+    <string name="settings_note_auto_save_title">स्वत: सहेजना</string>
+    <string name="settings_note_auto_save_text">यह स्वचालित रूप से नोट पाठ को बचाएगा। नए नोट्स को संदर्भित करता है</string>
     <!-- Подписки -->
     <string name="subs_inner_text">सभी सदस्यताएँ ऐप से विज्ञापन हटा देती हैं और डेवलपर को दान देना इंगित करती हैं</string>
     <string-array name="export_import_type">

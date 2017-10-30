@@ -45,7 +45,6 @@
     <string name="new_note_speech_recognition_error_insufficient_permissions">أذونات غير كافية.\n       تغيير إعدادات التطبيق، وإعطاء الأذونات اللازمة.</string>
     <string name="new_note_speech_recognition_error_network">أخطاء أخرى متعلقة بالشبكة. شغل الإنترنت ثم أعد المحاولة.</string>
     <string name="new_note_speech_recognition_error_network_timeout">اتصال ضعيف بالإنترنت، حاول تعطيله وحاول التعرف دون اتصال بالإنترنت.</string>
-    <string name="new_note_speech_recognition_error_no_match">لم تتم مطابقة نتيجة التعرف. حاول التحدث بشكل أكثر وضوحا وبصوت عال.</string>
     <string name="new_note_speech_recognition_error_recognizer_busy">يتم الآن تشغيل التعرف على الخادم بواسطة تطبيق آخر. جرب إيقاف تشغيل التطبيقات الأخرى وإعادة المحاولة.</string>
     <string name="new_note_speech_recognition_error_server">يرسل الخادم حالة الخطأ.</string>
     <string name="new_note_speech_recognition_error_server_fix">تحميل حزمة للاعتراف حاليا في الإعدادات.</string>
@@ -113,9 +112,23 @@
     <string name="settings_notification_repetition_select60">60 دقيقة</string>
     <string name="settings_notification_repetition_text">الوقت لتكرار تذكير</string>
     <string name="settings_notification_repetition_title">زمن التكرار</string>
-
     <string name="main_empty_notes">ليست لديك أية ملاحظات حتى الآن</string>
     <string name="main_empty_notification">ليس لديك أي تذكيرات حتى الآن</string>
+
+    <string name="main_view_categories_title">الاقسام</string>
+    <string name="main_empty_categories">ليس لديك أية فئات حتى الآن</string>
+    <string name="dialog_add_category_hint">أدخل اسما للفئة الجديدة</string>
+    <string name="main_edited">تصحيح</string>
+    <string name="main_unassigned">غير المعينة</string>
+    <string name="category_spinner_title">اختر الفئة</string>
+    <string name="category_spinner_filter">منقي</string>
+    <string name="action_filter">منقي</string>
+    <string name="new_note_speech_recognition_error_no_match">قد لا تتطابق النتيجة مع ما قيل، تشغيل الإنترنت للحصول على اعتراف أكثر دقة أو محاولة التحدث بشكل أكثر وضوحا وبصوت عال.</string>
+    <string name="settings_select_theme_title">غير الخلفية</string>
+    <string name="settings_select_theme_text">اختيار نظام الألوان التي تريد</string>
+    <string name="settings_note_title">ملاحظات</string>
+    <string name="settings_note_auto_save_title">الحفظ التلقائي</string>
+    <string name="settings_note_auto_save_text">فإنه سيتم حفظ النص المذكرة تلقائيا. يشير إلى الملاحظات الجديدة.</string>
 
     <string-array name="export_import_type">
         <item>JSON</item>

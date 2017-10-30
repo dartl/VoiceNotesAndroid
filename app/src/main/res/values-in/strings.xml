@@ -71,7 +71,6 @@
         Ubah pengaturan aplikasi, berikan izin yang diperlukan.</string>
     <string name="new_note_speech_recognition_error_network">Kesalahan terkait jaringan lainnya. Hidupkan Internet dan coba lagi.</string>
     <string name="new_note_speech_recognition_error_network_timeout">Miskin koneksi internet, cobalah untuk menonaktifkannya dan mencoba Pengakuan offline.</string>
-    <string name="new_note_speech_recognition_error_no_match">Tidak ada hasil pengenalan yang sesuai. Cobalah untuk berbicara lebih jelas dan keras.</string>
     <string name="new_note_speech_recognition_error_recognizer_busy">Pengakuan Server kini ditempati oleh aplikasi lain. Coba matikan aplikasi lain dan coba lagi.</string>
     <string name="new_note_speech_recognition_error_server">Server mengirimkan status error.</string>
     <string name="new_note_speech_recognition_error_server_fix">Download paket untuk pengenalan offline dalam pengaturan.</string>
@@ -129,6 +128,21 @@
     <string name="settings_notification_repetition_select60">60 menit</string>
     <string name="settings_notification_repetition_text">Waktunya mengulang pengingat</string>
     <string name="settings_notification_repetition_title">Waktu pengulangan</string>
+
+    <string name="main_view_categories_title">Kategori</string>
+    <string name="main_empty_categories">Anda belum memiliki kategori apa pun</string>
+    <string name="dialog_add_category_hint">Masukkan nama kategori baru</string>
+    <string name="main_edited">Edit</string>
+    <string name="main_unassigned">Belum ditetapkan</string>
+    <string name="category_spinner_title">Pilih Kategori</string>
+    <string name="category_spinner_filter">Menyaring</string>
+    <string name="action_filter">Menyaring</string>
+    <string name="new_note_speech_recognition_error_no_match">Hasilnya mungkin tidak sesuai dengan apa yang telah dikatakan, nyalakan Internet untuk mendapatkan pengakuan yang lebih akurat atau coba bicaralah dengan lebih jelas dan keras.</string>
+    <string name="settings_select_theme_title">Ubah tema</string>
+    <string name="settings_select_theme_text">Pilih skema warna yang Anda sukai</string>
+    <string name="settings_note_title">Catatan</string>
+    <string name="settings_note_auto_save_title">Penyimpanan otomatis</string>
+    <string name="settings_note_auto_save_text">Ini akan menyimpan teks catatan secara otomatis. Mengacu pada catatan baru.</string>
     <!-- Подписки -->
     <string name="subs_inner_text">Semua langganan akan menghapus iklan dari aplikasi ini dan menjadi sumbangan untuk pengembang</string>
     <string-array name="export_import_type">

@@ -70,7 +70,6 @@
         Modifiez les paramètres de l’application, en donnant les autorisations nécessaires.</string>
     <string name="new_note_speech_recognition_error_network">D’autres erreurs liées au réseau. Allumez l’Internet et réessayez.</string>
     <string name="new_note_speech_recognition_error_network_timeout">Une mauvaise connexion Internet, essayez de le désactiver et essayer de reconnaissance hors ligne.</string>
-    <string name="new_note_speech_recognition_error_no_match">Aucun résultat de reconnaissance n’est égal. Essayez de parler plus clairement et fort.</string>
     <string name="new_note_speech_recognition_error_recognizer_busy">Recognition Server est maintenant occupé par une autre application. Essayez de fermer les autres applications et essayez à nouveau.</string>
     <string name="new_note_speech_recognition_error_server">Le serveur envoie un état d’erreur.</string>
     <string name="new_note_speech_recognition_error_server_fix">Téléchargez le package pour la reconnaissance hors ligne dans les paramètres.</string>
@@ -128,6 +127,21 @@
     <string name="settings_notification_repetition_select60">60 minutes</string>
     <string name="settings_notification_repetition_text">Heure de répéter le rappel</string>
     <string name="settings_notification_repetition_title">Temps de répétition</string>
+
+    <string name="main_view_categories_title">Catégories</string>
+    <string name="main_empty_categories">Vous n’avez pas encore de catégories</string>
+    <string name="dialog_add_category_hint">Entrez un nom la nouvelle catégorie</string>
+    <string name="main_edited">modifier</string>
+    <string name="main_unassigned">Non attribué</string>
+    <string name="category_spinner_title">Choisir une catégorie</string>
+    <string name="category_spinner_filter">Filtre</string>
+    <string name="action_filter">Filtre</string>
+    <string name="new_note_speech_recognition_error_no_match">Le résultat peut ne pas correspondre à ce qui a été dit, activer Internet pour obtenir une reconnaissance plus précise ou essayer de parler plus clairement et plus fort.</string>
+    <string name="settings_select_theme_title">Change le thème</string>
+    <string name="settings_select_theme_text">Choisissez un schéma de couleurs que vous aimez</string>
+    <string name="settings_note_title">Remarques</string>
+    <string name="settings_note_auto_save_title">Enregistrement automatique</string>
+    <string name="settings_note_auto_save_text">Il sauvegardera automatiquement le texte de la note. Renvoie à de nouvelles notes.</string>
     <!-- Подписки -->
     <string name="subs_inner_text">Tous les abonnements suppriment des annonces de l’appli et représentent des dons pour le développeur</string>
     <string-array name="export_import_type">
