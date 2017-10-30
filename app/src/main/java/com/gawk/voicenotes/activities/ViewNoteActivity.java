@@ -118,7 +118,7 @@ public class ViewNoteActivity extends ParentActivity implements CustomRelativeLa
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_save_note) {
             NoteViewFragment noteViewFragment = (NoteViewFragment) mViewPagerAdapter.getItem(0);
-            dbHelper.saveNote(noteViewFragment.getUpdateNote(),1);
+            dbHelper.saveNote(noteViewFragment.getUpdateNote());
             finish();
             return true;
         }

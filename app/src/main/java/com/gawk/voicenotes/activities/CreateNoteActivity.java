@@ -133,8 +133,8 @@ public class CreateNoteActivity extends ParentActivity implements TimePickerRetu
         // сохранение заметки
         dbHelper.connection();
         NewNoteText newNoteText = (NewNoteText) mViewPagerAdapter.getItem(0);
-        Note newNote = new Note(-1,newNoteText.getTextNote(), Calendar.getInstance().getTime(),newNoteText.getSelectedCategoryId());
-        long note_id = dbHelper.saveNote(newNote, 0);
+        Note newNote = newNoteText.getUpdateNote();
+        long note_id = dbHelper.saveNote(newNote);
         newNote.setId(note_id);
 
         // сохранение оповещения

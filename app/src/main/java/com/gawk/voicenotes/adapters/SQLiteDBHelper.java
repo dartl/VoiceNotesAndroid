@@ -508,26 +508,18 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
 
     // Сохранить новую заметку или обновить существующую
     // action = 0 - добавить новую; action = 1 - обновить существующую
-    public long saveNote(Note note, int action) {
-        if (!db.isOpen()) {
-            return -1;
+    public long saveNote(Note note) {
+        if (!isConnect()) {
+            connection();
         }
         ContentValues newValues = new ContentValues();
+        if (note.getId() != -1) {
+            newValues.put(SQLiteDBHelper.NOTES_TABLE_COLUMN_ID, note.getId());
+        }
         newValues.put(SQLiteDBHelper.NOTES_TABLE_COLUMN_TEXT_NOTE, note.getText_note());
         newValues.put(SQLiteDBHelper.NOTES_TABLE_COLUMN_DATE, note.getDate().getTime());
         newValues.put(SQLiteDBHelper.NOTES_TABLE_COLUMN_CATEGORY, note.getCategoryId());
-        switch (action) {
-            case 0:
-                long i = db.insert(SQLiteDBHelper.NOTES_TABLE_NAME, null, newValues);
-                mStatistics.addPointCreateNotes();
-                return i;
-            case 1:
-                db.update(SQLiteDBHelper.NOTES_TABLE_NAME, newValues, NOTES_TABLE_COLUMN_ID +" = ?",
-                    new String[] { String.valueOf(note.getId()) });
-                return note.getId();
-            default:
-                return -1;
-        }
+        return db.replace(SQLiteDBHelper.NOTES_TABLE_NAME, null, newValues);
     }
 
     public boolean noteDelete(long id) {

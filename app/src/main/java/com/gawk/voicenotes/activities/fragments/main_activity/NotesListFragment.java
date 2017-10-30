@@ -79,7 +79,7 @@ public class NotesListFragment extends FragmentParent implements ListenerSelectF
         });
 
         mCategoriesSpinner = new CategoriesSpinner(dbHelper, getContext(), mSpinnerFilter, -1);
-        mCategoriesSpinner.setListenerSelectFilterCategory(this);
+        mCategoriesSpinner.setListenerSelectFilterCategory(this, true);
 
         dbHelper = SQLiteDBHelper.getInstance(getActivity());
         dbHelper.connection();

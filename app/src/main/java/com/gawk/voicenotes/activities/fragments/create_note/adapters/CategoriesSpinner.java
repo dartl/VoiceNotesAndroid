@@ -102,12 +102,10 @@ public class CategoriesSpinner {
         return selectedCategoryId;
     }
 
-    public ListenerSelectFilterCategory getListenerSelectFilterCategory() {
-        return mListenerSelectFilterCategory;
-    }
-
-    public void setListenerSelectFilterCategory(ListenerSelectFilterCategory mListenerSelectFilterCategory) {
-        mCategoriesNames[0] = mContext.getString(R.string.main_all);
+    public void setListenerSelectFilterCategory(ListenerSelectFilterCategory
+                                                        mListenerSelectFilterCategory,
+                                                boolean isFilter) {
+        if (isFilter) mCategoriesNames[0] = mContext.getString(R.string.main_all);
         this.mListenerSelectFilterCategory = mListenerSelectFilterCategory;
     }
 

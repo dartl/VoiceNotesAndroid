@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -89,7 +90,7 @@ public class SettingsActivity extends ParentActivity {
         setOnClickListenerChildren(mLinearLayoutNoteAutoSave, new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setAutoSave(mSwitchAutoSave.isChecked());
+                setAutoSave(view);
             }
         });
 
@@ -258,8 +259,15 @@ public class SettingsActivity extends ParentActivity {
         prefUtil.saveInt(PrefUtil.THEME,theme);
     }
 
-    public void setAutoSave(boolean b) {
-        mSwitchAutoSave.setChecked(b);
+    public void setAutoSave(View v) {
+        boolean b;
+        if (v == mSwitchAutoSave) {
+            b = mSwitchAutoSave.isChecked();
+        } else {
+            b = !mSwitchAutoSave.isChecked();
+            mSwitchAutoSave.setChecked(b);
+        }
+        Log.e("GAWK_ERR", "b = " + b);
         mPrefUtil.saveBoolean(PrefUtil.NOTE_AUTO_SAVE,b);
     }
 
