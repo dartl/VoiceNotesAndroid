@@ -11,6 +11,7 @@ public class PrefUtil {
     // константы названий настроек
     public static final String NOTIFICATION_SOUND = "sound_for_notification";
     public static final String NOTIFICATION_INTERVAL = "interval_for_notification";
+    public static final String NOTE_AUTO_SAVE = "note_auto_save";
     public static final String THEME = "theme_voice_notes";
 
     // основной код

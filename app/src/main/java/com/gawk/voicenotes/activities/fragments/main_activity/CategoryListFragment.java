@@ -142,7 +142,7 @@ public class CategoryListFragment extends FragmentParent{
     }
 
     @Override
-    public void refreshSelectedList() {
+    public void refreshSelectedList(int position) {
         onResume();
     }
 

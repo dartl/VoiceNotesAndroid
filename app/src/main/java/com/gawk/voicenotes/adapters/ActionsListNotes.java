@@ -14,7 +14,7 @@ public interface ActionsListNotes {
      * Вызыывает метод, отмечающий выделение заметки
      * @param id идентификатор заметки, которую выделяем
      */
-    boolean selectElement(long id);
+    boolean selectElement(long id, int position);
     boolean checkSelectElement(long id);
     void showBottomMenu(final long id);
     boolean isStateSelected();

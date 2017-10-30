@@ -34,12 +34,11 @@
             </intent-filter>
         </activity>
 
-
         <activity android:name=".activities.CreateNoteActivity"
             android:label="@string/menu_add"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden">
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:windowSoftInputMode="stateHidden|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.CREATE_DOCUMENT" />
             </intent-filter>

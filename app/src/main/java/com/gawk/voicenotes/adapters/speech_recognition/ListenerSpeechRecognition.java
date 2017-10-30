@@ -60,7 +60,6 @@ public class ListenerSpeechRecognition implements RecognitionListener {
 
     @Override
     public void onEndOfSpeech() {
-        Log.e("GAWK_ERR","onEndOfSpeech()");
     }
 
     @Override
@@ -79,7 +78,7 @@ public class ListenerSpeechRecognition implements RecognitionListener {
             mEditText.setText(getFullText());
             mSpeechRecognitionDialog.dismiss();
         }
-        mActionSpeechRecognition.endRecognition();
+        mActionSpeechRecognition.reStartRecognize();
     }
 
     @Override
@@ -99,6 +98,11 @@ public class ListenerSpeechRecognition implements RecognitionListener {
     public void show() {
         mSpeechRecognitionDialog.setFragmentParent(mActionSpeechRecognition);
         mSpeechRecognitionDialog.show(mFragmentActivity.getFragmentManager(),"SpeechRecognitionDialog");
+        updateText();
+    }
+
+    public void reShow() {
+        reShow();
         updateText();
     }
 

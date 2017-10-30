@@ -1,12 +1,15 @@
 package com.gawk.voicenotes.activities.fragments.view_note;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -14,6 +17,7 @@ import com.gawk.voicenotes.activities.fragments.FragmentParent;
 import com.gawk.voicenotes.R;
 import com.gawk.voicenotes.activities.fragments.create_note.adapters.ActionsEditedNote;
 import com.gawk.voicenotes.activities.fragments.create_note.adapters.CategoriesSpinner;
+import com.gawk.voicenotes.adapters.custom_layouts.CustomRelativeLayout;
 import com.gawk.voicenotes.models.Note;
 import com.gawk.voicenotes.adapters.speech_recognition.ListenerSpeechRecognition;
 
@@ -25,7 +29,7 @@ import java.text.SimpleDateFormat;
  * Created by GAWK on 24.10.2017.
  */
 
-public class NoteViewFragment extends FragmentParent {
+public class NoteViewFragment extends FragmentParent implements CustomRelativeLayout.Listener {
     private EditText mEditTextNoteText;
     private TextView mTextViewDate;
     private ImageButton mImageButton_NewNoteAdd, mImageButton_NewNoteClear;
@@ -62,15 +66,15 @@ public class NoteViewFragment extends FragmentParent {
         mImageButton_NewNoteClear =  view.findViewById(R.id.imageButton_NewNoteClear);
         mButton_NewNoteEdited =  view.findViewById(R.id.button_NewNoteEdited);
 
-
         mImageButton_NewNoteAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                view.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.animation_create_note_click_button));
                 showRecognizeDialog();
             }
         });
 
-        ActionsEditedNote actionsEditedNote = new ActionsEditedNote(mImageButton_NewNoteClear, mButton_NewNoteEdited, mEditTextNoteText);
+        ActionsEditedNote actionsEditedNote = new ActionsEditedNote(mImageButton_NewNoteClear, mButton_NewNoteEdited, mEditTextNoteText, getContext());
         actionsEditedNote.init();
 
         mEditTextNoteText.setText(mNote.getText_note());
@@ -106,6 +110,21 @@ public class NoteViewFragment extends FragmentParent {
         super.onPause();
         if (mListenerSpeechRecognition != null) {
             mListenerSpeechRecognition.pause();
+        }
+    }
+
+    @Override
+    public void onSoftKeyboardShown(boolean isShowing) {
+        if(mTextViewDate == null || mSpinnerSelectCategory == null) {
+            Log.e("GAWK_ERR","onSoftKeyboardShown NULL");
+            return;
+        }
+        if(isShowing) {
+            mTextViewDate.setVisibility(View.GONE);
+            mSpinnerSelectCategory.setVisibility(View.GONE);
+        } else {
+            mTextViewDate.setVisibility(View.VISIBLE);
+            mSpinnerSelectCategory.setVisibility(View.VISIBLE);
         }
     }
 }

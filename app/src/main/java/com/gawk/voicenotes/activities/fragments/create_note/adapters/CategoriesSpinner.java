@@ -107,6 +107,7 @@ public class CategoriesSpinner {
     }
 
     public void setListenerSelectFilterCategory(ListenerSelectFilterCategory mListenerSelectFilterCategory) {
+        mCategoriesNames[0] = mContext.getString(R.string.main_all);
         this.mListenerSelectFilterCategory = mListenerSelectFilterCategory;
     }
 

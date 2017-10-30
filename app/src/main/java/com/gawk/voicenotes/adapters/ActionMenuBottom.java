@@ -16,5 +16,5 @@ public interface ActionMenuBottom {
 
     void editedItemList(long id);
 
-    void refreshSelectedList();
+    void refreshSelectedList(int position);
 }

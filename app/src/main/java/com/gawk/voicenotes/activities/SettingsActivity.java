@@ -8,7 +8,10 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.gawk.voicenotes.R;
@@ -16,64 +19,81 @@ import com.gawk.voicenotes.adapters.preferences.PrefUtil;
 import com.gawk.voicenotes.windows.SelectIntervalDialog;
 import com.gawk.voicenotes.windows.SelectTheme;
 
+import java.util.ArrayList;
+
 /**
  * Created by GAWK on 30.03.2017.
  */
 
 public class SettingsActivity extends ParentActivity {
     private int CODE_RESULT_SOUND = 1;
-    private Button addShortcut, buttonSelectSound, mButtonRepetitionView, mSelectTheme;
     private TextView textViewSelectSound;
     private PrefUtil mPrefUtil;
     private TextView mTextViewRepetition;
     private SettingsActivity mSettingsActivity;
     private SelectTheme mSelectThemeDialog;
 
+    private Switch mSwitchAutoSave;
+    private LinearLayout mLinearLayoutSelectSound, mLinearLayoutSelectRepetitionTime,
+            mLinearLayoutAddShortcut, mLinearLayoutSelectTheme, mLinearLayoutNoteAutoSave;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+        initAdMob(true);
+
         mSettingsActivity = this;
         mPrefUtil = new PrefUtil(this);
 
-        addShortcut = (Button) findViewById(R.id.buttonAddShortcut);
-        addShortcut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                installIconAddNote();
-            }
-        });
+        textViewSelectSound = (TextView) findViewById(R.id.textViewSelectSound);
+        mTextViewRepetition = (TextView) findViewById(R.id.textViewRepetition);
 
-        buttonSelectSound = (Button) findViewById(R.id.buttonSelectSound);
-        buttonSelectSound.setOnClickListener(new View.OnClickListener() {
+        mLinearLayoutSelectSound = (LinearLayout) findViewById(R.id.linearLayoutSelectSound);
+        mLinearLayoutSelectRepetitionTime = (LinearLayout) findViewById(R.id.linearLayoutSelectRepetitionTime);
+        mLinearLayoutAddShortcut = (LinearLayout) findViewById(R.id.linearLayoutAddShortcut);
+        mLinearLayoutSelectTheme = (LinearLayout) findViewById(R.id.linearLayoutSelectTheme);
+        mLinearLayoutNoteAutoSave = (LinearLayout) findViewById(R.id.linearLayoutNoteAutoSave);
+        mSwitchAutoSave = (Switch) findViewById(R.id.switchAutoSave);
+
+        mSwitchAutoSave.setChecked(mPrefUtil.getBoolean(PrefUtil.NOTE_AUTO_SAVE,false));
+
+        setOnClickListenerChildren(mLinearLayoutSelectSound, new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 selectAudio();
             }
         });
 
-        textViewSelectSound = (TextView) findViewById(R.id.textViewSelectSound);
-        mButtonRepetitionView = (Button) findViewById(R.id.buttonRepetitionView);
+        setOnClickListenerChildren(mLinearLayoutSelectRepetitionTime, new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectRepetitionsInterval();
+            }
+        });
 
-        mTextViewRepetition = (TextView) findViewById(R.id.textViewRepetition);
+        setOnClickListenerChildren(mLinearLayoutAddShortcut, new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                installIconAddNote();
+            }
+        });
+
+        setOnClickListenerChildren(mLinearLayoutSelectTheme, new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectTheme();
+            }
+        });
+
+        setOnClickListenerChildren(mLinearLayoutNoteAutoSave, new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAutoSave(mSwitchAutoSave.isChecked());
+            }
+        });
+
         setIntervalNotification(mPrefUtil.getLong(mPrefUtil.NOTIFICATION_INTERVAL,0));
-
-        mButtonRepetitionView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SelectIntervalDialog selectIntervalDialog = new SelectIntervalDialog(mSettingsActivity);
-                selectIntervalDialog.show(getFragmentManager(),"selectIntervalDialog");
-            }
-        });
-
-        mSelectTheme = (Button) findViewById(R.id.buttonSelectTheme);
-        mSelectTheme.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mSelectThemeDialog = new SelectTheme();
-                mSelectThemeDialog.show(getFragmentManager(),"SelectTheme");
-            }
-        });
 
         String url = mPrefUtil.getString(PrefUtil.NOTIFICATION_SOUND,"");
         setSoundTitle(url);
@@ -84,6 +104,16 @@ public class SettingsActivity extends ParentActivity {
         super.onResume();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view_menu);
         navigationView.getMenu().findItem(R.id.menu_settings).setCheckable(true).setChecked(true);
+    }
+
+    private void selectTheme() {
+        mSelectThemeDialog = new SelectTheme();
+        mSelectThemeDialog.show(getFragmentManager(),"SelectTheme");
+    }
+
+    private void selectRepetitionsInterval() {
+        SelectIntervalDialog selectIntervalDialog = new SelectIntervalDialog(mSettingsActivity);
+        selectIntervalDialog.show(getFragmentManager(),"selectIntervalDialog");
     }
 
     protected void installIconAddNote() {
@@ -226,5 +256,22 @@ public class SettingsActivity extends ParentActivity {
         }
         recreate();
         prefUtil.saveInt(PrefUtil.THEME,theme);
+    }
+
+    public void setAutoSave(boolean b) {
+        mSwitchAutoSave.setChecked(b);
+        mPrefUtil.saveBoolean(PrefUtil.NOTE_AUTO_SAVE,b);
+    }
+
+    private void setOnClickListenerChildren(View v, View.OnClickListener onClickListener) {
+        if (!(v instanceof ViewGroup)) {
+            v.setOnClickListener(onClickListener);
+            return ;
+        }
+        ViewGroup viewGroup = (ViewGroup) v;
+        for (int i = 0; i < viewGroup.getChildCount(); i++) {
+            View child = viewGroup.getChildAt(i);
+            setOnClickListenerChildren(child, onClickListener);
+        }
     }
 }

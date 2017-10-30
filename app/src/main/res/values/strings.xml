@@ -31,6 +31,7 @@
     <string name="dialog_add_category_hint">Enter a name the new category</string>  <!-- NEW -->
     <string name="main_edited">Edit</string>  <!-- NEW -->
     <string name="main_unassigned">Unassigned</string>  <!-- NEW -->
+    <string name="main_all">All</string>  <!-- NEW -->
     <string name="category_spinner_title">Select category</string>  <!-- NEW -->
     <string name="category_spinner_filter">Filter</string>  <!-- NEW -->
 
@@ -91,7 +92,9 @@
         Change the settings of the application, giving the necessary permissions.</string>
     <string name="new_note_speech_recognition_error_network">Other network related errors. Turn on the Internet and try again.</string>
     <string name="new_note_speech_recognition_error_network_timeout">Poor connection to the Internet, try disabling it and try offline recognition.</string>
-    <string name="new_note_speech_recognition_error_no_match">No recognition result matched. Try to speak more clearly and loudly.</string>
+    <string name="new_note_speech_recognition_error_no_match">The result may not correspond to what
+        has been said, turn on the Internet to get a more accurate recognition or try to speak more
+        clearly and loudly.</string>    <!-- NEW -->
     <string name="new_note_speech_recognition_error_recognizer_busy">Server recognition is now occupied by another application. Try turning off other applications and try again.</string>
     <string name="new_note_speech_recognition_error_server">Server sends error status.</string>
     <string name="new_note_speech_recognition_error_server_fix">Download the package for offline recognition in the settings.</string>
@@ -146,6 +149,9 @@
     <string name="settings_add_icon_add_title">Add icon</string>
     <string name="settings_select_theme_title">Change theme</string> <!-- NEW -->
     <string name="settings_select_theme_text">Choose a color scheme that you like</string>  <!-- NEW -->
+    <string name="settings_note_title">Notes</string> <!-- NEW -->
+    <string name="settings_note_auto_save_title">Autosave</string> <!-- NEW -->
+    <string name="settings_note_auto_save_text">It will save the note text automatically. Refers to new notes.</string> <!-- NEW -->
 
     <!-- Подписки -->
     <string name="subs_inner_text">All subscriptions remove ads from the app and represent donations to the developer</string>

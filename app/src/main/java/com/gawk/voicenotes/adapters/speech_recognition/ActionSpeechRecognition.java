@@ -32,6 +32,7 @@ public class ActionSpeechRecognition {
     private SpeechRecognizer mRecognizerIntent;
     private SpeechRecognitionDialog mSpeechRecognitionDialog;
     private RecognitionListener mRecognitionListener;
+    private Intent mIntent;
 
     public ActionSpeechRecognition(Context mContext, Activity mActivity, SpeechRecognitionDialog mSpeechRecognitionDialog, RecognitionListener mRecognitionListener) {
         this.mContext = mContext;
@@ -41,17 +42,17 @@ public class ActionSpeechRecognition {
     }
 
     public void startRecognize() {
-        Intent i = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        i.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        i.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
-        i.putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, true);
-        i.putExtra(RecognizerIntent.EXTRA_SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS, 5000);
-        i.putExtra(RecognizerIntent.EXTRA_SPEECH_INPUT_POSSIBLY_COMPLETE_SILENCE_LENGTH_MILLIS, 5000);
+        mIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        mIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        mIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+        mIntent.putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, true);
+        mIntent.putExtra(RecognizerIntent.EXTRA_SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS, 5000);
+        mIntent.putExtra(RecognizerIntent.EXTRA_SPEECH_INPUT_POSSIBLY_COMPLETE_SILENCE_LENGTH_MILLIS, 5000);
 
-        if (isIntentAvailable(mContext,i)) { // Проверяем наличие программы для распознования
+        if (isIntentAvailable(mContext,mIntent)) { // Проверяем наличие программы для распознования
             mRecognizerIntent = SpeechRecognizer.createSpeechRecognizer(mContext);
             mRecognizerIntent.setRecognitionListener(mRecognitionListener);
-            mRecognizerIntent.startListening(i);
+            mRecognizerIntent.startListening(mIntent);
         } else {
             mSpeechRecognitionDialog.dismiss();
             AlertDialog.Builder ad = new AlertDialog.Builder(mContext);
@@ -80,6 +81,37 @@ public class ActionSpeechRecognition {
     public void endRecognition() {
         if (mRecognizerIntent != null) {
             mRecognizerIntent.cancel();
+        }
+    }
+
+    public void reStartRecognize() {
+        mRecognizerIntent.stopListening();
+        if (isIntentAvailable(mContext,mIntent)) { // Проверяем наличие программы для распознования
+            mRecognizerIntent = SpeechRecognizer.createSpeechRecognizer(mContext);
+            mRecognizerIntent.setRecognitionListener(mRecognitionListener);
+            mRecognizerIntent.startListening(mIntent);
+        } else {
+            mSpeechRecognitionDialog.dismiss();
+            AlertDialog.Builder ad = new AlertDialog.Builder(mContext);
+            ad.setTitle(mContext.getResources().getText(R.string.new_note_error_speech_recognition_title));  // заголовок
+            ad.setMessage(mContext.getResources().getText(R.string.new_note_error_speech_recognition)); // сообщение
+            ad.setPositiveButton(mContext.getResources().getText(R.string.new_note_error_speech_recognition_ok), new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    startInstallAppRecognize();
+                }
+            });
+            ad.setNegativeButton(mContext.getResources().getText(R.string.new_note_error_speech_recognition_cancel), new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    cancelInstallAppRecognize();
+                }
+            });
+            ad.setCancelable(true);
+            ad.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                public void onCancel(DialogInterface dialog) {
+                    cancelInstallAppRecognize();
+                }
+            });
+            ad.show();
         }
     }
 

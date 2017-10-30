@@ -12,10 +12,13 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.gawk.voicenotes.R;
+import com.gawk.voicenotes.activities.fragments.view_note.NoteViewFragment;
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
+import com.gawk.voicenotes.adapters.custom_layouts.CustomRelativeLayout;
 import com.gawk.voicenotes.adapters.listeners.TimePickerReturn;
 import com.gawk.voicenotes.adapters.ViewPagerAdapter;
 import com.gawk.voicenotes.activities.fragments.create_note.NewNoteNotifications;
@@ -29,30 +32,28 @@ import java.util.Calendar;
  * Created by GAWK on 12.02.2017.
  */
 
-public class CreateNoteActivity extends ParentActivity implements TimePickerReturn {
+public class CreateNoteActivity extends ParentActivity implements TimePickerReturn, CustomRelativeLayout.Listener {
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    private ViewPagerAdapter adapter;
+    private ViewPagerAdapter mViewPagerAdapter;
     private NewNoteText newNoteText;
+    private CustomRelativeLayout mCustomRelativeLayout;
 
     /* объявляем все элементы активные */
-    private Button newNoteAddNotification;
+    private Button mButtonSaveNote;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_note);
 
-        TabLayout tab = (TabLayout) findViewById(R.id.tabs);
-        tab.setVisibility(View.VISIBLE);
-
-        viewPager = (ViewPager) findViewById(R.id.viewpager_new_note);
-        setupViewPager(viewPager);
-
         tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setVisibility(View.VISIBLE);
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
+        viewPager = (ViewPager) findViewById(R.id.viewpager_new_note);
+        setupViewPager(viewPager);
 
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -74,8 +75,8 @@ public class CreateNoteActivity extends ParentActivity implements TimePickerRetu
         });
         createTabIcons();
 
-        newNoteAddNotification =  (Button) findViewById(R.id.button_save_note);
-        newNoteAddNotification.setOnClickListener(new View.OnClickListener() {
+        mButtonSaveNote = (Button) findViewById(R.id.button_save_note);
+        mButtonSaveNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startSaveNote();
@@ -83,6 +84,9 @@ public class CreateNoteActivity extends ParentActivity implements TimePickerRetu
         });
 
         dbHelper = SQLiteDBHelper.getInstance(this);
+
+        mCustomRelativeLayout = (CustomRelativeLayout) findViewById(R.id.customRelativeLayoutMain);
+        mCustomRelativeLayout.setListener(this);
 
         initAdMob(false);
     }
@@ -102,24 +106,24 @@ public class CreateNoteActivity extends ParentActivity implements TimePickerRetu
     }
 
     private void setupViewPager(ViewPager viewPager) {
-        adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         newNoteText = new NewNoteText();
-        adapter.addFragment(newNoteText, getResources().getString(R.string.new_note));
-        adapter.addFragment(new NewNoteNotifications(), getResources().getString(R.string.new_note_notification));
-        viewPager.setAdapter(adapter);
+        mViewPagerAdapter.addFragment(newNoteText, getResources().getString(R.string.new_note));
+        mViewPagerAdapter.addFragment(new NewNoteNotifications(), getResources().getString(R.string.new_note_notification));
+        viewPager.setAdapter(mViewPagerAdapter);
     }
 
     private void createTabIcons() {
         View tabOne = LayoutInflater.from(this).inflate(R.layout.tab_header, null);
         TextView tabOneName = tabOne.findViewById(R.id.textViewTabTitle);
-        tabOneName.setText(adapter.getPageTitle(0));
+        tabOneName.setText(mViewPagerAdapter.getPageTitle(0));
         ImageView tabOneIcon = tabOne.findViewById(R.id.imageViewTabIcon);
         tabOneIcon.setImageResource(R.drawable.ic_note_white_24dp);
         tabLayout.getTabAt(0).setCustomView(tabOne);
 
         View tabTwo = LayoutInflater.from(this).inflate(R.layout.tab_header, null);
         TextView tabTwoName = tabTwo.findViewById(R.id.textViewTabTitle);
-        tabTwoName.setText(adapter.getPageTitle(1));
+        tabTwoName.setText(mViewPagerAdapter.getPageTitle(1));
         ImageView tabTwoIcon = tabTwo.findViewById(R.id.imageViewTabIcon);
         tabTwoIcon.setImageResource(R.drawable.ic_alarm_white_24dp);
         tabLayout.getTabAt(1).setCustomView(tabTwo);
@@ -128,14 +132,13 @@ public class CreateNoteActivity extends ParentActivity implements TimePickerRetu
     private void startSaveNote() {
         // сохранение заметки
         dbHelper.connection();
-        NewNoteText newNoteText = (NewNoteText) adapter.getItem(0);
+        NewNoteText newNoteText = (NewNoteText) mViewPagerAdapter.getItem(0);
         Note newNote = new Note(-1,newNoteText.getTextNote(), Calendar.getInstance().getTime(),newNoteText.getSelectedCategoryId());
-        Log.e("GAWK_ERR",newNote.toString());
         long note_id = dbHelper.saveNote(newNote, 0);
         newNote.setId(note_id);
 
         // сохранение оповещения
-        NewNoteNotifications newNoteNotifications = (NewNoteNotifications) adapter.getItem(1);
+        NewNoteNotifications newNoteNotifications = (NewNoteNotifications) mViewPagerAdapter.getItem(1);
         if (newNoteNotifications.haveNotification()) {
             Notification notification = newNoteNotifications.getNotification();
             notification.setId_note(note_id);
@@ -154,4 +157,16 @@ public class CreateNoteActivity extends ParentActivity implements TimePickerRetu
     public void fail() {
     }
 
+    @Override
+    public void onSoftKeyboardShown(boolean isShowing) {
+        if (viewPager.getCurrentItem() == 0) {
+            if (isShowing) {
+                mButtonSaveNote.setVisibility(View.GONE);
+            } else {
+                mButtonSaveNote.setVisibility(View.VISIBLE);
+            }
+            CustomRelativeLayout.Listener noteViewFragment = (CustomRelativeLayout.Listener) mViewPagerAdapter.getItem(viewPager.getCurrentItem());
+            noteViewFragment.onSoftKeyboardShown(isShowing);
+        }
+    }
 }

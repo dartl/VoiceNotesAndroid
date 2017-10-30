@@ -113,7 +113,7 @@ public class NotificationRecyclerAdapter extends CursorRecyclerViewAdapter<Notif
             parent.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
-                    changeItemSelect(notificationRecyclerAdapter.getActionsListNotes().selectElement(id));
+                    changeItemSelect(notificationRecyclerAdapter.getActionsListNotes().selectElement(id,getLayoutPosition()));
                     return true;
                 }
             });
@@ -144,15 +144,15 @@ public class NotificationRecyclerAdapter extends CursorRecyclerViewAdapter<Notif
             calendar.setTimeInMillis(notification.getDate().getTime());
             Date date = notification.getDate();
 
-            if (!notificationRecyclerAdapter.checkDateNotification(calendar)) {
+            /*if (!notificationRecyclerAdapter.checkDateNotification(calendar)) {
                 dateFormat = SimpleDateFormat.getDateInstance();
                 String date_string = dateFormat.format(date);
                 mTextViewGroup.setText(date_string);
                 mTextViewGroup.setVisibility(View.VISIBLE);
             } else {
                 mTextViewGroup.setVisibility(View.GONE);
-            }
-            dateFormat = SimpleDateFormat.getTimeInstance();
+            }*/
+            dateFormat = SimpleDateFormat.getDateTimeInstance();
             textViewDateNotification.setText(dateFormat.format(date));
 
             // Задаем иконку для состояния звука оповещения

@@ -7,8 +7,47 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textViewNoteTitle"
+            style="@style/GawkMaterialTheme.SettingsTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_note_title" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true"
+            android:id="@+id/linearLayoutNoteAutoSave"
+            android:paddingBottom="12dp">
+
+            <Switch
+                android:id="@+id/switchAutoSave"
+                style="@style/GawkMaterialTheme.SettingsButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_note_auto_save_title" />
+
+            <TextView
+                android:id="@+id/textViewNoteAutoSave"
+                android:clickable="true"
+                android:focusable="true"
+                style="@style/GawkMaterialTheme.SettingsHelp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_note_auto_save_text" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/view3"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="#E0E0E0" />
 
         <TextView
             android:id="@+id/textView"
@@ -21,10 +60,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true"
+            android:id="@+id/linearLayoutSelectSound"
             android:paddingBottom="12dp">
 
-            <Button
+            <TextView
                 android:id="@+id/buttonSelectSound"
+                android:clickable="true"
+                android:focusable="true"
                 style="@style/GawkMaterialTheme.SettingsButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -32,6 +76,8 @@
 
             <TextView
                 android:id="@+id/textViewSelectSound"
+                android:clickable="true"
+                android:focusable="true"
                 style="@style/GawkMaterialTheme.SettingsHelp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -48,21 +94,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:id="@+id/linearLayoutSelectRepetitionTime"
             android:paddingBottom="12dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/buttonRepetitionView"
-                    style="@style/GawkMaterialTheme.SettingsButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/settings_notification_repetition_title" />
-            </LinearLayout>
+            <Button
+                android:id="@+id/buttonRepetitionView"
+                style="@style/GawkMaterialTheme.SettingsButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/settings_notification_repetition_title" />
 
             <TextView
                 android:id="@+id/textViewRepetition"
@@ -89,6 +131,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:id="@+id/linearLayoutAddShortcut"
             android:paddingBottom="12dp">
 
             <Button
@@ -117,6 +160,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:id="@+id/linearLayoutSelectTheme"
             android:paddingBottom="12dp">
 
             <Button

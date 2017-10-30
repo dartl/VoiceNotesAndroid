@@ -66,7 +66,7 @@ public class FragmentParent extends Fragment implements ActionMenuBottom {
     }
 
     @Override
-    public void refreshSelectedList() {
+    public void refreshSelectedList(int position) {
 
     }
 }

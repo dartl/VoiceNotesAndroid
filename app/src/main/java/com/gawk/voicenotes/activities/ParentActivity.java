@@ -366,6 +366,23 @@ public class ParentActivity extends AppCompatActivity
         }
     }
 
+    public void changeAdMob(boolean check) {
+        int aBoolean;
+        if (mGooglePlaySubs != null) {
+            aBoolean = mGooglePlaySubs.subsGetActive();
+        } else {
+            aBoolean = 0;
+        }
+        if (check) {
+            mAdView.setVisibility(View.GONE);
+            buttonDonateDeveloper.setVisibility(View.GONE);
+        } else if((aBoolean != 2)) {
+            mAdView.setVisibility(View.VISIBLE);
+        } else {
+            buttonDonateDeveloper.setVisibility(View.VISIBLE);
+        }
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1001 && data !=null) {

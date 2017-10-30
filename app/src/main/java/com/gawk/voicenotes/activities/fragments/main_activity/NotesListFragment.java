@@ -184,8 +184,11 @@ public class NotesListFragment extends FragmentParent implements ListenerSelectF
     }
 
     @Override
-    public void refreshSelectedList() {
-        onResume();
+    public void refreshSelectedList(int position) {
+        if (mListAdapters.getCount() == 0 || mListAdapters.getCount() == 1) {
+            updateList();
+        }
+        mAdapter.notifyItemChanged(position);
     }
 
     @Override

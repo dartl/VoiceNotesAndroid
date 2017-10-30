@@ -89,7 +89,7 @@ public class CategoriesRecyclerAdapter extends CursorRecyclerViewAdapter<Categor
             parent.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
-                    changeItemSelect(mCategoriesRecyclerAdapter.getActionsListNotes().selectElement(id));
+                    changeItemSelect(mCategoriesRecyclerAdapter.getActionsListNotes().selectElement(id,getLayoutPosition()));
                     return true;
                 }
             });

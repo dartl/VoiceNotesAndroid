@@ -60,7 +60,7 @@ public class MainActivity extends ParentActivity {
 
             @Override
             public void onPageSelected(int position) {
-                if (position == 1) {
+                if (position == 1 || position == 2) {
                     actionSearchVisible(false);
                 } else {
                     actionSearchVisible(true);

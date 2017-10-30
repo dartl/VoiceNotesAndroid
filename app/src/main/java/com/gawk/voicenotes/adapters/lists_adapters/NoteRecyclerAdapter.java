@@ -34,7 +34,6 @@ public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerA
     private ActionsListNotes actionsListNotes;
     private SQLiteDBHelper db;
     private Context mContext;
-    private Boolean mStateSelected = false;
 
     public NoteRecyclerAdapter(Context context, Cursor cursor, ActionsListNotes actionsListNotes,  SQLiteDBHelper db) {
         super(context, cursor);
@@ -49,25 +48,23 @@ public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerA
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView textView, dateView, mTextViewGroup, mTextViewListCategory;
+        TextView textView, mTextViewListCategory;
         ImageButton mImageButtonIconNote, mImageButtonMoreMenu;
         CardView cardView;
         View parent;
         NoteRecyclerAdapter mNoteRecyclerAdapter;
 
-        public ViewHolder(View v) {
+        ViewHolder(View v) {
             super(v);
             parent = v;
             mImageButtonIconNote = v.findViewById(R.id.imageButtonIconNote);
             mImageButtonMoreMenu = v.findViewById(R.id.imageButtonMoreMenu);
             textView = v.findViewById(R.id.textViewListText);
-            dateView = v.findViewById(R.id.textViewListDate);
             mTextViewListCategory = v.findViewById(R.id.textViewListCategory);
             cardView = v.findViewById(R.id.card_view);
-            mTextViewGroup = v.findViewById(R.id.textViewGroup);
         }
 
-        public void setData(final Cursor c, final NoteRecyclerAdapter noteRecyclerAdapter, SQLiteDBHelper db) {
+        void setData(final Cursor c, final NoteRecyclerAdapter noteRecyclerAdapter, SQLiteDBHelper db) {
             mNoteRecyclerAdapter = noteRecyclerAdapter;
             final int position = c.getPosition();
             final long id = noteRecyclerAdapter.getItemId(getLayoutPosition());
@@ -118,7 +115,7 @@ public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerA
             parent.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
-                    changeItemSelect(noteRecyclerAdapter.getActionsListNotes().selectElement(id));
+                    changeItemSelect(noteRecyclerAdapter.getActionsListNotes().selectElement(id,position));
                     return true;
                 }
             });
@@ -133,21 +130,6 @@ public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerA
                     v.getContext().startActivity(intent);
                 }
             });
-
-            Date date = note.getDate();
-            DateFormat dateFormat;
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTimeInMillis(date.getTime());
-            if (!noteRecyclerAdapter.checkDateNote(calendar)) {
-                dateFormat = SimpleDateFormat.getDateInstance();
-                String date_string = dateFormat.format(date);
-                mTextViewGroup.setText(date_string);
-                mTextViewGroup.setVisibility(View.VISIBLE);
-            } else {
-                mTextViewGroup.setVisibility(View.GONE);
-            }
-            dateFormat = SimpleDateFormat.getTimeInstance(DateFormat.SHORT, Locale.getDefault());
-            dateView.setText(dateFormat.format(date));
         }
 
         private void changeItemSelect(boolean state) {

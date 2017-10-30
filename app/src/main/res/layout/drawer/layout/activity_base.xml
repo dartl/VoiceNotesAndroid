@@ -5,9 +5,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <com.gawk.voicenotes.adapters.custom_layouts.CustomRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/customRelativeLayoutMain"
         android:orientation="vertical"
         android:weightSum="1">
 
@@ -44,6 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/appBarLayout"
             android:layout_above="@+id/adMobInclude" />
+
         <include
             android:id="@+id/adMobInclude"
             android:layout_width="match_parent"
@@ -55,7 +57,7 @@
             layout="@layout/admob"
             />
 
-    </RelativeLayout>
+    </com.gawk.voicenotes.adapters.custom_layouts.CustomRelativeLayout>
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"

@@ -134,6 +134,11 @@ public class SpeechRecognitionDialog extends DialogFragment {
         mActive = true;
     }
 
+    public void reShow() {
+        mFragmentParent.startRecognize();
+    }
+
+
     @Override
     public void onCancel(DialogInterface dialog) {
         if (mFragmentParent != null) {

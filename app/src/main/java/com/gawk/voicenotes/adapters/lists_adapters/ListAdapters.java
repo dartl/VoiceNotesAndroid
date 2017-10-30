@@ -30,6 +30,8 @@ public class ListAdapters implements ActionsListNotes {
     private BottomSheet mBottomMenu;
     private boolean mStateSelected;
 
+    private int mLastPosition;
+
     private View mParentView;
     private ActionMenuBottom mActionMenuBottom;
     private Activity mActivity;
@@ -112,7 +114,8 @@ public class ListAdapters implements ActionsListNotes {
     }
 
     @Override
-    public boolean selectElement(long id) {
+    public boolean selectElement(long id, int position) {
+        mLastPosition = position;
         if (mSelectItems.contains(id)) {
             mSelectItems.remove(id);
             changeBottomMenu();
@@ -144,7 +147,7 @@ public class ListAdapters implements ActionsListNotes {
     }
 
     private void changeBottomMenu() {
-        mActionMenuBottom.refreshSelectedList();
+        mActionMenuBottom.refreshSelectedList(mLastPosition);
         mTextViewNoteSelectCount.setText(mSelectItems.size() + " " + mActivity.getResources().getText(R.string.main_selected_element));
         if (mSelectItems.size() > 0) {
             mStateSelected = true;
@@ -181,5 +184,9 @@ public class ListAdapters implements ActionsListNotes {
 
     public void setStateSelected(Boolean mStateSelected) {
         this.mStateSelected = mStateSelected;
+    }
+
+    public int getCount() {
+        return mSelectItems.size();
     }
 }

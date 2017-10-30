@@ -3,27 +3,30 @@ package com.gawk.voicenotes.activities;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.gawk.voicenotes.R;
 import com.gawk.voicenotes.activities.fragments.main_activity.NotificationsListFragment;
 import com.gawk.voicenotes.adapters.ViewPagerAdapter;
 import com.gawk.voicenotes.activities.fragments.view_note.NoteViewFragment;
-import com.gawk.voicenotes.models.Note;
+import com.gawk.voicenotes.adapters.custom_layouts.CustomRelativeLayout;
 
 /**
  * Created by GAWK on 01.03.2017.
  */
 
-public class ViewNoteActivity extends ParentActivity {
+public class ViewNoteActivity extends ParentActivity implements CustomRelativeLayout.Listener {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private ViewPagerAdapter mViewPagerAdapter;
+    private CustomRelativeLayout mCustomRelativeLayout;
 
     private long id;
 
@@ -44,6 +47,9 @@ public class ViewNoteActivity extends ParentActivity {
         setupViewPager(viewPager);
         tabLayout.setupWithViewPager(viewPager);
         createTabIcons();
+
+        mCustomRelativeLayout = (CustomRelativeLayout) findViewById(R.id.customRelativeLayoutMain);
+        mCustomRelativeLayout.setListener(this);
     }
 
     private void setupViewPager(ViewPager viewPager) {
@@ -125,5 +131,12 @@ public class ViewNoteActivity extends ParentActivity {
         super.onBackPressed();
     }
 
-
+    @Override
+    public void onSoftKeyboardShown(boolean isShowing) {
+        changeAdMob(isShowing);
+        if (viewPager.getCurrentItem() == 0) {
+            CustomRelativeLayout.Listener noteViewFragment = (CustomRelativeLayout.Listener) mViewPagerAdapter.getItem(viewPager.getCurrentItem());
+            noteViewFragment.onSoftKeyboardShown(isShowing);
+        }
+    }
 }

@@ -145,7 +145,7 @@ public class NotificationsListFragment extends FragmentParent  {
     }
 
     @Override
-    public void refreshSelectedList() {
+    public void refreshSelectedList(int position) {
         onResume();
     }
 

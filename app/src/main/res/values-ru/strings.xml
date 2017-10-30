@@ -71,7 +71,8 @@
         Измените настройки приложения, предоставив необходимые разрешения.</string>
     <string name="new_note_speech_recognition_error_network">Другие ошибки, связанные с сетью. Включите Интернет и повторите попытку.</string>
     <string name="new_note_speech_recognition_error_network_timeout">Плохая связь с интернетом, попробуйте отключить его и попробуйте офлайн распознование.</string>
-    <string name="new_note_speech_recognition_error_no_match">Результат распознавания не получен. Постарайтесь говорить более четко и громко.</string>
+    <string name="new_note_speech_recognition_error_no_match">Полученный результат может не соответствовать
+        сказанному, включите интернет, чтобы получить более точное распознавание или постарайтесь говорить более четко.</string>
     <string name="new_note_speech_recognition_error_recognizer_busy">Сервер распознование сейчас занят другим приложнием. Попробуйте выключить другие приложения и попробуйте снова.</string>
     <string name="new_note_speech_recognition_error_server">Сервер отправляет статус ошибки.</string>
     <string name="new_note_speech_recognition_error_server_fix">Загрузите пакет для автономного распознавания в настройках.</string>
