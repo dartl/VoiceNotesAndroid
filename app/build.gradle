@@ -7,9 +7,10 @@ android {
         applicationId "com.gawk.voicenotes"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 33
-        versionName "7.3"
+        versionCode 46
+        versionName "8.1.7"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
     }
     sourceSets {
         main {

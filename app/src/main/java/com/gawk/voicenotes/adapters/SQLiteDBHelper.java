@@ -42,8 +42,6 @@ import java.util.Locale;
 public class SQLiteDBHelper extends SQLiteOpenHelper {
     private static SQLiteDBHelper sInstance;
     private SQLiteDatabase db;
-    private Context context;
-    private ParentActivity activity;
     private Statistics mStatistics;
     private NotificationAdapter mNotificationAdapter;
 
@@ -86,7 +84,6 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
      */
     public SQLiteDBHelper(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        this.context = context;
         mNotificationAdapter = new NotificationAdapter(context);
         mStatistics = new Statistics(context);
     }
@@ -97,13 +94,12 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db)
     {
-        // Создаем таблицу заметок
         db.execSQL(
                 "create table " + NOTES_TABLE_NAME +
                         "(" + NOTES_TABLE_COLUMN_ID + " integer primary key, " +
                         NOTES_TABLE_COLUMN_TEXT_NOTE + " text, " + NOTES_TABLE_COLUMN_DATE + " integer, " +NOTES_TABLE_COLUMN_CATEGORY+ " integer)"
         );
-        // Создаем таблицу оповещений
+
         db.execSQL(
                 "create table " + NOTIFICATIONS_TABLE_NAME +
                         "(" + NOTIFICATIONS_TABLE_COLUMN_ID + " integer primary key, " +
@@ -123,7 +119,6 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
     {
-        // Если версия 2, то
         if (oldVersion <= 1) {
             upgradeTo2(db);
         }
@@ -146,7 +141,9 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("SELECT * FROM " +
                 SQLiteDBHelper.NOTES_TABLE_NAME + " ORDER BY " + SQLiteDBHelper.NOTES_TABLE_COLUMN_DATE
                 + " DESC", null);
+
         ArrayList<Note> array = new ArrayList<Note>();
+
         Note temp;
         while (cursor.moveToNext()) {
             String data = cursor.getString(cursor.getColumnIndex(NOTES_TABLE_COLUMN_DATE));
@@ -160,6 +157,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
                 e.printStackTrace();
             }
         }
+
         db.execSQL("DROP TABLE IF EXISTS "+NOTES_TABLE_NAME);
         db.execSQL(
                 "create table " + NOTES_TABLE_NAME +
@@ -217,6 +215,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
     }
 
     private void upgradeTo4(SQLiteDatabase db) {
+        setConnection(db);
         db.execSQL("DROP TABLE IF EXISTS " + CATEGORIES_TABLE_NAME);
         // Создаем таблицу оповещений
         db.execSQL(
@@ -224,24 +223,21 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
                         "(" + CATEGORIES_TABLE_COLUMN_ID + " integer primary key, " + CATEGORIES_TABLE_COLUMN_NAME + " text)"
         );
 
-        Cursor cursor = db.rawQuery("SELECT * FROM " +
-                SQLiteDBHelper.NOTES_TABLE_NAME + " ORDER BY " + SQLiteDBHelper.NOTES_TABLE_COLUMN_DATE
-                + " DESC", null);
+        Cursor cursor = getCursorAllNotes();
+
         ArrayList<Note> array = new ArrayList<Note>();
-        Note temp;
-        while (cursor.moveToNext()) {
-            String data = cursor.getString(cursor.getColumnIndex(NOTES_TABLE_COLUMN_DATE));
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy kk:mm",Locale.US);
-            try {
-                Date date = dateFormat.parse(data);
-                temp = new Note(cursor.getLong(cursor.getColumnIndex(NOTES_TABLE_COLUMN_ID)),
-                        cursor.getString(cursor.getColumnIndex(NOTES_TABLE_COLUMN_TEXT_NOTE)),date, -1);
-                array.add(temp);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+
+        if (cursor.moveToFirst()) {
+            do {
+                Date date = new Date(cursor.getLong(cursor.getColumnIndex(NOTES_TABLE_COLUMN_DATE)));
+                array.add(new Note(cursor.getLong(cursor.getColumnIndex(NOTES_TABLE_COLUMN_ID)),
+                        cursor.getString(cursor.getColumnIndex(NOTES_TABLE_COLUMN_TEXT_NOTE)),
+                        date));
+            } while (cursor.moveToNext());
         }
+
         db.execSQL("DROP TABLE IF EXISTS "+NOTES_TABLE_NAME);
+
         db.execSQL(
                 "create table " + NOTES_TABLE_NAME +
                         "(" + NOTES_TABLE_COLUMN_ID + " integer primary key, " +
@@ -249,11 +245,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         );
 
         for (Note anArray : array) {
-            ContentValues newValues = new ContentValues();
-            newValues.put(SQLiteDBHelper.NOTES_TABLE_COLUMN_TEXT_NOTE, anArray.getText_note());
-            newValues.put(SQLiteDBHelper.NOTES_TABLE_COLUMN_DATE, anArray.getDate().getTime());
-            newValues.put(SQLiteDBHelper.NOTES_TABLE_COLUMN_CATEGORY, -1);
-            db.insert(SQLiteDBHelper.NOTES_TABLE_NAME, null, newValues);
+            long i = saveNote(anArray);
         }
     }
 
@@ -276,6 +268,10 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
             } catch (SQLiteException ex) {
             }
         }
+    }
+
+    public void setConnection(SQLiteDatabase db) {
+        this.db = db;
     }
 
     /*
@@ -512,6 +508,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         if (!isConnect()) {
             connection();
         }
+        if (note == null) return -1;
         ContentValues newValues = new ContentValues();
         if (note.getId() != -1) {
             newValues.put(SQLiteDBHelper.NOTES_TABLE_COLUMN_ID, note.getId());
@@ -552,40 +549,30 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
     }
 
     public boolean importDB(File file) {
-        Log.e("GAWK_ERR","start import");
         String json = "";
         if (file.canRead()) {
             try {
                 FileInputStream fin = new FileInputStream(file);
                 json = convertStreamToString(fin);
-                Log.e("GAWK_ERR","importDB: openFile()");
             } catch (Exception e) {
                 e.printStackTrace();
             }
             try {
                 JSONArray jreader = new JSONArray(json);
-                Log.e("GAWK_ERR","importDB: start json reader");
                 if (jreader.length() >= 1) {
-                    Log.e("GAWK_ERR","importDB: jreader.toString().length() >= 1. length = " + jreader.length());
                     JSONObject objNote;
                     String textNote, date;
                     DateFormat dateFormat;
                     dateFormat = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.US);
                     for (int  i = 0; i < jreader.length(); i++) {
-                        Log.e("GAWK_ERR","importDB: jreader for each start");
                         objNote=(JSONObject)jreader.get(i);
-                        Log.e("GAWK_ERR","importDB: objNote = " + objNote);
                         textNote = objNote.getString(NOTES_TABLE_COLUMN_TEXT_NOTE);
-                        Log.e("GAWK_ERR","importDB: textNote = " + textNote);
                         date = objNote.getString(NOTES_TABLE_COLUMN_DATE);
                         Date dt = dateFormat.parse(date);
-                        Log.e("GAWK_ERR","importDB: date = " + dt );
                         if (textNote != null) {
-                            Log.e("GAWK_ERR","importDB: textNote != null");
                             ContentValues newValues = new ContentValues();
                             newValues.put(SQLiteDBHelper.NOTES_TABLE_COLUMN_TEXT_NOTE, textNote);
                             newValues.put(SQLiteDBHelper.NOTES_TABLE_COLUMN_DATE, dt.getTime());
-                            Log.e("GAWK_ERR","importDB: db.insert() = " + db.insert(SQLiteDBHelper.NOTES_TABLE_NAME, null, newValues));
                             mStatistics.addPointImports();
                         } else {
                             return false;
@@ -593,7 +580,6 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
                     }
                 }
             } catch (JSONException | ParseException e) {
-                Log.e("GAWK_ERR","importDB: JSONException | ParseException e");
                 e.printStackTrace();
             }
         }
@@ -656,10 +642,6 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         }
         reader.close();
         return sb.toString();
-    }
-
-    public void setActivity(ParentActivity activity) {
-        this.activity = activity;
     }
 
     public boolean isConnect() {

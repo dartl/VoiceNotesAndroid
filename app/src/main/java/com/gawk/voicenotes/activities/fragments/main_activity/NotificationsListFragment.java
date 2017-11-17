@@ -134,7 +134,6 @@ public class NotificationsListFragment extends FragmentParent  {
                         id_temp = (Long) selectItems.get(i);
                         selectItems.remove(i);
                         dbHelper.connection();
-                        dbHelper.setActivity((ParentActivity) getContext());
                         dbHelper.deleteNotification(id_temp);
                     }
                 }

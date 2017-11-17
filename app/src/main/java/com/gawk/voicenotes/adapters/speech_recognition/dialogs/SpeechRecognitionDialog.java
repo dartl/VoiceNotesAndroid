@@ -13,8 +13,13 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.speech.SpeechRecognizer;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AppCompatDelegate;
+import android.support.v7.widget.AppCompatImageButton;
+import android.support.v7.widget.AppCompatImageView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -28,6 +33,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.gawk.voicenotes.R;
+import com.gawk.voicenotes.adapters.logs.CustomLogger;
 import com.gawk.voicenotes.adapters.speech_recognition.ActionSpeechRecognition;
 
 /**
@@ -37,8 +43,8 @@ import com.gawk.voicenotes.adapters.speech_recognition.ActionSpeechRecognition;
 public class SpeechRecognitionDialog extends DialogFragment {
 
     private ActionSpeechRecognition mFragmentParent;
-    private ImageView mImageViewVoiceValue;
-    private ImageButton mImageButtonVoice;
+    private AppCompatImageView mImageViewVoiceValue;
+    private AppCompatImageButton mImageButtonVoice;
     private TextView mTextViewMainText;
     private RelativeLayout mAreaRecognition;
     private Button mButtonClose, mButtonFix;
@@ -132,10 +138,6 @@ public class SpeechRecognitionDialog extends DialogFragment {
         super.show(manager, tag);
         mFragmentParent.startRecognize();
         mActive = true;
-    }
-
-    public void reShow() {
-        mFragmentParent.startRecognize();
     }
 
 
@@ -261,9 +263,12 @@ public class SpeechRecognitionDialog extends DialogFragment {
     }
 
     public void startOpenSettings() {
-        Intent callGPSSettingIntent = new Intent(Intent.ACTION_MAIN);
-
-        startActivity(callGPSSettingIntent);
+        try {
+            Intent settingIntent = new Intent(Settings.ACTION_LOCALE_SETTINGS);
+            startActivity(settingIntent);
+        } catch (Exception e) {
+            Snackbar.make(getView(), "Open the settings yourself", Snackbar.LENGTH_LONG).show();
+        }
     }
 
     public static boolean hasConnection(final Context context)

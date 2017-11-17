@@ -76,7 +76,6 @@ public class MainActivity extends ParentActivity {
         tabLayout.setupWithViewPager(viewPager);
         createTabIcons();
         dbHelper = SQLiteDBHelper.getInstance(this);
-        dbHelper.setActivity(this);
         verifyAllPermissions(this);
     }
 
@@ -88,7 +87,6 @@ public class MainActivity extends ParentActivity {
         boolean boolInstall = prefUtil.getBoolean(INSTALL_PREF,false);
         if (!boolInstall) {
             if (dbHelper.getCountNotes() >= 2) {
-                installIcon();
                 showVote();
                 prefUtil.saveBoolean(INSTALL_PREF,true);
             }
@@ -162,11 +160,9 @@ public class MainActivity extends ParentActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        final NotesListFragment listFragment = (NotesListFragment) adapter.getItem(viewPager.getCurrentItem());
+        final NotesListFragment listFragment = (NotesListFragment) adapter.getItem(0);
         switch (id) {
             case R.id.action_search:
-
-                Log.e("GAWK_ERR","action SEARCH");
                 searchView =
                         (SearchView) MenuItemCompat.getActionView(actionSearch);
                 searchView.setQueryHint(getResources().getString(R.string.action_search) + "...");
@@ -186,7 +182,6 @@ public class MainActivity extends ParentActivity {
                 );
                 break;
             case R.id.action_filter:
-                Log.e("GAWK_ERR","action FILTER");
                 listFragment.filter();
                 break;
         }

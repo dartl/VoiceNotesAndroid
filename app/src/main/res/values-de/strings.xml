@@ -141,6 +141,8 @@
     <string name="settings_note_title">Notizen</string>
     <string name="settings_note_auto_save_title">Autosave</string>
     <string name="settings_note_auto_save_text">Es wird der Notiztext automatisch gespeichert. Bezieht sich auf neue Notizen.</string>
+    <string name="main_all">Alle</string>
+
     <!-- Подписки -->
     <string name="subs_inner_text">Alle Abonnements entfernen Anzeigen aus der App und verstehen sich als Spenden an die Entwickler</string>
     <string-array name="export_import_type">

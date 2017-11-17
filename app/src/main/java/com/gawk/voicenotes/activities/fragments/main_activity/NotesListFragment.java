@@ -204,6 +204,7 @@ public class NotesListFragment extends FragmentParent implements ListenerSelectF
     }
 
     public void filter() {
+        if (mRelativeLayoutFilter == null) return;
         if (mRelativeLayoutFilter.getVisibility() == View.VISIBLE) {
             closeFilter();
         } else {

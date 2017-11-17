@@ -129,6 +129,7 @@
     <string name="settings_note_title">Gli appunti</string>
     <string name="settings_note_auto_save_title">Salvataggio automatico</string>
     <string name="settings_note_auto_save_text">Salva automaticamente il testo della nota. Si riferisce a nuove note.</string>
+    <string name="main_all">Tutti</string>
 
     <string-array name="export_import_type">
         <item>JSON</item>

@@ -47,6 +47,8 @@ public class NoteViewFragment extends FragmentParent implements CustomRelativeLa
     private ListenerSpeechRecognition mListenerSpeechRecognition;
     private CategoriesSpinner mCategoriesSpinner;
 
+    public NoteViewFragment() {this.id = -1;}
+
     public NoteViewFragment(long id) {
         this.id = id;
     }
@@ -66,54 +68,57 @@ public class NoteViewFragment extends FragmentParent implements CustomRelativeLa
         mEditTextNoteText = view.findViewById(R.id.editTextNoteText);
         mSpinnerSelectCategory = view.findViewById(R.id.spinnerSelectCategory);
 
-        mNote = new Note(dbHelper.getNoteById(id));
+        if(id != -1) {
+            mNote = new Note(dbHelper.getNoteById(id));
 
-        mCategoriesSpinner = new CategoriesSpinner(dbHelper, getContext(), mSpinnerSelectCategory, mNote.getCategoryId());
-        mCategoriesSpinner.setListenerSelectFilterCategory(this, false);
+            mCategoriesSpinner = new CategoriesSpinner(dbHelper, getContext(), mSpinnerSelectCategory, mNote.getCategoryId());
+            mCategoriesSpinner.setListenerSelectFilterCategory(this, false);
 
-        mImageButton_NewNoteAdd = view.findViewById(R.id.imageButton_NewNoteAdd);
-        mImageButton_NewNoteClear =  view.findViewById(R.id.imageButton_NewNoteClear);
-        mButton_NewNoteEdited =  view.findViewById(R.id.button_NewNoteEdited);
+            mImageButton_NewNoteAdd = view.findViewById(R.id.imageButton_NewNoteAdd);
+            mImageButton_NewNoteClear =  view.findViewById(R.id.imageButton_NewNoteClear);
+            mButton_NewNoteEdited =  view.findViewById(R.id.button_NewNoteEdited);
 
-        mImageButton_NewNoteAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                view.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.animation_create_note_click_button));
-                showRecognizeDialog();
+            mImageButton_NewNoteAdd.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    view.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.animation_create_note_click_button));
+                    showRecognizeDialog();
+                }
+            });
+
+            ActionsEditedNote actionsEditedNote = new ActionsEditedNote(mImageButton_NewNoteClear,
+                    mButton_NewNoteEdited, mEditTextNoteText, getContext());
+            actionsEditedNote.init();
+
+            mEditTextNoteText.setText(mNote.getText_note());
+
+            DateFormat dateFormat;
+            dateFormat = SimpleDateFormat.getDateTimeInstance();
+            if (mTextViewDate != null) {
+                mTextViewDate.setText(dateFormat.format(mNote.getDate()));
             }
-        });
 
-        ActionsEditedNote actionsEditedNote = new ActionsEditedNote(mImageButton_NewNoteClear,
-                mButton_NewNoteEdited, mEditTextNoteText, getContext());
-        actionsEditedNote.init();
+            mEditTextNoteText.addTextChangedListener(new TextWatcher() {
+                private int mCount = 0;
 
-        mEditTextNoteText.setText(mNote.getText_note());
+                @Override
+                public void afterTextChanged(Editable s) {
+                }
 
-        DateFormat dateFormat;
-        dateFormat = SimpleDateFormat.getDateTimeInstance();
-        if (mTextViewDate != null) {
-            mTextViewDate.setText(dateFormat.format(mNote.getDate()));
+                @Override
+                public void beforeTextChanged(CharSequence s, int start,
+                                              int count, int after) {
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start,
+                                          int before, int count) {
+                    if (mCount + count > 3) mCount = 0; saveNote();
+                    mCount += count;
+                }
+            });
         }
 
-        mEditTextNoteText.addTextChangedListener(new TextWatcher() {
-            private int mCount = 0;
-
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start,
-                                      int before, int count) {
-                if (mCount + count > 3) mCount = 0; saveNote();
-                mCount += count;
-            }
-        });
 
         return view;
     }

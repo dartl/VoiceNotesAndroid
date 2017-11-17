@@ -126,7 +126,8 @@
     <string name="settings_select_theme_text">Виберіть кольорову схему, яка вам сподобається</string>
     <string name="settings_note_title">Заметки</string>
     <string name="settings_note_auto_save_title">Автосохранение</string>
-    <string name="settings_note_auto_save_text">Автоматически сохранят изменяемый текст заметки. Відноситься і до нових пам'яток.</string>
+    <string name="settings_note_auto_save_text">Автоматически сохранят изменяемый текст заметки. Відноситься і до нових пам\'яток.</string>
+    <string name="main_all">Все</string>
 
     <string-array name="export_import_type">
         <item>JSON</item>

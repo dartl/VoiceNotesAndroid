@@ -129,6 +129,7 @@
     <string name="settings_note_title">ملاحظات</string>
     <string name="settings_note_auto_save_title">الحفظ التلقائي</string>
     <string name="settings_note_auto_save_text">فإنه سيتم حفظ النص المذكرة تلقائيا. يشير إلى الملاحظات الجديدة.</string>
+    <string name="main_all">الكل</string>
 
     <string-array name="export_import_type">
         <item>JSON</item>

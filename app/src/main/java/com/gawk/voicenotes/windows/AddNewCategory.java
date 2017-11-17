@@ -4,10 +4,12 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -26,6 +28,7 @@ public class AddNewCategory extends DialogFragment {
     private Category mCategory;
     private CategoryListFragment mCategoryListFragment;
     private int mAction = 0;
+    private InputMethodManager mInputMethodManager;
 
     public AddNewCategory() {
     }
@@ -47,6 +50,7 @@ public class AddNewCategory extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         // Get the layout inflater
         LayoutInflater inflater = getActivity().getLayoutInflater();
+        mInputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 
         View view = inflater.inflate(R.layout.dialog_add_category, null);
 
@@ -77,6 +81,12 @@ public class AddNewCategory extends DialogFragment {
             }
         });
 
+        mEditTextNewCategory.requestFocus();
+
+        if (mInputMethodManager != null) {
+            mInputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+        }
+
         mDlg = builder.create();
         return mDlg;
     }
@@ -94,5 +104,8 @@ public class AddNewCategory extends DialogFragment {
     @Override
     public void onDismiss(DialogInterface dialog) {
         super.onDismiss(dialog);
+        if (mInputMethodManager != null) {
+            mInputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+        }
     }
 }

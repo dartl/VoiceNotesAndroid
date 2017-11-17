@@ -143,6 +143,8 @@
     <string name="settings_note_title">Catatan</string>
     <string name="settings_note_auto_save_title">Penyimpanan otomatis</string>
     <string name="settings_note_auto_save_text">Ini akan menyimpan teks catatan secara otomatis. Mengacu pada catatan baru.</string>
+    <string name="main_all">Semua</string>
+
     <!-- Подписки -->
     <string name="subs_inner_text">Semua langganan akan menghapus iklan dari aplikasi ini dan menjadi sumbangan untuk pengembang</string>
     <string-array name="export_import_type">

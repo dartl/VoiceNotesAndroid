@@ -7,10 +7,12 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
+import android.util.DisplayMetrics;
 import android.util.Log;
 
 import com.gawk.voicenotes.activities.ViewNoteActivity;
@@ -54,8 +56,8 @@ public class TimeNotification extends BroadcastReceiver {
         intentTL.putExtra("id", note.getId());
         intentTL.putExtra("id_notification", notification.getId());
         NotificationCompat.Builder nb = new NotificationCompat.Builder(context)
-                .setSmallIcon(R.drawable.icon175x175)
-                .setLargeIcon(BitmapFactory.decodeResource(res, R.drawable.icon_notification))
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setLargeIcon(BitmapFactory.decodeResource(res, R.mipmap.ic_launcher))
                 .setAutoCancel(true) //уведомление закроется по клику на него
                 .setTicker(context.getString(R.string.new_note_notification)) //текст, который отобразится вверху статус-бара при создании уведомления
                 .setContentText(text) // Основной текст уведомления

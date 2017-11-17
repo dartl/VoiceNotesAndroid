@@ -148,9 +148,5 @@ public class CategoryListFragment extends FragmentParent{
 
     @Override
     public void search(String text) {
-        if (dbHelper != null) {
-            dbHelper.connection();
-            //mAdapter.changeCursor(dbHelper.getCursorAllNotes(text));
-        }
     }
 }

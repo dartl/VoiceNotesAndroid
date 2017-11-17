@@ -8,6 +8,7 @@ import android.util.Log;
 import android.widget.EditText;
 
 import com.gawk.voicenotes.R;
+import com.gawk.voicenotes.adapters.logs.CustomLogger;
 import com.gawk.voicenotes.adapters.speech_recognition.dialogs.SpeechRecognitionDialog;
 
 import java.util.ArrayList;
@@ -45,7 +46,7 @@ public class ListenerSpeechRecognition implements RecognitionListener {
     @Override
     public void onRmsChanged(float rmsdB) {
         if (mSpeechRecognitionDialog != null) {
-            int size = (int) (mActionSpeechRecognition.convertDpToPixel((rmsdB*6), mFragmentActivity)+
+            int size = (int) (mActionSpeechRecognition.convertDpToPixel((rmsdB*6))+
                     mFragmentActivity.getResources().getDimension(R.dimen.dialog_recognize_circle_min_size));
             if (size >= 0) {
                 mSpeechRecognitionDialog.changeVoiceValue(size);
@@ -76,9 +77,9 @@ public class ListenerSpeechRecognition implements RecognitionListener {
         if (thingsYouSaid != null) {
             addText(thingsYouSaid.get(0));
             mEditText.setText(getFullText());
-            mSpeechRecognitionDialog.dismiss();
+            mSpeechRecognitionDialog.dismissAllowingStateLoss();
         }
-        mActionSpeechRecognition.reStartRecognize();
+        //mActionSpeechRecognition.reStartRecognize();
     }
 
     @Override
@@ -98,11 +99,6 @@ public class ListenerSpeechRecognition implements RecognitionListener {
     public void show() {
         mSpeechRecognitionDialog.setFragmentParent(mActionSpeechRecognition);
         mSpeechRecognitionDialog.show(mFragmentActivity.getFragmentManager(),"SpeechRecognitionDialog");
-        updateText();
-    }
-
-    public void reShow() {
-        reShow();
         updateText();
     }
 

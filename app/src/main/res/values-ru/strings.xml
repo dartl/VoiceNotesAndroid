@@ -145,6 +145,7 @@
     <string name="settings_note_title">Заметки</string>
     <string name="settings_note_auto_save_title">Автосохранение</string>
     <string name="settings_note_auto_save_text">Автоматически сохранят изменяемый текст заметки. Относится и к новым заметкам.</string>
+    <string name="main_all">Все</string>
 
     <string-array name="export_import_type">
         <item>json</item>

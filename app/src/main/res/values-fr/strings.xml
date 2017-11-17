@@ -142,6 +142,9 @@
     <string name="settings_note_title">Remarques</string>
     <string name="settings_note_auto_save_title">Enregistrement automatique</string>
     <string name="settings_note_auto_save_text">Il sauvegardera automatiquement le texte de la note. Renvoie à de nouvelles notes.</string>
+    <string name="main_all">Tout
+</string>
+
     <!-- Подписки -->
     <string name="subs_inner_text">Tous les abonnements suppriment des annonces de l’appli et représentent des dons pour le développeur</string>
     <string-array name="export_import_type">

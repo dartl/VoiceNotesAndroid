@@ -402,21 +402,6 @@ public class ParentActivity extends AppCompatActivity
         mNotificationAdapter.removeNotify(id);
     }
 
-    protected void installIcon() {
-        //where this is a context (e.g. your current activity)
-        final Intent shortcutIntent = new Intent(this, MainActivity.class);
-
-        final Intent intent = new Intent();
-        intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
-        // Sets the custom shortcut's title
-        intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, getString(R.string.app_name));
-        // Set the custom shortcut icon
-        intent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, Intent.ShortcutIconResource.fromContext(this, R.drawable.icon175x175));
-        // add the shortcut
-        intent.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
-        sendBroadcast(intent);
-    }
-
     protected void showVote() {
         VotesDialog votesDialog = new VotesDialog();
         votesDialog.show(getFragmentManager(),"VotesDialog");

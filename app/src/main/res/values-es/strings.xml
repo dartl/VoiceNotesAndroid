@@ -143,6 +143,8 @@
     <string name="settings_note_title">Notas</string>
     <string name="settings_note_auto_save_title">Autoguardar</string>
     <string name="settings_note_auto_save_text">Guardará el texto de la nota automáticamente. Se refiere a notas nuevas.</string>
+    <string name="main_all">Todas</string>
+
     <!-- Подписки -->
     <string name="subs_inner_text">La suscripción permite eliminar los anuncios y representa una donación para el desarrollador de la aplicación</string>
     <string-array name="export_import_type">

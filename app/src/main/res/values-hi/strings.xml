@@ -140,6 +140,8 @@
     <string name="settings_note_title">टिप्पणियाँ</string>
     <string name="settings_note_auto_save_title">स्वत: सहेजना</string>
     <string name="settings_note_auto_save_text">यह स्वचालित रूप से नोट पाठ को बचाएगा। नए नोट्स को संदर्भित करता है</string>
+    <string name="main_all">सब</string>
+
     <!-- Подписки -->
     <string name="subs_inner_text">सभी सदस्यताएँ ऐप से विज्ञापन हटा देती हैं और डेवलपर को दान देना इंगित करती हैं</string>
     <string-array name="export_import_type">

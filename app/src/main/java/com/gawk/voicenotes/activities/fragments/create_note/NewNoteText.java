@@ -18,6 +18,7 @@ import com.gawk.voicenotes.activities.fragments.create_note.adapters.ActionsEdit
 import com.gawk.voicenotes.activities.fragments.create_note.adapters.CategoriesSpinner;
 import com.gawk.voicenotes.activities.fragments.main_activity.adapters.ListenerSelectFilterCategory;
 import com.gawk.voicenotes.adapters.custom_layouts.CustomRelativeLayout;
+import com.gawk.voicenotes.adapters.logs.CustomLogger;
 import com.gawk.voicenotes.adapters.preferences.PrefUtil;
 import com.gawk.voicenotes.adapters.speech_recognition.ListenerSpeechRecognition;
 import com.gawk.voicenotes.models.Note;

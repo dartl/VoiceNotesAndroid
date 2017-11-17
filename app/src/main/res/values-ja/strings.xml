@@ -141,6 +141,8 @@
     <string name="settings_note_title">ノート</string>
     <string name="settings_note_auto_save_title">自動保存</string>
     <string name="settings_note_auto_save_text">ノートテキストを自動的に保存します。 新しいメモを参照します。</string>
+    <string name="main_all">すべて</string>
+
     <!-- Подписки -->
     <string name="subs_inner_text">どのサブスクリプションでもアプリから広告が削除され、開発者への寄付が行われます。</string>
     <string-array name="export_import_type">
