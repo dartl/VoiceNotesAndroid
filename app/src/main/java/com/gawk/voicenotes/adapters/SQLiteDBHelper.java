@@ -410,10 +410,9 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
      * Сохранить новую заметку или обновить существующую
      * <p><b>action = 0</b> - добавить новую; <b>action = 1</b> - обновить существующую</p>
      * @param notification экземпляр оповещения
-     * @param action действие для метода
      * @return возвращает результат запроса к БД
      */
-    public long saveNotification(Notification notification, int action) {
+    public long saveNotification(Notification notification) {
         if (!isConnect()) {
             connection();
         }
@@ -425,16 +424,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         newValues.put(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_SOUND, notification.isSound());
         newValues.put(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_VIBRATE, notification.isShake());
         newValues.put(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_REPEAT, notification.isRepeat());
-        switch (action) {
-            case 0:
-                return db.insert(SQLiteDBHelper.NOTIFICATIONS_TABLE_NAME, null, newValues);
-            case 1:
-                db.update(SQLiteDBHelper.NOTIFICATIONS_TABLE_NAME, newValues, NOTIFICATIONS_TABLE_COLUMN_ID +" = ?",
-                        new String[] { String.valueOf(notification.getId()) });
-                return 0;
-            default:
-                return -1;
-        }
+        return db.replace(SQLiteDBHelper.NOTIFICATIONS_TABLE_NAME, null, newValues);
     }
 
     /**

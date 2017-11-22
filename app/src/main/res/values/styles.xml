@@ -342,6 +342,13 @@
         <item name="android:textAllCaps">true</item>
     </style>
 
+    <style name="GawkMaterialTheme.DefaultButtonDonate">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:background">?primaryColorDark</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
     <style name="GawkMaterialTheme.PrimaryButton">
         <item name="android:background">?drawableDefaultButtonSelector</item>
         <item name="android:minHeight">56dp</item>

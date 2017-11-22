@@ -1,5 +1,6 @@
 package com.gawk.voicenotes.activities;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.appodeal.ads.Appodeal;
 import com.gawk.voicenotes.R;
 import com.gawk.voicenotes.activities.fragments.main_activity.NotificationsListFragment;
 import com.gawk.voicenotes.adapters.ViewPagerAdapter;
@@ -27,6 +29,7 @@ public class ViewNoteActivity extends ParentActivity implements CustomRelativeLa
     private ViewPager viewPager;
     private ViewPagerAdapter mViewPagerAdapter;
     private CustomRelativeLayout mCustomRelativeLayout;
+    boolean mShowActivity = false;
 
     private long id;
 
@@ -34,7 +37,6 @@ public class ViewNoteActivity extends ParentActivity implements CustomRelativeLa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_viewnote);
-        initAdMob(true);
 
         id = getIntent().getLongExtra("id",-1);
 
@@ -83,19 +85,19 @@ public class ViewNoteActivity extends ParentActivity implements CustomRelativeLa
     @Override
     public void onResume() {
         super.onResume();
-        initAdMob(true);
+        mShowActivity = true;
+        Log.e("GAWK_ERR","onResume() called END");
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        mAdView.destroy();
+        mShowActivity = false;
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        mAdView.destroy();
     }
 
     @Override
@@ -133,10 +135,13 @@ public class ViewNoteActivity extends ParentActivity implements CustomRelativeLa
 
     @Override
     public void onSoftKeyboardShown(boolean isShowing) {
-        changeAdMob(isShowing);
+        mIsShowKeyboard = isShowing;
+        changeAdMob();
         if (viewPager.getCurrentItem() == 0) {
             CustomRelativeLayout.Listener noteViewFragment = (CustomRelativeLayout.Listener) mViewPagerAdapter.getItem(viewPager.getCurrentItem());
             noteViewFragment.onSoftKeyboardShown(isShowing);
         }
     }
+
+
 }

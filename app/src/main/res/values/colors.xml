@@ -2,6 +2,7 @@
 <resources>
     <!-- Общие цвета -->
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorDark">#000000</color>
     <color name="windowBackground">#FFFFFF</color>
     <color name="navigationBarColor">#000000</color>
     <color name="colorGrey50">#FAFAFA</color>

@@ -149,7 +149,7 @@ public class NotificationsListFragment extends FragmentParent  {
     }
 
     public void saveNotification(Notification notification) {
-        notification.setId(dbHelper.saveNotification(notification,0));
+        notification.setId(dbHelper.saveNotification(notification));
         NotificationAdapter notificationAdapter = new NotificationAdapter(getContext());
         notificationAdapter.restartNotify(new Note(dbHelper.getNoteById(mNoteActiveId)), notification);
         updateList();

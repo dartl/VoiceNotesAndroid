@@ -43,8 +43,6 @@ public class ExportImportActivity extends ParentActivity implements View.OnClick
         setContentView(R.layout.activity_export_import);
         mView = findViewById(R.id.export_import);
 
-        initAdMob(true);
-
         openDirectoryDialog = new OpenFileDialog(this)
                 .setFileSelectedColor(getColorByAttr(R.attr.primaryColor))
                 .setFolderSelectable(true).setOnCloseListener(new OpenFileDialog.OnCloseListener(){
@@ -138,7 +136,6 @@ public class ExportImportActivity extends ParentActivity implements View.OnClick
     @Override
     public void onResume() {
         super.onResume();
-        initAdMob(true);
         if (!checkPermissions(this,2)) {
             Snackbar.make(mView, getString(R.string.main_permissions_error), Snackbar.LENGTH_LONG).show();
         }
@@ -150,13 +147,11 @@ public class ExportImportActivity extends ParentActivity implements View.OnClick
     @Override
     public void onPause() {
         super.onPause();
-        mAdView.destroy();
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        mAdView.destroy();
     }
 
     @Override

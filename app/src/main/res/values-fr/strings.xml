@@ -4,7 +4,7 @@
     <string name="navigation_drawer_open">Ouvrir le panneau de navigation</string>
     <string name="navigation_drawer_close">Fermer le panneau de navigation</string>
     <string name="success">Succès</string>
-    <string name="donate_developer">Soutenir le développeur</string>
+    <string name="donate_developer">Faire un don au développeur</string>
     <string name="donate_small">Petit don</string>
     <string name="donate_big">Importante donation</string>
     <!-- Названия активити -->

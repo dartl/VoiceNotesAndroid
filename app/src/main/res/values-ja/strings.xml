@@ -4,7 +4,7 @@
     <string name="navigation_drawer_open">ナビゲーションパネルを開く</string>
     <string name="navigation_drawer_close">ナビゲーションパネルを閉じる</string>
     <string name="success">成功</string>
-    <string name="donate_developer">開発者を支援する</string>
+    <string name="donate_developer">開発者に寄付する</string>
     <string name="donate_small">小額の寄付</string>
     <string name="donate_big">多額の寄付</string>
     <!-- Названия активити -->

@@ -4,7 +4,7 @@
     <string name="navigation_drawer_open">Buka panel navigasi</string>
     <string name="navigation_drawer_close">Tutup panel navigasi</string>
     <string name="success">Berhasil</string>
-    <string name="donate_developer">Dukung pengembang</string>
+    <string name="donate_developer">Donasi ke pengembang</string>
     <string name="donate_small">Sumbangan kecil</string>
     <string name="donate_big">Sumbangan besar</string>
     <!-- Названия активити -->

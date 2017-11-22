@@ -7,10 +7,11 @@ android {
         applicationId "com.gawk.voicenotes"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 46
-        versionName "8.1.7"
+        versionCode 47
+        versionName "8.2.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true //important
     }
     sourceSets {
         main {
@@ -38,6 +39,17 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    dexOptions {
+        maxProcessCount 2
+        javaMaxHeapSize "2g"
+    }
+}
+
+repositories {
+    jcenter()
+    flatDir {
+        dirs 'libs-aar'
+    }
 }
 
 dependencies {
@@ -45,6 +57,7 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    compile 'com.google.gms:google-services:3.1.2'
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:design:25.3.1'
     compile 'com.google.firebase:firebase-ads:10.0.1'
@@ -54,10 +67,10 @@ dependencies {
     compile 'com.android.support:support-v4:21.+'
     compile 'com.cocosw:bottomsheet:1.+@aar'
     compile 'com.yandex.android:mobmetricalib:2.76'
-    compile 'net.yslibrary.keyboardvisibilityevent:keyboardvisibilityevent:2.1.0'
+    compile 'com.android.support:multidex:1.0.1'
     testCompile 'junit:junit:4.12'
 }
 
-
+fileTree(dir: 'libs-aar', include: '*.aar').each { File file -> dependencies.add("compile", [name: file.name.replaceFirst(~/\.[^\.]+$/, ''), ext: 'aar']) }
 
 apply plugin: 'com.google.gms.google-services'

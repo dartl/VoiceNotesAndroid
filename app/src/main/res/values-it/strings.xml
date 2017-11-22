@@ -3,7 +3,7 @@
     <string name="navigation_drawer_open">Apri il pannello di navigazione</string>
     <string name="navigation_drawer_close">Chiudi il pannello di navigazione</string>
     <string name="success">Successo</string>
-    <string name="donate_developer">Supporta lo sviluppatore</string>
+    <string name="donate_developer">Dona allo sviluppatore</string>
     <string name="donate_small">Piccola donazione</string>
     <string name="donate_big">Grande donazione</string>
     <string name="app_name">Note vocali</string>

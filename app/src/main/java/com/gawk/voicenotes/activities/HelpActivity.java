@@ -19,7 +19,6 @@ public class HelpActivity extends ParentActivity {
 
         webView = (WebView) findViewById(R.id.webView);
         webView.loadUrl("http://voicenotes.cofp.ru/");
-        initAdMob(false);
     }
 
     @Override

@@ -13,6 +13,7 @@ public class PrefUtil {
     public static final String NOTIFICATION_INTERVAL = "interval_for_notification";
     public static final String NOTE_AUTO_SAVE = "note_auto_save";
     public static final String THEME = "theme_voice_notes";
+    public static final String DONATE_SHOW = "donate_show";
 
     // основной код
     public static final String PERSISTANT_STORAGE_NAME = "GAWK_VOICE_NOTES";

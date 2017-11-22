@@ -42,7 +42,6 @@ public class SettingsActivity extends ParentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-        initAdMob(true);
 
         mSettingsActivity = this;
         mPrefUtil = new PrefUtil(this);

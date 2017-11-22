@@ -4,7 +4,7 @@
     <string name="navigation_drawer_open">탐색 패널 열기</string>
     <string name="navigation_drawer_close">탐색 패널 닫기</string>
     <string name="success">성공</string>
-    <string name="donate_developer">개발자 후원하기</string>
+    <string name="donate_developer">개발자에게 기부</string>
     <string name="donate_small">소액 기부</string>
     <string name="donate_big">고액 기부</string>
     <!-- Названия активити -->

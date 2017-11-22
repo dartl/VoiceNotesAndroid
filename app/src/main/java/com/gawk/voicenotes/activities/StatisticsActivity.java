@@ -39,7 +39,6 @@ public class StatisticsActivity extends ParentActivity {
 
         refresh();
 
-        initAdMob(true);
     }
 
     @Override

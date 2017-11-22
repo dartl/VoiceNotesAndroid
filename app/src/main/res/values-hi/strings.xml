@@ -4,7 +4,7 @@
     <string name="navigation_drawer_open">नेविगेशन पैनल खोलें</string>
     <string name="navigation_drawer_close">नेविगेशन पैनल बंद करें</string>
     <string name="success">सफल</string>
-    <string name="donate_developer">डेवलपर को सपोर्ट करें</string>
+    <string name="donate_developer">डेवलपर को दान करें</string>
     <string name="donate_small">छोटा-सा दान</string>
     <string name="donate_big">बड़ा दान</string>
     <!-- Названия активити -->

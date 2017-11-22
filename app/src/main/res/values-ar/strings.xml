@@ -4,7 +4,7 @@
     <string name="navigation_drawer_open">افتح لوحة التنقل</string>
     <string name="navigation_drawer_close">أغلق لوحة التنقل</string>
     <string name="success">نجاح</string>
-    <string name="donate_developer">دعم المطور</string>
+    <string name="donate_developer">التبرع للمطور</string>
     <string name="donate_small">تبرع صغير</string>
     <string name="donate_big">تبرع كبير</string>
     <string name="app_name">ملاحظات صوتية</string>

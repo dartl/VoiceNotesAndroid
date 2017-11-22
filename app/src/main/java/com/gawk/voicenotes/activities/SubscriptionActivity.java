@@ -62,7 +62,7 @@ public class SubscriptionActivity extends ParentActivity {
                 addPrice();
             }
         }, 200);
-        initAdMob(false);
+
     }
 
     @Override

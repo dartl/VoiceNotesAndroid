@@ -110,7 +110,6 @@ public class GooglePlaySubs implements SubsInterface {
                     activeSubs.getStringArrayList("INAPP_PURCHASE_ITEM_LIST");
             if (ownedSkus.size() > 0) {
                 prefUtil.saveInt(DONATE_PREF,2);
-                mActivity.initAdMob(false);
             } else {
                 prefUtil.saveInt(DONATE_PREF,1);
             }

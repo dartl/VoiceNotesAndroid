@@ -2,6 +2,7 @@ package com.gawk.voicenotes.activities;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -44,6 +45,7 @@ public class CreateNoteActivity extends ParentActivity implements TimePickerRetu
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        mShowAdsAndDonate = false;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_note);
 
@@ -92,8 +94,6 @@ public class CreateNoteActivity extends ParentActivity implements TimePickerRetu
 
         mCustomRelativeLayout = (CustomRelativeLayout) findViewById(R.id.customRelativeLayoutMain);
         mCustomRelativeLayout.setListener(this);
-
-        initAdMob(false);
     }
 
     @Override
@@ -147,7 +147,7 @@ public class CreateNoteActivity extends ParentActivity implements TimePickerRetu
         if (newNoteNotifications.haveNotification()) {
             Notification notification = newNoteNotifications.getNotification();
             notification.setId_note(note_id);
-            notification.setId(dbHelper.saveNotification(notification,0));
+            notification.setId(dbHelper.saveNotification(notification));
             restartNotify(newNote, notification);
         }
         dbHelper.disconnection();

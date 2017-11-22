@@ -1,6 +1,7 @@
 package com.gawk.voicenotes.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -20,6 +21,7 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.appodeal.ads.Appodeal;
 import com.gawk.voicenotes.R;
 import com.gawk.voicenotes.activities.fragments.FragmentParent;
 import com.gawk.voicenotes.activities.fragments.create_note.adapters.CategoriesSpinner;
@@ -36,19 +38,18 @@ public class MainActivity extends ParentActivity {
     private ViewPagerAdapter adapter;
     private SearchView searchView;
     private View mView;
+    private boolean mShowNotification = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(com.gawk.voicenotes.R.layout.activity_main);
-        initAdMob(true);
 
         mView = findViewById(R.id.activity_main);
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setVisibility(View.VISIBLE);
         tabLayout.setTabGravity(TabLayout.GRAVITY_CENTER);
-
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
@@ -82,7 +83,12 @@ public class MainActivity extends ParentActivity {
     @Override
     public void onResume() {
         super.onResume();
-        initAdMob(true);
+        mShowNotification = getIntent().getBooleanExtra("com.gawk.voicenotes.activities.mainactivity.shownotification", false);
+
+        if (mShowNotification) {
+            viewPager.setCurrentItem(1);
+        }
+
         PrefUtil prefUtil = new PrefUtil(this);
         boolean boolInstall = prefUtil.getBoolean(INSTALL_PREF,false);
         if (!boolInstall) {
@@ -99,15 +105,20 @@ public class MainActivity extends ParentActivity {
     }
 
     @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        //now getIntent() should always return the last received intent
+    }
+
+    @Override
     public void onPause() {
         super.onPause();
-        mAdView.destroy();
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        mAdView.destroy();
     }
 
     private void setupViewPager(ViewPager viewPager) {

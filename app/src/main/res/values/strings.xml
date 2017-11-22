@@ -4,7 +4,7 @@
     <string name="navigation_drawer_open">Open navigation panel</string>
     <string name="navigation_drawer_close">Close navigation panel</string>
     <string name="success">Success</string>
-    <string name="donate_developer">Support the developer</string>
+    <string name="donate_developer">Donate to the developer</string>
     <string name="donate_small">Small donation</string>
     <string name="donate_big">Large donation</string>
 
