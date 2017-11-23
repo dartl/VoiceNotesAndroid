@@ -39,6 +39,7 @@ public class NotesListFragment extends FragmentParent implements ListenerSelectF
     private ListAdapters mListAdapters;
     private NoteRecyclerAdapter mAdapter;
     private RelativeLayout mRelativeLayoutEmptyNotes;
+    private View mView;
 
     private Spinner mSpinnerFilter;
     private CategoriesSpinner mCategoriesSpinner;

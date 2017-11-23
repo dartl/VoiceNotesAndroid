@@ -48,13 +48,24 @@
 
             <Button
                 android:id="@+id/button_NewNoteEdited"
+                style="@style/GawkMaterialTheme.DefaultButtonNoBackground.Primary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toLeftOf="@+id/imageButton_NewNoteEnter"
+                android:layout_toStartOf="@+id/imageButton_NewNoteEnter"
+                android:text=". ,?!" />
+
+
+            <ImageButton
+                android:id="@+id/imageButton_NewNoteEnter"
                 style="@style/GawkMaterialTheme.DefaultButtonNoBackground.Primary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_toLeftOf="@+id/imageButton_NewNoteAdd"
                 android:layout_toStartOf="@+id/imageButton_NewNoteAdd"
-                android:text=". ,?!" />
+                app:srcCompat="@drawable/ic_keyboard_return_black_24dp" />
 
             <ImageButton
                 android:id="@+id/imageButton_NewNoteAdd"

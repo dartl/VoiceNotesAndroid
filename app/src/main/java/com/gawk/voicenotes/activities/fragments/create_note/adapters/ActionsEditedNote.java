@@ -2,7 +2,9 @@ package com.gawk.voicenotes.activities.fragments.create_note.adapters;
 
 import android.app.Instrumentation;
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.IBinder;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -15,35 +17,55 @@ import android.widget.ImageButton;
 
 import com.gawk.voicenotes.R;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * Created by GAWK on 26.10.2017.
  */
 
 public class ActionsEditedNote {
-    private ImageButton mImageButton_NewNoteClear;
+    private ImageButton mImageButton_NewNoteClear, mImageButton_NewNoteEnter;
     private Button mButton_NewNoteEdited;
     private EditText mEditText;
     private Context mContext;
 
-    public ActionsEditedNote(ImageButton mImageButton_NewNoteClear, Button mButton_NewNoteEdited, EditText mEditText, Context context) {
+    public ActionsEditedNote(ImageButton mImageButton_NewNoteClear, ImageButton mImageButton_NewNoteEnter, Button mButton_NewNoteEdited, EditText mEditText, Context mContext) {
         this.mImageButton_NewNoteClear = mImageButton_NewNoteClear;
+        this.mImageButton_NewNoteEnter = mImageButton_NewNoteEnter;
         this.mButton_NewNoteEdited = mButton_NewNoteEdited;
         this.mEditText = mEditText;
-        this.mContext = context;
+        this.mContext = mContext;
     }
 
     public void init() {
-        mImageButton_NewNoteClear.setOnClickListener(new View.OnClickListener() {
+        mImageButton_NewNoteClear.setOnTouchListener(new View.OnTouchListener() {
+            TaskClear mTaskClear = new TaskClear();
+
             @Override
-            public void onClick(View view) {
-                int length = mEditText.getText().length();
-                if (length > 0) {
-                    mEditText.getText().delete(length - 1, length);
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                switch (motionEvent.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        mTaskClear.execute(mEditText.getText().toString());
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        mTaskClear.cancel(true);
+                        mTaskClear = new TaskClear();
+                        //view.performClick();
+                        break;
+                    default:
+                        break;
                 }
-                mEditText.setSelection(mEditText.getText().length());
+                return true;
             }
         });
 
+        mImageButton_NewNoteEnter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mEditText.setText(mEditText.getText() + "\n");
+                mEditText.setSelection(mEditText.getText().length());
+            }
+        });
 
         mButton_NewNoteEdited.setOnClickListener(new View.OnClickListener() {
             private long mLastClickButton_NewNoteEdited = 0;
@@ -86,5 +108,56 @@ public class ActionsEditedNote {
                 mLastClickButton_NewNoteEdited = currentTime;
             }
         });
+    }
+
+    class TaskClear extends AsyncTask<String, String, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Log.e("GAWK_ERR","onPreExecute()");
+        }
+
+        @Override
+        protected Void doInBackground(String... params) {
+            Log.e("GAWK_ERR","doInBackground() start");
+            String str = params[0];
+            long milliseconds = 400;
+            try {
+                while (true) {
+                    isCancelled();
+                    int length = str.length();
+                    if (length > 0) {
+                        str = str.substring(0,length-1);
+                        publishProgress(str);
+                    } else {
+                        cancel(true);
+                    }
+                    TimeUnit.MILLISECONDS.sleep(milliseconds);
+                    if (milliseconds >= 99) milliseconds -= 50;
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(String... values) {
+            super.onProgressUpdate(values);
+            mEditText.setText(values[0]);
+            Log.e("GAWK_ERR","onProgressUpdate() values[0] = " + values[0]);
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+        }
+
+        @Override
+        protected void onCancelled() {
+            super.onCancelled();
+            Log.e("GAWK_ERR","onCancelled()");
+        }
     }
 }

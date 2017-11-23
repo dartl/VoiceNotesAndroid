@@ -77,6 +77,7 @@ public class ListenerSpeechRecognition implements RecognitionListener {
         if (thingsYouSaid != null) {
             addText(thingsYouSaid.get(0));
             mEditText.setText(getFullText());
+            mEditText.setSelection(mEditText.length());
             mSpeechRecognitionDialog.dismissAllowingStateLoss();
         }
         //mActionSpeechRecognition.reStartRecognize();
@@ -88,6 +89,7 @@ public class ListenerSpeechRecognition implements RecognitionListener {
         if (thingsYouSaid != null) {
             String text = getFullText() + thingsYouSaid.get(0);
             mEditText.setText(text);
+            mEditText.setSelection(mEditText.length());
         }
     }
 

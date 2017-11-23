@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
@@ -21,6 +23,8 @@ import com.gawk.voicenotes.windows.SelectIntervalDialog;
 import com.gawk.voicenotes.windows.SelectTheme;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by GAWK on 30.03.2017.
@@ -254,8 +258,8 @@ public class SettingsActivity extends ParentActivity {
                 theme = R.style.GawkMaterialTheme_BaseBrown;
                 break;
         }
-        recreate();
         prefUtil.saveInt(PrefUtil.THEME,theme);
+        recreate();
     }
 
     public void setAutoSave(View v) {
@@ -280,5 +284,9 @@ public class SettingsActivity extends ParentActivity {
             View child = viewGroup.getChildAt(i);
             setOnClickListenerChildren(child, onClickListener);
         }
+    }
+
+    private void getAvailableLocales() {
+
     }
 }

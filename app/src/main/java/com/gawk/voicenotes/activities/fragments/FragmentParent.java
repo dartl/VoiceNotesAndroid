@@ -16,29 +16,14 @@ import java.util.ArrayList;
 public class FragmentParent extends Fragment implements ActionMenuBottom {
     public SQLiteDBHelper dbHelper;
 
+    public FragmentParent() {
+        this.dbHelper = SQLiteDBHelper.getInstance(getContext());
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        dbHelper = SQLiteDBHelper.getInstance(getContext());
-        dbHelper.connection();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        dbHelper.connection();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        dbHelper.disconnection();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        dbHelper.disconnection();
+        this.dbHelper = SQLiteDBHelper.getInstance(getContext());
     }
 
     // функция поиска

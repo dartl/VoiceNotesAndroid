@@ -43,6 +43,7 @@ public class MainActivity extends ParentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(com.gawk.voicenotes.R.layout.activity_main);
 
         mView = findViewById(R.id.activity_main);
@@ -78,6 +79,8 @@ public class MainActivity extends ParentActivity {
         createTabIcons();
         dbHelper = SQLiteDBHelper.getInstance(this);
         verifyAllPermissions(this);
+
+
     }
 
     @Override
@@ -97,7 +100,6 @@ public class MainActivity extends ParentActivity {
                 prefUtil.saveBoolean(INSTALL_PREF,true);
             }
         }
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view_menu);
         navigationView.getMenu().findItem(R.id.menu_notes_list).setCheckable(true).setChecked(true);
         TextView textView = navigationView.getMenu().findItem(R.id.menu_notes_list).getActionView().findViewById(R.id.counterNotes);
@@ -108,7 +110,9 @@ public class MainActivity extends ParentActivity {
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         setIntent(intent);
-        //now getIntent() should always return the last received intent
+        if (getIntent().getExtras() != null && getIntent().getExtras().getBoolean("EXIT", false)) {
+            finish();
+        }
     }
 
     @Override

@@ -10,6 +10,13 @@
         <item name="primaryColorDark">@color/tealColor900</item>
         <item name="colorSelectListItem">#EDFAEF</item>
         <item name="accentColor">@color/tealColorA700</item>
+
+        <item name="attrColorGrey400">@color/colorGrey400</item>
+        <item name="attrColorGrey500">@color/colorGrey500</item>
+        <item name="attrColorGrey600">@color/colorGrey600</item>
+        <item name="attrColorGrey700">@color/colorGrey700</item>
+        <item name="attrColorGrey800">@color/colorGrey800</item>
+
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="colorPrimary">?primaryColor</item>
@@ -28,6 +35,12 @@
         <item name="colorSelectListItem">@color/deepPurpleColor50</item>
         <item name="accentColor">@color/deepPurpleColorA700</item>
 
+        <item name="attrColorGrey400">@color/colorGrey400</item>
+        <item name="attrColorGrey500">@color/colorGrey500</item>
+        <item name="attrColorGrey600">@color/colorGrey600</item>
+        <item name="attrColorGrey700">@color/colorGrey700</item>
+        <item name="attrColorGrey800">@color/colorGrey800</item>
+
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="colorPrimary">?primaryColor500</item>
@@ -40,11 +53,17 @@
     </style>
 
     <style name="GawkMaterialTheme.BaseGrey" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="primaryColor">@color/colorGrey500</item>
-        <item name="primaryColor500">@color/colorGrey800</item>
+        <item name="attrColorGrey400">@color/colorGrey900</item>
+        <item name="attrColorGrey500">@color/colorGrey900</item>
+        <item name="attrColorGrey600">@color/colorGrey900</item>
+        <item name="attrColorGrey700">@color/colorGrey900</item>
+        <item name="attrColorGrey800">@color/colorGrey900</item>
+
+        <item name="primaryColor">?attrColorGrey500</item>
+        <item name="primaryColor500">@color/colorGrey900</item>
         <item name="primaryColorDark">@color/colorGrey900</item>
         <item name="colorSelectListItem">@color/colorGrey50</item>
-        <item name="accentColor">@color/colorGrey800</item>
+        <item name="accentColor">?attrColorGrey800</item>
 
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
@@ -64,6 +83,12 @@
         <item name="colorSelectListItem">@color/red50</item>
         <item name="accentColor">@color/redA700</item>
 
+        <item name="attrColorGrey400">@color/colorGrey400</item>
+        <item name="attrColorGrey500">@color/colorGrey500</item>
+        <item name="attrColorGrey600">@color/colorGrey600</item>
+        <item name="attrColorGrey700">@color/colorGrey700</item>
+        <item name="attrColorGrey800">@color/colorGrey800</item>
+
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="colorPrimary">?primaryColor</item>
@@ -81,6 +106,12 @@
         <item name="primaryColorDark">@color/Pink900</item>
         <item name="colorSelectListItem">@color/Pink50</item>
         <item name="accentColor">@color/PinkA700</item>
+
+        <item name="attrColorGrey400">@color/colorGrey400</item>
+        <item name="attrColorGrey500">@color/colorGrey500</item>
+        <item name="attrColorGrey600">@color/colorGrey600</item>
+        <item name="attrColorGrey700">@color/colorGrey700</item>
+        <item name="attrColorGrey800">@color/colorGrey800</item>
 
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
@@ -100,6 +131,12 @@
         <item name="colorSelectListItem">@color/Purple50</item>
         <item name="accentColor">@color/PurpleA700</item>
 
+        <item name="attrColorGrey400">@color/colorGrey400</item>
+        <item name="attrColorGrey500">@color/colorGrey500</item>
+        <item name="attrColorGrey600">@color/colorGrey600</item>
+        <item name="attrColorGrey700">@color/colorGrey700</item>
+        <item name="attrColorGrey800">@color/colorGrey800</item>
+
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="colorPrimary">?primaryColor</item>
@@ -117,6 +154,12 @@
         <item name="primaryColorDark">@color/Indigo900</item>
         <item name="colorSelectListItem">@color/Indigo50</item>
         <item name="accentColor">@color/IndigoA700</item>
+
+        <item name="attrColorGrey400">@color/colorGrey400</item>
+        <item name="attrColorGrey500">@color/colorGrey500</item>
+        <item name="attrColorGrey600">@color/colorGrey600</item>
+        <item name="attrColorGrey700">@color/colorGrey700</item>
+        <item name="attrColorGrey800">@color/colorGrey800</item>
 
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
@@ -136,6 +179,12 @@
         <item name="colorSelectListItem">@color/Blue50</item>
         <item name="accentColor">@color/BlueA700</item>
 
+        <item name="attrColorGrey400">@color/colorGrey400</item>
+        <item name="attrColorGrey500">@color/colorGrey500</item>
+        <item name="attrColorGrey600">@color/colorGrey600</item>
+        <item name="attrColorGrey700">@color/colorGrey700</item>
+        <item name="attrColorGrey800">@color/colorGrey800</item>
+
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="colorPrimary">?primaryColor</item>
@@ -153,6 +202,12 @@
         <item name="primaryColorDark">@color/LightBlue900</item>
         <item name="colorSelectListItem">@color/LightBlue50</item>
         <item name="accentColor">@color/LightBlueA700</item>
+
+        <item name="attrColorGrey400">@color/colorGrey400</item>
+        <item name="attrColorGrey500">@color/colorGrey500</item>
+        <item name="attrColorGrey600">@color/colorGrey600</item>
+        <item name="attrColorGrey700">@color/colorGrey700</item>
+        <item name="attrColorGrey800">@color/colorGrey800</item>
 
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
@@ -172,6 +227,12 @@
         <item name="colorSelectListItem">@color/Cyan50</item>
         <item name="accentColor">@color/CyanA700</item>
 
+        <item name="attrColorGrey400">@color/colorGrey400</item>
+        <item name="attrColorGrey500">@color/colorGrey500</item>
+        <item name="attrColorGrey600">@color/colorGrey600</item>
+        <item name="attrColorGrey700">@color/colorGrey700</item>
+        <item name="attrColorGrey800">@color/colorGrey800</item>
+
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="colorPrimary">?primaryColor</item>
@@ -189,6 +250,12 @@
         <item name="primaryColorDark">@color/Green900</item>
         <item name="colorSelectListItem">@color/Green50</item>
         <item name="accentColor">@color/GreenA700</item>
+
+        <item name="attrColorGrey400">@color/colorGrey400</item>
+        <item name="attrColorGrey500">@color/colorGrey500</item>
+        <item name="attrColorGrey600">@color/colorGrey600</item>
+        <item name="attrColorGrey700">@color/colorGrey700</item>
+        <item name="attrColorGrey800">@color/colorGrey800</item>
 
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
@@ -208,6 +275,12 @@
         <item name="colorSelectListItem">@color/LightGreen50</item>
         <item name="accentColor">@color/LightGreenA700</item>
 
+        <item name="attrColorGrey400">@color/colorGrey400</item>
+        <item name="attrColorGrey500">@color/colorGrey500</item>
+        <item name="attrColorGrey600">@color/colorGrey600</item>
+        <item name="attrColorGrey700">@color/colorGrey700</item>
+        <item name="attrColorGrey800">@color/colorGrey800</item>
+
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="colorPrimary">?primaryColor</item>
@@ -225,6 +298,12 @@
         <item name="primaryColorDark">@color/Lime900</item>
         <item name="colorSelectListItem">@color/Lime50</item>
         <item name="accentColor">@color/LimeA700</item>
+
+        <item name="attrColorGrey400">@color/colorGrey400</item>
+        <item name="attrColorGrey500">@color/colorGrey500</item>
+        <item name="attrColorGrey600">@color/colorGrey600</item>
+        <item name="attrColorGrey700">@color/colorGrey700</item>
+        <item name="attrColorGrey800">@color/colorGrey800</item>
 
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
@@ -244,6 +323,12 @@
         <item name="colorSelectListItem">@color/Yellow50</item>
         <item name="accentColor">@color/YellowA700</item>
 
+        <item name="attrColorGrey400">@color/colorGrey400</item>
+        <item name="attrColorGrey500">@color/colorGrey500</item>
+        <item name="attrColorGrey600">@color/colorGrey600</item>
+        <item name="attrColorGrey700">@color/colorGrey700</item>
+        <item name="attrColorGrey800">@color/colorGrey800</item>
+
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="colorPrimary">@color/Yellow800</item>
@@ -261,6 +346,12 @@
         <item name="primaryColorDark">@color/Amber900</item>
         <item name="colorSelectListItem">@color/Amber50</item>
         <item name="accentColor">@color/AmberA700</item>
+
+        <item name="attrColorGrey400">@color/colorGrey400</item>
+        <item name="attrColorGrey500">@color/colorGrey500</item>
+        <item name="attrColorGrey600">@color/colorGrey600</item>
+        <item name="attrColorGrey700">@color/colorGrey700</item>
+        <item name="attrColorGrey800">@color/colorGrey800</item>
 
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
@@ -280,6 +371,12 @@
         <item name="colorSelectListItem">@color/Orange50</item>
         <item name="accentColor">@color/OrangeA700</item>
 
+        <item name="attrColorGrey400">@color/colorGrey400</item>
+        <item name="attrColorGrey500">@color/colorGrey500</item>
+        <item name="attrColorGrey600">@color/colorGrey600</item>
+        <item name="attrColorGrey700">@color/colorGrey700</item>
+        <item name="attrColorGrey800">@color/colorGrey800</item>
+
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="colorPrimary">?primaryColor</item>
@@ -298,6 +395,12 @@
         <item name="colorSelectListItem">@color/DeepOrange50</item>
         <item name="accentColor">@color/DeepOrangeA700</item>
 
+        <item name="attrColorGrey400">@color/colorGrey400</item>
+        <item name="attrColorGrey500">@color/colorGrey500</item>
+        <item name="attrColorGrey600">@color/colorGrey600</item>
+        <item name="attrColorGrey700">@color/colorGrey700</item>
+        <item name="attrColorGrey800">@color/colorGrey800</item>
+
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="colorPrimary">?primaryColor</item>
@@ -315,6 +418,12 @@
         <item name="primaryColorDark">@color/Brown900</item>
         <item name="colorSelectListItem">@color/Brown50</item>
         <item name="accentColor">@color/BrownA700</item>
+
+        <item name="attrColorGrey400">@color/colorGrey400</item>
+        <item name="attrColorGrey500">@color/colorGrey500</item>
+        <item name="attrColorGrey600">@color/colorGrey600</item>
+        <item name="attrColorGrey700">@color/colorGrey700</item>
+        <item name="attrColorGrey800">@color/colorGrey800</item>
 
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
@@ -407,7 +516,7 @@
         <item name="android:paddingRight">@dimen/activity_horizontal_margin</item>
         <item name="android:paddingBottom">8dp</item>
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">#5F5F5F</item>
+        <item name="android:textColor">?attrColorGrey700</item>
         <item name="android:textStyle">bold</item>
     </style>
 
@@ -428,13 +537,13 @@
 
     <style name="GawkMaterialTheme.ListNoteElementDate">
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">#878787</item>
+        <item name="android:textColor">?attrColorGrey500</item>
         <item name="android:fontFamily">sans-serif-light</item>
     </style>
 
     <style name="GawkMaterialTheme.ListNoteElementText">
         <item name="android:textSize">16sp</item>
-        <item name="android:textColor">#5F5F5F</item>
+        <item name="android:textColor">?attrColorGrey700</item>
         <item name="android:paddingBottom">6dp</item>
     </style>
 
@@ -448,12 +557,12 @@
         <item name="android:layout_height">@dimen/actions_icon_size</item>
         <item name="android:layout_width">@dimen/actions_icon_size</item>
         <item name="android:padding">@dimen/actions_icon_padding</item>
-        <item name="android:tint">@color/colorGrey600</item>
+        <item name="android:tint">?attrColorGrey600</item>
     </style>
 
     <style name="GawkMaterialTheme.ListNoteActionsTitle">
         <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/colorGrey600</item>
+        <item name="android:textColor">?attrColorGrey600</item>
         <item name="android:layout_marginLeft">8dp</item>
     </style>
 
@@ -464,8 +573,6 @@
 
     <!-- Окно статистики -->
     <style name="GawkMaterialTheme.Statistics">
-        <item name="android:paddingTop">@dimen/activity_horizontal_margin</item>
-        <item name="android:paddingBottom">@dimen/activity_horizontal_margin</item>
     </style>
 
     <style name="GawkMaterialTheme.StatisticsAvatar">
@@ -489,13 +596,13 @@
     <style name="GawkMaterialTheme.StatisticsHeadText2">
         <item name="android:textSize">16sp</item>
         <item name="android:fontFamily">sans-serif-medium</item>
-        <item name="android:textColor">@color/colorGrey500</item>
+        <item name="android:textColor">?attrColorGrey500</item>
         <item name="android:gravity">center_horizontal</item>
     </style>
 
     <style name="GawkMaterialTheme.StatisticsHeadText3">
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/colorGrey500</item>
+        <item name="android:textColor">?attrColorGrey500</item>
         <item name="android:gravity">center_horizontal</item>
     </style>
 
@@ -505,7 +612,7 @@
 
     <style name="GawkMaterialTheme.StatisticsItemTitle">
         <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/colorGrey600</item>
+        <item name="android:textColor">?attrColorGrey600</item>
     </style>
 
     <style name="GawkMaterialTheme.StatisticsItemCounter">
@@ -526,8 +633,8 @@
     </style>
 
     <style name="GawkMaterialTheme.NewNoteText">
-        <item name="android:textColor">@color/colorGrey500</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">?attrColorGrey500</item>
+        <item name="android:textSize">24sp</item>
         <item name="android:layout_marginLeft">@dimen/activity_horizontal_margin</item>
         <item name="android:layout_marginRight">@dimen/activity_horizontal_margin</item>
         <item name="android:layout_marginTop">@dimen/activity_horizontal_margin</item>
@@ -541,7 +648,7 @@
     <style name="GawkMaterialTheme.NewNoteNotificationSwitcherTop">
         <item name="android:textSize">16sp</item>
         <item name="android:fontFamily">sans-serif-medium</item>
-        <item name="android:textColor">@color/colorGrey600</item>
+        <item name="android:textColor">?attrColorGrey600</item>
         <item name="android:paddingTop">@dimen/activity_horizontal_margin</item>
         <item name="android:paddingBottom">@dimen/activity_horizontal_margin</item>
         <item name="android:paddingLeft">@dimen/activity_horizontal_margin</item>
@@ -550,7 +657,7 @@
 
     <style name="GawkMaterialTheme.NewNoteNotificationSwitcher">
         <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/colorGrey500</item>
+        <item name="android:textColor">?attrColorGrey500</item>
         <item name="android:paddingLeft">@dimen/activity_horizontal_margin</item>
         <item name="android:paddingRight">@dimen/activity_horizontal_margin</item>
     </style>
@@ -561,12 +668,12 @@
     <style name="GawkMaterialTheme.NewNoteNotificationDate">
         <item name="android:textSize">14sp</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/colorGrey500</item>
+        <item name="android:textColor">?attrColorGrey500</item>
     </style>
 
     <style name="GawkMaterialTheme.NewNoteNotificationHead">
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/colorGrey500</item>
+        <item name="android:textColor">?attrColorGrey500</item>
     </style>
 
     <style name="GawkMaterialTheme.NewNoteNotificationIcon">
@@ -574,7 +681,7 @@
     </style>
 
     <style name="GawkMaterialTheme.NewNoteNotificationSwitchText">
-        <item name="android:textColor">@color/colorGrey500</item>
+        <item name="android:textColor">?attrColorGrey500</item>
         <item name="android:paddingLeft">@dimen/activity_horizontal_margin</item>
         <item name="android:paddingTop">@dimen/activity_horizontal_margin</item>
         <item name="android:paddingBottom">@dimen/activity_horizontal_margin</item>
@@ -592,7 +699,7 @@
         <item name="android:textSize">16sp</item>
         <item name="android:paddingTop">6dp</item>
         <item name="android:paddingBottom">6dp</item>
-        <item name="android:textColor">@color/colorGrey400</item>
+        <item name="android:textColor">?attrColorGrey400</item>
     </style>
 
     <style name="GawkMaterialTheme.SpinnerSelectCategory.Filter">
@@ -626,7 +733,7 @@
 
     <style name="GawkMaterialTheme.DrawerSocialTitle">
         <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/colorGrey500</item>
+        <item name="android:textColor">?attrColorGrey500</item>
         <item name="android:gravity">center_horizontal</item>
     </style>
 
@@ -634,24 +741,25 @@
     <style name="GawkMaterialTheme.NoteViewRemindersTitle">
         <item name="android:textSize">16sp</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/colorGrey500</item>
+        <item name="android:textColor">?attrColorGrey500</item>
     </style>
 
     <style name="GawkMaterialTheme.NoteViewDate">
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/colorGrey500</item>
+        <item name="android:textColor">?attrColorGrey500</item>
         <item name="android:layout_marginRight">@dimen/activity_horizontal_margin</item>
         <item name="android:layout_marginTop">@dimen/activity_horizontal_margin</item>
     </style>
 
     <style name="GawkMaterialTheme.NoteViewEditeText">
+        <item name="android:textSize">24sp</item>
         <item name="android:padding">@dimen/activity_horizontal_margin</item>
     </style>
 
     <!-- Окно Экспорта/Импорта -->
     <style name="GawkMaterialTheme.ExportImportTitle">
         <item name="android:background">@drawable/plate_titile</item>
-        <item name="android:textColor">@color/colorGrey600</item>
+        <item name="android:textColor">?attrColorGrey600</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">14sp</item>
         <item name="android:gravity">left|center_vertical</item>
@@ -663,7 +771,7 @@
 
     <style name="GawkMaterialTheme.ExportImportFileSelect">
         <item name="android:fontFamily">sans-serif-medium</item>
-        <item name="android:textColor">@color/colorGrey400</item>
+        <item name="android:textColor">?attrColorGrey400</item>
         <item name="android:textSize">12sp</item>
     </style>
 
@@ -671,14 +779,14 @@
         <item name="android:layout_marginTop">@dimen/activity_horizontal_margin</item>
         <item name="android:layout_marginRight">@dimen/activity_horizontal_margin</item>
         <item name="android:layout_marginLeft">@dimen/activity_horizontal_margin</item>
-        <item name="android:textColor">@color/colorGrey600</item>
+        <item name="android:textColor">?attrColorGrey600</item>
         <item name="android:textSize">14sp</item>
     </style>
 
     <style name="GawkMaterialTheme.ExportImportText">
         <item name="android:layout_marginRight">@dimen/activity_horizontal_margin</item>
         <item name="android:layout_marginLeft">@dimen/activity_horizontal_margin</item>
-        <item name="android:textColor">@color/colorGrey500</item>
+        <item name="android:textColor">?attrColorGrey500</item>
         <item name="android:textSize">16sp</item>
     </style>
 
@@ -694,7 +802,7 @@
     </style>
 
     <style name="GawkMaterialTheme.SettingsButton" parent="GawkMaterialTheme.DefaultButtonNoBackground">
-        <item name="android:textColor">@color/colorGrey800</item>
+        <item name="android:textColor">?attrColorGrey800</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:paddingBottom">12dp</item>
@@ -702,7 +810,7 @@
     </style>
 
     <style name="GawkMaterialTheme.SettingsHelp">
-        <item name="android:textColor">@color/colorGrey500</item>
+        <item name="android:textColor">?attrColorGrey500</item>
         <item name="android:textSize">14sp</item>
         <item name="android:layout_marginLeft">@dimen/activity_horizontal_margin</item>
         <item name="android:layout_marginRight">@dimen/activity_horizontal_margin</item>
@@ -710,12 +818,12 @@
 
     <!-- Окно распознователя речи -->
     <style name="GawkMaterialTheme.SpeechRecognitionTitle">
-        <item name="android:textColor">@color/colorGrey600</item>
+        <item name="android:textColor">?attrColorGrey600</item>
         <item name="android:textSize">24sp</item>
     </style>
 
     <style name="GawkMaterialTheme.SpeechRecognitionTextError">
-        <item name="android:textColor">@color/colorGrey600</item>
+        <item name="android:textColor">?attrColorGrey600</item>
         <item name="android:textSize">16sp</item>
     </style>
 

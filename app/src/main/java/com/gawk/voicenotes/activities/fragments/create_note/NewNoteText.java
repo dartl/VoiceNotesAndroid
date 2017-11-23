@@ -32,8 +32,6 @@ import java.util.Calendar;
 public class NewNoteText extends FragmentParent implements CustomRelativeLayout.Listener, ListenerSelectFilterCategory{
     private EditText editText_NewNoteText;
     private Spinner mSpinnerSelectCategory;
-    private ImageButton mImageButton_NewNoteAdd, mImageButton_NewNoteClear;
-    private Button mButton_NewNoteEdited;
     private ListenerSpeechRecognition mListenerSpeechRecognition;
     private CategoriesSpinner mCategoriesSpinner;
     private Note mCurrentNote;
@@ -53,15 +51,16 @@ public class NewNoteText extends FragmentParent implements CustomRelativeLayout.
         mPrefUtil = new PrefUtil(getContext());
 
         editText_NewNoteText = view.findViewById(R.id.editText_NewNoteText);
-        mImageButton_NewNoteAdd = view.findViewById(R.id.imageButton_NewNoteAdd);
-        mImageButton_NewNoteClear =  view.findViewById(R.id.imageButton_NewNoteClear);
-        mButton_NewNoteEdited = view.findViewById(R.id.button_NewNoteEdited);
+        ImageButton mImageButton_NewNoteAdd = view.findViewById(R.id.imageButton_NewNoteAdd);
+        ImageButton mImageButton_NewNoteClear = view.findViewById(R.id.imageButton_NewNoteClear);
+        ImageButton mImageButton_NewNoteEnter = view.findViewById(R.id.imageButton_NewNoteEnter);
+        Button mButton_NewNoteEdited = view.findViewById(R.id.button_NewNoteEdited);
         mSpinnerSelectCategory = view.findViewById(R.id.spinnerSelectCategory);
 
         mCategoriesSpinner = new CategoriesSpinner(dbHelper, getContext(), mSpinnerSelectCategory);
         mCategoriesSpinner.setListenerSelectFilterCategory(this, false);
 
-        ActionsEditedNote actionsEditedNote = new ActionsEditedNote(mImageButton_NewNoteClear,
+        ActionsEditedNote actionsEditedNote = new ActionsEditedNote(mImageButton_NewNoteClear, mImageButton_NewNoteEnter,
                 mButton_NewNoteEdited, editText_NewNoteText, getContext());
         actionsEditedNote.init();
 

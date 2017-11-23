@@ -37,8 +37,6 @@ import java.util.Calendar;
 public class NoteViewFragment extends FragmentParent implements CustomRelativeLayout.Listener, ListenerSelectFilterCategory {
     private EditText mEditTextNoteText;
     private TextView mTextViewDate;
-    private ImageButton mImageButton_NewNoteAdd, mImageButton_NewNoteClear;
-    private Button mButton_NewNoteEdited;
     private Spinner mSpinnerSelectCategory;
     private Note mNote;
     private long id;
@@ -74,9 +72,10 @@ public class NoteViewFragment extends FragmentParent implements CustomRelativeLa
             mCategoriesSpinner = new CategoriesSpinner(dbHelper, getContext(), mSpinnerSelectCategory, mNote.getCategoryId());
             mCategoriesSpinner.setListenerSelectFilterCategory(this, false);
 
-            mImageButton_NewNoteAdd = view.findViewById(R.id.imageButton_NewNoteAdd);
-            mImageButton_NewNoteClear =  view.findViewById(R.id.imageButton_NewNoteClear);
-            mButton_NewNoteEdited =  view.findViewById(R.id.button_NewNoteEdited);
+            ImageButton mImageButton_NewNoteAdd = view.findViewById(R.id.imageButton_NewNoteAdd);
+            ImageButton mImageButton_NewNoteClear = view.findViewById(R.id.imageButton_NewNoteClear);
+            ImageButton mImageButton_NewNoteEnter = view.findViewById(R.id.imageButton_NewNoteEnter);
+            Button mButton_NewNoteEdited = view.findViewById(R.id.button_NewNoteEdited);
 
             mImageButton_NewNoteAdd.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -86,7 +85,7 @@ public class NoteViewFragment extends FragmentParent implements CustomRelativeLa
                 }
             });
 
-            ActionsEditedNote actionsEditedNote = new ActionsEditedNote(mImageButton_NewNoteClear,
+            ActionsEditedNote actionsEditedNote = new ActionsEditedNote(mImageButton_NewNoteClear, mImageButton_NewNoteEnter,
                     mButton_NewNoteEdited, mEditTextNoteText, getContext());
             actionsEditedNote.init();
 

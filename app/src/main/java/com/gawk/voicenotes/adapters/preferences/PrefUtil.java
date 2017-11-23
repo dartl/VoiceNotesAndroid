@@ -63,6 +63,7 @@ public class PrefUtil {
         return ed.commit();
     }
 
+
     public long getLong(String key, long def) {
         return sharedPreferences.getLong(key,def);
     }

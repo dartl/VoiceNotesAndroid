@@ -74,7 +74,12 @@ public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerA
             Log.e("GAWK_ERR","note = " + note.toString());
             String categoryName = db.getNameCategory(note.getCategoryId());
 
-            mTextViewListCategory.setText(categoryName);
+            if (categoryName.equals("")) {
+                mTextViewListCategory.setVisibility(View.GONE);
+            } else {
+                mTextViewListCategory.setVisibility(View.VISIBLE);
+                mTextViewListCategory.setText(categoryName);
+            }
 
             textView.setText(note.getText_note());
             mImageButtonIconNote.setOnClickListener(new View.OnClickListener() {
@@ -123,11 +128,15 @@ public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerA
             parent.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent;
-                    long id = noteRecyclerAdapter.getItemId(position);
-                    intent = new Intent(v.getContext(), ViewNoteActivity.class);
-                    intent.putExtra("id",id);
-                    v.getContext().startActivity(intent);
+                    if (noteRecyclerAdapter.getActionsListNotes().isStateSelected()) {
+                        parent.performLongClick();
+                    } else {
+                        Intent intent;
+                        long id = noteRecyclerAdapter.getItemId(position);
+                        intent = new Intent(v.getContext(), ViewNoteActivity.class);
+                        intent.putExtra("id",id);
+                        v.getContext().startActivity(intent);
+                    }
                 }
             });
         }

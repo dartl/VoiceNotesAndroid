@@ -104,8 +104,6 @@ public class ParentActivity extends AppCompatActivity
 
         dbHelper = SQLiteDBHelper.getInstance(this);
         dbHelper.connection();
-
-
     }
 
     ServiceConnection mServiceConn = new ServiceConnection() {
@@ -135,11 +133,12 @@ public class ParentActivity extends AppCompatActivity
 
     @Override
     public void onResume() {
-        super.onResume();
         int newTheme = mPrefUtil.getInt(PrefUtil.THEME,-1);
         if (newTheme != -1 && newTheme != getThemeId()) {
-            recreate();
+            Intent starterIntent = getIntent();
+            finish(); startActivity(starterIntent);
         }
+        super.onResume();
         Intent serviceIntent =
                 new Intent("com.android.vending.billing.InAppBillingService.BIND");
         serviceIntent.setPackage("com.android.vending");
@@ -151,10 +150,15 @@ public class ParentActivity extends AppCompatActivity
         view.setText(noteCursorAdapter.getItemCount() > 0 ? String.valueOf(noteCursorAdapter.getItemCount()) : null);
         refreshNavHeader();
 
-        if (mShowAdsAndDonate) {
+
+        if (isShowAdsOrDonate()) {
             Appodeal.onResume(mActivity, Appodeal.BANNER);
+            Appodeal.show(mActivity, Appodeal.BANNER_BOTTOM);
+            mBannerView.setVisibility(View.VISIBLE);
+            changeDonation();
+        } else {
+            Appodeal.hide(mActivity, Appodeal.BANNER_BOTTOM);
         }
-        changeDonation();
     }
 
     @Override
@@ -193,7 +197,7 @@ public class ParentActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close){
             @Override
             public void onDrawerClosed(View view) {
-                if (mShowAdsAndDonate) {
+                if (isShowAdsOrDonate()) {
                     Appodeal.onResume(mActivity, Appodeal.BANNER_BOTTOM);
                     Appodeal.show(mActivity, Appodeal.BANNER_BOTTOM);
                 }
@@ -202,7 +206,7 @@ public class ParentActivity extends AppCompatActivity
 
             @Override
             public void onDrawerOpened(View drawerView) {
-                if (mShowAdsAndDonate) {
+                if (isShowAdsOrDonate()) {
                     Appodeal.hide(mActivity, Appodeal.BANNER_BOTTOM);;
                 }
 
@@ -287,7 +291,7 @@ public class ParentActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-            if (mShowAdsAndDonate) {
+            if (isShowAdsOrDonate()) {
                 Appodeal.show(mActivity, Appodeal.BANNER_BOTTOM);
             }
         } else {
@@ -344,22 +348,22 @@ public class ParentActivity extends AppCompatActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
-        if (mShowAdsAndDonate) {
+        if (isShowAdsOrDonate()) {
             Appodeal.show(mActivity, Appodeal.BANNER_BOTTOM);
         }
         return true;
     }
 
     public boolean checkSubs() {
-        if (mGooglePlaySubs != null) {
-            return mGooglePlaySubs.subsGetActive() == 2;
+        if (mGooglePlaySubs != null && mGooglePlaySubs.subsGetActive() == 2) {
+            mBannerView.setVisibility(View.GONE);
+            return true;
         }
         return false;
     }
 
     public void initAdMob() {
         if (!mShowAdsAndDonate) {
-            Log.e("GAWK_ERR", "!mShowAdsAndDonate");
             try {
                 buttonDonateDeveloper.setVisibility(View.GONE);
                 Appodeal.hide(this, Appodeal.BANNER);
@@ -373,10 +377,8 @@ public class ParentActivity extends AppCompatActivity
             Appodeal.setBannerCallbacks(new BannerCallbacks() {
                 @Override
                 public void onBannerLoaded(int height, boolean isPrecache) {
-                    Log.d("Appodeal", "onBannerLoaded");
-                    mBannerView.getLayoutParams().height = height;
+                    mBannerView.setVisibility(View.VISIBLE);
                     buttonDonateDeveloper.setVisibility(View.GONE);
-                    //buttonDonateDeveloper.getLayoutParams().height = height;
                 }
                 @Override
                 public void onBannerFailedToLoad() {
@@ -417,14 +419,8 @@ public class ParentActivity extends AppCompatActivity
         }
     }
 
-    public void changeAdMob() {
-        /*
-        if (!Appodeal.isLoaded(Appodeal.BANNER_BOTTOM)) {
-            Log.e("GAWK_ERR", "changeAdMob() called, !Appodeal.isLoaded(Appodeal.BANNER_BOTTOM) = " + !Appodeal.isLoaded(Appodeal.BANNER_BOTTOM));
-            return;
-        }
-        Log.e("GAWK_ERR","changeAdMob() called, mIsShowKeyboard = " + mIsShowKeyboard);
-        if (mIsShowKeyboard) {
+    public void changeAdMob(boolean b) {
+        /*if (mIsShowKeyboard && b) {
             Appodeal.hide(mActivity,Appodeal.BANNER_BOTTOM);
         } else {
             Appodeal.show(mActivity,Appodeal.BANNER_BOTTOM);
@@ -494,6 +490,10 @@ public class ParentActivity extends AppCompatActivity
             e.printStackTrace();
         }
         return 0;
+    }
+
+    private boolean isShowAdsOrDonate() {
+        return mShowAdsAndDonate && !checkSubs();
     }
 
 }
