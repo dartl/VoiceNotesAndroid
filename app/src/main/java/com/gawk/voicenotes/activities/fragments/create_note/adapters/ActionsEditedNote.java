@@ -115,12 +115,10 @@ public class ActionsEditedNote {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            Log.e("GAWK_ERR","onPreExecute()");
         }
 
         @Override
         protected Void doInBackground(String... params) {
-            Log.e("GAWK_ERR","doInBackground() start");
             String str = params[0];
             long milliseconds = 400;
             try {
@@ -146,7 +144,7 @@ public class ActionsEditedNote {
         protected void onProgressUpdate(String... values) {
             super.onProgressUpdate(values);
             mEditText.setText(values[0]);
-            Log.e("GAWK_ERR","onProgressUpdate() values[0] = " + values[0]);
+            mEditText.setSelection(mEditText.getText().length());
         }
 
         @Override
@@ -157,7 +155,6 @@ public class ActionsEditedNote {
         @Override
         protected void onCancelled() {
             super.onCancelled();
-            Log.e("GAWK_ERR","onCancelled()");
         }
     }
 }

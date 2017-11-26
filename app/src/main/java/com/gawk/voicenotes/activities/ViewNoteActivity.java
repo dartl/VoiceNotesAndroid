@@ -1,6 +1,7 @@
 package com.gawk.voicenotes.activities;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -9,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -48,6 +50,30 @@ public class ViewNoteActivity extends ParentActivity implements CustomRelativeLa
         viewPager = (ViewPager) findViewById(R.id.viewpager_view_note);
         setupViewPager(viewPager);
         tabLayout.setupWithViewPager(viewPager);
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                try {
+                    final InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                    onSoftKeyboardShown(false);
+                } catch (NullPointerException e) {
+                    Log.e("GAWK_ERR", "onTabSelected NULL POINTER EXCEPTION");
+                }
+
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
         createTabIcons();
 
         mCustomRelativeLayout = (CustomRelativeLayout) findViewById(R.id.customRelativeLayoutMain);

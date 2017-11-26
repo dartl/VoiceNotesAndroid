@@ -44,7 +44,39 @@
         </LinearLayout>
 
         <View
-            android:id="@+id/view3"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="#E0E0E0" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true"
+            android:id="@+id/linearLayoutSelectLanguageRecognize"
+            android:paddingBottom="12dp">
+
+            <TextView
+                android:id="@+id/buttonSelectLanguageRecognize"
+                android:clickable="true"
+                android:focusable="true"
+                style="@style/GawkMaterialTheme.SettingsButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_note_select_language_recognize_title" />
+
+            <TextView
+                android:id="@+id/textViewSelectLanguageRecognize"
+                android:clickable="true"
+                android:focusable="true"
+                style="@style/GawkMaterialTheme.SettingsHelp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_note_select_language_recognize_text" />
+        </LinearLayout>
+
+        <View
             android:layout_width="fill_parent"
             android:layout_height="1dp"
             android:background="#E0E0E0" />

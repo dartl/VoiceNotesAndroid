@@ -16,7 +16,7 @@
     <!-- Главное окно -->
     <string name="new_notes">Notes</string>
     <string name="new_note_notifications">Reminders</string>
-    <string name="main_view_categories_title">Categories</string> <!-- NEW -->
+    <string name="main_view_categories_title">Categories</string>  
     <string name="main_view_error_select">No objects selected</string>
     <string name="main_permissions_error">You did not provide all the permissions. We do not guarantee the working capacity of the application.</string>
     <string name="main_share_text">Notes created using the application:</string>
@@ -24,16 +24,15 @@
     <string name="main_selected_element">items</string>
     <string name="main_action_element">Actions</string>
     <string name="main_action_remove">Delete</string>
-
     <string name="main_empty_notes">You do not have any notes yet</string>
     <string name="main_empty_notification">You do not have any reminders yet</string>
-    <string name="main_empty_categories">You do not have any categories yet</string>    <!-- NEW -->
-    <string name="dialog_add_category_hint">Enter a name the new category</string>  <!-- NEW -->
-    <string name="main_edited">Edit</string>  <!-- NEW -->
-    <string name="main_unassigned">Unassigned</string>  <!-- NEW -->
-    <string name="main_all">All</string>  <!-- NEW -->
-    <string name="category_spinner_title">Select category</string>  <!-- NEW -->
-    <string name="category_spinner_filter">Filter</string>  <!-- NEW -->
+    <string name="main_empty_categories">You do not have any categories yet</string>     
+    <string name="dialog_add_category_hint">Enter a name the new category</string>   
+    <string name="main_edited">Edit</string>   
+    <string name="main_unassigned">Unassigned</string>   
+    <string name="main_all">All</string>   
+    <string name="category_spinner_title">Select category</string>   
+    <string name="category_spinner_filter">Filter</string>   
 
     <!-- Меню -->
     <string name="menu_add">Add note</string>
@@ -46,8 +45,7 @@
     <string name="action_save">Save</string>
     <string name="action_remove">Delete selected</string>
     <string name="action_search">Search</string>
-    <string name="action_filter">Filter</string> <!-- NEW -->
-
+    <string name="action_filter">Filter</string>
     <string name="menu_statistics">Statistics</string>
     <string name="social_action_title">Tell us about your friends</string>
 
@@ -94,7 +92,7 @@
     <string name="new_note_speech_recognition_error_network_timeout">Poor connection to the Internet, try disabling it and try offline recognition.</string>
     <string name="new_note_speech_recognition_error_no_match">The result may not correspond to what
         has been said, turn on the Internet to get a more accurate recognition or try to speak more
-        clearly and loudly.</string>    <!-- NEW -->
+        clearly and loudly.</string>     
     <string name="new_note_speech_recognition_error_recognizer_busy">Server recognition is now occupied by another application. Try turning off other applications and try again.</string>
     <string name="new_note_speech_recognition_error_server">Server sends error status.</string>
     <string name="new_note_speech_recognition_error_server_fix">Download the package for offline recognition in the settings.</string>
@@ -147,11 +145,14 @@
     <string name="settings_notification_repetition_select60">60 minutes</string>
     <string name="settings_other_title">Other</string>
     <string name="settings_add_icon_add_title">Add icon</string>
-    <string name="settings_select_theme_title">Change theme</string> <!-- NEW -->
-    <string name="settings_select_theme_text">Choose a color scheme that you like</string>  <!-- NEW -->
-    <string name="settings_note_title">Notes</string> <!-- NEW -->
-    <string name="settings_note_auto_save_title">Autosave</string> <!-- NEW -->
-    <string name="settings_note_auto_save_text">It will save the note text automatically. Refers to new notes.</string> <!-- NEW -->
+    <string name="settings_select_theme_title">Change theme</string>  
+    <string name="settings_select_theme_text">Choose a color scheme that you like</string>   
+    <string name="settings_note_title">Notes</string>  
+    <string name="settings_note_auto_save_title">Autosave</string>  
+    <string name="settings_note_auto_save_text">It will save the note text automatically. Refers to new notes.</string>
+    <string name="settings_note_select_language_recognize_title">Select the language of recognition</string> <!-- NEW -->
+    <string name="settings_note_select_language_recognize_text">If you want notes in a language other than the default on the device</string> <!-- NEW -->
+    <string name="settings_note_select_language_recognize_default">Default</string> <!-- NEW -->
 
     <!-- Подписки -->
     <string name="subs_inner_text">All subscriptions remove ads from the app and represent donations to the developer</string>

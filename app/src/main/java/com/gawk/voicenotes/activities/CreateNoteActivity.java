@@ -9,6 +9,8 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -64,6 +66,7 @@ public class CreateNoteActivity extends ParentActivity implements TimePickerRetu
                 try {
                     final InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                    onSoftKeyboardShown(false);
                 } catch (NullPointerException e) {
                     Log.e("GAWK_ERR", "onTabSelected NULL POINTER EXCEPTION");
                 }
@@ -152,6 +155,31 @@ public class CreateNoteActivity extends ParentActivity implements TimePickerRetu
         }
         dbHelper.disconnection();
         finish();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        super.onCreateOptionsMenu(menu);
+        actionSave.setVisible(true);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        boolean ret = super.onOptionsItemSelected(item);
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_save_note) {
+            startSaveNote();
+            return true;
+        }
+
+        return ret;
     }
 
     @Override

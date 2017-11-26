@@ -17,6 +17,7 @@
 
     <!-- Общие отступы -->
     <dimen name="element_padding">16dp</dimen>
+    <dimen name="list_element_padding">12dp</dimen>
 
     <!-- Главное окно -->
     <dimen name="actions_icon_size">48dp</dimen>

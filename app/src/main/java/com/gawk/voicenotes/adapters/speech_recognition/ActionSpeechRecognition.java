@@ -14,10 +14,12 @@ import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.gawk.voicenotes.R;
 import com.gawk.voicenotes.adapters.logs.CustomLogger;
+import com.gawk.voicenotes.adapters.preferences.PrefUtil;
 import com.gawk.voicenotes.adapters.speech_recognition.dialogs.SpeechRecognitionDialog;
 
 import java.util.List;
@@ -35,7 +37,7 @@ public class ActionSpeechRecognition {
     private RecognitionListener mRecognitionListener;
     private Intent mIntent;
 
-    public ActionSpeechRecognition(Context mContext, Activity mActivity, SpeechRecognitionDialog mSpeechRecognitionDialog, RecognitionListener mRecognitionListener) {
+    ActionSpeechRecognition(Context mContext, Activity mActivity, SpeechRecognitionDialog mSpeechRecognitionDialog, RecognitionListener mRecognitionListener) {
         this.mContext = mContext;
         this.mActivity = mActivity;
         this.mSpeechRecognitionDialog = mSpeechRecognitionDialog;
@@ -43,10 +45,15 @@ public class ActionSpeechRecognition {
     }
 
     public void startRecognize() {
+        PrefUtil mPrefUtil = new PrefUtil(mContext);
+        String lang = mPrefUtil.getString(PrefUtil.SELECTED_LANGUAGE_FOR_RECOGNIZE,"");
 
         mIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         mIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        mIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+
+        if (lang.equals("")) mIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+        else mIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, lang);
+
         mIntent.putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, true);
         mIntent.putExtra(RecognizerIntent.EXTRA_SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS, 5000);
         mIntent.putExtra(RecognizerIntent.EXTRA_SPEECH_INPUT_POSSIBLY_COMPLETE_SILENCE_LENGTH_MILLIS, 5000);

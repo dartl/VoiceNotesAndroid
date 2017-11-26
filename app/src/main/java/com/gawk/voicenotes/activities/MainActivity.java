@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
@@ -31,6 +32,7 @@ import com.gawk.voicenotes.activities.fragments.main_activity.CategoryListFragme
 import com.gawk.voicenotes.activities.fragments.main_activity.NotesListFragment;
 import com.gawk.voicenotes.activities.fragments.main_activity.NotificationsListFragment;
 import com.gawk.voicenotes.adapters.preferences.PrefUtil;
+import com.gawk.voicenotes.adapters.speech_recognition.LanguageDetailsChecker;
 
 public class MainActivity extends ParentActivity {
     private TabLayout tabLayout;
@@ -80,7 +82,11 @@ public class MainActivity extends ParentActivity {
         dbHelper = SQLiteDBHelper.getInstance(this);
         verifyAllPermissions(this);
 
-
+        if (mPrefUtil.getStringSet(PrefUtil.SUPPORTED_LANGUAGE_FOR_RECOGNIZE, null) == null) {
+            Intent detailsIntent =  new Intent(RecognizerIntent.ACTION_GET_LANGUAGE_DETAILS);
+            sendOrderedBroadcast(
+                    detailsIntent, null, new LanguageDetailsChecker(), null, Activity.RESULT_OK, null, null);
+        }
     }
 
     @Override

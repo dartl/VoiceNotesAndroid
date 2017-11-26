@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.gawk.voicenotes.R;
 import com.gawk.voicenotes.adapters.preferences.PrefUtil;
 import com.gawk.voicenotes.windows.SelectIntervalDialog;
+import com.gawk.voicenotes.windows.SelectLanguageRecognize;
 import com.gawk.voicenotes.windows.SelectTheme;
 
 import java.util.ArrayList;
@@ -37,10 +38,11 @@ public class SettingsActivity extends ParentActivity {
     private TextView mTextViewRepetition;
     private SettingsActivity mSettingsActivity;
     private SelectTheme mSelectThemeDialog;
+    private SelectLanguageRecognize mSelectLanguageRecognize;
 
     private Switch mSwitchAutoSave;
     private LinearLayout mLinearLayoutSelectSound, mLinearLayoutSelectRepetitionTime,
-            mLinearLayoutAddShortcut, mLinearLayoutSelectTheme, mLinearLayoutNoteAutoSave;
+            mLinearLayoutAddShortcut, mLinearLayoutSelectTheme, mLinearLayoutNoteAutoSave, mLinearLayoutSelectLanguageRecognize;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +60,7 @@ public class SettingsActivity extends ParentActivity {
         mLinearLayoutAddShortcut = (LinearLayout) findViewById(R.id.linearLayoutAddShortcut);
         mLinearLayoutSelectTheme = (LinearLayout) findViewById(R.id.linearLayoutSelectTheme);
         mLinearLayoutNoteAutoSave = (LinearLayout) findViewById(R.id.linearLayoutNoteAutoSave);
+        mLinearLayoutSelectLanguageRecognize = (LinearLayout) findViewById(R.id.linearLayoutSelectLanguageRecognize);
         mSwitchAutoSave = (Switch) findViewById(R.id.switchAutoSave);
 
         mSwitchAutoSave.setChecked(mPrefUtil.getBoolean(PrefUtil.NOTE_AUTO_SAVE,false));
@@ -97,7 +100,14 @@ public class SettingsActivity extends ParentActivity {
             }
         });
 
-        setIntervalNotification(mPrefUtil.getLong(mPrefUtil.NOTIFICATION_INTERVAL,0));
+        setOnClickListenerChildren(mLinearLayoutSelectLanguageRecognize, new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startSelectLanguageRecognize();
+            }
+        });
+
+        setIntervalNotification(mPrefUtil.getLong(PrefUtil.NOTIFICATION_INTERVAL,0));
 
         String url = mPrefUtil.getString(PrefUtil.NOTIFICATION_SOUND,"");
         setSoundTitle(url);
@@ -108,6 +118,11 @@ public class SettingsActivity extends ParentActivity {
         super.onResume();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view_menu);
         navigationView.getMenu().findItem(R.id.menu_settings).setCheckable(true).setChecked(true);
+    }
+
+    private void startSelectLanguageRecognize() {
+        mSelectLanguageRecognize = new SelectLanguageRecognize(this);
+        mSelectLanguageRecognize.show(getFragmentManager(),"SelectLanguageRecognition");
     }
 
     private void selectTheme() {
@@ -286,7 +301,12 @@ public class SettingsActivity extends ParentActivity {
         }
     }
 
-    private void getAvailableLocales() {
-
+    public void setLanguageRecognition(String lang) {
+        if (lang.equals(""))  {
+            mPrefUtil.saveString(PrefUtil.SELECTED_LANGUAGE_FOR_RECOGNIZE, "");
+            return;
+        }
+        mPrefUtil.saveString(PrefUtil.SELECTED_LANGUAGE_FOR_RECOGNIZE, new Locale(lang).toString());
     }
+
 }

@@ -3,6 +3,8 @@ package com.gawk.voicenotes.adapters.preferences;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import java.util.Set;
+
 /**
  * Created by GAWK on 03.07.2017.
  */
@@ -14,6 +16,8 @@ public class PrefUtil {
     public static final String NOTE_AUTO_SAVE = "note_auto_save";
     public static final String THEME = "theme_voice_notes";
     public static final String DONATE_SHOW = "donate_show";
+    public static final String SUPPORTED_LANGUAGE_FOR_RECOGNIZE = "supported_language_for_recognize";
+    public static final String SELECTED_LANGUAGE_FOR_RECOGNIZE = "selected_language_for_recognize";
 
     // основной код
     public static final String PERSISTANT_STORAGE_NAME = "GAWK_VOICE_NOTES";
@@ -63,6 +67,15 @@ public class PrefUtil {
         return ed.commit();
     }
 
+    public boolean saveStringSet(String key, Set<String> set) {
+        SharedPreferences.Editor ed = sharedPreferences.edit();
+        ed.putStringSet(key,set);
+        return ed.commit();
+    }
+
+    public Set<String> getStringSet(String key, Set<String> set) {
+        return sharedPreferences.getStringSet(key, set);
+    }
 
     public long getLong(String key, long def) {
         return sharedPreferences.getLong(key,def);
