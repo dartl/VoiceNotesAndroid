@@ -128,6 +128,9 @@
     <string name="settings_note_auto_save_title">自动保存</string>
     <string name="settings_note_auto_save_text">自动保存笔记的可编辑文本。 指新笔记。</string>
     <string name="main_all">所有</string>
+    <string name="settings_note_select_language_recognize_title">选择识别语言</string>
+    <string name="settings_note_select_language_recognize_text">如果您要使用默认设备上选择的语言以外的其他语言的笔记</string>
+    <string name="settings_note_select_language_recognize_default">默认</string>
 
     <string-array name="export_import_type">
         <item>JSON</item>

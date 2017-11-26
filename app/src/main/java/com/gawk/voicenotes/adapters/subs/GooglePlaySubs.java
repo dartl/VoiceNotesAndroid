@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.IntentSender;
 import android.os.Bundle;
 import android.os.RemoteException;
+import android.util.Log;
 
 import com.android.vending.billing.IInAppBillingService;
 import com.gawk.voicenotes.activities.ParentActivity;
@@ -109,6 +110,7 @@ public class GooglePlaySubs implements SubsInterface {
             ArrayList<String> ownedSkus =
                     activeSubs.getStringArrayList("INAPP_PURCHASE_ITEM_LIST");
             if (ownedSkus.size() > 0) {
+                Log.e("GAWK_ERR", "prefUtil.saveInt(DONATE_PREF,2)");
                 prefUtil.saveInt(DONATE_PREF,2);
             } else {
                 prefUtil.saveInt(DONATE_PREF,1);

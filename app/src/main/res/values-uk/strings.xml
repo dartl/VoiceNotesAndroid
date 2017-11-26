@@ -128,6 +128,9 @@
     <string name="settings_note_auto_save_title">Автосохранение</string>
     <string name="settings_note_auto_save_text">Автоматически сохранят изменяемый текст заметки. Відноситься і до нових пам\'яток.</string>
     <string name="main_all">Все</string>
+    <string name="settings_note_select_language_recognize_title">Виберіть мову розпізнавання</string>
+    <string name="settings_note_select_language_recognize_text">Якщо ви хочете замітки на мові, відмінному від обраного на пристрої за замовчуванням</string>
+    <string name="settings_note_select_language_recognize_default">За замовчуванням</string>
 
     <string-array name="export_import_type">
         <item>JSON</item>

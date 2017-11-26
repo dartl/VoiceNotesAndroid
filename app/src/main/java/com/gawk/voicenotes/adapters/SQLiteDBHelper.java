@@ -354,8 +354,8 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
      * @return возвращает результат запроса к БД
      */
     public boolean deleteAllOldNotification() {
-        if (!db.isOpen()) {
-            return false;
+        if (!isConnect()) {
+            connection();
         }
         Cursor oldNotificationCursor = db.rawQuery("SELECT * FROM " +
                 SQLiteDBHelper.NOTIFICATIONS_TABLE_NAME + " WHERE " + SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_DATE

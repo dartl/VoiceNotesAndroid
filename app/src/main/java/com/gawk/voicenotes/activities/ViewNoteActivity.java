@@ -60,7 +60,7 @@ public class ViewNoteActivity extends ParentActivity implements CustomRelativeLa
                 } catch (NullPointerException e) {
                     Log.e("GAWK_ERR", "onTabSelected NULL POINTER EXCEPTION");
                 }
-
+                mViewPagerAdapter.getItem(1).onResume();
             }
 
             @Override
@@ -112,7 +112,6 @@ public class ViewNoteActivity extends ParentActivity implements CustomRelativeLa
     public void onResume() {
         super.onResume();
         mShowActivity = true;
-        Log.e("GAWK_ERR","onResume() called END");
     }
 
     @Override
@@ -168,6 +167,5 @@ public class ViewNoteActivity extends ParentActivity implements CustomRelativeLa
             noteViewFragment.onSoftKeyboardShown(isShowing);
         }
     }
-
 
 }

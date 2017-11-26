@@ -103,6 +103,7 @@ public class NotificationsListFragment extends FragmentParent  {
     @Override
     public void onResume() {
         super.onResume();
+        Log.e("GAWK_ERR", "onResume NotificationsListFragment()");
         updateList();
     }
 

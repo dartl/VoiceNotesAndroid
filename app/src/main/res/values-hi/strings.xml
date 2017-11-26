@@ -141,6 +141,9 @@
     <string name="settings_note_auto_save_title">स्वत: सहेजना</string>
     <string name="settings_note_auto_save_text">यह स्वचालित रूप से नोट पाठ को बचाएगा। नए नोट्स को संदर्भित करता है</string>
     <string name="main_all">सब</string>
+    <string name="settings_note_select_language_recognize_title">मान्यता की भाषा का चयन करें</string>
+    <string name="settings_note_select_language_recognize_text">यदि आप डिवाइस पर डिफ़ॉल्ट के अलावा किसी अन्य भाषा में नोट्स चाहते हैं</string>
+    <string name="settings_note_select_language_recognize_default">चूक</string>
 
     <!-- Подписки -->
     <string name="subs_inner_text">सभी सदस्यताएँ ऐप से विज्ञापन हटा देती हैं और डेवलपर को दान देना इंगित करती हैं</string>

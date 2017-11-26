@@ -285,7 +285,6 @@ public class SettingsActivity extends ParentActivity {
             b = !mSwitchAutoSave.isChecked();
             mSwitchAutoSave.setChecked(b);
         }
-        Log.e("GAWK_ERR", "b = " + b);
         mPrefUtil.saveBoolean(PrefUtil.NOTE_AUTO_SAVE,b);
     }
 

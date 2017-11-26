@@ -10,6 +10,8 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
@@ -119,7 +121,6 @@ public class ParentActivity extends AppCompatActivity
             try {
                 mGooglePlaySubs = new GooglePlaySubs(mActivity,mService);
                 mGooglePlaySubs.checkBuySubs();
-                //changeAdMob();
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
@@ -159,6 +160,8 @@ public class ParentActivity extends AppCompatActivity
         } else {
             Appodeal.hide(mActivity, Appodeal.BANNER_BOTTOM);
         }
+
+        if (!isNetworkAvailable()) mBannerView.setVisibility(View.GONE);
     }
 
     @Override
@@ -201,7 +204,6 @@ public class ParentActivity extends AppCompatActivity
                     Appodeal.onResume(mActivity, Appodeal.BANNER_BOTTOM);
                     Appodeal.show(mActivity, Appodeal.BANNER_BOTTOM);
                 }
-                Log.e("GAWK_ERR","onDrawerClosed(View view)");
             }
 
             @Override
@@ -209,8 +211,6 @@ public class ParentActivity extends AppCompatActivity
                 if (isShowAdsOrDonate()) {
                     Appodeal.hide(mActivity, Appodeal.BANNER_BOTTOM);;
                 }
-
-                Log.e("GAWK_ERR","onDrawerOpened(View drawerView)");
             };
 
         };
@@ -355,8 +355,9 @@ public class ParentActivity extends AppCompatActivity
     }
 
     public boolean checkSubs() {
-        if (mGooglePlaySubs != null && mGooglePlaySubs.subsGetActive() == 2) {
-            mBannerView.setVisibility(View.GONE);
+        if (mPrefUtil == null) mPrefUtil = new PrefUtil(this);
+        if (mPrefUtil.subsGetActive() == 2) {
+            if (mBannerView != null) mBannerView.setVisibility(View.GONE);
             return true;
         }
         return false;
@@ -370,7 +371,6 @@ public class ParentActivity extends AppCompatActivity
             } catch (NullPointerException e) {
                 Log.e("GAWK_ERR", "initAdMob NullPointerException");
             }
-
             return;
         }
         if (!checkSubs()) {
@@ -379,10 +379,11 @@ public class ParentActivity extends AppCompatActivity
                 public void onBannerLoaded(int height, boolean isPrecache) {
                     mBannerView.setVisibility(View.VISIBLE);
                     buttonDonateDeveloper.setVisibility(View.GONE);
+                    Log.d("Appodeal", "onBannerLoaded");
                 }
                 @Override
                 public void onBannerFailedToLoad() {
-                    Log.d("Appodeal", "onBannerFailedToLoad");
+                    Log.d("Appodeal", "onBannerFailedToLoad");mBannerView.setVisibility(View.GONE);
                 }
                 @Override
                 public void onBannerShown() {
@@ -496,4 +497,10 @@ public class ParentActivity extends AppCompatActivity
         return mShowAdsAndDonate && !checkSubs();
     }
 
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
 }

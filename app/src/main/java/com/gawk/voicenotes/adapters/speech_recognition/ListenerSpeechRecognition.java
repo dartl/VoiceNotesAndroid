@@ -34,13 +34,12 @@ public class ListenerSpeechRecognition implements RecognitionListener {
 
     @Override
     public void onReadyForSpeech(Bundle params) {
-        Log.e("GAWK_ERR","onReadyForSpeech()");
         mSpeechRecognitionDialog.setActive();
     }
 
     @Override
     public void onBeginningOfSpeech() {
-        Log.e("GAWK_ERR","onBeginningOfSpeech()");
+
     }
 
     @Override
@@ -56,7 +55,6 @@ public class ListenerSpeechRecognition implements RecognitionListener {
 
     @Override
     public void onBufferReceived(byte[] buffer) {
-        Log.e("GAWK_ERR","onBufferReceived(byte[] buffer)");
     }
 
     @Override
@@ -65,7 +63,6 @@ public class ListenerSpeechRecognition implements RecognitionListener {
 
     @Override
     public void onError(int error) {
-        Log.e("GAWK_ERR","onError(int error) = " + error);
         mActionSpeechRecognition.endRecognition();
         mSpeechRecognitionDialog.setInactive();
         mSpeechRecognitionDialog.errorMessage(error);
@@ -95,7 +92,6 @@ public class ListenerSpeechRecognition implements RecognitionListener {
 
     @Override
     public void onEvent(int eventType, Bundle params) {
-        Log.e("GAWK_ERR","onEvent(int eventType, Bundle params)");
     }
 
     public void show() {

@@ -142,8 +142,10 @@
     <string name="settings_note_title">Remarques</string>
     <string name="settings_note_auto_save_title">Enregistrement automatique</string>
     <string name="settings_note_auto_save_text">Il sauvegardera automatiquement le texte de la note. Renvoie à de nouvelles notes.</string>
-    <string name="main_all">Tout
-</string>
+    <string name="main_all">Tout</string>
+    <string name="settings_note_select_language_recognize_title">Sélectionnez la langue de reconnaissance</string>
+    <string name="settings_note_select_language_recognize_text">Si vous voulez des notes dans une langue autre que celle par défaut sur l\'appareil</string>
+    <string name="settings_note_select_language_recognize_default">Par défaut</string>
 
     <!-- Подписки -->
     <string name="subs_inner_text">Tous les abonnements suppriment des annonces de l’appli et représentent des dons pour le développeur</string>

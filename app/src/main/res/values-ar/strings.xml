@@ -130,6 +130,9 @@
     <string name="settings_note_auto_save_title">الحفظ التلقائي</string>
     <string name="settings_note_auto_save_text">فإنه سيتم حفظ النص المذكرة تلقائيا. يشير إلى الملاحظات الجديدة.</string>
     <string name="main_all">الكل</string>
+    <string name="settings_note_select_language_recognize_title">حدد لغة التعرف</string>
+    <string name="settings_note_select_language_recognize_text">إذا كنت تريد الملاحظات بلغة أخرى غير الافتراضي على الجهاز</string>
+    <string name="settings_note_select_language_recognize_default">افتراضي</string>
 
     <string-array name="export_import_type">
         <item>JSON</item>

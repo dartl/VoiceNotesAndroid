@@ -10,6 +10,8 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.AudioManager;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 import android.util.DisplayMetrics;
@@ -34,7 +36,7 @@ public class TimeNotification extends BroadcastReceiver {
     private PrefUtil mPrefUtil;
     NotificationManager nm;
     @Override
-    public void onReceive(Context context, Intent intent) {
+    public void onReceive(final Context context, Intent intent) {
         Log.e("GAWK_ERR","OnReceive()");
         nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         mNotificationAdapter = new NotificationAdapter(context);
@@ -74,7 +76,7 @@ public class TimeNotification extends BroadcastReceiver {
         }
         if(!sound_link.equalsIgnoreCase("")) {
             Uri defaultRingtoneUri = Uri.parse(sound_link);
-            nb.setSound(defaultRingtoneUri,AudioManager.STREAM_RING);
+            nb.setSound(defaultRingtoneUri,AudioManager.STREAM_NOTIFICATION);
         } else if (voice){
             nb.setDefaults(Notification.DEFAULT_SOUND); // выставляет звук по умолчанию
         }
@@ -89,4 +91,3 @@ public class TimeNotification extends BroadcastReceiver {
         }
     }
 }
-

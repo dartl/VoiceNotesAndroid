@@ -130,6 +130,9 @@
     <string name="settings_note_auto_save_title">Salvataggio automatico</string>
     <string name="settings_note_auto_save_text">Salva automaticamente il testo della nota. Si riferisce a nuove note.</string>
     <string name="main_all">Tutti</string>
+    <string name="settings_note_select_language_recognize_title">Seleziona la lingua di riconoscimento</string>
+    <string name="settings_note_select_language_recognize_text">Se desideri note in una lingua diversa da quella predefinita sul dispositivo</string>
+    <string name="settings_note_select_language_recognize_default">difetto</string>
 
     <string-array name="export_import_type">
         <item>JSON</item>

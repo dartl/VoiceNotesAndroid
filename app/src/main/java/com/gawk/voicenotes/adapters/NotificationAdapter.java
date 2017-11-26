@@ -23,7 +23,6 @@ public class NotificationAdapter {
     }
 
     public void restartNotify(Note note, Notification notification) {
-        Log.e("GAWK_ERR","restartNotify()");
         AlarmManager am = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(mContext, TimeNotification.class);
         intent.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);

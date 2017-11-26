@@ -144,6 +144,9 @@
     <string name="settings_note_auto_save_title">Penyimpanan otomatis</string>
     <string name="settings_note_auto_save_text">Ini akan menyimpan teks catatan secara otomatis. Mengacu pada catatan baru.</string>
     <string name="main_all">Semua</string>
+    <string name="settings_note_select_language_recognize_title">Pilih bahasa pengakuan</string>
+    <string name="settings_note_select_language_recognize_text">Jika Anda menginginkan catatan dalam bahasa selain default pada perangkat</string>
+    <string name="settings_note_select_language_recognize_default">Default</string>
 
     <!-- Подписки -->
     <string name="subs_inner_text">Semua langganan akan menghapus iklan dari aplikasi ini dan menjadi sumbangan untuk pengembang</string>

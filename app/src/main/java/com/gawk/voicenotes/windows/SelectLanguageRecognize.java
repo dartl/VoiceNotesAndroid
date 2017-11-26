@@ -41,11 +41,15 @@ public class SelectLanguageRecognize extends DialogFragment implements View.OnCl
     private RadioGroup mRadioGroup;
     private String oldLang;
 
+    public SelectLanguageRecognize() {
+    }
+
     public SelectLanguageRecognize(SettingsActivity mSettingsActivity) {
         this.mSettingsActivity = mSettingsActivity;
         PrefUtil prefUtil =  new PrefUtil(mSettingsActivity);
         Set<String> unSortedSet = prefUtil.getStringSet(PrefUtil.SUPPORTED_LANGUAGE_FOR_RECOGNIZE, null);
         // TreeSet
+        if (unSortedSet == null) return;
         allSupportedLanguage = new TreeSet<>(new Comparator<String>() {
             public int compare(String o1, String o2) {
                 return o1.compareTo(o2);
@@ -53,7 +57,6 @@ public class SelectLanguageRecognize extends DialogFragment implements View.OnCl
         });
         allSupportedLanguage.addAll(unSortedSet);
         oldLang = prefUtil.getString(PrefUtil.SELECTED_LANGUAGE_FOR_RECOGNIZE,"");
-        Log.e("GAWK_ERR", "allSupportedLanguage = " + allSupportedLanguage);
     }
 
     @Override
@@ -134,6 +137,7 @@ public class SelectLanguageRecognize extends DialogFragment implements View.OnCl
     @Override
     public void show(FragmentManager manager, String tag) {
         super.show(manager, tag);
+        if (allSupportedLanguage == null) dismiss();
     }
 
     @Override

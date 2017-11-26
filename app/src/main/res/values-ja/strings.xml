@@ -142,6 +142,9 @@
     <string name="settings_note_auto_save_title">自動保存</string>
     <string name="settings_note_auto_save_text">ノートテキストを自動的に保存します。 新しいメモを参照します。</string>
     <string name="main_all">すべて</string>
+    <string name="settings_note_select_language_recognize_title">認識の言語を選択する</string>
+    <string name="settings_note_select_language_recognize_text">ノートをデバイスのデフォルト以外の言語で使用する場合</string>
+    <string name="settings_note_select_language_recognize_default">デフォルト</string>
 
     <!-- Подписки -->
     <string name="subs_inner_text">どのサブスクリプションでもアプリから広告が削除され、開発者への寄付が行われます。</string>

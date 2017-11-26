@@ -3,6 +3,8 @@ package com.gawk.voicenotes.adapters.preferences;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.gawk.voicenotes.adapters.subs.SubsInterface;
+
 import java.util.Set;
 
 /**
@@ -79,5 +81,9 @@ public class PrefUtil {
 
     public long getLong(String key, long def) {
         return sharedPreferences.getLong(key,def);
+    }
+
+    public int subsGetActive() {
+        return sharedPreferences.getInt(SubsInterface.DONATE_PREF,0);
     }
 }

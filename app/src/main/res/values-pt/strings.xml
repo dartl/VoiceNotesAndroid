@@ -140,6 +140,10 @@
     <string name="settings_note_title">Notas</string>
     <string name="settings_note_auto_save_title">Salvamento automático</string>
     <string name="settings_note_auto_save_text">Ele salvará o texto da nota automaticamente. Refere-se a novas notas.</string>
+    <string name="settings_note_select_language_recognize_title">Selecione o idioma do reconhecimento</string>
+    <string name="settings_note_select_language_recognize_text">Se você quiser notas em um idioma diferente do padrão no dispositivo</string>
+    <string name="settings_note_select_language_recognize_default">Padrão</string>
+
     <!-- Подписки -->
     <string name="subs_inner_text">Todas as assinaturas removem os anúncios da aplicação e representam doações para o desenvolvedor</string>
     <string-array name="export_import_type">

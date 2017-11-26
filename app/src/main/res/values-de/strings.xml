@@ -142,6 +142,9 @@
     <string name="settings_note_auto_save_title">Autosave</string>
     <string name="settings_note_auto_save_text">Es wird der Notiztext automatisch gespeichert. Bezieht sich auf neue Notizen.</string>
     <string name="main_all">Alle</string>
+    <string name="settings_note_select_language_recognize_title">Wählen Sie die Sprache der Erkennung</string>
+    <string name="settings_note_select_language_recognize_text">Wenn Sie Notizen in einer anderen Sprache als der Standardeinstellung auf dem Gerät möchten</string>
+    <string name="settings_note_select_language_recognize_default">Standard</string>
 
     <!-- Подписки -->
     <string name="subs_inner_text">Alle Abonnements entfernen Anzeigen aus der App und verstehen sich als Spenden an die Entwickler</string>
