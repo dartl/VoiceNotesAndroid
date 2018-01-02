@@ -82,6 +82,12 @@ public class CategoriesSpinner {
         });
     }
 
+    public void reInit(long selectedCategoryId) {
+        this.selectedCategoryId = selectedCategoryId;
+        upDateCategoriesArray();
+        mSpinnerSelectCategory.setSelection(positionSelectedCategory);
+    }
+
     private void upDateCategoriesArray() {
         Cursor categories = dbHelper.getCursorAllCategories();
         Category category;

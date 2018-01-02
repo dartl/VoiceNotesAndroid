@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,6 +66,10 @@ public class NoteViewFragment extends FragmentParent implements CustomRelativeLa
         mTextViewDate =  view.findViewById(R.id.textViewDate);
         mEditTextNoteText = view.findViewById(R.id.editTextNoteText);
         mSpinnerSelectCategory = view.findViewById(R.id.spinnerSelectCategory);
+
+        if (mPrefUtil.getInt(PrefUtil.FONT_SIZE, 0) != 0) {
+            mEditTextNoteText.setTextSize(TypedValue.COMPLEX_UNIT_SP, mPrefUtil.getInt(PrefUtil.FONT_SIZE, 0));
+        }
 
         if(id != -1) {
             mNote = new Note(dbHelper.getNoteById(id));

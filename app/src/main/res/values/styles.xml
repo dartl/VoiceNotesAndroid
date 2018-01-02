@@ -11,11 +11,11 @@
         <item name="colorSelectListItem">#EDFAEF</item>
         <item name="accentColor">@color/tealColorA700</item>
 
-        <item name="attrColorGrey400">@color/colorGrey400</item>
-        <item name="attrColorGrey500">@color/colorGrey500</item>
-        <item name="attrColorGrey600">@color/colorGrey600</item>
-        <item name="attrColorGrey700">@color/colorGrey700</item>
-        <item name="attrColorGrey800">@color/colorGrey800</item>
+        <item name="attrColorGrey400">@color/colorGrey800</item>
+        <item name="attrColorGrey500">@color/colorGrey900</item>
+        <item name="attrColorGrey600">@color/colorGrey800</item>
+        <item name="attrColorGrey700">@color/colorGrey800</item>
+        <item name="attrColorGrey800">@color/colorGrey900</item>
 
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
@@ -35,11 +35,11 @@
         <item name="colorSelectListItem">@color/deepPurpleColor50</item>
         <item name="accentColor">@color/deepPurpleColorA700</item>
 
-        <item name="attrColorGrey400">@color/colorGrey400</item>
-        <item name="attrColorGrey500">@color/colorGrey500</item>
-        <item name="attrColorGrey600">@color/colorGrey600</item>
-        <item name="attrColorGrey700">@color/colorGrey700</item>
-        <item name="attrColorGrey800">@color/colorGrey800</item>
+        <item name="attrColorGrey400">@color/colorGrey800</item>
+        <item name="attrColorGrey500">@color/colorGrey900</item>
+        <item name="attrColorGrey600">@color/colorGrey800</item>
+        <item name="attrColorGrey700">@color/colorGrey800</item>
+        <item name="attrColorGrey800">@color/colorGrey900</item>
 
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
@@ -83,11 +83,11 @@
         <item name="colorSelectListItem">@color/red50</item>
         <item name="accentColor">@color/redA700</item>
 
-        <item name="attrColorGrey400">@color/colorGrey400</item>
-        <item name="attrColorGrey500">@color/colorGrey500</item>
-        <item name="attrColorGrey600">@color/colorGrey600</item>
-        <item name="attrColorGrey700">@color/colorGrey700</item>
-        <item name="attrColorGrey800">@color/colorGrey800</item>
+        <item name="attrColorGrey400">@color/colorGrey800</item>
+        <item name="attrColorGrey500">@color/colorGrey900</item>
+        <item name="attrColorGrey600">@color/colorGrey800</item>
+        <item name="attrColorGrey700">@color/colorGrey800</item>
+        <item name="attrColorGrey800">@color/colorGrey900</item>
 
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
@@ -107,11 +107,11 @@
         <item name="colorSelectListItem">@color/Pink50</item>
         <item name="accentColor">@color/PinkA700</item>
 
-        <item name="attrColorGrey400">@color/colorGrey400</item>
-        <item name="attrColorGrey500">@color/colorGrey500</item>
-        <item name="attrColorGrey600">@color/colorGrey600</item>
-        <item name="attrColorGrey700">@color/colorGrey700</item>
-        <item name="attrColorGrey800">@color/colorGrey800</item>
+        <item name="attrColorGrey400">@color/colorGrey800</item>
+        <item name="attrColorGrey500">@color/colorGrey900</item>
+        <item name="attrColorGrey600">@color/colorGrey800</item>
+        <item name="attrColorGrey700">@color/colorGrey800</item>
+        <item name="attrColorGrey800">@color/colorGrey900</item>
 
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
@@ -131,11 +131,11 @@
         <item name="colorSelectListItem">@color/Purple50</item>
         <item name="accentColor">@color/PurpleA700</item>
 
-        <item name="attrColorGrey400">@color/colorGrey400</item>
-        <item name="attrColorGrey500">@color/colorGrey500</item>
-        <item name="attrColorGrey600">@color/colorGrey600</item>
-        <item name="attrColorGrey700">@color/colorGrey700</item>
-        <item name="attrColorGrey800">@color/colorGrey800</item>
+        <item name="attrColorGrey400">@color/colorGrey800</item>
+        <item name="attrColorGrey500">@color/colorGrey900</item>
+        <item name="attrColorGrey600">@color/colorGrey800</item>
+        <item name="attrColorGrey700">@color/colorGrey800</item>
+        <item name="attrColorGrey800">@color/colorGrey900</item>
 
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
@@ -155,11 +155,11 @@
         <item name="colorSelectListItem">@color/Indigo50</item>
         <item name="accentColor">@color/IndigoA700</item>
 
-        <item name="attrColorGrey400">@color/colorGrey400</item>
-        <item name="attrColorGrey500">@color/colorGrey500</item>
-        <item name="attrColorGrey600">@color/colorGrey600</item>
-        <item name="attrColorGrey700">@color/colorGrey700</item>
-        <item name="attrColorGrey800">@color/colorGrey800</item>
+        <item name="attrColorGrey400">@color/colorGrey800</item>
+        <item name="attrColorGrey500">@color/colorGrey900</item>
+        <item name="attrColorGrey600">@color/colorGrey800</item>
+        <item name="attrColorGrey700">@color/colorGrey800</item>
+        <item name="attrColorGrey800">@color/colorGrey900</item>
 
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
@@ -179,11 +179,11 @@
         <item name="colorSelectListItem">@color/Blue50</item>
         <item name="accentColor">@color/BlueA700</item>
 
-        <item name="attrColorGrey400">@color/colorGrey400</item>
-        <item name="attrColorGrey500">@color/colorGrey500</item>
-        <item name="attrColorGrey600">@color/colorGrey600</item>
-        <item name="attrColorGrey700">@color/colorGrey700</item>
-        <item name="attrColorGrey800">@color/colorGrey800</item>
+        <item name="attrColorGrey400">@color/colorGrey800</item>
+        <item name="attrColorGrey500">@color/colorGrey900</item>
+        <item name="attrColorGrey600">@color/colorGrey800</item>
+        <item name="attrColorGrey700">@color/colorGrey800</item>
+        <item name="attrColorGrey800">@color/colorGrey900</item>
 
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
@@ -203,11 +203,11 @@
         <item name="colorSelectListItem">@color/LightBlue50</item>
         <item name="accentColor">@color/LightBlueA700</item>
 
-        <item name="attrColorGrey400">@color/colorGrey400</item>
-        <item name="attrColorGrey500">@color/colorGrey500</item>
-        <item name="attrColorGrey600">@color/colorGrey600</item>
-        <item name="attrColorGrey700">@color/colorGrey700</item>
-        <item name="attrColorGrey800">@color/colorGrey800</item>
+        <item name="attrColorGrey400">@color/colorGrey800</item>
+        <item name="attrColorGrey500">@color/colorGrey900</item>
+        <item name="attrColorGrey600">@color/colorGrey800</item>
+        <item name="attrColorGrey700">@color/colorGrey800</item>
+        <item name="attrColorGrey800">@color/colorGrey900</item>
 
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
@@ -227,11 +227,11 @@
         <item name="colorSelectListItem">@color/Cyan50</item>
         <item name="accentColor">@color/CyanA700</item>
 
-        <item name="attrColorGrey400">@color/colorGrey400</item>
-        <item name="attrColorGrey500">@color/colorGrey500</item>
-        <item name="attrColorGrey600">@color/colorGrey600</item>
-        <item name="attrColorGrey700">@color/colorGrey700</item>
-        <item name="attrColorGrey800">@color/colorGrey800</item>
+        <item name="attrColorGrey400">@color/colorGrey800</item>
+        <item name="attrColorGrey500">@color/colorGrey900</item>
+        <item name="attrColorGrey600">@color/colorGrey800</item>
+        <item name="attrColorGrey700">@color/colorGrey800</item>
+        <item name="attrColorGrey800">@color/colorGrey900</item>
 
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
@@ -251,11 +251,11 @@
         <item name="colorSelectListItem">@color/Green50</item>
         <item name="accentColor">@color/GreenA700</item>
 
-        <item name="attrColorGrey400">@color/colorGrey400</item>
-        <item name="attrColorGrey500">@color/colorGrey500</item>
-        <item name="attrColorGrey600">@color/colorGrey600</item>
-        <item name="attrColorGrey700">@color/colorGrey700</item>
-        <item name="attrColorGrey800">@color/colorGrey800</item>
+        <item name="attrColorGrey400">@color/colorGrey800</item>
+        <item name="attrColorGrey500">@color/colorGrey900</item>
+        <item name="attrColorGrey600">@color/colorGrey800</item>
+        <item name="attrColorGrey700">@color/colorGrey800</item>
+        <item name="attrColorGrey800">@color/colorGrey900</item>
 
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
@@ -275,11 +275,11 @@
         <item name="colorSelectListItem">@color/LightGreen50</item>
         <item name="accentColor">@color/LightGreenA700</item>
 
-        <item name="attrColorGrey400">@color/colorGrey400</item>
-        <item name="attrColorGrey500">@color/colorGrey500</item>
-        <item name="attrColorGrey600">@color/colorGrey600</item>
-        <item name="attrColorGrey700">@color/colorGrey700</item>
-        <item name="attrColorGrey800">@color/colorGrey800</item>
+        <item name="attrColorGrey400">@color/colorGrey800</item>
+        <item name="attrColorGrey500">@color/colorGrey900</item>
+        <item name="attrColorGrey600">@color/colorGrey800</item>
+        <item name="attrColorGrey700">@color/colorGrey800</item>
+        <item name="attrColorGrey800">@color/colorGrey900</item>
 
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
@@ -299,11 +299,11 @@
         <item name="colorSelectListItem">@color/Lime50</item>
         <item name="accentColor">@color/LimeA700</item>
 
-        <item name="attrColorGrey400">@color/colorGrey400</item>
-        <item name="attrColorGrey500">@color/colorGrey500</item>
-        <item name="attrColorGrey600">@color/colorGrey600</item>
-        <item name="attrColorGrey700">@color/colorGrey700</item>
-        <item name="attrColorGrey800">@color/colorGrey800</item>
+        <item name="attrColorGrey400">@color/colorGrey800</item>
+        <item name="attrColorGrey500">@color/colorGrey900</item>
+        <item name="attrColorGrey600">@color/colorGrey800</item>
+        <item name="attrColorGrey700">@color/colorGrey800</item>
+        <item name="attrColorGrey800">@color/colorGrey900</item>
 
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
@@ -323,11 +323,11 @@
         <item name="colorSelectListItem">@color/Yellow50</item>
         <item name="accentColor">@color/YellowA700</item>
 
-        <item name="attrColorGrey400">@color/colorGrey400</item>
-        <item name="attrColorGrey500">@color/colorGrey500</item>
-        <item name="attrColorGrey600">@color/colorGrey600</item>
-        <item name="attrColorGrey700">@color/colorGrey700</item>
-        <item name="attrColorGrey800">@color/colorGrey800</item>
+        <item name="attrColorGrey400">@color/colorGrey800</item>
+        <item name="attrColorGrey500">@color/colorGrey900</item>
+        <item name="attrColorGrey600">@color/colorGrey800</item>
+        <item name="attrColorGrey700">@color/colorGrey800</item>
+        <item name="attrColorGrey800">@color/colorGrey900</item>
 
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
@@ -347,11 +347,11 @@
         <item name="colorSelectListItem">@color/Amber50</item>
         <item name="accentColor">@color/AmberA700</item>
 
-        <item name="attrColorGrey400">@color/colorGrey400</item>
-        <item name="attrColorGrey500">@color/colorGrey500</item>
-        <item name="attrColorGrey600">@color/colorGrey600</item>
-        <item name="attrColorGrey700">@color/colorGrey700</item>
-        <item name="attrColorGrey800">@color/colorGrey800</item>
+        <item name="attrColorGrey400">@color/colorGrey800</item>
+        <item name="attrColorGrey500">@color/colorGrey900</item>
+        <item name="attrColorGrey600">@color/colorGrey800</item>
+        <item name="attrColorGrey700">@color/colorGrey800</item>
+        <item name="attrColorGrey800">@color/colorGrey900</item>
 
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
@@ -371,11 +371,11 @@
         <item name="colorSelectListItem">@color/Orange50</item>
         <item name="accentColor">@color/OrangeA700</item>
 
-        <item name="attrColorGrey400">@color/colorGrey400</item>
-        <item name="attrColorGrey500">@color/colorGrey500</item>
-        <item name="attrColorGrey600">@color/colorGrey600</item>
-        <item name="attrColorGrey700">@color/colorGrey700</item>
-        <item name="attrColorGrey800">@color/colorGrey800</item>
+        <item name="attrColorGrey400">@color/colorGrey800</item>
+        <item name="attrColorGrey500">@color/colorGrey900</item>
+        <item name="attrColorGrey600">@color/colorGrey800</item>
+        <item name="attrColorGrey700">@color/colorGrey800</item>
+        <item name="attrColorGrey800">@color/colorGrey900</item>
 
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
@@ -395,11 +395,11 @@
         <item name="colorSelectListItem">@color/DeepOrange50</item>
         <item name="accentColor">@color/DeepOrangeA700</item>
 
-        <item name="attrColorGrey400">@color/colorGrey400</item>
-        <item name="attrColorGrey500">@color/colorGrey500</item>
-        <item name="attrColorGrey600">@color/colorGrey600</item>
-        <item name="attrColorGrey700">@color/colorGrey700</item>
-        <item name="attrColorGrey800">@color/colorGrey800</item>
+        <item name="attrColorGrey400">@color/colorGrey800</item>
+        <item name="attrColorGrey500">@color/colorGrey900</item>
+        <item name="attrColorGrey600">@color/colorGrey800</item>
+        <item name="attrColorGrey700">@color/colorGrey800</item>
+        <item name="attrColorGrey800">@color/colorGrey900</item>
 
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
@@ -419,11 +419,11 @@
         <item name="colorSelectListItem">@color/Brown50</item>
         <item name="accentColor">@color/BrownA700</item>
 
-        <item name="attrColorGrey400">@color/colorGrey400</item>
-        <item name="attrColorGrey500">@color/colorGrey500</item>
-        <item name="attrColorGrey600">@color/colorGrey600</item>
-        <item name="attrColorGrey700">@color/colorGrey700</item>
-        <item name="attrColorGrey800">@color/colorGrey800</item>
+        <item name="attrColorGrey400">@color/colorGrey800</item>
+        <item name="attrColorGrey500">@color/colorGrey900</item>
+        <item name="attrColorGrey600">@color/colorGrey800</item>
+        <item name="attrColorGrey700">@color/colorGrey800</item>
+        <item name="attrColorGrey800">@color/colorGrey900</item>
 
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>

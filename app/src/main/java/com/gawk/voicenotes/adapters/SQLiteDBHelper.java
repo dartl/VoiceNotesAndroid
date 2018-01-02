@@ -74,6 +74,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
      */
     public static synchronized SQLiteDBHelper getInstance(Context context) {
         if (sInstance == null) {
+            if (context == null) return null;
             sInstance = new SQLiteDBHelper(context.getApplicationContext());
         }
         return sInstance;
@@ -559,16 +560,16 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
                         textNote = objNote.getString(NOTES_TABLE_COLUMN_TEXT_NOTE);
                         date = objNote.getString(NOTES_TABLE_COLUMN_DATE);
                         Date dt = dateFormat.parse(date);
+                        Note note = new Note(-1,textNote,dt);
                         if (textNote != null) {
-                            ContentValues newValues = new ContentValues();
-                            newValues.put(SQLiteDBHelper.NOTES_TABLE_COLUMN_TEXT_NOTE, textNote);
-                            newValues.put(SQLiteDBHelper.NOTES_TABLE_COLUMN_DATE, dt.getTime());
-                            mStatistics.addPointImports();
+                            saveNote(note);
+
                         } else {
                             return false;
                         }
                     }
                 }
+                mStatistics.addPointImports();
             } catch (JSONException | ParseException e) {
                 e.printStackTrace();
             }

@@ -45,12 +45,13 @@ public class ActionsEditedNote {
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 switch (motionEvent.getAction()) {
                     case MotionEvent.ACTION_DOWN:
-                        mTaskClear.execute(mEditText.getText().toString());
+                        if(mTaskClear.getStatus() == AsyncTask.Status.PENDING){
+                            if (!mEditText.getText().equals("")) mTaskClear.execute(mEditText.getText().toString());
+                        }
                         break;
                     case MotionEvent.ACTION_UP:
                         mTaskClear.cancel(true);
                         mTaskClear = new TaskClear();
-                        //view.performClick();
                         break;
                     default:
                         break;

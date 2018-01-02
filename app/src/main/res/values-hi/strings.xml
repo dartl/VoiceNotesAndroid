@@ -145,6 +145,10 @@
     <string name="settings_note_select_language_recognize_text">यदि आप डिवाइस पर डिफ़ॉल्ट के अलावा किसी अन्य भाषा में नोट्स चाहते हैं</string>
     <string name="settings_note_select_language_recognize_default">चूक</string>
 
+    <string name="error_search">खोज त्रुटि, पूरी तरह से एप्लिकेशन को पुनरारंभ करें</string>
+
+    <string name="disable_ads">विज्ञापनों को अक्षम करें</string>
+
     <!-- Подписки -->
     <string name="subs_inner_text">सभी सदस्यताएँ ऐप से विज्ञापन हटा देती हैं और डेवलपर को दान देना इंगित करती हैं</string>
     <string-array name="export_import_type">

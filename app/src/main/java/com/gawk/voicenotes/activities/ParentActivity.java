@@ -24,6 +24,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
@@ -50,9 +51,9 @@ import com.gawk.voicenotes.models.Note;
 import com.gawk.voicenotes.models.Notification;
 import com.gawk.voicenotes.adapters.subs.GooglePlaySubs;
 import com.gawk.voicenotes.windows.VotesDialog;
-import com.yandex.metrica.YandexMetrica;
 
 import java.lang.reflect.Method;
+import java.util.Random;
 
 
 /**
@@ -62,7 +63,6 @@ import java.lang.reflect.Method;
 public class ParentActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     public final String API_KEY_ADS = "1a2a7d16840f9909fc9a1b747c0920118444cd6c54cd2a14";
-    public final String API_KEY = "d766dee6-1292-4981-8845-966d5c4fd00c";
     public final String INSTALL_PREF = "install_app";
     protected MenuItem actionSave, actionSearch, actionFilter;
     private NavigationView navigationView, navigationViewMenu;
@@ -92,11 +92,6 @@ public class ParentActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         initAdMob();
 
-        // Инициализация AppMetrica SDK
-        YandexMetrica.activate(getApplicationContext(), API_KEY);
-        // Отслеживание активности пользователей
-        YandexMetrica.enableActivityAutoTracking(getApplication());
-
         mNotificationAdapter = new NotificationAdapter(this);
 
         /* Проверяем наличие настройки для интервала напоминания, если нет - добавляем стандартные 5 минут */
@@ -106,6 +101,8 @@ public class ParentActivity extends AppCompatActivity
 
         dbHelper = SQLiteDBHelper.getInstance(this);
         dbHelper.connection();
+
+        mShowAdsAndDonate = false;
     }
 
     ServiceConnection mServiceConn = new ServiceConnection() {
@@ -134,6 +131,7 @@ public class ParentActivity extends AppCompatActivity
 
     @Override
     public void onResume() {
+        mShowAdsAndDonate = false;
         int newTheme = mPrefUtil.getInt(PrefUtil.THEME,-1);
         if (newTheme != -1 && newTheme != getThemeId()) {
             Intent starterIntent = getIntent();
@@ -145,12 +143,13 @@ public class ParentActivity extends AppCompatActivity
         serviceIntent.setPackage("com.android.vending");
         bindService(serviceIntent, mServiceConn, Context.BIND_AUTO_CREATE);
         dbHelper.connection();
+
         Cursor noteCursor = dbHelper.getCursorAllNotes();
         NoteRecyclerAdapter noteCursorAdapter = new NoteRecyclerAdapter(this, noteCursor);
         TextView view = (TextView) navigationViewMenu.getMenu().findItem(R.id.menu_notes_list).getActionView();
         view.setText(noteCursorAdapter.getItemCount() > 0 ? String.valueOf(noteCursorAdapter.getItemCount()) : null);
-        refreshNavHeader();
 
+        refreshNavHeader();
 
         if (isShowAdsOrDonate()) {
             Appodeal.onResume(mActivity, Appodeal.BANNER);
@@ -355,6 +354,7 @@ public class ParentActivity extends AppCompatActivity
     }
 
     public boolean checkSubs() {
+        //return true;
         if (mPrefUtil == null) mPrefUtil = new PrefUtil(this);
         if (mPrefUtil.subsGetActive() == 2) {
             if (mBannerView != null) mBannerView.setVisibility(View.GONE);
@@ -378,6 +378,7 @@ public class ParentActivity extends AppCompatActivity
                 @Override
                 public void onBannerLoaded(int height, boolean isPrecache) {
                     mBannerView.setVisibility(View.VISIBLE);
+                    //mBannerView.getLayoutParams().height = height;
                     buttonDonateDeveloper.setVisibility(View.GONE);
                     Log.d("Appodeal", "onBannerLoaded");
                 }
@@ -404,15 +405,24 @@ public class ParentActivity extends AppCompatActivity
                 Appodeal.disableNetwork(mActivity, "tapjoy");
                 Appodeal.disableNetwork(mActivity, "unity_ads");
                 Appodeal.disableNetwork(mActivity, "vungle");
+                Appodeal.setBannerViewId(R.id.appodealBannerView);
                 Appodeal.initialize(mActivity, API_KEY_ADS, Appodeal.BANNER);
-                Appodeal.show(mActivity, Appodeal.BANNER_BOTTOM);
+                Appodeal.show(mActivity, Appodeal.BANNER_VIEW);
             }
         }
     }
 
     public void changeDonation() {
         mPrefUtil.saveInt(PrefUtil.DONATE_SHOW, mPrefUtil.getInt(PrefUtil.DONATE_SHOW,0) + 1);
-        if (mShowAdsAndDonate && mPrefUtil.getInt(PrefUtil.DONATE_SHOW,0) >= 6) {
+        if (mShowAdsAndDonate && mPrefUtil.getInt(PrefUtil.DONATE_SHOW,0) >= 3) {
+            // create random object
+            Random randomno = new Random();
+
+            // get next next boolean value
+            boolean value = randomno.nextBoolean();
+            if (value) buttonDonateDeveloper.setText(R.string.disable_ads);
+            else buttonDonateDeveloper.setText(R.string.donate_developer);
+
             buttonDonateDeveloper.setVisibility(View.VISIBLE);
             mPrefUtil.saveInt(PrefUtil.DONATE_SHOW, 0);
         } else {
@@ -502,5 +512,18 @@ public class ParentActivity extends AppCompatActivity
                 = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    /**
+     * This method converts device specific pixels to density independent pixels.
+     *
+     * @param px A value in px (pixels) unit. Which we need to convert into db
+     * @param context Context to get resources and device specific display metrics
+     * @return A float value to represent dp equivalent to px value
+     */
+    public static float convertPixelsToDp(float px, Context context){
+        Resources resources = context.getResources();
+        DisplayMetrics metrics = resources.getDisplayMetrics();
+        return px / ((float)metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
     }
 }

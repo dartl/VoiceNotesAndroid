@@ -1,6 +1,7 @@
 package com.gawk.voicenotes.adapters.lists_adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
@@ -14,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gawk.voicenotes.R;
+import com.gawk.voicenotes.activities.ViewNoteActivity;
 import com.gawk.voicenotes.adapters.ActionsListNotes;
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
 import com.gawk.voicenotes.models.Note;
@@ -115,6 +117,15 @@ public class NotificationRecyclerAdapter extends CursorRecyclerViewAdapter<Notif
                 public boolean onLongClick(View view) {
                     changeItemSelect(notificationRecyclerAdapter.getActionsListNotes().selectElement(id,getLayoutPosition()));
                     return true;
+                }
+            });
+
+            parent.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (notificationRecyclerAdapter.getActionsListNotes().isStateSelected()) {
+                        parent.performLongClick();
+                    }
                 }
             });
 

@@ -71,7 +71,7 @@ public class CategoryListFragment extends FragmentParent{
         mListAdapters.changeVisibleItemMenu(R.id.action_edited_element,true);
 
         /* new NoteRecycler */
-        mAdapter = new CategoriesRecyclerAdapter(getActivity(), categoryCursor, mListAdapters);
+        mAdapter = new CategoriesRecyclerAdapter(this, categoryCursor, mListAdapters);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         RecyclerView mRecyclerView = view.findViewById(R.id.recyclerViewCategories);
@@ -127,6 +127,12 @@ public class CategoryListFragment extends FragmentParent{
         }
         updateList();
         mNotesListFragment.updateList();
+    }
+
+    @Override
+    public void filterNotes(long category_id) {
+        super.filterNotes(category_id);
+        mainActivity.filterNotes(category_id);
     }
 
     @Override

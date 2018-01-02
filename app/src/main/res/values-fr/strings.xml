@@ -147,6 +147,10 @@
     <string name="settings_note_select_language_recognize_text">Si vous voulez des notes dans une langue autre que celle par défaut sur l\'appareil</string>
     <string name="settings_note_select_language_recognize_default">Par défaut</string>
 
+    <string name="error_search">Erreur de recherche, redémarrez complètement l\'application.</string>
+
+    <string name="disable_ads">Désactiver les annonces</string>
+
     <!-- Подписки -->
     <string name="subs_inner_text">Tous les abonnements suppriment des annonces de l’appli et représentent des dons pour le développeur</string>
     <string-array name="export_import_type">

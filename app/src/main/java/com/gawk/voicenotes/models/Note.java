@@ -46,7 +46,10 @@ public class Note implements Serializable, Parcelable {
             this.date = new Date(temp);
             this.mCategoryId = elem.getLong(elem.getColumnIndex(SQLiteDBHelper.NOTES_TABLE_COLUMN_CATEGORY));
         } else {
-            throw new NullPointerException();
+            this.id = -1;
+            this.text_note = "";
+            this.date = new Date();
+            this.mCategoryId = -1;
         }
     }
 

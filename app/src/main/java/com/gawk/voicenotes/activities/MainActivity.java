@@ -106,8 +106,10 @@ public class MainActivity extends ParentActivity {
                 prefUtil.saveBoolean(INSTALL_PREF,true);
             }
         }
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view_menu);
         navigationView.getMenu().findItem(R.id.menu_notes_list).setCheckable(true).setChecked(true);
+
         TextView textView = navigationView.getMenu().findItem(R.id.menu_notes_list).getActionView().findViewById(R.id.counterNotes);
         textView.setTextColor(getColorByAttr(R.attr.primaryColor));
     }
@@ -203,7 +205,7 @@ public class MainActivity extends ParentActivity {
                 );
                 break;
             case R.id.action_filter:
-                listFragment.filter();
+                listFragment.filter(true);
                 break;
         }
 
@@ -221,6 +223,13 @@ public class MainActivity extends ParentActivity {
             actionFilter.setVisible(b);
         }
         return true;
+    }
+
+    public void filterNotes(long category_id) {
+        viewPager.setCurrentItem(0);
+        NotesListFragment notesListFragment = (NotesListFragment) adapter.getItem(0);
+        notesListFragment.changeCategoryFilter(category_id);
+        notesListFragment.filter(false);
     }
 
 

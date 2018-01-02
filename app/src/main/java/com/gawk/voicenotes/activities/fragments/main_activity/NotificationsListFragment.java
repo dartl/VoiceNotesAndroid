@@ -113,6 +113,10 @@ public class NotificationsListFragment extends FragmentParent  {
         dbHelper.deleteAllOldNotification();
         Cursor cursor = getCursorNotifications();
         Log.e("GAWK_ERR","updateList() Notification. cursor.getCount() = " + cursor.getCount());
+        if (mAdapter == null) {
+            Cursor notificationCursor = getCursorNotifications();
+            mAdapter = new NotificationRecyclerAdapter(getActivity(), notificationCursor, mListAdapters, dbHelper);
+        }
         mAdapter.changeCursor(cursor);
         if (mAdapter.getItemCount() > 0) {
             mRelativeLayoutEmptyNotifications.setVisibility(View.GONE);

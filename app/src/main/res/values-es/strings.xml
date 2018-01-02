@@ -148,6 +148,10 @@
     <string name="settings_note_select_language_recognize_text">Si desea notas en un idioma que no sea el predeterminado en el dispositivo</string>
     <string name="settings_note_select_language_recognize_default">Default</string>
 
+    <string name="error_search">Error de búsqueda, reinicie completamente la aplicación.</string>
+
+    <string name="disable_ads">Desactivar los anuncios</string>
+
     <!-- Подписки -->
     <string name="subs_inner_text">La suscripción permite eliminar los anuncios y representa una donación para el desarrollador de la aplicación</string>
     <string-array name="export_import_type">

@@ -5,6 +5,7 @@
     <string name="navigation_drawer_close">Close navigation panel</string>
     <string name="success">Success</string>
     <string name="donate_developer">Donate to the developer</string>
+    <string name="disable_ads">Disable ads</string>
     <string name="donate_small">Small donation</string>
     <string name="donate_big">Large donation</string>
 
@@ -150,9 +151,14 @@
     <string name="settings_note_title">Notes</string>  
     <string name="settings_note_auto_save_title">Autosave</string>  
     <string name="settings_note_auto_save_text">It will save the note text automatically. Refers to new notes.</string>
-    <string name="settings_note_select_language_recognize_title">Select the language of recognition</string> <!-- NEW -->
-    <string name="settings_note_select_language_recognize_text">If you want notes in a language other than the default on the device</string> <!-- NEW -->
-    <string name="settings_note_select_language_recognize_default">Default</string> <!-- NEW -->
+    <string name="settings_note_select_language_recognize_title">Select the language of recognition</string>
+    <string name="settings_note_select_language_recognize_text">If you want notes in a language other than the default on the device</string>
+    <string name="settings_note_select_language_recognize_default">Default</string>
+
+    <string name="settings_note_select_text_size_title">Select text size</string> <!-- NEW -->
+    <string name="settings_note_select_text_size_text">Text size of notes</string> <!-- NEW -->
+
+    <string name="error_search">Search failed. Fully restart the application.</string>
 
     <!-- Подписки -->
     <string name="subs_inner_text">All subscriptions remove ads from the app and represent donations to the developer</string>

@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.gawk.voicenotes.R;
+import com.gawk.voicenotes.activities.fragments.main_activity.CategoryListFragment;
 import com.gawk.voicenotes.adapters.ActionsListNotes;
 import com.gawk.voicenotes.models.Category;
 
@@ -22,10 +24,12 @@ import com.gawk.voicenotes.models.Category;
 public class CategoriesRecyclerAdapter extends CursorRecyclerViewAdapter<CategoriesRecyclerAdapter.ViewHolder> implements View.OnLongClickListener {
 
     private ActionsListNotes actionsListNotes;
+    private CategoryListFragment mCategoryListFragment;
     private Boolean mStateSelected = false;
 
-    public CategoriesRecyclerAdapter(Context context, Cursor cursor, ActionsListNotes actionsListNotes) {
-        super(context, cursor);
+    public CategoriesRecyclerAdapter(CategoryListFragment context, Cursor cursor, ActionsListNotes actionsListNotes) {
+        super(context.getContext(), cursor);
+        mCategoryListFragment = context;
         this.actionsListNotes = actionsListNotes;
     }
 
@@ -96,7 +100,14 @@ public class CategoriesRecyclerAdapter extends CursorRecyclerViewAdapter<Categor
 
             parent.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
+                public void onClick(View view) {
+                    Log.e("GAWK_ERR", "select filter = " + id);
+                    if (categoriesRecyclerAdapter.getActionsListNotes().isStateSelected()) {
+                        parent.performLongClick();
+                    } else {
+                        Log.e("GAWK_ERR", "select filter = " + id);
+                        mCategoriesRecyclerAdapter.mCategoryListFragment.filterNotes(id);
+                    }
                 }
             });
 

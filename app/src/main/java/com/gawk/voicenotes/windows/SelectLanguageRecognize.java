@@ -42,11 +42,17 @@ public class SelectLanguageRecognize extends DialogFragment implements View.OnCl
     private String oldLang;
 
     public SelectLanguageRecognize() {
+        PrefUtil prefUtil =  new PrefUtil(getActivity());
+        init(prefUtil);
     }
 
     public SelectLanguageRecognize(SettingsActivity mSettingsActivity) {
         this.mSettingsActivity = mSettingsActivity;
         PrefUtil prefUtil =  new PrefUtil(mSettingsActivity);
+        init(prefUtil);
+    }
+
+    private void init(PrefUtil prefUtil) {
         Set<String> unSortedSet = prefUtil.getStringSet(PrefUtil.SUPPORTED_LANGUAGE_FOR_RECOGNIZE, null);
         // TreeSet
         if (unSortedSet == null) return;
@@ -82,7 +88,8 @@ public class SelectLanguageRecognize extends DialogFragment implements View.OnCl
         mRadioButton.setLayoutParams(new RadioGroup.LayoutParams(RadioGroup.LayoutParams.MATCH_PARENT,RadioGroup.LayoutParams.WRAP_CONTENT));
         mRadioGroup.addView(mRadioButton);
 
-        if (oldLang.equals("")) mRadioGroup.check(mRadioButton.getId());
+        if (oldLang==null || oldLang.equals("")) mRadioGroup.check(mRadioButton.getId());
+
 
         if (allSupportedLanguage != null) {
             for (String anAllSupportedLanguage : allSupportedLanguage) {

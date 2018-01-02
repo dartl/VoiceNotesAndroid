@@ -150,6 +150,10 @@
     <string name="settings_note_select_language_recognize_text">Если вы хотите заметки на языке, отличном от выбранного на устройстве по-умолчанию</string>
     <string name="settings_note_select_language_recognize_default">По-умолчанию</string>
 
+    <string name="error_search">Ошибка поиска, полностью перезапустите приложение.</string>
+
+    <string name="disable_ads">Отключить рекламу</string>
+
     <string-array name="export_import_type">
         <item>json</item>
         <item>txt</item>

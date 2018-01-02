@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.gawk.voicenotes.activities.ViewNoteActivity;
 import com.gawk.voicenotes.activities.fragments.FragmentParent;
 import com.gawk.voicenotes.activities.MainActivity;
 import com.gawk.voicenotes.activities.CreateNoteActivity;
@@ -24,7 +26,9 @@ import com.gawk.voicenotes.activities.fragments.main_activity.adapters.ListenerS
 import com.gawk.voicenotes.adapters.lists_adapters.ListAdapters;
 import com.gawk.voicenotes.adapters.lists_adapters.NoteRecyclerAdapter;
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
+import com.gawk.voicenotes.models.Category;
 import com.gawk.voicenotes.models.Note;
+import com.gawk.voicenotes.windows.AddNewCategory;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -90,6 +94,7 @@ public class NotesListFragment extends FragmentParent implements ListenerSelectF
         mListAdapters = new ListAdapters(view,this,getActivity());
         mListAdapters.changeVisibleItemMenu(R.id.action_share_element,true);
         mListAdapters.changeVisibleItemSelectedMenu(R.id.imageButtonShare,View.VISIBLE);
+        mListAdapters.changeVisibleItemMenu(R.id.action_edited_element,true);
 
         /* new NoteRecycler */
         mAdapter = new NoteRecyclerAdapter(getActivity(), noteCursor, mListAdapters, dbHelper);
@@ -194,23 +199,30 @@ public class NotesListFragment extends FragmentParent implements ListenerSelectF
 
     @Override
     public void search(String text) {
-        if (dbHelper != null) {
-            dbHelper.connection();
-            mSearchText = text;
-            if (mSearchText != null && mSearchText.equals("")) {
-                mSearchText = null;
+        try {
+            if (dbHelper != null) {
+                dbHelper.connection();
+                mSearchText = text;
+                if (mSearchText != null && mSearchText.equals("")) {
+                    mSearchText = null;
+                }
+                mAdapter.changeCursor(dbHelper.getCursorAllNotes(mSearchText,mFilterCategory));
             }
-            mAdapter.changeCursor(dbHelper.getCursorAllNotes(mSearchText,mFilterCategory));
+        } catch (Exception e) {
+            Snackbar.make(mView, getString(R.string.error_search), Snackbar.LENGTH_LONG).show();
         }
     }
 
-    public void filter() {
+    public void filter(boolean showSelectWindow) {
         if (mRelativeLayoutFilter == null) return;
         if (mRelativeLayoutFilter.getVisibility() == View.VISIBLE) {
             closeFilter();
         } else {
             mRelativeLayoutFilter.setVisibility(View.VISIBLE);
-            mSpinnerFilter.performClick();
+            if (showSelectWindow) mSpinnerFilter.performClick();
+            else {
+                mCategoriesSpinner.reInit(mFilterCategory);
+            }
         }
     }
 
@@ -219,6 +231,15 @@ public class NotesListFragment extends FragmentParent implements ListenerSelectF
         mFilterCategory = newCategoryId;
         mAdapter.changeCursor(dbHelper.getCursorAllNotes(mSearchText,mFilterCategory));
     }
+
+    @Override
+    public void editedItemList(long id) {
+        Intent intent;
+        intent = new Intent(getContext(), ViewNoteActivity.class);
+        intent.putExtra("id",id);
+        getContext().startActivity(intent);
+    }
+
 
     public void closeFilter() {
         mFilterCategory = -1;

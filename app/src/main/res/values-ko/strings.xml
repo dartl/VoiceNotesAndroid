@@ -146,6 +146,10 @@
     <string name="settings_note_select_language_recognize_text">메모를 기기의 기본 언어가 아닌 다른 언어로 원하면</string>
     <string name="settings_note_select_language_recognize_default">기본값</string>
 
+    <string name="error_search">검색 오류가 발생하여 응용 프로그램을 완전히 다시 시작하십시오.</string>
+
+    <string name="disable_ads">광고 사용 중지</string>
+
     <!-- Подписки -->
     <string name="subs_inner_text">모든 구독 상품은 광고를 없애고 개발자를 후원하게 됩니다.</string>
     <string-array name="export_import_type">

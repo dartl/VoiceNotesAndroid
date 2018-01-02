@@ -134,6 +134,10 @@
     <string name="settings_note_select_language_recognize_text">Se desideri note in una lingua diversa da quella predefinita sul dispositivo</string>
     <string name="settings_note_select_language_recognize_default">difetto</string>
 
+    <string name="error_search">Errore di ricerca, riavviare completamente l\'applicazione.</string>
+
+    <string name="disable_ads">Disabilita annunci</string>
+
     <string-array name="export_import_type">
         <item>JSON</item>
         <item>txt</item>

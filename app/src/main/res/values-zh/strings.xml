@@ -132,6 +132,10 @@
     <string name="settings_note_select_language_recognize_text">如果您要使用默认设备上选择的语言以外的其他语言的笔记</string>
     <string name="settings_note_select_language_recognize_default">默认</string>
 
+    <string name="error_search">搜索錯誤，完全重新啟動應用程序。</string>
+
+    <string name="disable_ads">停用广告</string>
+
     <string-array name="export_import_type">
         <item>JSON</item>
         <item>txt</item>

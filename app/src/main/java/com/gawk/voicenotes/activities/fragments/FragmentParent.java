@@ -54,4 +54,9 @@ public class FragmentParent extends Fragment implements ActionMenuBottom {
     public void refreshSelectedList(int position) {
 
     }
+
+    @Override
+    public void filterNotes(long category_id) {
+
+    }
 }

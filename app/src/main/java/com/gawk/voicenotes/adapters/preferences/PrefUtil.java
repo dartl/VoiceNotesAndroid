@@ -20,6 +20,7 @@ public class PrefUtil {
     public static final String DONATE_SHOW = "donate_show";
     public static final String SUPPORTED_LANGUAGE_FOR_RECOGNIZE = "supported_language_for_recognize";
     public static final String SELECTED_LANGUAGE_FOR_RECOGNIZE = "selected_language_for_recognize";
+    public static final String FONT_SIZE = "font_size";
 
     // основной код
     public static final String PERSISTANT_STORAGE_NAME = "GAWK_VOICE_NOTES";

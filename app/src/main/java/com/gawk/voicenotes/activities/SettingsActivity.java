@@ -21,6 +21,7 @@ import com.gawk.voicenotes.R;
 import com.gawk.voicenotes.adapters.preferences.PrefUtil;
 import com.gawk.voicenotes.windows.SelectIntervalDialog;
 import com.gawk.voicenotes.windows.SelectLanguageRecognize;
+import com.gawk.voicenotes.windows.SelectTextSize;
 import com.gawk.voicenotes.windows.SelectTheme;
 
 import java.util.ArrayList;
@@ -38,11 +39,13 @@ public class SettingsActivity extends ParentActivity {
     private TextView mTextViewRepetition;
     private SettingsActivity mSettingsActivity;
     private SelectTheme mSelectThemeDialog;
+    private SelectTextSize mSelectTextSize;
     private SelectLanguageRecognize mSelectLanguageRecognize;
 
     private Switch mSwitchAutoSave;
     private LinearLayout mLinearLayoutSelectSound, mLinearLayoutSelectRepetitionTime,
-            mLinearLayoutAddShortcut, mLinearLayoutSelectTheme, mLinearLayoutNoteAutoSave, mLinearLayoutSelectLanguageRecognize;
+            mLinearLayoutAddShortcut, mLinearLayoutSelectTheme, mLinearLayoutNoteAutoSave,
+            mLinearLayoutSelectLanguageRecognize, mLinearLayoutSelectTextSize;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +64,8 @@ public class SettingsActivity extends ParentActivity {
         mLinearLayoutSelectTheme = (LinearLayout) findViewById(R.id.linearLayoutSelectTheme);
         mLinearLayoutNoteAutoSave = (LinearLayout) findViewById(R.id.linearLayoutNoteAutoSave);
         mLinearLayoutSelectLanguageRecognize = (LinearLayout) findViewById(R.id.linearLayoutSelectLanguageRecognize);
+        mLinearLayoutSelectTextSize = (LinearLayout) findViewById(R.id.linearLayoutSelectTextSize);
+
         mSwitchAutoSave = (Switch) findViewById(R.id.switchAutoSave);
 
         mSwitchAutoSave.setChecked(mPrefUtil.getBoolean(PrefUtil.NOTE_AUTO_SAVE,false));
@@ -107,6 +112,13 @@ public class SettingsActivity extends ParentActivity {
             }
         });
 
+        setOnClickListenerChildren(mLinearLayoutSelectTextSize, new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startSelectTextSize();
+            }
+        });
+
         setIntervalNotification(mPrefUtil.getLong(PrefUtil.NOTIFICATION_INTERVAL,0));
 
         String url = mPrefUtil.getString(PrefUtil.NOTIFICATION_SOUND,"");
@@ -139,7 +151,6 @@ public class SettingsActivity extends ParentActivity {
         final Intent shortcutIntent = new Intent(this, CreateNoteActivity.class);
         final Intent intent = new Intent();
         intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
-        shortcutIntent.setAction(Intent.ACTION_CREATE_DOCUMENT);
         // Sets the custom shortcut's title
         intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, getString(R.string.menu_add));
         // Set the custom shortcut icon
@@ -306,6 +317,16 @@ public class SettingsActivity extends ParentActivity {
             return;
         }
         mPrefUtil.saveString(PrefUtil.SELECTED_LANGUAGE_FOR_RECOGNIZE, new Locale(lang).toString());
+    }
+
+    public void startSelectTextSize() {
+        mSelectTextSize = new SelectTextSize();
+        mSelectTextSize.show(getFragmentManager(),"SelectTextSize");
+    }
+
+    public void setTextSize(int size) {
+        mPrefUtil.saveInt(PrefUtil.FONT_SIZE,size);
+        mSelectTextSize.dismiss();
     }
 
 }

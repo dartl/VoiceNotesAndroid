@@ -146,6 +146,10 @@
     <string name="settings_note_select_language_recognize_text">ノートをデバイスのデフォルト以外の言語で使用する場合</string>
     <string name="settings_note_select_language_recognize_default">デフォルト</string>
 
+    <string name="error_search">検索エラー、完全にアプリケーションを再起動します。</string>
+
+    <string name="disable_ads">広告を無効にする</string>
+
     <!-- Подписки -->
     <string name="subs_inner_text">どのサブスクリプションでもアプリから広告が削除され、開発者への寄付が行われます。</string>
     <string-array name="export_import_type">

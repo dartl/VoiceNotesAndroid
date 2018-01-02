@@ -17,4 +17,6 @@ public interface ActionMenuBottom {
     void editedItemList(long id);
 
     void refreshSelectedList(int position);
+
+    void filterNotes(long category_id);
 }
