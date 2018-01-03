@@ -143,10 +143,19 @@
     <string name="settings_note_select_language_recognize_title">Selecione o idioma do reconhecimento</string>
     <string name="settings_note_select_language_recognize_text">Se você quiser notas em um idioma diferente do padrão no dispositivo</string>
     <string name="settings_note_select_language_recognize_default">Padrão</string>
-
     <string name="error_search">Erro de pesquisa, reinicie completamente o aplicativo.</string>
-
     <string name="disable_ads">Desativar anúncios</string>
+
+    <string name="information_about_permissions_text">
+        <![CDATA[Esta mensagem aparecerá apenas uma vez, se for importante para você, por que o aplicativo precisa de certas permissões - certifique-se de lê-lo com atenção.
+        <br/><b>Acesso a arquivos</b> - você precisa exportar / importar notas.
+        <br/><b>Acesso à Internet</b> - para reconhecer seu discurso mais corretamente em servidores externos.
+        <br/><b>Grave áudio (microfone)</b> - obtenha seu discurso para reconhecer e gravar notas.
+        <br/><b>Configurando o alarme</b> - para lembrá-lo de eventos importantes.]]></string>
+    <string name="information_about_permissions_title">Sobre as permissões solicitadas</string>
+    <string name="ok">Está bem</string>
+    <string name="settings_note_select_text_size_title">Selecione o tamanho do texto</string>
+    <string name="settings_note_select_text_size_text">Tamanho do texto das notas</string>
 
     <!-- Подписки -->
     <string name="subs_inner_text">Todas as assinaturas removem os anúncios da aplicação e representam doações para o desenvolvedor</string>

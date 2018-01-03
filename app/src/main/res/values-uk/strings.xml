@@ -131,10 +131,19 @@
     <string name="settings_note_select_language_recognize_title">Виберіть мову розпізнавання</string>
     <string name="settings_note_select_language_recognize_text">Якщо ви хочете замітки на мові, відмінному від обраного на пристрої за замовчуванням</string>
     <string name="settings_note_select_language_recognize_default">За замовчуванням</string>
-
     <string name="error_search">Помилка пошуку, повністю запустіть програму.</string>
-
     <string name="disable_ads">Вимкнути об\'яви</string>
+
+    <string name="information_about_permissions_text">
+        <![CDATA[Це повідомлення з\'явиться лише одного разу, якщо вам важливо, навіщо додатком ті чи інші дозволи - обов\'язково прочитайте уважно.
+        <br/><b>Доступ до файлів</b> - потрібен для експорту / імпорту заміток.
+        <br/><b>Доступ до інтернету</b> - розпізнавати вашу мову більш коректно на зовнішніх серверах.
+        <br/><b>Запис аудіо (мікрофон)</b> - отримати вашу мову для розпізнавання і записи заміток.
+        <br/><b>Установка будильника</b> - нагадувати вам про важливі події.]]></string>
+    <string name="information_about_permissions_title">Про запитувані права доступу</string>
+    <string name="ok">добре</string>
+    <string name="settings_note_select_text_size_title">Виберіть розмір тексту</string>
+    <string name="settings_note_select_text_size_text">Розмір тексту нот</string>
 
     <string-array name="export_import_type">
         <item>JSON</item>

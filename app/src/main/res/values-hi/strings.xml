@@ -144,10 +144,20 @@
     <string name="settings_note_select_language_recognize_title">मान्यता की भाषा का चयन करें</string>
     <string name="settings_note_select_language_recognize_text">यदि आप डिवाइस पर डिफ़ॉल्ट के अलावा किसी अन्य भाषा में नोट्स चाहते हैं</string>
     <string name="settings_note_select_language_recognize_default">चूक</string>
-
     <string name="error_search">खोज त्रुटि, पूरी तरह से एप्लिकेशन को पुनरारंभ करें</string>
-
     <string name="disable_ads">विज्ञापनों को अक्षम करें</string>
+
+    <string name="information_about_permissions_text">
+        <![CDATA[यह संदेश केवल एक बार दिखाई देगा, यदि आपके लिए यह महत्वपूर्ण है, तो आवेदन को कुछ अनुमतियों की आवश्यकता क्यों है - इसे ध्यानपूर्वक पढ़ें
+        <br/><b>फाइलों तक पहुंच</b> - आपको नोट आयात / आयात करने की आवश्यकता है
+        <br/><b>इंटरनेट तक पहुंच</b> - अपने भाषण को बाहरी सर्वर पर अधिक सही ढंग से पहचानने के लिए
+        <br/><b>रिकॉर्ड ऑडियो (माइक्रोफोन)</b> - नोट्स को पहचानने और रिकॉर्ड करने के लिए अपना भाषण प्राप्त करें
+        <br/><b>महत्वपूर्ण नोट्स</b> के अनुस्मारक के लिए अलार्म सेट करना।]]>
+        </string>
+    <string name="information_about_permissions_title">अनुरोधित अनुमतियों के बारे में</string>
+    <string name="ok">ठीक</string>
+    <string name="settings_note_select_text_size_title">पाठ का आकार चुनें</string>
+    <string name="settings_note_select_text_size_text">नोटों का पाठ आकार</string>
 
     <!-- Подписки -->
     <string name="subs_inner_text">सभी सदस्यताएँ ऐप से विज्ञापन हटा देती हैं और डेवलपर को दान देना इंगित करती हैं</string>

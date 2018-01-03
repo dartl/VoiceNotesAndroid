@@ -133,10 +133,19 @@
     <string name="settings_note_select_language_recognize_title">Seleziona la lingua di riconoscimento</string>
     <string name="settings_note_select_language_recognize_text">Se desideri note in una lingua diversa da quella predefinita sul dispositivo</string>
     <string name="settings_note_select_language_recognize_default">difetto</string>
-
     <string name="error_search">Errore di ricerca, riavviare completamente l\'applicazione.</string>
-
     <string name="disable_ads">Disabilita annunci</string>
+
+    <string name="information_about_permissions_text">
+        <![CDATA[Questo messaggio apparirà una sola volta, se è importante per te, perché l\'applicazione ha bisogno di determinate autorizzazioni - assicurati di leggerla attentamente.
+        <br/><b>Accesso ai file</b> - è necessario esportare / importare note.
+        <br/><b>Accesso a Internet</b> - per riconoscere il tuo discorso più correttamente su server esterni.
+        <br/><b>Registra audio (microfono)</b> - fai in modo che il tuo discorso riconosca e registri le note.
+        <br/><b>Impostazione dell\'allarme</b> - per promemoria di note importanti.]]></string>
+    <string name="information_about_permissions_title">Informazioni sulle autorizzazioni richieste</string>
+    <string name="ok">ok</string>
+    <string name="settings_note_select_text_size_title">Seleziona la dimensione del testo</string>
+    <string name="settings_note_select_text_size_text">Dimensione del testo delle note</string>
 
     <string-array name="export_import_type">
         <item>JSON</item>

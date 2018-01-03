@@ -131,10 +131,19 @@
     <string name="settings_note_select_language_recognize_title">选择识别语言</string>
     <string name="settings_note_select_language_recognize_text">如果您要使用默认设备上选择的语言以外的其他语言的笔记</string>
     <string name="settings_note_select_language_recognize_default">默认</string>
-
     <string name="error_search">搜索錯誤，完全重新啟動應用程序。</string>
-
     <string name="disable_ads">停用广告</string>
+
+    <string name="information_about_permissions_text">
+        <![CDATA[这条消息只会出现一次，如果对您很重要，为什么应用程序需要一定的权限 - 一定要仔细阅读。
+        <br/><b>访问文件</b> - 您需要导出/导入笔记。
+        <br/><b>访问互联网</b> - 在外部服务器上更准确地识别您的语音。
+        <br/><b>录制音频（麦克风）</b> - 让您的演讲识别和记录笔记。
+        <br/><b>设置闹钟</b> - 提醒您重要的事件。]]></string>
+    <string name="information_about_permissions_title">关于请求的权限</string>
+    <string name="ok">好</string>
+    <string name="settings_note_select_text_size_title">选择文字大小</string>
+    <string name="settings_note_select_text_size_text">笔记的文本大小</string>
 
     <string-array name="export_import_type">
         <item>JSON</item>

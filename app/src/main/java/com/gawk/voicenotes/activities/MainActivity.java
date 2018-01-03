@@ -1,8 +1,11 @@
 package com.gawk.voicenotes.activities;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.support.design.widget.NavigationView;
@@ -12,6 +15,9 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.SearchView;
+import android.text.Html;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -34,6 +40,8 @@ import com.gawk.voicenotes.activities.fragments.main_activity.NotificationsListF
 import com.gawk.voicenotes.adapters.preferences.PrefUtil;
 import com.gawk.voicenotes.adapters.speech_recognition.LanguageDetailsChecker;
 
+import java.util.Locale;
+
 public class MainActivity extends ParentActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -47,6 +55,8 @@ public class MainActivity extends ParentActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(com.gawk.voicenotes.R.layout.activity_main);
+
+        showInformationAboutPermissions();
 
         mView = findViewById(R.id.activity_main);
 
@@ -232,6 +242,30 @@ public class MainActivity extends ParentActivity {
         notesListFragment.filter(false);
     }
 
+    void showInformationAboutPermissions() {
+
+        if (mPrefUtil.getBoolean(PrefUtil.INFORMATION_ABOUT_PERMISSIONS,true)) {
+            mPrefUtil.saveBoolean(PrefUtil.INFORMATION_ABOUT_PERMISSIONS,false);
+            AlertDialog alertDialog = new AlertDialog.Builder(this)
+                    .setTitle(R.string.information_about_permissions_title)
+                    .setMessage(getSpannedText(getString(R.string.information_about_permissions_text)))
+                    .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    }).create();
+            alertDialog.show();
+        }
+    }
+
+    private Spanned getSpannedText(String text) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            return Html.fromHtml(text, Html.FROM_HTML_MODE_COMPACT);
+        } else {
+            return Html.fromHtml(text);
+        }
+    }
 
     /**
      * Checks if the app has permission to write to device storage

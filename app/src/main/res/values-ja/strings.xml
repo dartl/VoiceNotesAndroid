@@ -145,10 +145,19 @@
     <string name="settings_note_select_language_recognize_title">認識の言語を選択する</string>
     <string name="settings_note_select_language_recognize_text">ノートをデバイスのデフォルト以外の言語で使用する場合</string>
     <string name="settings_note_select_language_recognize_default">デフォルト</string>
-
     <string name="error_search">検索エラー、完全にアプリケーションを再起動します。</string>
-
     <string name="disable_ads">広告を無効にする</string>
+
+    <string name="information_about_permissions_text">
+        <![CDATA[このメッセージは重要な場合には1回だけ表示され、アプリケーションには特定のアクセス許可が必要な理由があります。慎重に読んでください。
+        <br/><b>ファイルへのアクセス</b> - ノートをエクスポート/インポートする必要があります。
+        <br/><b>インターネットへのアクセス</b> - あなたのスピーチを外部サーバーでより正確に認識すること。
+        <br/><b>オーディオ（マイク）を録音する</b> - スピーチでメモを認識して録音します。
+        <br/><b>アラームを設定する</b> - 重要なイベントを思い出させる。]]></string>
+    <string name="information_about_permissions_title">要求されたアクセス許可について</string>
+    <string name="ok">[OK]</string>
+    <string name="settings_note_select_text_size_title">テキストサイズを選択</string>
+    <string name="settings_note_select_text_size_text">ノートのテキストサイズ</string>
 
     <!-- Подписки -->
     <string name="subs_inner_text">どのサブスクリプションでもアプリから広告が削除され、開発者への寄付が行われます。</string>

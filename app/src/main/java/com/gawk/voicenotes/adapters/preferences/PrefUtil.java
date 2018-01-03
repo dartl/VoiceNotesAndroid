@@ -13,6 +13,7 @@ import java.util.Set;
 
 public class PrefUtil {
     // константы названий настроек
+    public static final String INFORMATION_ABOUT_PERMISSIONS = "information_about_permissions";
     public static final String NOTIFICATION_SOUND = "sound_for_notification";
     public static final String NOTIFICATION_INTERVAL = "interval_for_notification";
     public static final String NOTE_AUTO_SAVE = "note_auto_save";

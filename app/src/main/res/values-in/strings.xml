@@ -147,10 +147,19 @@
     <string name="settings_note_select_language_recognize_title">Pilih bahasa pengakuan</string>
     <string name="settings_note_select_language_recognize_text">Jika Anda menginginkan catatan dalam bahasa selain default pada perangkat</string>
     <string name="settings_note_select_language_recognize_default">Default</string>
-
     <string name="error_search">Cari kesalahan, restart sepenuhnya aplikasi.</string>
-
     <string name="disable_ads">Nonaktifkan iklanं</string>
+
+    <string name="information_about_permissions_text">
+        <![CDATA[Pesan ini hanya akan muncul sekali, jika penting bagi Anda, mengapa aplikasi memerlukan izin tertentu - pastikan membacanya dengan saksama.
+        <br/><b>Akses ke file</b> - Anda perlu mengekspor / mengimpor catatan.
+        <br/><b>Akses ke Internet</b> - untuk mengenali pidato Anda dengan lebih benar di server eksternal.
+        <br/><b>Rekam audio (mikrofon)</b> - mintalah ucapan Anda untuk mengenali dan mencatat catatan.
+        <br/><b>Mengatur alarm</b> - untuk pengingat catatan penting]]></string>
+    <string name="information_about_permissions_title">Tentang izin yang diminta</string>
+    <string name="ok">baik</string>
+    <string name="settings_note_select_text_size_title">Pilih ukuran teks</string>
+    <string name="settings_note_select_text_size_text">Ukuran teks catatan</string>
 
     <!-- Подписки -->
     <string name="subs_inner_text">Semua langganan akan menghapus iklan dari aplikasi ini dan menjadi sumbangan untuk pengembang</string>

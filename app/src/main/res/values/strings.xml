@@ -33,7 +33,17 @@
     <string name="main_unassigned">Unassigned</string>   
     <string name="main_all">All</string>   
     <string name="category_spinner_title">Select category</string>   
-    <string name="category_spinner_filter">Filter</string>   
+    <string name="category_spinner_filter">Filter</string>
+
+    <string name="information_about_permissions_title">About the requested permissions</string> <!-- NEW -->
+    <string name="information_about_permissions_text">
+        <![CDATA[This message will appear only once, if it is important for you, why the application needs certain permissions - be sure to read it carefully.
+        <br/><b>Access to files</b> - you need to export / import notes.
+        <br/><b>Access to the Internet</b> - to recognize your speech more correctly on external servers.
+        <br/><b>Record audio (microphone)</b> - get your speech to recognize and record notes.
+        <br/><b>Setting the alarm</b> - for reminders of important notes]]>
+        </string>
+    <string name="ok">OK</string> <!-- NEW -->
 
     <!-- Меню -->
     <string name="menu_add">Add note</string>

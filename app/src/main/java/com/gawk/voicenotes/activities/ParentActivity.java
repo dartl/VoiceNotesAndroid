@@ -97,8 +97,6 @@ public class ParentActivity extends AppCompatActivity
 
         dbHelper = SQLiteDBHelper.getInstance(this);
         dbHelper.connection();
-
-        mShowAdsAndDonate = false;
     }
 
     ServiceConnection mServiceConn = new ServiceConnection() {
@@ -127,7 +125,6 @@ public class ParentActivity extends AppCompatActivity
 
     @Override
     public void onResume() {
-        mShowAdsAndDonate = false;
         int newTheme = mPrefUtil.getInt(PrefUtil.THEME,-1);
         if (newTheme != -1 && newTheme != getThemeId()) {
             Intent starterIntent = getIntent();

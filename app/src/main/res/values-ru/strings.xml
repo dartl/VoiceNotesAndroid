@@ -149,10 +149,19 @@
     <string name="settings_note_select_language_recognize_title">Выберите язык распознавания</string>
     <string name="settings_note_select_language_recognize_text">Если вы хотите заметки на языке, отличном от выбранного на устройстве по-умолчанию</string>
     <string name="settings_note_select_language_recognize_default">По-умолчанию</string>
-
     <string name="error_search">Ошибка поиска, полностью перезапустите приложение.</string>
-
     <string name="disable_ads">Отключить рекламу</string>
+
+    <string name="information_about_permissions_text">
+        <![CDATA[Это сообщение появится лишь однажды, если вам важно, зачем приложению те или иные разрешения - обязательно прочтите внимательно.
+        <br/><b>Доступ к файлам</b> - нужен для экспорта/импорта заметок.
+        <br/><b>Доступ к интернету</b> - распознавать вашу речь более корректно на внешних серверах.
+        <br/><b>Запись аудио (микрофон)</b> - получить вашу речь для распознавания и записи заметок.
+        <br/><b>Установка будильника</b> - напоминать вам о важных событиях.]]></string>
+    <string name="information_about_permissions_title">О запрашиваемых разрешениях</string>
+    <string name="ok">ОК</string>
+    <string name="settings_note_select_text_size_title">Выберите размер текста</string>
+    <string name="settings_note_select_text_size_text">Размер текста заметок</string>
 
     <string-array name="export_import_type">
         <item>json</item>

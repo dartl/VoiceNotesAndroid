@@ -145,10 +145,19 @@
     <string name="settings_note_select_language_recognize_title">Wählen Sie die Sprache der Erkennung</string>
     <string name="settings_note_select_language_recognize_text">Wenn Sie Notizen in einer anderen Sprache als der Standardeinstellung auf dem Gerät möchten</string>
     <string name="settings_note_select_language_recognize_default">Standard</string>
-
     <string name="error_search">Suche fehlgeschlagen Starten Sie die Anwendung vollständig neu.</string>
-
     <string name="disable_ads">Werbungen ausschalten</string>
+
+    <string name="information_about_permissions_text">
+        <![CDATA[Diese Nachricht wird nur einmal angezeigt, wenn es für Sie wichtig ist, warum die Anwendung bestimmte Berechtigungen benötigt - lesen Sie sie sorgfältig.
+        <br/><b>Zugriff auf Dateien</b> - Sie müssen Notizen exportieren / importieren.
+        <br/><b>Zugang zum Internet</b> - um Ihre Sprache auf externen Servern besser zu erkennen.
+        <br/><b>Audio aufnehmen (Mikrofon)</b> - Lassen Sie Ihre Rede Noten erkennen und aufnehmen.
+        <br/><b>Wecker einstellen</b> - zur Erinnerung an wichtige Notizen.]]></string>
+    <string name="information_about_permissions_title">Über die angeforderten Berechtigungen</string>
+    <string name="ok">OK</string>
+    <string name="settings_note_select_text_size_title">Wählen Sie die Textgröße</string>
+    <string name="settings_note_select_text_size_text">Textgröße von Notizen</string>
 
     <!-- Подписки -->
     <string name="subs_inner_text">Alle Abonnements entfernen Anzeigen aus der App und verstehen sich als Spenden an die Entwickler</string>
