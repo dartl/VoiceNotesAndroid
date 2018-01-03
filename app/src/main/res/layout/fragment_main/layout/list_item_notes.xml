@@ -5,6 +5,14 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <TextView
+        android:id="@+id/textViewGroupDate"
+        style="@style/GawkMaterialTheme.ListGrouping"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:visibility="gone" />
+
     <android.support.v7.widget.CardView
         android:id="@+id/card_view"
         android:layout_width="fill_parent"
@@ -13,65 +21,78 @@
         app:cardElevation="0dp">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/GawkMaterialTheme.ListNoteElement"
-                android:orientation="horizontal">
+                    style="@style/GawkMaterialTheme.ListNoteElement"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
 
-                <ImageButton
-                    android:id="@+id/imageButtonIconNote"
-                    style="@style/GawkMaterialTheme.ListNoteElementIconNote"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/ic_insert_drive_file_black_24dp" />
-
-                <LinearLayout
-                    style="@style/GawkMaterialTheme.ListNoteElementTextAndDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/textViewListText"
-                        style="@style/GawkMaterialTheme.ListNoteElementText"
-                        android:layout_width="match_parent"
+                    <ImageButton
+                        android:id="@+id/imageButtonIconNote"
+                        style="@style/GawkMaterialTheme.ListNoteElementIconNote"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:maxLines="2"
-                        android:text="Text" />
+                        android:layout_gravity="center_vertical"
+                        android:scaleType="fitCenter"
+                        app:srcCompat="@drawable/ic_insert_drive_file_black_24dp" />
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        style="@style/GawkMaterialTheme.ListNoteElementTextAndDate"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
-                        android:orientation="horizontal">
+                        android:orientation="vertical">
 
 
                         <TextView
-                            android:id="@+id/textViewListCategory"
-                            style="@style/GawkMaterialTheme.ListNoteElementDate"
+                            android:id="@+id/textViewListText"
+                            style="@style/GawkMaterialTheme.ListNoteElementText"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="start"
-                            android:singleLine="true"
+                            android:maxLines="2"
                             android:text="" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/textViewListDate"
+                                style="@style/GawkMaterialTheme.ListNoteElementDate"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="end"
+                                android:singleLine="true"
+                                android:gravity="start"
+                                android:text="" />
+
+                            <TextView
+                                android:id="@+id/textViewListCategory"
+                                style="@style/GawkMaterialTheme.ListNoteElementDate"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                                android:layout_gravity="start"
+                                android:gravity="end"
+                                android:singleLine="true"
+                                android:text="" />
+                        </LinearLayout>
+
                     </LinearLayout>
 
-                </LinearLayout>
+                    <ImageButton
+                        android:id="@+id/imageButtonMoreMenu"
+                        style="@style/GawkMaterialTheme.IconNoBackground"
+                        android:layout_width="48dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        app:srcCompat="@drawable/ic_more_vert_black_24dp" />
 
-                <ImageButton
-                    android:id="@+id/imageButtonMoreMenu"
-                    style="@style/GawkMaterialTheme.IconNoBackground"
-                    android:layout_width="48dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center_vertical"
-                    app:srcCompat="@drawable/ic_more_vert_black_24dp" />
+        </LinearLayout>
 
-            </LinearLayout>
     </android.support.v7.widget.CardView>
 
     <View

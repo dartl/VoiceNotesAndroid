@@ -32,7 +32,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -43,7 +42,6 @@ import com.appodeal.ads.BannerView;
 import com.gawk.voicenotes.R;
 import com.gawk.voicenotes.adapters.NotificationAdapter;
 import com.gawk.voicenotes.adapters.lists_adapters.NoteRecyclerAdapter;
-import com.gawk.voicenotes.adapters.listeners.SocialShare;
 import com.gawk.voicenotes.models.Statistics;
 import com.gawk.voicenotes.adapters.preferences.PrefUtil;
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
@@ -70,8 +68,6 @@ public class ParentActivity extends AppCompatActivity
     IInAppBillingService mService;
     private ActionBarDrawerToggle toggle;
     private Button buttonDonateDeveloper;
-    private ImageButton mButtonFacebook, mButtonVk, mButtonGoogle, mButtonTwitter, mButtonLinkedln,
-            mButtonOdnoklassnik;
     private ImageView mImageViewLevelIcon;
     private TextView mTextViewLevelRank, mTextViewLevelLevel, mTextViewLevelExperience;
     private NotificationAdapter mNotificationAdapter;
@@ -229,22 +225,6 @@ public class ParentActivity extends AppCompatActivity
                 startActivity(intent);
             }
         });
-
-        SocialShare socialShare =  new SocialShare(this);
-
-        mButtonFacebook = fullView.findViewById(R.id.buttonFacebook);
-        mButtonVk = fullView.findViewById(R.id.buttonVk);
-        mButtonGoogle = fullView.findViewById(R.id.buttonGoogle);
-        mButtonTwitter = fullView.findViewById(R.id.buttonTwitter);
-        mButtonLinkedln = fullView.findViewById(R.id.buttonLinkedln);
-        mButtonOdnoklassnik = fullView.findViewById(R.id.buttonOdnoklassnik);
-
-        mButtonFacebook.setOnClickListener(socialShare);
-        mButtonVk.setOnClickListener(socialShare);
-        mButtonGoogle.setOnClickListener(socialShare);
-        mButtonTwitter.setOnClickListener(socialShare);
-        mButtonLinkedln.setOnClickListener(socialShare);
-        mButtonOdnoklassnik.setOnClickListener(socialShare);
 
         mImageViewLevelIcon = navigationView.findViewById(R.id.imageViewLevelIcon);
         mTextViewLevelRank = navigationView.findViewById(R.id.textViewLevelRank);

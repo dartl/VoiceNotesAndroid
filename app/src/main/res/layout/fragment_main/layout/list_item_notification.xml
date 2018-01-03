@@ -5,11 +5,11 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/textViewGroup"
+        android:id="@+id/textViewGroupDate"
+        style="@style/GawkMaterialTheme.ListGrouping"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/GawkMaterialTheme.ListGrouping"
-        android:text="TextView"
+        android:text=""
         android:visibility="gone" />
 
     <android.support.v7.widget.CardView

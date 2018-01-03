@@ -18,7 +18,7 @@ public class DatePickerFragment extends DialogFragment
         implements DatePickerDialog.OnDateSetListener {
 
     DateAndTimeCombine mDateAndTimeCombine;
-    Calendar current;
+    Calendar current = Calendar.getInstance();
 
     public DatePickerFragment() {}
 
@@ -26,14 +26,15 @@ public class DatePickerFragment extends DialogFragment
         this.mDateAndTimeCombine = mDateAndTimeCombine;
     }
 
+    public DatePickerFragment(DateAndTimeCombine mDateAndTimeCombine, long time) {
+        this.mDateAndTimeCombine = mDateAndTimeCombine;
+        current.setTimeInMillis(time);
+    }
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the current time as the default values for the picker
         int year, month, dayOfMonth;
-
-        if (current == null) {
-            current = Calendar.getInstance();
-        }
 
         year = current.get(Calendar.YEAR);
         month = current.get(Calendar.MONTH);
@@ -42,6 +43,7 @@ public class DatePickerFragment extends DialogFragment
         // Create a new instance of TimePickerDialog and return it
         return new DatePickerDialog(getActivity(), this, year, month, dayOfMonth);
     }
+
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         current.set(year, month, dayOfMonth,

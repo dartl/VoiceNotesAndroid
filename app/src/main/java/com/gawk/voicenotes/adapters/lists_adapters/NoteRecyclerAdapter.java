@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,8 +22,10 @@ import com.gawk.voicenotes.models.Note;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
 
 /**
@@ -34,6 +37,7 @@ public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerA
     private ActionsListNotes actionsListNotes;
     private SQLiteDBHelper db;
     private Context mContext;
+    private HashMap<Long, Integer> mGroupsByDate = new HashMap<>();
 
     public NoteRecyclerAdapter(Context context, Cursor cursor, ActionsListNotes actionsListNotes,  SQLiteDBHelper db) {
         super(context, cursor);
@@ -48,20 +52,24 @@ public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerA
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView textView, mTextViewListCategory;
+        TextView textView, mTextViewListCategory, mTextViewListDate, mTextViewGroupDate;
         ImageButton mImageButtonIconNote, mImageButtonMoreMenu;
         CardView cardView;
         View parent;
         NoteRecyclerAdapter mNoteRecyclerAdapter;
+        int mViewType = -1;
 
-        ViewHolder(View v) {
+        ViewHolder(View v, int viewType) {
             super(v);
             parent = v;
             mImageButtonIconNote = v.findViewById(R.id.imageButtonIconNote);
             mImageButtonMoreMenu = v.findViewById(R.id.imageButtonMoreMenu);
             textView = v.findViewById(R.id.textViewListText);
             mTextViewListCategory = v.findViewById(R.id.textViewListCategory);
+            mTextViewListDate = v.findViewById(R.id.textViewListDate);
+            mTextViewGroupDate = v.findViewById(R.id.textViewGroupDate);
             cardView = v.findViewById(R.id.card_view);
+            mViewType = viewType;
         }
 
         void setData(final Cursor c, final NoteRecyclerAdapter noteRecyclerAdapter, SQLiteDBHelper db) {
@@ -139,6 +147,20 @@ public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerA
                     }
                 }
             });
+
+            DateFormat dateFormat;
+            Date date = note.getDate();
+
+            dateFormat = SimpleDateFormat.getTimeInstance();
+            mTextViewListDate.setText(dateFormat.format(date));
+
+            if (mNoteRecyclerAdapter.getItemViewType(position-1) != mViewType) {
+                DateFormat dateGroupFormat = SimpleDateFormat.getDateInstance();
+                mTextViewGroupDate.setVisibility(View.VISIBLE);
+                mTextViewGroupDate.setText(dateGroupFormat.format(date));
+            } else {
+                mTextViewGroupDate.setVisibility(View.GONE);
+            }
         }
 
         private void changeItemSelect(boolean state) {
@@ -159,12 +181,11 @@ public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerA
     @Override
     public NoteRecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(getContext()).inflate(R.layout.list_item_notes, parent, false);
-        return new NoteRecyclerAdapter.ViewHolder(v);
+        return new NoteRecyclerAdapter.ViewHolder(v, viewType);
     }
 
     @Override
     public void onBindViewHolder(NoteRecyclerAdapter.ViewHolder viewHolder, Cursor cursor) {
-        cursor.moveToPosition(cursor.getPosition());
         viewHolder.setData(cursor, this, db);
     }
 
@@ -181,32 +202,28 @@ public class NoteRecyclerAdapter extends CursorRecyclerViewAdapter<NoteRecyclerA
 
     @Override
     public int getItemViewType(int position) {
-        return 0;
+        int result = -1;
+        if (null != getCursor() && getCursor().moveToPosition(position)) {
+            if (-1 != getCursor().getColumnIndex(SQLiteDBHelper.NOTES_TABLE_COLUMN_DATE)) {
+                long temp = getCursor().getLong(getCursor().getColumnIndex(SQLiteDBHelper.NOTES_TABLE_COLUMN_DATE));
+
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTimeInMillis(temp);
+                calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), 0, 0 ,0);
+                calendar.set(Calendar.MILLISECOND, 0);
+
+                if (mGroupsByDate.containsKey(calendar.getTimeInMillis())) {
+                    result = mGroupsByDate.get(calendar.getTimeInMillis());
+                } else {
+                    result = mGroupsByDate.size();
+                    mGroupsByDate.put(calendar.getTimeInMillis(),mGroupsByDate.size());
+                }
+            }
+        }
+        return result;
     }
 
-    public ActionsListNotes getActionsListNotes() {
+    ActionsListNotes getActionsListNotes() {
         return actionsListNotes;
-    }
-
-    public void setActionsListNotes(ActionsListNotes actionsListNotes) {
-        this.actionsListNotes = actionsListNotes;
-    }
-
-    @Override
-    public Cursor swapCursor(Cursor newCursor) {
-        // инициализируем сегодняшним днем
-        mGroupEndDate = Calendar.getInstance();
-        mGroupEndDate.set(
-                mGroupEndDate.get(Calendar.YEAR),
-                mGroupEndDate.get(Calendar.MONTH),
-                mGroupEndDate.get(Calendar.DAY_OF_MONTH)+2,
-                0,0);
-        mGroupStartDate = Calendar.getInstance();
-        mGroupStartDate.set(
-                mGroupStartDate.get(Calendar.YEAR),
-                mGroupStartDate.get(Calendar.MONTH),
-                mGroupStartDate.get(Calendar.DAY_OF_MONTH)+1,
-                0,0);
-        return super.swapCursor(newCursor);
     }
 }

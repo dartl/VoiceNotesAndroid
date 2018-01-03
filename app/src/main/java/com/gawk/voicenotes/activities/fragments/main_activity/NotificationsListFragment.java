@@ -1,5 +1,6 @@
 package com.gawk.voicenotes.activities.fragments.main_activity;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
+import com.gawk.voicenotes.activities.ViewNoteActivity;
 import com.gawk.voicenotes.activities.fragments.FragmentParent;
 import com.gawk.voicenotes.activities.ParentActivity;
 import com.gawk.voicenotes.R;
@@ -39,7 +41,6 @@ public class NotificationsListFragment extends FragmentParent  {
     private RecyclerView.LayoutManager mLayoutManager;
     private ListAdapters mListAdapters;
     private SetNotification mSetNotification;
-    private Note note;
     private long mNoteActiveId;
     private boolean mIsNotificationsListFromViewNote = false;
 
@@ -74,6 +75,7 @@ public class NotificationsListFragment extends FragmentParent  {
         dbHelper.connection();
 
         mListAdapters = new ListAdapters(view,this,getActivity());
+        mListAdapters.changeVisibleItemMenu(R.id.action_edited_element,true);
 
         Cursor notificationCursor = getCursorNotifications();
 
@@ -153,10 +155,25 @@ public class NotificationsListFragment extends FragmentParent  {
         onResume();
     }
 
+    @Override
+    public void editedItemList(long id) {
+        Notification notification = new Notification(dbHelper.getCursorNotification(id));
+        mSetNotification = new SetNotification(notification);
+        mSetNotification.setNoteView(mNotificationsListFragment);
+        mSetNotification.show(getFragmentManager(),"SetNotification");
+    }
+
     public void saveNotification(Notification notification) {
-        notification.setId(dbHelper.saveNotification(notification));
+        long id, note_id;
+        id = dbHelper.saveNotification(notification);
         NotificationAdapter notificationAdapter = new NotificationAdapter(getContext());
-        notificationAdapter.restartNotify(new Note(dbHelper.getNoteById(mNoteActiveId)), notification);
+        if (id != notification.getId()) {
+            note_id = mNoteActiveId;
+            notification.setId(id);
+        } else {
+            note_id = notification.getId_note();
+        }
+        notificationAdapter.restartNotify(new Note(dbHelper.getNoteById(note_id)), notification);
         updateList();
     }
 

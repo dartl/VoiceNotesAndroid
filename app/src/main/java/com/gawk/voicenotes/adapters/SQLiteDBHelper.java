@@ -351,6 +351,20 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
     }
 
     /**
+     * Получаем указатель на напоминание по ид
+     * @return возвращает результат запроса к БД
+     */
+    public Cursor getCursorNotification(long id) {
+        if (!isConnect()) {
+            connection();
+        }
+        return db.rawQuery("SELECT * FROM " +
+                SQLiteDBHelper.NOTIFICATIONS_TABLE_NAME + " WHERE " + SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_ID
+                + " = " + id + " ORDER BY " + SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_DATE
+                 + " ASC", null);
+    }
+
+    /**
      * Удаляет из БД все старые заметки
      * @return возвращает результат запроса к БД
      */
@@ -417,9 +431,11 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         if (!isConnect()) {
             connection();
         }
-
         mStatistics.addPointCreateNotifications();
         ContentValues newValues = new ContentValues();
+        if (notification.getId() != -1) {
+            newValues.put(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_ID, notification.getId());
+        }
         newValues.put(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_ID_NOTE, notification.getId_note());
         newValues.put(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_DATE, notification.getDate().getTime());
         newValues.put(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_SOUND, notification.isSound());

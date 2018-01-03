@@ -22,19 +22,28 @@ public class Notification implements Serializable, Parcelable {
     public Notification() {
         this.id = -1;
         this.id_note = -1;
-        this.date = null;
+        this.date = new Date();
         this.sound = true;
         this.shake = true;
         this.mRepeat = false;
     }
 
     public Notification(Cursor element) {
-        this.id = element.getInt(element.getColumnIndex(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_ID));
-        this.id_note = element.getInt(element.getColumnIndex(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_ID_NOTE));
-        this.sound = toBoolean(element.getInt(element.getColumnIndex(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_SOUND)));
-        this.shake = toBoolean(element.getInt(element.getColumnIndex(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_VIBRATE)));
-        this.mRepeat = toBoolean(element.getInt(element.getColumnIndex(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_REPEAT)));
-        this.date = new Date(element.getLong(element.getColumnIndex(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_DATE)));
+        if (element.getCount() > 1 || element.moveToFirst()) {
+            this.id = element.getInt(element.getColumnIndex(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_ID));
+            this.id_note = element.getInt(element.getColumnIndex(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_ID_NOTE));
+            this.sound = toBoolean(element.getInt(element.getColumnIndex(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_SOUND)));
+            this.shake = toBoolean(element.getInt(element.getColumnIndex(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_VIBRATE)));
+            this.mRepeat = toBoolean(element.getInt(element.getColumnIndex(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_REPEAT)));
+            this.date = new Date(element.getLong(element.getColumnIndex(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_DATE)));
+        } else {
+            this.id = -1;
+            this.id_note = -1;
+            this.date = null;
+            this.sound = true;
+            this.shake = true;
+            this.mRepeat = false;
+        }
     }
 
     public Notification(long id, long id_note, Date date, boolean sound, boolean shake, boolean repeat) {

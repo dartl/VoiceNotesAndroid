@@ -530,6 +530,7 @@
         <item name="android:paddingLeft">@dimen/element_padding</item>
     </style>
 
+
     <style name="GawkMaterialTheme.ListNoteElementIconNote" parent="GawkMaterialTheme.IconNoBackground">
         <item name="android:padding">8dp</item>
         <item name="android:tint">?primaryColor500</item>

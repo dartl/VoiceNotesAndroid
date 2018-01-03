@@ -25,6 +25,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 
 /**
  * Created by GAWK on 29.03.2017.
@@ -35,6 +36,7 @@ public class NotificationRecyclerAdapter extends CursorRecyclerViewAdapter<Notif
     private ActionsListNotes actionsListNotes;
     private SQLiteDBHelper db;
     private boolean mViewNote = false;
+    private HashMap<Long, Integer> mGroupsByDate = new HashMap<>();
 
     public NotificationRecyclerAdapter(Context context, Cursor cursor, ActionsListNotes actionsListNotes, SQLiteDBHelper db) {
         super(context, cursor);
@@ -43,19 +45,16 @@ public class NotificationRecyclerAdapter extends CursorRecyclerViewAdapter<Notif
         this.db.connection();
     }
 
-    public NotificationRecyclerAdapter(Context context, Cursor cursor) {
-        super(context, cursor);
-    }
-
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imageViewSound, imageViewShake;
-        TextView textViewTextNote, textViewDateNotification, mTextViewGroup;
+        TextView textViewTextNote, textViewDateNotification, mTextViewGroupDate;
         ImageButton mImageButtonNotificationIcon, mImageButtonMoreMenu;
         CardView cardView;
         NotificationRecyclerAdapter mNotificationRecyclerAdapter;
         public View parent;
+        int mViewType = -1;
 
-        ViewHolder(View v) {
+        ViewHolder(View v, int viewType) {
             super(v);
             parent = v;
             imageViewSound = v.findViewById(R.id.imageViewSound);
@@ -64,12 +63,14 @@ public class NotificationRecyclerAdapter extends CursorRecyclerViewAdapter<Notif
             textViewDateNotification = v.findViewById(R.id.textViewDateNotification);
             mImageButtonNotificationIcon = v.findViewById(R.id.imageButtonNotificationIcon);
             mImageButtonMoreMenu = v.findViewById(R.id.imageButtonMoreMenu);
+            mTextViewGroupDate = v.findViewById(R.id.textViewGroupDate);
             cardView = v.findViewById(R.id.card_view);
-            mTextViewGroup = v.findViewById(R.id.textViewGroup);
+            mViewType = viewType;
         }
 
         void setData(final Cursor c, final NotificationRecyclerAdapter notificationRecyclerAdapter, SQLiteDBHelper db) {
             mNotificationRecyclerAdapter = notificationRecyclerAdapter;
+            final int position = c.getPosition();
             final long id = notificationRecyclerAdapter.getItemId(getLayoutPosition());
 
             Notification notification = new Notification(c);
@@ -151,20 +152,17 @@ public class NotificationRecyclerAdapter extends CursorRecyclerViewAdapter<Notif
             }
 
             DateFormat dateFormat;
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTimeInMillis(notification.getDate().getTime());
             Date date = notification.getDate();
-
-            /*if (!notificationRecyclerAdapter.checkDateNotification(calendar)) {
-                dateFormat = SimpleDateFormat.getDateInstance();
-                String date_string = dateFormat.format(date);
-                mTextViewGroup.setText(date_string);
-                mTextViewGroup.setVisibility(View.VISIBLE);
-            } else {
-                mTextViewGroup.setVisibility(View.GONE);
-            }*/
-            dateFormat = SimpleDateFormat.getDateTimeInstance();
+            dateFormat = SimpleDateFormat.getTimeInstance();
             textViewDateNotification.setText(dateFormat.format(date));
+
+            if (mNotificationRecyclerAdapter.getItemViewType(position-1) != mViewType) {
+                DateFormat dateGroupFormat = SimpleDateFormat.getDateInstance();
+                mTextViewGroupDate.setVisibility(View.VISIBLE);
+                mTextViewGroupDate.setText(dateGroupFormat.format(date));
+            } else {
+                mTextViewGroupDate.setVisibility(View.GONE);
+            }
 
             // Задаем иконку для состояния звука оповещения
             if (notification.isSound()) {
@@ -198,26 +196,46 @@ public class NotificationRecyclerAdapter extends CursorRecyclerViewAdapter<Notif
     @Override
     public NotificationRecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(getContext()).inflate(R.layout.list_item_notification, parent, false);
-        return new NotificationRecyclerAdapter.ViewHolder(v);
+        Log.e("GAWK_ERR", "viewType = " + viewType);
+        return new NotificationRecyclerAdapter.ViewHolder(v, viewType);
     }
 
     @Override
     public void onBindViewHolder(NotificationRecyclerAdapter.ViewHolder viewHolder, Cursor cursor) {
-        NotificationRecyclerAdapter.ViewHolder holder = viewHolder;
-        cursor.moveToPosition(cursor.getPosition());
-        holder.setData(cursor, this, db);
+        viewHolder.setData(cursor, this, db);
     }
 
     @Override
     public int getItemCount() {
-        if (db.isConnect()) return super.getItemCount();
-        return 0;
+        return super.getItemCount();
     }
 
     @Override
     public int getItemViewType(int position) {
-        return 0;
+        int result = -1;
+        if (null != getCursor() && getCursor().moveToPosition(position)) {
+            if (-1 != getCursor().getColumnIndex(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_DATE)) {
+                long temp = getCursor().getLong(getCursor().getColumnIndex(SQLiteDBHelper.NOTIFICATIONS_TABLE_COLUMN_DATE));
+
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTimeInMillis(temp);
+                calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), 0, 0 ,0);
+                calendar.set(Calendar.MILLISECOND, 0);
+
+                if (mGroupsByDate.containsKey(calendar.getTimeInMillis())) {
+                    result = mGroupsByDate.get(calendar.getTimeInMillis());
+                } else {
+                    result = mGroupsByDate.size();
+                    Log.e("GAWK_ERR", "new result = " + result);
+                    Log.e("GAWK_ERR", "calendar.getTimeInMillis() = " + Calendar.getInstance().getTimeInMillis());
+                    mGroupsByDate.put(calendar.getTimeInMillis(),mGroupsByDate.size());
+                }
+            }
+        }
+
+        return result;
     }
+
 
     public ActionsListNotes getActionsListNotes() {
         return actionsListNotes;
@@ -233,22 +251,5 @@ public class NotificationRecyclerAdapter extends CursorRecyclerViewAdapter<Notif
 
     public void setViewNote(boolean mViewNote) {
         this.mViewNote = mViewNote;
-    }
-
-    @Override
-    public Cursor swapCursor(Cursor newCursor) {
-        mGroupEndDate = Calendar.getInstance();
-        mGroupEndDate.set(
-                mGroupEndDate.get(Calendar.YEAR),
-                mGroupEndDate.get(Calendar.MONTH),
-                mGroupEndDate.get(Calendar.DAY_OF_MONTH),
-                0,0);
-        mGroupStartDate = Calendar.getInstance();
-        mGroupStartDate.set(
-                mGroupStartDate.get(Calendar.YEAR),
-                mGroupStartDate.get(Calendar.MONTH),
-                mGroupStartDate.get(Calendar.DAY_OF_MONTH)-1,
-                0,0);
-        return super.swapCursor(newCursor);
     }
 }

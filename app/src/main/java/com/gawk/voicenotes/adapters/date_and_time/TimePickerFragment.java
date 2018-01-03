@@ -20,10 +20,15 @@ public class TimePickerFragment extends DialogFragment
         implements TimePickerDialog.OnTimeSetListener {
 
     DateAndTimeCombine mDateAndTimeCombine;
-    Calendar current;
+    Calendar current = Calendar.getInstance();
 
     public TimePickerFragment(DateAndTimeCombine mDateAndTimeCombine) {
         this.mDateAndTimeCombine = mDateAndTimeCombine;
+    }
+
+    public TimePickerFragment(DateAndTimeCombine mDateAndTimeCombine, long time) {
+        this.mDateAndTimeCombine = mDateAndTimeCombine;
+        current.setTimeInMillis(time);
     }
 
     @Override
@@ -31,9 +36,6 @@ public class TimePickerFragment extends DialogFragment
         // Use the current time as the default values for the picker
         int hour,minute;
 
-        if (current == null) {
-            current = Calendar.getInstance();
-        }
         hour = current.get(Calendar.HOUR_OF_DAY);
         minute = current.get(Calendar.MINUTE);
 

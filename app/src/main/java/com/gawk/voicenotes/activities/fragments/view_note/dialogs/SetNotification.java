@@ -33,21 +33,24 @@ import java.util.Calendar;
 
 public class SetNotification extends DialogFragment implements TimePickerReturn {
     private Dialog mDlg;
-    private Switch switchNotification, mSwitchSound, mSwitchVibrate, mSwitchRepeat;
+    private Switch mSwitchNotification, mSwitchSound, mSwitchVibrate, mSwitchRepeat;
     private View mView;
     private ArrayList<View> allChildren;
-    private Switch mSwitchNotification;
     private AppCompatButton selectTime, mButtonSave, mButtonClose;
     private TextView textViewNowDate;
-    private Calendar dateNotification;
+    private Calendar dateNotification = Calendar.getInstance();;
     private DateAndTimeCombine mDateAndTimeCombine;
     private boolean checkError, checkNotification = false;
     private NotificationsListFragment mNotificationsListFragment;
     public SQLiteDBHelper dbHelper;
 
-    private final Notification notification = new Notification();
+    private Notification notification = new Notification();
 
     public SetNotification(long id_note) {notification.setId_note(id_note);}
+
+    public SetNotification(Notification notification) {
+        this.notification = notification;
+    }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -64,7 +67,6 @@ public class SetNotification extends DialogFragment implements TimePickerReturn 
         RelativeLayout notificationLayout =  mView.findViewById(R.id.notificationLayout);
 
         mSwitchNotification = mView.findViewById(R.id.switchNotification);
-        switchNotification =  mView.findViewById(R.id.switchNotification);
         selectTime = mView.findViewById(R.id.buttonSelectTime);
         textViewNowDate = mView.findViewById(R.id.textViewNowDate);
         mSwitchSound = mView.findViewById(R.id.switchSound);
@@ -115,7 +117,10 @@ public class SetNotification extends DialogFragment implements TimePickerReturn 
             }
         });
 
-        dateNotification = Calendar.getInstance();
+        if (notification.getId() != -1) {
+            dateNotification.setTimeInMillis(notification.getDate().getTime());
+        }
+
         setNotificationTime();
 
         mDlg = builder.create();
@@ -140,7 +145,11 @@ public class SetNotification extends DialogFragment implements TimePickerReturn 
 
     public void showTimePickerDialog() {
         if (mDateAndTimeCombine == null) {
-            mDateAndTimeCombine = new DateAndTimeCombine(this);
+            if (notification.getId() != -1) {
+                mDateAndTimeCombine = new DateAndTimeCombine(this, notification.getDate().getTime());
+            } else {
+                mDateAndTimeCombine = new DateAndTimeCombine(this);
+            }
         }
         mDateAndTimeCombine.show(getFragmentManager());
     }
@@ -162,7 +171,7 @@ public class SetNotification extends DialogFragment implements TimePickerReturn 
     public void fail() {
         mNotificationsListFragment.failSetNotification();
         checkError = false;
-        switchNotification.setChecked(false);
+        mSwitchNotification.setChecked(false);
         dismiss();
     }
 
