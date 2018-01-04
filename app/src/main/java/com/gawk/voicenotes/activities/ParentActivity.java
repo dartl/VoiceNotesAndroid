@@ -407,14 +407,6 @@ public class ParentActivity extends AppCompatActivity
         }
     }
 
-    public void changeAdMob(boolean b) {
-        /*if (mIsShowKeyboard && b) {
-            Appodeal.hide(mActivity,Appodeal.BANNER_BOTTOM);
-        } else {
-            Appodeal.show(mActivity,Appodeal.BANNER_BOTTOM);
-        }*/
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1001 && data !=null) {

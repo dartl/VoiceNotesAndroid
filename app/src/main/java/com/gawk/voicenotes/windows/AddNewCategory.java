@@ -27,7 +27,6 @@ public class AddNewCategory extends DialogFragment {
     private EditText mEditTextNewCategory;
     private Category mCategory;
     private CategoryListFragment mCategoryListFragment;
-    private int mAction = 0;
     private InputMethodManager mInputMethodManager;
 
     public AddNewCategory() {
@@ -36,13 +35,11 @@ public class AddNewCategory extends DialogFragment {
     public AddNewCategory(CategoryListFragment categoryListFragment) {
         this.mCategoryListFragment = categoryListFragment;
         mCategory = new Category();
-        mAction = 0;
     }
 
     public AddNewCategory(Category category, CategoryListFragment categoryListFragment) {
         this.mCategory = category;
         this.mCategoryListFragment = categoryListFragment;
-        mAction = 1;
     }
 
     @Override
@@ -76,7 +73,7 @@ public class AddNewCategory extends DialogFragment {
             @Override
             public void onClick(View view) {
                 mCategory.setName(mEditTextNewCategory.getText().toString());
-                mCategoryListFragment.saveCategory(mCategory, mAction);
+                mCategoryListFragment.saveCategory(mCategory);
                 dismiss();
             }
         });

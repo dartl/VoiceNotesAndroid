@@ -9,7 +9,6 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.gawk.voicenotes.activities.ParentActivity;
 import com.gawk.voicenotes.models.Category;
 import com.gawk.voicenotes.models.Note;
 import com.gawk.voicenotes.models.Notification;
@@ -278,25 +277,17 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
     /*
         Методы для работы с Категориями
      */
-    public boolean saveCategory(Category category, int action) {
+    public boolean saveCategory(Category category) {
         if (!isConnect()) {
             connection();
         }
         mStatistics.addPointCreateNotifications();
         ContentValues newValues = new ContentValues();
         newValues.put(SQLiteDBHelper.CATEGORIES_TABLE_COLUMN_NAME, category.getName());
-        long result = 0;
-        switch (action) {
-            case 0:
-                result = db.insert(SQLiteDBHelper.CATEGORIES_TABLE_NAME, null, newValues);
-                break;
-            case 1:
-                newValues.put(SQLiteDBHelper.CATEGORIES_TABLE_COLUMN_ID, category.getId());
-                result = db.update(SQLiteDBHelper.CATEGORIES_TABLE_NAME, newValues, CATEGORIES_TABLE_COLUMN_ID +" = ?",
-                        new String[] { String.valueOf(category.getId()) });
-                break;
+        if (category.getId() != -1) {
+            newValues.put(SQLiteDBHelper.CATEGORIES_TABLE_COLUMN_ID, category.getId());
         }
-        return result >= -1;
+        return db.replace(SQLiteDBHelper.CATEGORIES_TABLE_NAME, null, newValues) >= -1;
     }
 
     public String getNameCategory(long id) {
@@ -320,7 +311,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         int deleteRow = db.delete(SQLiteDBHelper.CATEGORIES_TABLE_NAME, "_id = ?" ,new String[] { String.valueOf(id) });
         ContentValues cv = new ContentValues();
         cv.put(NOTES_TABLE_COLUMN_CATEGORY,-1);
-        int updateNote = db.update(NOTES_TABLE_NAME, cv, NOTES_TABLE_COLUMN_CATEGORY + " = " + id, null);
+        db.update(NOTES_TABLE_NAME, cv, NOTES_TABLE_COLUMN_CATEGORY + " = " + id, null);
         return deleteRow == 1;
     }
 
@@ -330,7 +321,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         }
         return db.rawQuery("SELECT * FROM " +
                 SQLiteDBHelper.CATEGORIES_TABLE_NAME + " ORDER BY " + SQLiteDBHelper.CATEGORIES_TABLE_COLUMN_ID
-                + " ASC", null);
+                + " DESC", null);
     }
 
     /*
@@ -565,28 +556,30 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
                 e.printStackTrace();
             }
             try {
-                JSONArray jreader = new JSONArray(json);
-                if (jreader.length() >= 1) {
-                    JSONObject objNote;
-                    String textNote, date;
-                    DateFormat dateFormat;
-                    dateFormat = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.US);
-                    for (int  i = 0; i < jreader.length(); i++) {
-                        objNote=(JSONObject)jreader.get(i);
-                        textNote = objNote.getString(NOTES_TABLE_COLUMN_TEXT_NOTE);
-                        date = objNote.getString(NOTES_TABLE_COLUMN_DATE);
-                        Date dt = dateFormat.parse(date);
-                        Note note = new Note(-1,textNote,dt);
-                        if (textNote != null) {
-                            saveNote(note);
+                JSONObject jReader = new JSONObject(json);
 
-                        } else {
-                            return false;
-                        }
+                JSONArray categories = jReader.getJSONArray(CATEGORIES_TABLE_NAME);
+                if (categories.length() >= 1) {
+                    JSONObject objNote;
+                    for (int  i = 0; i < categories.length(); i++) {
+                        objNote=(JSONObject)categories.get(i);
+                        Category category = new Category(objNote);
+                        saveCategory(category);
                     }
                 }
+
+                JSONArray notes = jReader.getJSONArray(NOTES_TABLE_NAME);
+                if (notes.length() >= 1) {
+                    JSONObject objNote;
+                    for (int  i = 0; i < notes.length(); i++) {
+                        objNote=(JSONObject)notes.get(i);
+                        Note note = new Note(objNote);
+                        saveNote(note);
+                    }
+                }
+
                 mStatistics.addPointImports();
-            } catch (JSONException | ParseException e) {
+            } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
@@ -594,39 +587,47 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
     }
 
     public boolean exportDB(File file, String type, final String[] data) {
-        String result = "";
+        StringBuilder result = new StringBuilder();
         Note note;
         Cursor cursor = getCursorAllNotes();
-        JSONArray resultJson = new JSONArray();
-        DateFormat dateFormat;
-        dateFormat = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.US);
-        try {
+
+        if (type.equals(data[0])) {
+            JSONObject resultObject = new JSONObject();
+
+            JSONArray notesArray = new JSONArray();
             for (int i = 0; i < cursor.getCount(); i++) {
                 cursor.moveToPosition(i);
                 note = new Note(cursor);
-                if (type.equals(data[0])) {
-                    JSONObject obj;
-                    obj = new JSONObject();
-                    try {
-                        obj.put(NOTES_TABLE_COLUMN_TEXT_NOTE, note.getText_note());
-                        obj.put(NOTES_TABLE_COLUMN_DATE, dateFormat.format(note.getDate()));
-                        resultJson.put(obj);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                } else if (type.equals(data[1])) {
-                    result += note.getDate();
-                    result += ": ";
-                    result += note.getText_note();
-                    result += "\n";
-                }
+                notesArray.put(note.toJSON());
             }
-        } finally {
-            cursor.close();
+
+            Cursor cursorAllCategories = getCursorAllCategories();
+            JSONArray categoryArray = new JSONArray();
+            for (int i = 0; i < cursorAllCategories.getCount(); i++) {
+                cursorAllCategories.moveToPosition(i);
+                Category category = new Category(cursorAllCategories);
+                categoryArray.put(category.toJSON());
+            }
+
+            try {
+                resultObject.put(NOTES_TABLE_NAME,notesArray);
+                resultObject.put(CATEGORIES_TABLE_NAME,categoryArray);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            result = new StringBuilder(resultObject.toString());
+        } else if (type.equals(data[1])) {
+            for (int i = 0; i < cursor.getCount(); i++) {
+                cursor.moveToPosition(i);
+                note = new Note(cursor);
+                result.append(note.getDate());
+                result.append(": ");
+                result.append(note.getText_note());
+                result.append("\n");
+            }
         }
-        if (type == data[0]) {
-            result = resultJson.toString();
-        }
+
         if (file.canWrite()) {
             try {
                 PrintWriter printWriter = new PrintWriter(file);

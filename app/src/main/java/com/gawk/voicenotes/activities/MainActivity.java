@@ -2,6 +2,7 @@ package com.gawk.voicenotes.activities;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -49,13 +50,14 @@ public class MainActivity extends ParentActivity {
     private SearchView searchView;
     private View mView;
     private boolean mShowNotification = false;
+    private MainActivity mMainActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(com.gawk.voicenotes.R.layout.activity_main);
 
+        mMainActivity = this;
         showInformationAboutPermissions();
 
         mView = findViewById(R.id.activity_main);
@@ -90,7 +92,6 @@ public class MainActivity extends ParentActivity {
         tabLayout.setupWithViewPager(viewPager);
         createTabIcons();
         dbHelper = SQLiteDBHelper.getInstance(this);
-        verifyAllPermissions(this);
 
         if (mPrefUtil.getStringSet(PrefUtil.SUPPORTED_LANGUAGE_FOR_RECOGNIZE, null) == null) {
             Intent detailsIntent =  new Intent(RecognizerIntent.ACTION_GET_LANGUAGE_DETAILS);
@@ -243,7 +244,6 @@ public class MainActivity extends ParentActivity {
     }
 
     void showInformationAboutPermissions() {
-
         if (mPrefUtil.getBoolean(PrefUtil.INFORMATION_ABOUT_PERMISSIONS,true)) {
             mPrefUtil.saveBoolean(PrefUtil.INFORMATION_ABOUT_PERMISSIONS,false);
             AlertDialog alertDialog = new AlertDialog.Builder(this)
@@ -252,10 +252,13 @@ public class MainActivity extends ParentActivity {
                     .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
+                            verifyAllPermissions(mMainActivity);
                             dialogInterface.dismiss();
                         }
                     }).create();
             alertDialog.show();
+        } else {
+            verifyAllPermissions(this);
         }
     }
 

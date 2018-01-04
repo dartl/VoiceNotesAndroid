@@ -161,7 +161,6 @@ public class ViewNoteActivity extends ParentActivity implements CustomRelativeLa
     @Override
     public void onSoftKeyboardShown(boolean isShowing) {
         mIsShowKeyboard = isShowing;
-        changeAdMob(mShowActivity);
         if (viewPager.getCurrentItem() == 0) {
             CustomRelativeLayout.Listener noteViewFragment = (CustomRelativeLayout.Listener) mViewPagerAdapter.getItem(viewPager.getCurrentItem());
             noteViewFragment.onSoftKeyboardShown(isShowing);

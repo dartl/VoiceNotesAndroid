@@ -89,8 +89,8 @@ public class CategoryListFragment extends FragmentParent{
         return view;
     }
 
-    public void saveCategory(Category category, int action) {
-        dbHelper.saveCategory(category, action);
+    public void saveCategory(Category category) {
+        dbHelper.saveCategory(category);
         updateList();
     }
 

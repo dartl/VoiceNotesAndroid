@@ -6,9 +6,16 @@ import android.os.Parcelable;
 
 import com.gawk.voicenotes.adapters.SQLiteDBHelper;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by GAWK on 10.02.2017.
@@ -50,6 +57,24 @@ public class Note implements Serializable, Parcelable {
             this.text_note = "";
             this.date = new Date();
             this.mCategoryId = -1;
+        }
+    }
+
+    public Note(JSONObject objNote) {
+        String date;
+        DateFormat dateFormat;
+        dateFormat = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.US);
+
+        this.id = -1;
+        try {
+            this.text_note = objNote.getString(SQLiteDBHelper.NOTES_TABLE_COLUMN_TEXT_NOTE);
+            date = objNote.getString(SQLiteDBHelper.NOTES_TABLE_COLUMN_DATE);
+            this.date = dateFormat.parse(date);
+            this.mCategoryId = objNote.getLong(SQLiteDBHelper.NOTES_TABLE_COLUMN_CATEGORY);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
     }
 
@@ -123,5 +148,20 @@ public class Note implements Serializable, Parcelable {
                 ", date=" + date +
                 ", mCategoryId=" + mCategoryId +
                 '}';
+    }
+
+    public JSONObject toJSON() {
+        JSONObject obj;
+        obj = new JSONObject();
+        DateFormat dateFormat;
+        dateFormat = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.US);
+        try {
+            obj.put(SQLiteDBHelper.NOTES_TABLE_COLUMN_TEXT_NOTE, this.text_note);
+            obj.put(SQLiteDBHelper.NOTES_TABLE_COLUMN_DATE, dateFormat.format(this.date));
+            obj.put(SQLiteDBHelper.NOTES_TABLE_COLUMN_CATEGORY, this.mCategoryId);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return obj;
     }
 }
